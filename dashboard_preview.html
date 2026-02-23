@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baker · CEO Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Jura:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   Baker CEO Dashboard v2.2 — style.css
+   3-layer role-based navigation design
+   ============================================================ */
+
+/* === Custom Properties === */
+:root {
+    --bg-page: #e8eaed;
+    --bg-app: #f5f5f7;
+    --bg-card: #ffffff;
+
+    /* Top bar gradient */
+    --bar-from: #1e2636;
+    --bar-mid1: #2f3b52;
+    --bar-mid2: #3f4f6b;
+    --bar-to: #4d6080;
+
+    /* Role accents */
+    --accent-private: #a855f7;
+    --accent-chairman: #fbbf24;
+    --accent-pm: #3b82f6;
+    --accent-network: #10b981;
+    --accent-travel: #0891b2;
+    --accent-home: #1e293b;
+
+    /* Badges */
+    --badge-ok: #22c55e;
+    --badge-warn: #f59e0b;
+    --badge-neutral: #94a3b8;
+
+    /* Text */
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --text-white: #ffffff;
+
+    /* System */
+    --scan-green: #34d058;
+    --scan-amber: #f0b429;
+    --scan-red: #f56565;
+
+    /* Shadows */
+    --shadow-app: 0 8px 32px rgba(0,0,0,0.12);
+    --shadow-card: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.1);
+
+    /* Radii */
+    --radius-app: 20px;
+    --radius-card: 12px;
+    --radius-btn: 8px;
+    --radius-pill: 20px;
+
+    /* Fonts */
+    --font-body: 'Work Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Jura', var(--font-body);
+    --font-mono: 'DM Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* === Reset === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* === App Shell === */
+.app {
+    width: 72vw;
+    max-width: 1200px;
+    min-width: 800px;
+    height: 88vh;
+    background: var(--bg-app);
+    border-radius: var(--radius-app);
+    box-shadow: var(--shadow-app);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* === Top Bar === */
+.top-bar {
+    background: linear-gradient(135deg, var(--bar-from) 0%, var(--bar-mid1) 40%, var(--bar-mid2) 70%, var(--bar-to) 100%);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.tb-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.tb-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-white);
+    letter-spacing: 1px;
+}
+
+.tb-sub {
+    font-family: var(--font-mono);
+    font-weight: 300;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1.5px;
+}
+
+.tb-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Scan dot */
+.scan-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--scan-green);
+    box-shadow: 0 0 10px rgba(52,208,88,0.5);
+    display: inline-block;
+}
+
+.scan-info {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+}
+
+.lens-container {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 14px rgba(52,208,88,0.18);
+    transition: background 0.2s, box-shadow 0.3s;
+}
+
+.lens-container:hover {
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 20px rgba(52,208,88,0.3);
+}
+
+.lens-img {
+    width: 36px;
+    height: 36px;
+    transition: transform 0.2s ease;
+}
+
+.refresh-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+}
+
+/* === Main Layout === */
+.main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* === Sidebar Rail === */
+.rail {
+    width: 180px;
+    flex-shrink: 0;
+    background: #f0f0f2;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-right: 1px solid #e0e0e4;
+}
+
+.rail-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 11px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: left;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+    letter-spacing: 0.2px;
+}
+
+.rail-btn:hover {
+    background: rgba(0,0,0,0.04);
+    color: var(--text-primary);
+}
+
+.rail-btn.active {
+    background: rgba(0,0,0,0.06);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Role-specific active colors */
+.rail-btn.active[data-role="home"]     { border-left-color: var(--accent-home); }
+.rail-btn.active[data-role="chairman"] { border-left-color: var(--accent-chairman); }
+.rail-btn.active[data-role="pm"]       { border-left-color: var(--accent-pm); }
+.rail-btn.active[data-role="network"]  { border-left-color: var(--accent-network); }
+.rail-btn.active[data-role="private"]  { border-left-color: var(--accent-private); }
+.rail-btn.active[data-role="travel"]   { border-left-color: var(--accent-travel); }
+
+/* === Content Area === */
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+}
+
+/* === Views === */
+.view {
+    display: none;
+    flex-direction: column;
+    animation: fadeUp 0.3s ease-out;
+}
+
+.view.active {
+    display: flex;
+}
+
+/* === HOME VIEW === */
+.home-greeting {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    letter-spacing: 0.3px;
+}
+
+.home-section-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 24px;
+}
+
+.home-section-label:first-of-type {
+    margin-top: 0;
+}
+
+/* Agenda items */
+.agenda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.agenda-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border-radius: var(--radius-btn);
+    border: 1px solid #e8eaed;
+    transition: box-shadow 0.15s;
+}
+
+.agenda-item:hover {
+    box-shadow: var(--shadow-card);
+}
+
+.agenda-time {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    min-width: 48px;
+    flex-shrink: 0;
+}
+
+.agenda-type {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+}
+
+.agenda-type.meeting    { background: #eff6ff; color: #3b82f6; }
+.agenda-type.call       { background: #ecfdf5; color: #10b981; }
+.agenda-type.appointment { background: #fef3c7; color: #d97706; }
+.agenda-type.commitment { background: #fae8ff; color: #a855f7; }
+.agenda-type.task       { background: #f1f5f9; color: #64748b; }
+
+.agenda-desc {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.agenda-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+/* === Contact Search === */
+.contact-search-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.contact-input {
+    flex: 1;
+    padding: 8px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    outline: none;
+    background: var(--bg-card);
+    transition: border-color 0.15s;
+}
+
+.contact-input:focus {
+    border-color: var(--accent-network);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+}
+
+.contact-btn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+}
+
+.contact-btn:hover {
+    border-color: var(--accent-network);
+    color: var(--accent-network);
+}
+
+.contact-result {
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid #e8eaed;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+}
+
+.contact-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.contact-result-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+
+.contact-fields {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    font-size: 0.8rem;
+}
+
+.contact-field-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding-top: 2px;
+}
+
+.contact-field-value {
+    color: var(--text-primary);
+}
+
+.contact-error {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.badge-stage {
+    background: #eff6ff;
+    color: var(--accent-pm);
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+/* === CATEGORY VIEW (Layer 2) === */
+.cat-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px 0;
+}
+
+.cat-hero-icon {
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.04);
+    border-radius: 14px;
+}
+
+.cat-hero-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.cat-hero-desc {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+}
+
+/* Category card grid */
+.cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.cat-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    cursor: pointer;
+    border: 1px solid #e8eaed;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: fadeUp 0.3s ease-out backwards;
+}
+
+.cat-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+    border-color: #d0d0d4;
+}
+
+/* Role-colored left border on cards */
+.cat-card[data-role="chairman"] { border-left: 3px solid var(--accent-chairman); }
+.cat-card[data-role="pm"]       { border-left: 3px solid var(--accent-pm); }
+.cat-card[data-role="network"]  { border-left: 3px solid var(--accent-network); }
+.cat-card[data-role="private"]  { border-left: 3px solid var(--accent-private); }
+.cat-card[data-role="travel"]   { border-left: 3px solid var(--accent-travel); }
+
+.cc-icon {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+}
+
+.cc-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.cc-count {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+}
+
+.cc-action {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--accent-pm);
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+/* === DETAIL VIEW (Layer 3) === */
+.back-btn {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+}
+
+.back-btn:hover {
+    color: var(--text-primary);
+}
+
+.detail-breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.detail-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+/* Sub-tabs */
+.sub-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.sub-tab {
+    padding: 5px 14px;
+    border: 1px solid #e2e5e9;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+}
+
+.sub-tab:hover {
+    background: #eef1f4;
+    border-color: #c8cdd3;
+}
+
+.sub-tab.active {
+    background: var(--text-primary);
+    color: var(--text-white);
+    border-color: var(--text-primary);
+}
+
+/* Detail cards */
+.detail-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.d-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    padding: 16px 18px;
+    border: 1px solid #e8eaed;
+    transition: box-shadow 0.15s;
+    animation: fadeUp 0.25s ease-out backwards;
+}
+
+.d-card:hover {
+    box-shadow: var(--shadow-card);
+}
+
+/* Role-colored top border on detail cards */
+.d-card[data-role="chairman"] { border-top: 2px solid var(--accent-chairman); }
+.d-card[data-role="pm"]       { border-top: 2px solid var(--accent-pm); }
+.d-card[data-role="network"]  { border-top: 2px solid var(--accent-network); }
+.d-card[data-role="private"]  { border-top: 2px solid var(--accent-private); }
+.d-card[data-role="travel"]   { border-top: 2px solid var(--accent-travel); }
+
+.d-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.d-text {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.55;
+}
+
+/* === BAKER'S SCAN BAR === */
+.take-bar {
+    display: none;
+    position: absolute;
+    bottom: 36px;
+    left: 180px;
+    right: 0;
+    padding: 0 24px 12px 24px;
+    background: linear-gradient(transparent 0%, var(--bg-app) 40%);
+    z-index: 5;
+}
+
+.take-bar.visible {
+    display: block;
+}
+
+.take-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.take-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.take-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, var(--bar-from), var(--bar-to));
+    color: var(--text-white);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: opacity 0.15s;
+}
+
+.take-btn:hover {
+    opacity: 0.9;
+}
+
+/* === BAKER'S SCAN OVERLAY === */
+.take-overlay {
+    display: none;
+    position: absolute;
+    bottom: 72px;
+    right: 24px;
+    width: 420px;
+    max-height: 400px;
+    background: var(--bar-from);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    z-index: 20;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.take-overlay.visible {
+    display: flex;
+}
+
+.take-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+}
+
+.take-header-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.take-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.15s;
+}
+
+.take-close:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+.take-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scan messages in overlay */
+.scan-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 100px;
+    max-height: 260px;
+}
+
+.scan-bubble {
+    max-width: 90%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    word-wrap: break-word;
+    animation: fadeUp 0.2s ease-out;
+}
+
+.scan-bubble-user {
+    align-self: flex-end;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.9);
+    border-bottom-right-radius: 4px;
+}
+
+.scan-bubble-assistant {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.85);
+    border-bottom-left-radius: 4px;
+    font-family: var(--font-body);
+}
+
+.scan-bubble-assistant h1,
+.scan-bubble-assistant h2,
+.scan-bubble-assistant h3 {
+    font-family: var(--font-heading);
+    color: rgba(255,255,255,0.95);
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+.scan-bubble-assistant h1 { font-size: 0.95rem; }
+.scan-bubble-assistant h2 { font-size: 0.85rem; }
+.scan-bubble-assistant h3 { font-size: 0.8rem; }
+.scan-bubble-assistant strong { font-weight: 600; color: rgba(255,255,255,0.95); }
+.scan-bubble-assistant ul, .scan-bubble-assistant ol { padding-left: 16px; margin: 4px 0; }
+.scan-bubble-assistant li { margin-bottom: 2px; }
+.scan-bubble-assistant a { color: #93c5fd; text-decoration: none; }
+.scan-bubble-assistant a:hover { text-decoration: underline; }
+
+.scan-form {
+    display: flex;
+    gap: 8px;
+    padding: 10px 16px 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+}
+
+.scan-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.06);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-white);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.scan-input:focus {
+    border-color: rgba(255,255,255,0.25);
+}
+
+.scan-input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+
+.scan-input:disabled {
+    opacity: 0.5;
+}
+
+.scan-send {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+}
+
+.scan-send:hover {
+    background: rgba(255,255,255,0.18);
+    color: var(--text-white);
+}
+
+.scan-send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* === Footer === */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 24px;
+    border-top: 1px solid #e0e0e4;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+/* === Animations === */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* === Responsive === */
+@media (max-width: 1000px) {
+    .app {
+        width: 95vw;
+        min-width: 600px;
+        height: 94vh;
+    }
+
+    .rail {
+        width: 140px;
+    }
+
+    .take-bar {
+        left: 140px;
+    }
+
+    .cat-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .app {
+        width: 100vw;
+        min-width: auto;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .rail {
+        width: 100%;
+        flex-direction: row;
+        padding: 8px 12px;
+        gap: 4px;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e4;
+        overflow-x: auto;
+    }
+
+    .rail-btn {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        padding: 6px 12px;
+        white-space: nowrap;
+        font-size: 0.75rem;
+    }
+
+    .rail-btn.active {
+        border-left-color: transparent;
+    }
+
+    .rail-btn.active[data-role="home"]     { border-bottom-color: var(--accent-home); }
+    .rail-btn.active[data-role="chairman"] { border-bottom-color: var(--accent-chairman); }
+    .rail-btn.active[data-role="pm"]       { border-bottom-color: var(--accent-pm); }
+    .rail-btn.active[data-role="network"]  { border-bottom-color: var(--accent-network); }
+    .rail-btn.active[data-role="private"]  { border-bottom-color: var(--accent-private); }
+    .rail-btn.active[data-role="travel"]   { border-bottom-color: var(--accent-travel); }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .take-bar {
+        left: 0;
+    }
+
+    .take-overlay {
+        width: calc(100% - 32px);
+        right: 16px;
+    }
+
+    .tb-sub {
+        display: none;
+    }
+}
+
+</style>
+</head>
+<body>
+    <div class="app">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="tb-left">
+                <span class="tb-title">baker</span>
+                <span class="tb-sub">chief of staff</span>
+            </div>
+            <div class="tb-right">
+                <span class="scan-dot" id="scanDot"></span>
+                <span class="scan-info" id="scanTime">last scan --:--</span>
+                <div class="lens-container" id="lensContainer" title="Baker state: clear" onclick="cycleLens()">
+                    <img class="lens-img" id="lensImg" alt="lens" />
+                </div>
+                <button class="refresh-btn" onclick="runScan()" title="Refresh scan">&#8635;</button>
+            </div>
+        </div>
+
+        <!-- Main layout: sidebar + content -->
+        <div class="main">
+            <!-- Sidebar rail -->
+            <div class="rail">
+                <button class="rail-btn active" data-role="home" onclick="goHome()">
+                    <span class="r-label">Home</span>
+                </button>
+                <button class="rail-btn" data-role="chairman" onclick="openRole('chairman')">
+                    <span class="r-label">Chairman</span>
+                </button>
+                <button class="rail-btn" data-role="pm" onclick="openRole('pm')">
+                    <span class="r-label">Projects</span>
+                </button>
+                <button class="rail-btn" data-role="network" onclick="openRole('network')">
+                    <span class="r-label">Network</span>
+                </button>
+                <button class="rail-btn" data-role="private" onclick="openRole('private')">
+                    <span class="r-label">Private</span>
+                </button>
+                <button class="rail-btn" data-role="travel" onclick="openRole('travel')">
+                    <span class="r-label">Travel</span>
+                </button>
+            </div>
+
+            <!-- Content area with 3 views -->
+            <div class="content">
+
+                <!-- VIEW 1: Home -->
+                <div class="view active" id="homeView">
+                    <div class="home-greeting" id="homeGreeting">Good morning, Dimitry</div>
+
+                    <!-- Today's agenda -->
+                    <div class="home-section-label">Today</div>
+                    <div class="agenda-list" id="agendaList">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Pending items -->
+                    <div class="home-section-label">Pending</div>
+                    <div class="agenda-list" id="pendingList">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Contact search -->
+                    <div class="home-section-label">Contact Search</div>
+                    <form class="contact-search-form" onsubmit="searchContact(event)">
+                        <input id="contactSearchInput" type="text" class="contact-input" placeholder="Search by name..." maxlength="200" />
+                        <button type="submit" class="contact-btn">Search</button>
+                    </form>
+                    <div id="contactSearchResult"></div>
+                </div>
+
+                <!-- VIEW 2: Category (Layer 2) -->
+                <div class="view" id="catView">
+                    <div class="cat-hero">
+                        <span class="cat-hero-icon" id="catHeroIcon"></span>
+                        <div>
+                            <div class="cat-hero-title" id="catHeroTitle"></div>
+                            <div class="cat-hero-desc" id="catHeroDesc"></div>
+                        </div>
+                    </div>
+                    <div class="cat-grid" id="catGrid">
+                        <!-- Category cards populated by JS -->
+                    </div>
+                </div>
+
+                <!-- VIEW 3: Detail (Layer 3) -->
+                <div class="view" id="detailView">
+                    <button class="back-btn" id="detailBack">&larr; Back</button>
+                    <div class="detail-breadcrumb" id="detailBreadcrumb"></div>
+                    <div class="detail-title" id="detailTitle"></div>
+                    <div class="sub-tabs" id="subTabs">
+                        <!-- Sub-issue tabs populated by JS -->
+                    </div>
+                    <div class="detail-cards" id="detailCards">
+                        <!-- Detail items populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Baker's Scan bar (bottom action) -->
+        <div class="take-bar" id="takeBar">
+            <div class="take-bar-inner">
+                <span class="take-label" id="takeLabel">Baker's Scan</span>
+                <button class="take-btn" onclick="showTake()">Baker's Scan</button>
+            </div>
+        </div>
+
+        <!-- Baker's Scan overlay -->
+        <div class="take-overlay" id="takeOverlay">
+            <div class="take-header">
+                <span class="take-header-title">Baker's Scan</span>
+                <button class="take-close" onclick="closeTake()">&times;</button>
+            </div>
+            <div class="take-body">
+                <div id="scanMessages" class="scan-messages"></div>
+                <form id="scanForm" class="scan-form" autocomplete="off">
+                    <input id="scanInput" type="text" class="scan-input" placeholder="Ask Baker..." maxlength="4000" required />
+                    <button type="submit" class="scan-send" id="scanSendBtn">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>auto-scan active</span>
+            <span>baker v2.2 &middot; feb 2026</span>
+        </div>
+    </div>
+
+    <script>
+window.__BAKER_SVG_DATA = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8IS0tIEJha2VyIEZhY2Ug4oCUIEdyZWVuIChDbGVhciBTdGF0ZSkgLS0+CgogIDwhLS0gT3V0ZXIgcmluZyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgb3BhY2l0eT0iMC4zIi8+CgogIDwhLS0gU3VidGxlIGRhc2hlZCByZWZlcmVuY2UgcmluZyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjAuNiIgb3BhY2l0eT0iMC4xIiBzdHJva2UtZGFzaGFycmF5PSIyLDUiLz4KCiAgPCEtLSAxNiBSYWRpYXRpbmcgYmxhZGVzIC0tPgogIDxnIGZpbGw9IiMzNGQwNTgiIG9wYWNpdHk9IjAuNzgiPgogICAgPHBhdGggZD0iTTQ4LjUsMzcgTDQ1LjUsMTIgUTUwLDUgNTQuNSwxMiBMNTEuNSwzNyBaIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDIyLjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDQ1LDUwLDUwKSIvPgogICAgPHBhdGggZD0iTTQ4LjUsMzcgTDQ1LjUsMTIgUTUwLDUgNTQuNSwxMiBMNTEuNSwzNyBaIiB0cmFuc2Zvcm09InJvdGF0ZSg2Ny41LDUwLDUwKSIvPgogICAgPHBhdGggZD0iTTQ4LjUsMzcgTDQ1LjUsMTIgUTUwLDUgNTQuNSwxMiBMNTEuNSwzNyBaIiB0cmFuc2Zvcm09InJvdGF0ZSg5MCw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMTEyLjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDEzNSw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMTU3LjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDE4MCw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMjAyLjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDIyNSw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMjQ3LjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDI3MCw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMjkyLjUsNTAsNTApIi8+CiAgICA8cGF0aCBkPSJNNDguNSwzNyBMNDUuNSwxMiBRNTAsNSA1NC41LDEyIEw1MS41LDM3IFoiIHRyYW5zZm9ybT0icm90YXRlKDMxNSw1MCw1MCkiLz4KICAgIDxwYXRoIGQ9Ik00OC41LDM3IEw0NS41LDEyIFE1MCw1IDU0LjUsMTIgTDUxLjUsMzcgWiIgdHJhbnNmb3JtPSJyb3RhdGUoMzM3LjUsNTAsNTApIi8+CiAgPC9nPgoKICA8IS0tIElubmVyIGd1aWRlIHJpbmcgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjEyIi8+CgogIDwhLS0gQ2VudGVyIGdsb3cgaGFsbyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI2IiBmaWxsPSIjMzRkMDU4IiBvcGFjaXR5PSIwLjE1Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzLjUiIGZpbGw9IiMzNGQwNTgiLz4KPC9zdmc+Cg==';
+/* ============================================================
+   Baker CEO Dashboard v2.2 — app.js
+   3-layer role-based navigation with live Baker API connections
+   ============================================================ */
+
+// ═══ LENS ICONS (placeholder — simple colored circles) ═══
+const lensIcons = {
+    clear: '/static/baker-face-green.svg',
+    attentive: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"><circle cx="11" cy="11" r="9" fill="%23f0b429" opacity="0.8"/></svg>'),
+    alert: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"><circle cx="11" cy="11" r="9" fill="%23f56565" opacity="0.8"/></svg>')
+};
+
+// ═══ ROLE METADATA ═══
+const roleDescs = {
+    private: 'Personal wealth, property, family & legal',
+    chairman: 'Brisen Group governance & strategy',
+    pm: 'Active project portfolio management',
+    network: 'Key contacts, advisors & pipeline',
+    travel: 'Business & personal travel logistics'
+};
+
+const roleNames = {
+    private: 'Private',
+    chairman: 'Chairman',
+    pm: 'Projects',
+    network: 'Network',
+    travel: 'Travel'
+};
+
+// ═══ ROLE DATA (hierarchical) ═══
+const roleData = {
+    private: {
+        title: 'Private',
+        categories: [
+            { id: 'wealth', icon: '', title: 'Wealth & Banking', badge: 'stable', badgeType: 'ok', colorClass: 'wealth',
+              items: [
+                { label: 'accounts', text: 'UBS, Raiffeisen, UniCredit — all accounts active, no flags.' },
+                { label: 'structure', text: 'Swiss structure review — ongoing with tax advisor. ETA March 2026.' },
+              ]
+            },
+            { id: 'property', icon: '', title: 'Property', badge: '3 assets', badgeType: 'ok', colorClass: 'property',
+              items: [
+                { label: 'Vienna', text: 'Primary residence — no outstanding items.' },
+                { label: 'Cap Ferrat', text: 'MO Villa management — operations stable.' },
+                { label: 'Baden', text: 'Balgerstrasse 7 — loan terms current.' },
+              ]
+            },
+            { id: 'family', icon: '', title: 'Family', badge: 'ok', badgeType: 'ok', colorClass: 'family',
+              items: [
+                { label: 'status', text: 'No pending family-related items or obligations.' },
+              ]
+            },
+            { id: 'subscriptions', icon: '', title: 'Subscriptions & Memberships', badge: 'active', badgeType: 'ok', colorClass: 'subscriptions',
+              items: [
+                { label: 'clubs', text: 'All memberships current. No renewals due within 60 days.' },
+                { label: 'digital', text: 'Software and digital subscriptions — reviewed.' },
+              ]
+            },
+            { id: 'legal-private', icon: '', title: 'Legal (Private)', badge: 'clear', badgeType: 'ok', colorClass: 'legal',
+              items: [
+                { label: 'status', text: 'No active private legal matters.' },
+              ]
+            }
+        ]
+    },
+    chairman: {
+        title: 'Chairman',
+        categories: [
+            { id: 'group-overview', icon: '', title: 'Group Overview', badge: 'stable', badgeType: 'ok', colorClass: 'group',
+              items: [
+                { label: 'entities', text: 'Brisen Group — all entities operational. No compliance flags.' },
+                { label: 'KPIs', text: 'Quarterly KPIs on track. Next board review Q2 2026.' },
+              ]
+            },
+            { id: 'board', icon: '', title: 'Board & Governance', badge: '2 items', badgeType: 'neutral', colorClass: 'board',
+              items: [
+                { label: 'next meeting', text: 'Board meeting — scheduled for March 2026.' },
+                { label: 'minutes', text: 'Last meeting minutes filed and approved.' },
+              ]
+            },
+            { id: 'group-finance', icon: '', title: 'Group Finance', badge: 'on track', badgeType: 'ok', colorClass: 'finance',
+              items: [
+                { label: 'cashflow', text: 'Group cash position healthy. No liquidity concerns.' },
+                { label: 'audit', text: 'FY2025 annual accounts — preparation ongoing.' },
+              ]
+            },
+            { id: 'legal-compliance', icon: '', title: 'Legal & Compliance', badge: 'clear', badgeType: 'ok', colorClass: 'legal',
+              items: [
+                { label: 'status', text: 'All regulatory filings current. No outstanding compliance items.' },
+              ]
+            },
+            { id: 'key-people', icon: '', title: 'Key People', badge: 'stable', badgeType: 'ok', colorClass: 'people',
+              items: [
+                { label: 'team', text: 'Core team stable. No personnel changes pending.' },
+              ]
+            },
+            { id: 'brisen2030', icon: '', title: 'Brisen 2030', badge: '6 tracks', badgeType: 'warn', colorClass: 'brisen2030',
+              items: [
+                { label: 'strategy', text: 'Long-term vision — 6 strategic tracks being developed.' },
+                { label: 'status', text: 'Deck shared with key stakeholders. Feedback cycle ongoing.' },
+              ],
+              subIssues: [
+                { id: 'b30-vision', icon: '', title: 'Vision & Mission', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'Mission statement finalized. Vision document v3 under review.' }
+                ]},
+                { id: 'b30-portfolio', icon: '', title: 'Portfolio Strategy', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'Asset allocation targets set. RE-heavy portfolio with AI diversification.' }
+                ]},
+                { id: 'b30-capital', icon: '', title: 'Capital Structure', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'Optimal leverage ratios defined. Implementation roadmap drafted.' }
+                ]},
+                { id: 'b30-talent', icon: '', title: 'Talent & Organization', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'Key hires identified for 2026. Organizational chart proposed.' }
+                ]},
+                { id: 'b30-digital', icon: '', title: 'Digital & AI', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'Baker AI operational. Next: integrate with deal pipeline.' }
+                ]},
+                { id: 'b30-impact', icon: '', title: 'Impact & ESG', colorClass: 'brisen2030', items: [
+                    { label: 'status', text: 'ESG framework drafted. Sustainability metrics defined.' }
+                ]}
+              ]
+            }
+        ]
+    },
+    pm: {
+        title: 'Projects',
+        categories: [
+            { id: 'hagenauer', icon: '', title: 'Hagenauer', badge: '8 tracks', badgeType: 'warn', colorClass: 'hagenauer',
+              items: [
+                { label: 'insolvency', text: 'Dr. Gaspar / S&K managing insolvency proceedings. Weekly updates.' },
+                { label: 'construction', text: 'Construction progress tracked. Thomas Leitner as project lead.' },
+              ],
+              subIssues: [
+                { id: 'hg-insolvency', icon: '', title: 'Insolvency Proceedings', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'S&K managing. Court dates and filings on track.' }
+                ]},
+                { id: 'hg-construction', icon: '', title: 'Construction Progress', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Phase 2 underway. Thomas Leitner leading on-site coordination.' }
+                ]},
+                { id: 'hg-finance', icon: '', title: 'Project Finance', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Budget tracking within parameters. No overruns flagged.' }
+                ]},
+                { id: 'hg-permits', icon: '', title: 'Permits & Approvals', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'All current permits valid. Next renewal Q3 2026.' }
+                ]},
+                { id: 'hg-sales', icon: '', title: 'Sales Strategy', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Sales strategy defined. Initial buyer interest tracked.' }
+                ]},
+                { id: 'hg-legal', icon: '', title: 'Legal Issues', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Active legal matters with Siegfried Gröschl oversight.' }
+                ]},
+                { id: 'hg-investors', icon: '', title: 'Investor Relations', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Investor updates distributed monthly. No concerns raised.' }
+                ]},
+                { id: 'hg-timeline', icon: '', title: 'Master Timeline', colorClass: 'hagenauer', items: [
+                    { label: 'status', text: 'Project timeline on schedule. Key milestones tracked.' }
+                ]}
+              ]
+            },
+            { id: 'moviesales', icon: '', title: 'Movie Sales', badge: '4 items', badgeType: 'ok', colorClass: 'moviesales',
+              items: [
+                { label: 'pipeline', text: 'Active sales pipeline — 4 properties in various stages.' },
+              ],
+              subIssues: [
+                { id: 'ms-active', icon: '', title: 'Active Listings', colorClass: 'moviesales', items: [
+                    { label: 'status', text: 'Current listings performing within expectations.' }
+                ]},
+                { id: 'ms-pipeline', icon: '', title: 'Sales Pipeline', colorClass: 'moviesales', items: [
+                    { label: 'status', text: 'Pipeline healthy. Multiple inquiries in progress.' }
+                ]},
+                { id: 'ms-legal', icon: '', title: 'Contracts & Legal', colorClass: 'moviesales', items: [
+                    { label: 'status', text: 'Standard contracts in use. No legal disputes.' }
+                ]},
+                { id: 'ms-marketing', icon: '', title: 'Marketing', colorClass: 'moviesales', items: [
+                    { label: 'status', text: 'Marketing materials updated. Online presence active.' }
+                ]}
+              ]
+            },
+            { id: 'ao', icon: '', title: 'AO', badge: '7 items', badgeType: 'warn', colorClass: 'ao',
+              items: [
+                { label: 'operations', text: 'AO operations — multiple workstreams active in Baden-Baden.' },
+              ],
+              subIssues: [
+                { id: 'ao-ops', icon: '', title: 'Operations', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Daily operations running smoothly.' }
+                ]},
+                { id: 'ao-finance', icon: '', title: 'Finance', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Financial tracking current. No budget concerns.' }
+                ]},
+                { id: 'ao-hr', icon: '', title: 'HR & Team', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Team stable. No open positions.' }
+                ]},
+                { id: 'ao-legal', icon: '', title: 'Legal', colorClass: 'ao', items: [
+                    { label: 'status', text: 'No active legal matters.' }
+                ]},
+                { id: 'ao-it', icon: '', title: 'IT Systems', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Systems operational. O365 migration in progress.' }
+                ]},
+                { id: 'ao-reporting', icon: '', title: 'Reporting', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Monthly reports on schedule.' }
+                ]},
+                { id: 'ao-strategy', icon: '', title: 'Strategy', colorClass: 'ao', items: [
+                    { label: 'status', text: 'Strategic review planned for Q2 2026.' }
+                ]}
+              ]
+            },
+            { id: 'annaberg', icon: '', title: 'Annaberg', badge: '5 items', badgeType: 'ok', colorClass: 'annaberg',
+              items: [
+                { label: 'project', text: 'Annaberg project — construction and planning on track.' },
+              ],
+              subIssues: [
+                { id: 'ab-master', icon: '', title: 'Master Plan', colorClass: 'annaberg', items: [
+                    { label: 'status', text: 'Master plan finalized. Implementation underway.' }
+                ]},
+                { id: 'ab-construction', icon: '', title: 'Construction', colorClass: 'annaberg', items: [
+                    { label: 'status', text: 'Construction progress on schedule.' }
+                ]},
+                { id: 'ab-budget', icon: '', title: 'Project Budget', colorClass: 'annaberg', items: [
+                    { label: 'status', text: 'Overall project budget — tracking within parameters.' }
+                ]},
+                { id: 'ab-baden', icon: '', title: 'Baden Baden / Aukera', colorClass: 'annaberg', items: [
+                    { label: 'status', text: 'Aukera teaser sent to Antje Bonnewitz for Baden Baden.' }
+                ]},
+                { id: 'ab-lilienmatt', icon: '', title: 'Lilienmatt Company', colorClass: 'annaberg', items: [
+                    { label: 'status', text: 'Lilienmatt Immobilien GmbH — company active, Conrad Weiss managing.' }
+                ]}
+              ]
+            },
+            { id: 'mrci', icon: '', title: 'MRCI Baden', badge: '8 items', badgeType: 'warn', colorClass: 'mrci',
+              items: [
+                { label: 'restructuring', text: 'MRCI & Lilienmatt restructuring — options table drafted.' },
+                { label: 'tax', text: 'Steuerbescheide 2022 received. Financial statements in progress.' },
+              ],
+              subIssues: [
+                { id: 'mr-restructure', icon: '', title: 'Restructuring', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Restructuring options — table of options (Draft 1) prepared.' }
+                ]},
+                { id: 'mr-gmbh', icon: '', title: 'MRCI GmbH', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Christian Merz meeting scheduled in Baden-Baden (07/2026).' }
+                ]},
+                { id: 'mr-lilienmatt', icon: '', title: 'Lilienmatt Immobilien', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Conrad Weiss managing. Operations stable.' }
+                ]},
+                { id: 'mr-tax', icon: '', title: 'Tax Assessments', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Steuerbescheide 2022 — received, review in progress.' }
+                ]},
+                { id: 'mr-fin', icon: '', title: 'Financial Statements', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Statement drafts — preparation ongoing.' }
+                ]},
+                { id: 'mr-cashflow', icon: '', title: 'Cash Flow', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Internal transfers — MRCI/Lilienmatt cash flows tracked.' }
+                ]},
+                { id: 'mr-loan', icon: '', title: 'Balgerstrasse 7 Loan', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Property loan terms current.' }
+                ]},
+                { id: 'mr-o365', icon: '', title: 'O365 Migration', colorClass: 'mrci', items: [
+                    { label: 'status', text: 'Dennis managing migration spreadsheet.' }
+                ]}
+              ]
+            },
+            { id: 'capferrat', icon: '', title: 'Cap Ferrat', badge: '5 items', badgeType: 'ok', colorClass: 'capferrat',
+              items: [
+                { label: 'villa', text: 'MO Villa management — operations stable.' },
+              ],
+              subIssues: [
+                { id: 'cf-villa', icon: '', title: 'MO Villa', colorClass: 'capferrat', items: [
+                    { label: 'status', text: 'Villa management — MOHG operating, performance on track.' }
+                ]},
+                { id: 'cf-upgrade', icon: '', title: 'Second Villa Upgrade', colorClass: 'capferrat', items: [
+                    { label: 'status', text: 'Planning phase for second property upgrade.' }
+                ]},
+                { id: 'cf-tax', icon: '', title: 'SUNNY IMMO Tax', colorClass: 'capferrat', items: [
+                    { label: 'status', text: 'Tax debts — SUNNY IMMO liabilities being resolved.' }
+                ]},
+                { id: 'cf-annabelle', icon: '', title: 'Annabelle Discussion', colorClass: 'capferrat', items: [
+                    { label: 'status', text: 'Discussion ongoing regarding property.' }
+                ]},
+                { id: 'cf-party', icon: '', title: 'Opening Party', colorClass: 'capferrat', items: [
+                    { label: 'status', text: 'Opening event — planning in progress.' }
+                ]}
+              ]
+            },
+            { id: 'originations', icon: '', title: 'Originations', badge: '9 tracks', badgeType: 'ok', colorClass: 'originations',
+              items: [
+                { label: 'pipeline', text: '9 active origination tracks across RE, AI, and brands.' },
+                { label: 'highlight', text: 'FX Mayr brand investment most advanced.' },
+              ],
+              subIssues: [
+                { id: 'or-fund', icon: '', title: 'RE Fund Management', colorClass: 'originations', items: [
+                    { label: 'status', text: 'Ski Team Investors pitch and Fund Pitch materials prepared.' }
+                ]},
+                { id: 'or-fxmayr', icon: '', title: 'Brand: FX Mayr', colorClass: 'originations', items: [
+                    { label: 'NDA', text: 'Henrik Huydts NDA signed for Stuttgart meeting.' },
+                    { label: 'progress', text: 'Teaser sent, Stuttgart meeting completed, Maria Worth follow-up done.' }
+                ]},
+                { id: 'or-cashprod', icon: '', title: 'RE Cash Producing', colorClass: 'originations', items: [
+                    { label: '6 Senses', text: '6 Senses Crans Montana — tracked.' },
+                    { label: 'Hyatt', text: 'Hyatt Vienna — Eastdil presentations reviewed.' },
+                    { label: 'MO Prague', text: 'MO Prague — CITIC docs reviewed.' }
+                ]},
+                { id: 'or-dev', icon: '', title: 'RE Development', colorClass: 'originations', items: [
+                    { label: 'active', text: '5 dev opportunities: Bora Bora, Kitzbühel, Palais Corso, School, Venti.' }
+                ]},
+                { id: 'or-ai', icon: '', title: 'AI Investments', colorClass: 'originations', items: [
+                    { label: 'construction', text: 'clAIm — AI construction technology tracked.' },
+                    { label: 'hospitality', text: 'Hospitality R&D — AI applications in hospitality sector.' }
+                ]}
+              ]
+            },
+            { id: 'cupial', icon: '', title: 'Cupial', badge: '6 items', badgeType: 'warn', colorClass: 'cupial',
+              items: [
+                { label: 'handover', text: 'Open handover items tracked with Pagitsch.' },
+                { label: 'legal', text: 'URGENT — legal matters requiring immediate attention.' },
+              ],
+              subIssues: [
+                { id: 'cu-handover', icon: '', title: 'Handover Issues', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'Open handover items — punch list being resolved.' }
+                ]},
+                { id: 'cu-escrow', icon: '', title: 'Escrow Release', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'Escrow funds — release conditions being verified.' }
+                ]},
+                { id: 'cu-pagitsch', icon: '', title: 'Pagitsch Reconciliation', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'Cost reconciliation — Pagitsch review in progress.' }
+                ]},
+                { id: 'cu-special', icon: '', title: 'Special Requests', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'Additional works and modifications tracked.' }
+                ]},
+                { id: 'cu-legal', icon: '', title: 'Legal (URGENT)', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'URGENT legal matter — requires immediate attention.' }
+                ]},
+                { id: 'cu-ipd', icon: '', title: 'IPD Q4 Interest', colorClass: 'cupial', items: [
+                    { label: 'status', text: 'Q4 interest payment — IPD obligation tracked.' }
+                ]}
+              ]
+            }
+        ]
+    },
+    network: {
+        title: 'Network',
+        categories: [
+            { id: 'keycontacts', icon: '', title: 'Key Contacts', badge: 'active', badgeType: 'ok', colorClass: 'keycontacts',
+              subIssues: [
+                { id: 'investors', icon: '', title: 'Investors & Partners', colorClass: 'keycontacts', items: [
+                    { label: 'active', text: 'John (UBS) — quarterly review scheduled.' },
+                    { label: 'pending', text: 'Christophe Buchwalder — awaiting response on Brisen 2030 deck.' }
+                ]},
+                { id: 'board-net', icon: '', title: 'Board & Directors', colorClass: 'keycontacts', items: [
+                    { label: 'contact', text: 'Siegfried Gröschl — active on Hagenauer and Cupial.' },
+                    { label: 'contact', text: 'Rolf Hubner — advisory role, low-touch.' }
+                ]},
+                { id: 'family-net', icon: '', title: 'Family & Personal', colorClass: 'keycontacts', items: [
+                    { label: 'contact', text: 'Vladimir & Mykola — operational team, daily contact.' },
+                    { label: 'contact', text: 'Thomas Leitner — Hagenauer project lead.' }
+                ]}
+              ]
+            },
+            { id: 'advisors', icon: '', title: 'Advisors & Consultants', badge: '4 active', badgeType: 'neutral', colorClass: 'advisors',
+              items: [
+                { label: 'legal', text: 'Dr. Gaspar / S&K — insolvency proceedings. Weekly updates.' },
+                { label: 'tax', text: 'Tax advisor (CH) — Swiss structure review. ETA March 2026.' },
+                { label: 'financial', text: 'Auditor — FY2025 annual accounts in preparation.' },
+              ]
+            },
+            { id: 'serviceproviders', icon: '', title: 'Service Providers', badge: 'stable', badgeType: 'ok', colorClass: 'serviceproviders',
+              items: [
+                { label: 'IT', text: 'IT / O365 — managed by Vladimir. Systems running normally.' },
+                { label: 'banking', text: 'UBS / Raiffeisen / UniCredit — all account relationships active.' },
+                { label: 'insurance', text: 'Insurance broker — policies current through 2026.' },
+              ]
+            },
+            { id: 'pipeline-contacts', icon: '', title: 'Pipeline Contacts', badge: '5 warm', badgeType: 'warn', colorClass: 'pipeline',
+              items: [
+                { label: 'warm leads', text: '5 active pipeline contacts from originations deal flow.' },
+                { label: 'follow-ups', text: '3 email follow-ups and 2 WhatsApp messages pending.' },
+              ]
+            }
+        ]
+    },
+    travel: {
+        title: 'Travel',
+        categories: [
+            { id: 'business-travel', icon: '', title: 'Business Travel', badge: 'no trips', badgeType: 'neutral', colorClass: 'travel',
+              items: [
+                { label: 'recent', text: 'Baden-Baden — completed 16-18 Feb (AO tasks).' },
+                { label: 'upcoming', text: 'No upcoming business travel currently booked.' },
+              ]
+            },
+            { id: 'personal-travel', icon: '', title: 'Personal Travel', badge: 'no trips', badgeType: 'neutral', colorClass: 'travel',
+              items: [
+                { label: 'upcoming', text: 'No upcoming personal travel currently booked.' },
+              ]
+            },
+            { id: 'docs-visas', icon: '', title: 'Documents & Visas', badge: 'all clear', badgeType: 'ok', colorClass: 'travel',
+              items: [
+                { label: 'passports', text: 'All passports valid. No renewals due within 6 months.' },
+                { label: 'visas', text: 'No pending visa applications.' },
+              ]
+            },
+            { id: 'logistics', icon: '', title: 'Logistics & Preferences', badge: 'stable', badgeType: 'ok', colorClass: 'travel',
+              items: [
+                { label: 'airlines', text: 'Preferred: Swiss/Lufthansa. Miles accounts active.' },
+                { label: 'hotels', text: 'No active reservations.' },
+              ]
+            }
+        ]
+    }
+};
+
+// ═══ STATE ═══
+let currentRole = null;
+let currentCatIndex = null;
+let currentSubIndex = null;
+let currentView = 'home';
+let lensIndex = 0;
+let takeVisible = false;
+
+// Scan chat state
+let scanHistory = [];
+let scanStreaming = false;
+
+// ═══ HELPERS ═══
+
+function esc(str) {
+    if (!str) return '';
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+}
+
+function md(text) {
+    if (!text) return '';
+    let h = esc(text);
+    h = h.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    h = h.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    h = h.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+    h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    h = h.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    h = h.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    h = h.replace(/^- (.+)$/gm, '<li>$1</li>');
+    h = h.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+    h = h.replace(/\n/g, '<br>');
+    return h;
+}
+
+function fmtDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+        + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+}
+
+// ═══ INIT ═══
+function init() {
+    const now = new Date();
+
+    // Greeting
+    const hour = now.getHours();
+    const greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+    const dateStr = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const greetEl = document.getElementById('homeGreeting');
+    if (greetEl) greetEl.textContent = greet + ', Dimitry \u2014 ' + dateStr;
+
+    // Last scan time
+    updateScanTime();
+
+    // Set initial lens
+    const lensKeys = Object.keys(lensIcons);
+    if (lensKeys.length > 0) {
+        document.getElementById('lensImg').src = lensIcons[lensKeys[0]];
+    }
+
+    // Populate home sections
+    populateHome();
+
+    // Wire scan form
+    const scanForm = document.getElementById('scanForm');
+    if (scanForm) {
+        scanForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('scanInput');
+            if (input && input.value.trim()) {
+                sendScanMessage(input.value.trim());
+                input.value = '';
+            }
+        });
+    }
+
+    // Fetch system status
+    fetchSystemStatus();
+}
+
+function updateScanTime() {
+    const scanEl = document.getElementById('scanTime');
+    if (scanEl) {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        scanEl.textContent = 'last scan ' + hh + ':' + mm;
+    }
+}
+
+// ═══ SYSTEM STATUS ═══
+async function fetchSystemStatus() {
+    try {
+        const resp = await fetch('/api/status');
+        if (!resp.ok) throw new Error('Status ' + resp.status);
+        const status = await resp.json();
+
+        const dot = document.getElementById('scanDot');
+        if (status.system === 'operational') {
+            dot.style.background = '#34d058';
+            dot.style.boxShadow = '0 0 10px rgba(52,208,88,0.5)';
+        } else {
+            dot.style.background = '#f56565';
+            dot.style.boxShadow = '0 0 10px rgba(245,101,101,0.5)';
+        }
+    } catch (e) {
+        console.warn('Status fetch failed:', e.message);
+    }
+}
+
+// ═══ HOME POPULATION ═══
+function populateHome() {
+    const agendaList = document.getElementById('agendaList');
+    const pendingList = document.getElementById('pendingList');
+
+    // Agenda items (will be populated from API later; static for now)
+    if (agendaList) {
+        agendaList.innerHTML = '<div class="agenda-empty">No scheduled items for today.</div>';
+    }
+
+    // Pending items from API
+    if (pendingList) {
+        fetchPendingItems(pendingList);
+    }
+}
+
+async function fetchPendingItems(container) {
+    try {
+        const resp = await fetch('/api/alerts?tier=1');
+        if (!resp.ok) throw new Error('API ' + resp.status);
+        const data = await resp.json();
+        const alerts = (data && data.alerts) ? data.alerts : [];
+
+        if (alerts.length === 0) {
+            container.innerHTML = '<div class="agenda-empty">No pending items. All clear.</div>';
+            return;
+        }
+
+        let html = '';
+        for (const a of alerts.slice(0, 5)) {
+            html += `<div class="agenda-item">
+                <span class="agenda-time" style="color:#ef4444;">T${a.tier || 1}</span>
+                <span class="agenda-type task">alert</span>
+                <span class="agenda-desc">${esc(a.title)}</span>
+            </div>`;
+        }
+        container.innerHTML = html;
+    } catch (e) {
+        container.innerHTML = '<div class="agenda-empty">No pending items. All clear.</div>';
+    }
+}
+
+// ═══ VIEW SWITCHING ═══
+function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    currentView = id;
+}
+
+function setRail(role) {
+    document.querySelectorAll('.rail-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.role === (role || 'home'));
+    });
+}
+
+// ═══ HOME ═══
+function goHome() {
+    currentRole = null;
+    currentCatIndex = null;
+    currentSubIndex = null;
+    setRail(null);
+    showView('homeView');
+    document.getElementById('takeBar').classList.remove('visible');
+    closeTake();
+}
+
+// ═══ OPEN ROLE (Layer 2) ═══
+function openRole(role) {
+    currentRole = role;
+    currentCatIndex = null;
+    currentSubIndex = null;
+    setRail(role);
+
+    const data = roleData[role];
+    if (!data) return;
+
+    // Hero
+    document.getElementById('catHeroIcon').textContent = data.icon || '';
+    document.getElementById('catHeroTitle').textContent = data.title || roleNames[role];
+    document.getElementById('catHeroDesc').textContent = data.subtitle || roleDescs[role];
+
+    // Build category cards
+    const grid = document.getElementById('catGrid');
+    grid.innerHTML = '';
+
+    const cats = data.categories || [];
+    cats.forEach((cat, idx) => {
+        const card = document.createElement('div');
+        card.className = 'cat-card';
+        card.dataset.role = role;
+        card.style.animationDelay = (idx * 0.06) + 's';
+
+        const countLabel = cat.subIssues
+            ? cat.subIssues.length + ' sub-items'
+            : (cat.items ? cat.items.length + ' items' : '');
+
+        const actionLabel = cat.subIssues ? 'Review' : 'View';
+
+        card.innerHTML =
+            '<div class="cc-icon">' + (cat.icon || '') + '</div>' +
+            '<div class="cc-title">' + cat.title + '</div>' +
+            '<div class="cc-count">' + countLabel + '</div>' +
+            '<span class="cc-action">' + actionLabel + '</span>';
+
+        card.onclick = () => openCategory(role, idx);
+        grid.appendChild(card);
+    });
+
+    showView('catView');
+
+    // Show Baker's Scan bar
+    document.getElementById('takeBar').classList.add('visible');
+    document.getElementById('takeLabel').textContent = roleNames[role];
+}
+
+// ═══ OPEN CATEGORY (Layer 3) ═══
+function openCategory(role, catIndex) {
+    currentCatIndex = catIndex;
+    currentSubIndex = null;
+    const data = roleData[role];
+    const cat = data.categories[catIndex];
+
+    // Back button
+    document.getElementById('detailBack').onclick = () => openRole(role);
+
+    // Title & breadcrumb
+    document.getElementById('detailTitle').textContent = cat.title;
+    document.getElementById('detailBreadcrumb').textContent = roleNames[role] + ' \u2192 ' + cat.title;
+
+    // Sub-tabs
+    const tabsEl = document.getElementById('subTabs');
+    tabsEl.innerHTML = '';
+
+    if (cat.subIssues && cat.subIssues.length > 0) {
+        cat.subIssues.forEach((sub, subIdx) => {
+            const tab = document.createElement('button');
+            tab.className = 'sub-tab' + (subIdx === 0 ? ' active' : '');
+            tab.textContent = sub.title;
+            tab.onclick = () => selectSub(role, catIndex, subIdx);
+            tabsEl.appendChild(tab);
+        });
+        renderItems(cat.subIssues[0].items, role);
+        currentSubIndex = 0;
+    } else {
+        renderItems(cat.items, role);
+    }
+
+    showView('detailView');
+    document.getElementById('takeLabel').textContent = roleNames[role] + ' \u2192 ' + cat.title;
+}
+
+function selectSub(role, catIndex, subIndex) {
+    currentSubIndex = subIndex;
+    const cat = roleData[role].categories[catIndex];
+    const sub = cat.subIssues[subIndex];
+
+    document.querySelectorAll('.sub-tab').forEach((t, i) => t.classList.toggle('active', i === subIndex));
+    renderItems(sub.items, role);
+    document.getElementById('takeLabel').textContent = roleNames[role] + ' \u2192 ' + cat.title + ' \u2192 ' + sub.title;
+}
+
+function renderItems(items, role) {
+    const container = document.getElementById('detailCards');
+    container.innerHTML = '';
+    if (!items || items.length === 0) {
+        container.innerHTML = '<div style="padding:20px;color:rgba(0,0,0,0.3);font-size:13px;">No items yet.</div>';
+        return;
+    }
+    items.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'd-card';
+        card.dataset.role = role;
+        card.style.animationDelay = (i * 0.05) + 's';
+        card.innerHTML =
+            '<div class="d-label">' + item.label + '</div>' +
+            '<div class="d-text">' + item.text + '</div>';
+        container.appendChild(card);
+    });
+}
+
+// ═══ BAKER'S SCAN (live SSE) ═══
+function showTake() {
+    const overlay = document.getElementById('takeOverlay');
+    overlay.classList.add('visible');
+    takeVisible = true;
+
+    // Render existing messages
+    const container = document.getElementById('scanMessages');
+    if (container && container.children.length === 0 && scanHistory.length > 0) {
+        for (const msg of scanHistory) {
+            appendScanBubble(msg.role, msg.content);
+        }
+    }
+
+    // Focus input
+    const input = document.getElementById('scanInput');
+    if (input) input.focus();
+}
+
+function closeTake() {
+    document.getElementById('takeOverlay').classList.remove('visible');
+    takeVisible = false;
+}
+
+function appendScanBubble(role, content, id) {
+    const container = document.getElementById('scanMessages');
+    if (!container) return;
+    const div = document.createElement('div');
+    div.className = 'scan-bubble scan-bubble-' + role;
+    if (id) div.id = id;
+    div.innerHTML = role === 'assistant' ? md(content) : esc(content);
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    return div;
+}
+
+async function sendScanMessage(question) {
+    if (scanStreaming || !question.trim()) return;
+    scanStreaming = true;
+
+    const sendBtn = document.getElementById('scanSendBtn');
+    const input = document.getElementById('scanInput');
+    if (sendBtn) sendBtn.disabled = true;
+    if (input) input.disabled = true;
+
+    // Add user bubble
+    scanHistory.push({ role: 'user', content: question });
+    appendScanBubble('user', question);
+
+    // Add assistant placeholder
+    const assistantId = 'scan-reply-' + Date.now();
+    appendScanBubble('assistant', '', assistantId);
+    const replyEl = document.getElementById(assistantId);
+
+    let fullResponse = '';
+    try {
+        const resp = await fetch('/api/scan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                question: question,
+                history: scanHistory.slice(-10),
+            }),
+        });
+
+        if (!resp.ok) throw new Error('Scan API returned ' + resp.status);
+
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop();
+
+            for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+                const payload = line.slice(6).trim();
+                if (payload === '[DONE]') continue;
+                try {
+                    const data = JSON.parse(payload);
+                    if (data.token) {
+                        fullResponse += data.token;
+                        if (replyEl) replyEl.innerHTML = md(fullResponse);
+                        const container = document.getElementById('scanMessages');
+                        if (container) container.scrollTop = container.scrollHeight;
+                    }
+                    if (data.error) {
+                        fullResponse += '\n[Error: ' + data.error + ']';
+                        if (replyEl) replyEl.innerHTML = md(fullResponse);
+                    }
+                } catch (e) {
+                    // skip unparseable
+                }
+            }
+        }
+    } catch (err) {
+        fullResponse = 'Connection error: ' + err.message;
+        if (replyEl) replyEl.innerHTML = esc(fullResponse);
+    }
+
+    scanHistory.push({ role: 'assistant', content: fullResponse });
+    if (scanHistory.length > 20) scanHistory = scanHistory.slice(-20);
+
+    scanStreaming = false;
+    if (sendBtn) sendBtn.disabled = false;
+    if (input) { input.disabled = false; input.focus(); }
+}
+
+// ═══ CONTACT SEARCH (live API) ═══
+async function searchContact(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById('contactSearchInput');
+    const resultEl = document.getElementById('contactSearchResult');
+    if (!input || !resultEl) return;
+
+    const name = input.value.trim();
+    if (!name) return;
+
+    resultEl.innerHTML = '<div class="contact-error">Searching...</div>';
+
+    try {
+        const resp = await fetch('/api/contacts/' + encodeURIComponent(name));
+        if (resp.status === 404) {
+            resultEl.innerHTML = '<div class="contact-error">No contact found for "' + esc(name) + '"</div>';
+            return;
+        }
+        if (!resp.ok) throw new Error('API error ' + resp.status);
+        const contact = await resp.json();
+
+        let html = '<div class="contact-result">';
+        html += '<div class="contact-result-header">';
+        html += '<span class="contact-result-name">' + esc(contact.name || name) + '</span>';
+        if (contact.relationship_tier) {
+            html += '<span class="badge-stage">Tier ' + esc(String(contact.relationship_tier)) + '</span>';
+        }
+        html += '</div>';
+
+        html += '<div class="contact-fields">';
+        const fields = [
+            ['Company', contact.company],
+            ['Role', contact.role],
+            ['Email', contact.email],
+            ['Phone', contact.phone],
+            ['Timezone', contact.timezone],
+            ['Style', contact.communication_style],
+            ['Response', contact.response_pattern],
+            ['Last Contact', contact.last_contact ? fmtDate(contact.last_contact) : null],
+        ];
+        for (const [label, value] of fields) {
+            if (value) {
+                html += '<span class="contact-field-label">' + esc(label) + '</span>';
+                html += '<span class="contact-field-value">' + esc(String(value)) + '</span>';
+            }
+        }
+        html += '</div>';
+
+        if (contact.notes) {
+            html += '<div style="margin-top:12px;font-size:0.8rem;color:var(--text-secondary);"><strong>Notes:</strong> ' + esc(contact.notes) + '</div>';
+        }
+
+        html += '</div>';
+        resultEl.innerHTML = html;
+    } catch (err) {
+        resultEl.innerHTML = '<div class="contact-error">Error: ' + esc(err.message) + '</div>';
+    }
+}
+
+// ═══ UTILITIES ═══
+function cycleLens() {
+    const keys = Object.keys(lensIcons);
+    lensIndex = (lensIndex + 1) % keys.length;
+    const state = keys[lensIndex];
+    const el = document.getElementById('lensImg');
+    el.src = lensIcons[state];
+
+    const container = document.getElementById('lensContainer');
+    if (container) container.title = 'Baker state: ' + state;
+
+    const dot = document.getElementById('scanDot');
+    const colorMap = { clear: '#34d058', attentive: '#f0b429', alert: '#f56565' };
+    if (dot) {
+        dot.style.background = colorMap[state] || '#34d058';
+        dot.style.boxShadow = '0 0 10px ' + (colorMap[state] || '#34d058') + '80';
+    }
+
+    updateScanTime();
+
+    el.style.transform = 'scale(1.15)';
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+}
+
+function runScan() {
+    const btn = document.querySelector('.refresh-btn');
+    if (btn) {
+        btn.style.transition = 'transform 0.5s ease';
+        btn.style.transform = 'rotate(360deg)';
+        setTimeout(() => { btn.style.transform = ''; btn.style.transition = ''; }, 500);
+    }
+    updateScanTime();
+    fetchSystemStatus();
+
+    const dot = document.getElementById('scanDot');
+    if (dot) {
+        dot.style.background = '#f0b429';
+        dot.style.boxShadow = '0 0 10px rgba(240,180,41,0.5)';
+        setTimeout(() => {
+            dot.style.background = '#34d058';
+            dot.style.boxShadow = '0 0 10px rgba(52,208,88,0.5)';
+        }, 2000);
+    }
+}
+
+// ═══ KEYBOARD ═══
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (takeVisible) { closeTake(); return; }
+        if (currentView === 'detailView') { openRole(currentRole); return; }
+        if (currentView === 'catView') { goHome(); return; }
+    }
+});
+
+// ═══ START ═══
+document.addEventListener('DOMContentLoaded', init);
+
+</script>
+</body>
+</html>

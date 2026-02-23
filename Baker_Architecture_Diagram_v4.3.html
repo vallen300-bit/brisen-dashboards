@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker AI — Architecture Diagram v4.3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface-2: #1a2235;
+    --border: #1e293b;
+    --border-accent: #334155;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --azure: #0078d4;
+    --anthropic: #d97706;
+    --retrieval: #10b981;
+    --augmentation: #8b5cf6;
+    --generation: #f59e0b;
+    --trigger: #06b6d4;
+    --store: #ec4899;
+    --ceo: #22d3ee;
+    --tier3: #ef4444;
+    --tier2: #f59e0b;
+    --tier1: #10b981;
+    --clickup: #7b68ee;
+    --phase1: #10b981;
+    --live: #10b981;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .noise {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 40px 30px; }
+
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 500; letter-spacing: 6px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  }
+  .header h2 {
+    font-size: 36px; font-weight: 800; letter-spacing: -1px;
+    background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header .subtitle { font-size: 15px; color: var(--text-muted); font-weight: 300; }
+  .header .naming {
+    margin-top: 10px; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
+  }
+  .header .naming strong { color: var(--text-dim); }
+  .header .identity {
+    margin-top: 14px; font-size: 14px; color: var(--text-dim); font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  .header .identity strong { color: var(--ceo); font-weight: 600; }
+
+  .legend {
+    display: flex; justify-content: center; gap: 28px;
+    margin-bottom: 35px; flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .diagram { display: flex; flex-direction: column; gap: 20px; }
+
+  .cloud-zone {
+    border: 1.5px solid var(--border); border-radius: 16px;
+    padding: 24px; position: relative; background: var(--surface);
+  }
+  .cloud-zone.azure { border-color: rgba(0,120,212,0.3); background: linear-gradient(135deg, var(--surface), rgba(0,120,212,0.04)); }
+  .cloud-zone.anthropic { border-color: rgba(217,119,6,0.3); background: linear-gradient(135deg, var(--surface), rgba(217,119,6,0.04)); }
+  .cloud-zone.external { border-color: rgba(6,182,212,0.3); background: linear-gradient(135deg, var(--surface), rgba(6,182,212,0.04)); }
+  .cloud-zone.ceo-zone { border-color: rgba(34,211,238,0.3); background: linear-gradient(135deg, var(--surface), rgba(34,211,238,0.04)); }
+  .cloud-zone.output-zone { border-color: rgba(236,72,153,0.3); background: linear-gradient(135deg, var(--surface), rgba(236,72,153,0.03)); }
+  .cloud-zone.platform-zone { border-color: rgba(123,104,238,0.3); background: linear-gradient(135deg, var(--surface), rgba(123,104,238,0.04)); }
+
+  .zone-label {
+    position: absolute; top: -11px; left: 24px;
+    background: var(--bg); padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .zone-label.azure { color: var(--azure); }
+  .zone-label.anthropic { color: var(--anthropic); }
+  .zone-label.external { color: var(--trigger); }
+  .zone-label.ceo { color: var(--ceo); }
+  .zone-label.output { color: var(--store); }
+  .zone-label.platform { color: var(--clickup); }
+
+  .components-grid { display: grid; gap: 14px; }
+  .grid-6 { grid-template-columns: repeat(6, 1fr); }
+  .grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .component {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; position: relative;
+    transition: all 0.3s ease;
+  }
+  .component:hover { border-color: var(--border-accent); transform: translateY(-1px); }
+  .component .icon { font-size: 20px; margin-bottom: 6px; }
+  .component .name { font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--text); }
+  .component .desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .component .tech {
+    display: inline-block; margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    padding: 2px 7px; border-radius: 4px;
+    background: rgba(255,255,255,0.05); color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+  .component .detail {
+    margin-top: 6px; font-size: 10px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace; line-height: 1.6;
+  }
+
+  .rag-badge {
+    position: absolute; top: 8px; right: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    font-weight: 600; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .rag-badge.retrieval { background: rgba(16,185,129,0.15); color: var(--retrieval); border: 1px solid rgba(16,185,129,0.3); }
+  .rag-badge.generation { background: rgba(245,158,11,0.15); color: var(--generation); border: 1px solid rgba(245,158,11,0.3); }
+  .rag-badge.trigger { background: rgba(6,182,212,0.15); color: var(--trigger); border: 1px solid rgba(6,182,212,0.3); }
+  .rag-badge.store-back { background: rgba(236,72,153,0.15); color: var(--store); border: 1px solid rgba(236,72,153,0.3); }
+  .rag-badge.phase2 { background: rgba(100,116,139,0.15); color: var(--text-muted); border: 1px solid rgba(100,116,139,0.3); }
+  .rag-badge.live { background: rgba(16,185,129,0.15); color: var(--live); border: 1px solid rgba(16,185,129,0.3); }
+  .rag-badge.building { background: rgba(245,158,11,0.15); color: var(--tier2); border: 1px solid rgba(245,158,11,0.3); }
+  .rag-badge.m3 { background: rgba(123,104,238,0.15); color: var(--clickup); border: 1px solid rgba(123,104,238,0.3); }
+  .rag-badge.bidi { background: rgba(34,211,238,0.15); color: var(--ceo); border: 1px solid rgba(34,211,238,0.3); }
+
+  /* Arrow */
+  .arrow-section { display: flex; justify-content: center; padding: 4px 0; }
+  .arrow-down { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .arrow-line { width: 2px; height: 14px; background: var(--border-accent); }
+  .arrow-head { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 8px solid var(--border-accent); }
+  .arrow-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+  .arrow-bidi { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ceo); letter-spacing: 1px; text-align: center; }
+
+  /* Orchestrator */
+  .orchestrator-section {
+    border: 2px solid rgba(139,92,246,0.4); border-radius: 16px;
+    padding: 24px; position: relative;
+    background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(139,92,246,0.02));
+  }
+  .orchestrator-label {
+    position: absolute; top: -11px; left: 24px;
+    background: var(--bg); padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--augmentation);
+  }
+  .orchestrator-inner { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 16px; }
+  .orch-column h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--augmentation); margin-bottom: 10px;
+  }
+  .orch-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--text-dim); padding: 4px 0;
+  }
+  .orch-icon { font-size: 14px; }
+
+  .context-window-viz {
+    background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin: 8px 0;
+  }
+  .context-window-viz h5 {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .token-bar { display: flex; height: 24px; border-radius: 4px; overflow: hidden; gap: 1px; }
+  .token-segment {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 8px;
+    font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.8);
+  }
+  .seg-system { background: #4a5568; flex: 0.5; }
+  .seg-contacts { background: #2d6a4f; flex: 1; }
+  .seg-emails { background: #1a759f; flex: 1.5; }
+  .seg-clickup { background: #7b68ee; flex: 1; }
+  .seg-meetings { background: #7b2cbf; flex: 0.8; }
+  .seg-current { background: #c2410c; flex: 0.5; }
+  .seg-free { background: #1e293b; flex: 1; border: 1px dashed #334155; }
+  .token-labels {
+    display: flex; justify-content: space-between; margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-muted);
+  }
+
+  /* Authority model */
+  .authority-bar {
+    display: flex; gap: 2px; margin-top: 12px; border-radius: 6px; overflow: hidden;
+  }
+  .auth-phase {
+    flex: 1; padding: 8px 12px; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  }
+  .auth-m1 { background: rgba(16,185,129,0.15); color: var(--retrieval); }
+  .auth-m2 { background: rgba(245,158,11,0.15); color: var(--generation); }
+  .auth-m3 { background: rgba(239,68,68,0.15); color: var(--tier3); border: 2px solid rgba(123,104,238,0.4); }
+  .auth-phase .label { font-size: 8px; font-weight: 400; margin-top: 2px; display: block; color: var(--text-muted); }
+
+  /* Two-way arrow */
+  .bidi-arrow {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 6px 0;
+  }
+  .bidi-line { width: 2px; height: 20px; background: var(--border-accent); }
+  .bidi-heads { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .arrow-up { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 7px solid var(--border-accent); }
+
+  .footer {
+    text-align: center; margin-top: 30px; padding: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 2px;
+  }
+
+  .sub-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-muted); letter-spacing: 1px; margin-top: 14px; margin-bottom: 8px;
+    text-transform: uppercase; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="container">
+
+  <div class="header">
+    <h1>Brisen Group</h1>
+    <h2>Baker — AI Chief of Staff</h2>
+    <div class="subtitle">System Architecture v4.3 — February 22, 2026</div>
+    <div class="naming"><strong>Baker</strong> = Production System &nbsp;|&nbsp; <strong>Sentinel</strong> = Infrastructure Layer</div>
+    <div class="identity"><strong>One Memory</strong> &nbsp;·&nbsp; <strong>Two Minds</strong> &nbsp;·&nbsp; <strong>Three Faces</strong></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--trigger)"></div>Data Sources</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--retrieval)"></div>Retrieval</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--augmentation)"></div>Augmentation</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--generation)"></div>Generation</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--store)"></div>Outputs + Store</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ceo)"></div>Three Faces (Bidirectional)</div>
+  </div>
+
+  <div class="diagram">
+
+    <!-- ① DATA SOURCES — LIVE -->
+    <div class="cloud-zone external">
+      <span class="zone-label external">① Data Sources — Connected & Live</span>
+      <div class="components-grid grid-4">
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">📧</div>
+          <div class="name">Gmail</div>
+          <div class="desc">OAuth2 polling every 5 min. Receives copies of all Outlook messages.</div>
+          <div class="detail">Auth: OAuth2<br>Switch to M365 after migration (~2 wks)</div>
+          <div class="tech">Live · 5min poll</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">🗄️</div>
+          <div class="name">PostgreSQL (Neon)</div>
+          <div class="desc">Structured data — alerts, deals, contacts, decisions, watermarks, task tracking.</div>
+          <div class="detail">Neon Cloud, US East 1<br>→ Azure EU (Phase 3)</div>
+          <div class="tech">Live · Neon Free</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">🔮</div>
+          <div class="name">Qdrant</div>
+          <div class="desc">Vector DB — semantic search across 6 collections. Voyage AI voyage-3, 1024 dims.</div>
+          <div class="detail">AWS EU Central 1<br>5 collections active</div>
+          <div class="tech">Live · EU</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">⚡</div>
+          <div class="name">Claude API</div>
+          <div class="desc">Opus 4.6 with 1M context window. Powers pipeline + Scan + deep analysis.</div>
+          <div class="detail">Anthropic SDK<br>~$0.71 per 93K analysis</div>
+          <div class="tech">Live · Opus 1M</div>
+        </div>
+      </div>
+
+      <div class="sub-label" style="color: var(--tier2);">Phase 1 — Building Now</div>
+      <div class="components-grid grid-3">
+        <div class="component">
+          <span class="rag-badge building">BUILDING</span>
+          <div class="icon">📋</div>
+          <div class="name">ClickUp (Read + Write)</div>
+          <div class="desc">Bidirectional. Reads ALL 6 workspaces, writes autonomously to BAKER space. M3 authority.</div>
+          <div class="detail">6 workspaces · 5min poll<br>M3: create tasks, update, comment<br>Kill switch: READONLY env var</div>
+          <div class="tech">Phase 1 · M3 · B1 in progress</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge trigger">STUBBED</span>
+          <div class="icon">📱</div>
+          <div class="name">WhatsApp (Input)</div>
+          <div class="desc">Wassenger API. Session currently offline — needs Director re-link.</div>
+          <div class="detail">Auth: Wassenger Professional<br>+41 79 960 50 92<br>Needs QR re-scan</div>
+          <div class="tech">Phase 1 · Paused</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge trigger">STUBBED</span>
+          <div class="icon">🎙️</div>
+          <div class="name">Fireflies.ai</div>
+          <div class="desc">Meeting transcripts. API key works, trigger needs validation.</div>
+          <div class="detail">Auth: API key<br>Extracts decisions + commitments</div>
+          <div class="tech">Phase 1 · Validate</div>
+        </div>
+      </div>
+
+      <div class="sub-label" style="color: var(--text-muted);">Phase 2 — Source Expansion (Sequenced)</div>
+      <div class="components-grid grid-5">
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">💬</div>
+          <div class="name">Slack (Full Bot)</div>
+          <div class="desc">Two-way bot. Input + output. CEO + COO Q&A.</div>
+          <div class="tech">P2 #1 · High</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">📱</div>
+          <div class="name">WhatsApp (Output)</div>
+          <div class="desc">Push alerts + conversational responses via Wassenger.</div>
+          <div class="tech">P2 #2 · High</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">✅</div>
+          <div class="name">Todoist</div>
+          <div class="desc">All sections — projects + private. Baker sees everything.</div>
+          <div class="tech">P2 #4 · High</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">📂</div>
+          <div class="name">Dropbox</div>
+          <div class="desc">File watching — detect new files in project directories.</div>
+          <div class="tech">P2 #7 · Medium</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">💪</div>
+          <div class="name">Whoop</div>
+          <div class="desc">Health data → Private tab. Recovery, strain, sleep.</div>
+          <div class="tech">P2 #8 · Medium</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow-section">
+      <div class="arrow-down">
+        <div class="arrow-line"></div>
+        <div class="arrow-label" style="color:var(--trigger)">5-step RAG Pipeline: Classify → Enrich → Decide → Draft → Store</div>
+        <div class="arrow-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+    </div>
+
+    <!-- ② INFRASTRUCTURE (Current) -->
+    <div class="cloud-zone azure">
+      <span class="zone-label azure">② Infrastructure — Current (Render + Neon + Qdrant) → Azure EU Phase 3</span>
+      <div class="components-grid grid-4">
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">🌐</div>
+          <div class="name">Render (App)</div>
+          <div class="desc">FastAPI backend + static frontend served together. Starter tier, always on.</div>
+          <div class="detail">baker-master.onrender.com<br>$7/month · Auto-deploy from GitHub<br>vallen300-bit/baker-master</div>
+          <div class="tech">Render Starter · US</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">🗄️</div>
+          <div class="name">PostgreSQL (Neon)</div>
+          <div class="desc">Structured data store. Connection pooling via SimpleConnectionPool singleton.</div>
+          <div class="detail">Neon Cloud, US East 1<br>Tables: alerts, deals, contacts,<br>decisions, trigger_watermarks, clickup_tasks</div>
+          <div class="tech">Neon Free · US East 1</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge live">LIVE</span>
+          <div class="icon">🔮</div>
+          <div class="name">Qdrant Cloud</div>
+          <div class="desc">Vector search. Voyage AI voyage-3 embeddings (1024 dims). 6 collections.</div>
+          <div class="detail">baker-emails, baker-contacts,<br>baker-whatsapp, baker-meetings,<br>baker-documents, baker-clickup (new)</div>
+          <div class="tech">Qdrant Free · EU Central 1</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge phase2">PHASE 3</span>
+          <div class="icon">☁️</div>
+          <div class="name">Azure EU (Target)</div>
+          <div class="desc">Full migration: App Service, PostgreSQL, Blob Storage. Data residency in EU.</div>
+          <div class="detail">Replaces Render + Neon<br>IaC needed before migration<br>Dashboard: Vercel/Netlify CDN</div>
+          <div class="tech">Phase 3 · EU</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow-section">
+      <div class="arrow-down">
+        <div class="arrow-line"></div>
+        <div class="arrow-label" style="color:var(--retrieval)">Retrieved context assembled into 1M token window</div>
+        <div class="arrow-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+    </div>
+
+    <!-- ③ ORCHESTRATOR -->
+    <div class="orchestrator-section">
+      <span class="orchestrator-label">③ Baker Orchestrator — The Brain (Augmentation Layer)</span>
+      <div class="orchestrator-inner">
+        <div class="orch-column">
+          <h4>Inputs (Retrieved)</h4>
+          <div class="orch-item"><span class="orch-icon">🔮</span>Qdrant semantic matches</div>
+          <div class="orch-item"><span class="orch-icon">🗄️</span>PostgreSQL structured data</div>
+          <div class="orch-item"><span class="orch-icon">📋</span>ClickUp tasks (6 workspaces)</div>
+          <div class="orch-item"><span class="orch-icon">⚡</span>Current trigger data</div>
+          <div class="orch-item"><span class="orch-icon">🔁</span>Director interaction history</div>
+          <div class="orch-item"><span class="orch-icon">🧠</span>1M deep analysis results</div>
+        </div>
+        <div class="orch-column">
+          <h4>Context Assembly → 1M Token Window</h4>
+          <div class="context-window-viz">
+            <h5>Context Window (up to 1,000,000 tokens)</h5>
+            <div class="token-bar">
+              <div class="token-segment seg-system">SYS</div>
+              <div class="token-segment seg-contacts">Contacts</div>
+              <div class="token-segment seg-emails">Email</div>
+              <div class="token-segment seg-clickup">ClickUp</div>
+              <div class="token-segment seg-meetings">Meetings</div>
+              <div class="token-segment seg-current">Now</div>
+              <div class="token-segment seg-free">Free</div>
+            </div>
+            <div class="token-labels">
+              <span>System + Persona (50K)</span>
+              <span>Retrieved context (500K–800K)</span>
+              <span>Output (128K)</span>
+            </div>
+          </div>
+          <div style="margin-top:10px;">
+            <div class="orch-item"><span class="orch-icon">📊</span>Pipeline: classify → enrich → decide → draft → store</div>
+            <div class="orch-item"><span class="orch-icon">🔍</span>Scan: conversational search across all sources</div>
+            <div class="orch-item"><span class="orch-icon">🧠</span>Deep Analysis: 50+ doc cross-reference (1M window)</div>
+            <div class="orch-item"><span class="orch-icon">⚙️</span>Two prompt modes: Pipeline (JSON) + Scan (natural)</div>
+          </div>
+        </div>
+        <div class="orch-column">
+          <h4>Pipeline Logic</h4>
+          <div class="orch-item"><span class="orch-icon">1️⃣</span>Classify — source, type, urgency</div>
+          <div class="orch-item"><span class="orch-icon">2️⃣</span>Enrich — cross-source Qdrant search</div>
+          <div class="orch-item"><span class="orch-icon">3️⃣</span>Decide — T1/T2/T3 tier assignment</div>
+          <div class="orch-item"><span class="orch-icon">4️⃣</span>Draft — generate alerts + responses</div>
+          <div class="orch-item"><span class="orch-icon">5️⃣</span>Store — log to PostgreSQL</div>
+          <div class="orch-item"><span class="orch-icon">6️⃣</span>Act (M3) — autonomous writes</div>
+        </div>
+      </div>
+      <div class="authority-bar">
+        <div class="auth-phase auth-m1">M1 — OBSERVE & ALERT<span class="label">Default — monitor, classify, surface</span></div>
+        <div class="auth-phase auth-m2">M2 — DRAFT & SUGGEST<span class="label">Queue for human approval</span></div>
+        <div class="auth-phase auth-m3">M3 — ACT & REPORT<span class="label">ClickUp writes: ACTIVE ✓</span></div>
+      </div>
+      <div style="text-align:center; margin-top:10px;">
+        <span class="tech" style="font-size:10px;">FastAPI · Python · Claude Opus 4.6 · Vanilla JS · APScheduler · No budget ceiling</span>
+      </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow-section">
+      <div class="arrow-down">
+        <div class="arrow-line"></div>
+        <div class="arrow-label" style="color:var(--augmentation)">Response routed to Three Faces + Store Back</div>
+        <div class="arrow-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+    </div>
+
+    <!-- ④ THREE FACES — OUTPUT + INPUT -->
+    <div class="cloud-zone output-zone">
+      <span class="zone-label output">④ Three Faces — Bidirectional (Output + Input)</span>
+
+      <div class="sub-label" style="color: var(--ceo);">Each face is both an output channel (Baker → Director) and an input source (Director → Baker)</div>
+      <div class="components-grid grid-3">
+        <div class="component">
+          <span class="rag-badge bidi">BIDI · LIVE</span>
+          <div class="icon">📊</div>
+          <div class="name">Face 1 — Dashboard</div>
+          <div class="desc">Always-on command center. Baker's Scan (full area takeover), Universal Search, 3-layer navigation, per-tab lens indicators.</div>
+          <div class="detail">Sidebar: Home, Chairman, Projects,<br>Network, Private, Travel (+ configurable)<br>Scan output: Quick/Report/Analysis/Opinion<br>UX: + buttons for roles & categories</div>
+          <div class="tech">Live · baker-master.onrender.com</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge phase2">Phase 2</span>
+          <div class="icon">💬</div>
+          <div class="name">Face 2 — Slack</div>
+          <div class="desc">Team channel. T2 alerts, Q&A for CEO + COO. Full two-way bot (not just webhooks).</div>
+          <div class="detail">Current: webhook push only<br>Target: full bot, read + respond<br>COO (Edita) access included<br>Dedicated #baker channel</div>
+          <div class="tech">Phase 2 · CEO + COO</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge trigger">STUBBED</span>
+          <div class="icon">📱</div>
+          <div class="name">Face 3 — WhatsApp</div>
+          <div class="desc">Director's private line. Deeper context, urgent alerts, back-and-forth analysis. CEO only.</div>
+          <div class="detail">Current: input trigger exists, offline<br>Target: two-way conversational<br>Wassenger API, +41 79 960 50 92<br>Needs QR re-link</div>
+          <div class="tech">Phase 1-2 · CEO Private</div>
+        </div>
+      </div>
+
+      <div class="sub-label" style="color: var(--store);">Store Back — Learning Loop</div>
+      <div class="components-grid grid-3">
+        <div class="component">
+          <span class="rag-badge store-back">Store Back</span>
+          <div class="icon">🔮</div>
+          <div class="name">Update Qdrant</div>
+          <div class="desc">New embeddings from interactions, updated profiles, deep analysis results stored for Scan recall.</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge store-back">Store Back</span>
+          <div class="icon">🗄️</div>
+          <div class="name">Update PostgreSQL</div>
+          <div class="desc">Decision log, alert outcomes, baker_actions audit trail, watermarks, task sync state.</div>
+        </div>
+        <div class="component">
+          <span class="rag-badge m3">M3 Write-Back</span>
+          <div class="icon">📋</div>
+          <div class="name">Write to ClickUp</div>
+          <div class="desc">Autonomous task creation, status updates, comments, tags in BAKER space. All logged to baker_actions.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bidirectional Arrow -->
+    <div class="bidi-arrow">
+      <div class="bidi-heads">
+        <div class="arrow-up"></div>
+        <div class="bidi-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+      <div class="arrow-bidi">Director interacts via all Three Faces ↕ Every interaction is a source for Baker</div>
+      <div class="bidi-heads">
+        <div class="arrow-up"></div>
+        <div class="bidi-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+    </div>
+
+    <!-- ⑤ USERS -->
+    <div class="cloud-zone ceo-zone">
+      <span class="zone-label ceo">⑤ Users — CEO + COO (Phase 5: Shared Dashboard)</span>
+      <div class="components-grid grid-3">
+        <div class="component">
+          <div class="icon">👔</div>
+          <div class="name">CEO — Dimitry Vallen</div>
+          <div class="desc">Full access: Dashboard (all roles), Slack, WhatsApp. Primary user. All Three Faces.</div>
+          <div class="detail">Dashboard: all roles + Scan<br>Slack: #baker + team channels<br>WhatsApp: private line<br>Configures: + roles, + categories</div>
+          <div class="tech">Full Access</div>
+        </div>
+        <div class="component" style="opacity:0.7;">
+          <div class="icon">👩‍💼</div>
+          <div class="name">COO — Edita (Phase 5)</div>
+          <div class="desc">Full dashboard access (sees everything). Slack access. First project: Hagenauer.</div>
+          <div class="detail">Shared dashboard, own login<br>Slack: ask Baker questions<br>No WhatsApp (CEO only)<br>Audit trail: queries logged separately</div>
+          <div class="tech">Phase 5 · Full View</div>
+        </div>
+        <div class="component">
+          <div class="icon">🖥️</div>
+          <div class="name">Mac Mini Display</div>
+          <div class="desc">Always-on dashboard at home office. Full screen command center. Auto-restarts.</div>
+          <div class="detail">Auto-launches on boot<br>~€700-900 one-time<br>Dedicated second screen</div>
+          <div class="tech">Phase 5 · Hardware</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ BAKER AS PLATFORM -->
+    <div class="cloud-zone platform-zone">
+      <span class="zone-label platform">⑥ Baker Operating Platform (Phase 6)</span>
+      <div class="components-grid grid-3">
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 6</span>
+          <div class="icon">🔄</div>
+          <div class="name">The Baker Operating Loop</div>
+          <div class="desc">Baker observes → writes structured briefs to ClickUp → PM reviews → PL executes → results flow back → Baker learns. Standard operating model.</div>
+          <div class="tech">Per-Project Automation</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 6</span>
+          <div class="icon">📄</div>
+          <div class="name">PM + PL Session Templates</div>
+          <div class="desc">Reusable per-project handover prompts. Spin up PM/PL pair for any project Baker manages.</div>
+          <div class="tech">Replicable Workflow</div>
+        </div>
+        <div class="component" style="opacity:0.6;">
+          <span class="rag-badge phase2">Phase 6</span>
+          <div class="icon">🔗</div>
+          <div class="name">Cross-Project Intelligence</div>
+          <div class="desc">Baker flags dependencies and patterns across all projects. First target: Hagenauer.</div>
+          <div class="tech">Organizational AI</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Baker AI Chief of Staff · Architecture v4.3 · Blueprint v4.3 · One Memory · Two Minds · Three Faces · No Budget Ceiling
+  </div>
+
+</div>
+
+</body></html>
