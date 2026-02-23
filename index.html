@@ -4,178 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brisen Dashboards</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231c1e2e'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-size='44' font-weight='700' fill='%236C5CE7' font-family='system-ui'%3EB%3C/text%3E%3C/svg%3E">
 <style>
-:root {
-  --bg-dark: #0f1117;
-  --bg-card: #1c1e2e;
-  --bg-card-hover: #232538;
-  --border: #2a2d3e;
-  --text-primary: #e8eaf0;
-  --text-secondary: #9ba1b5;
-  --text-muted: #6b7186;
-  --accent: #6C5CE7;
-  --accent-light: #a29bfe;
-  --cyan: #00B4D8;
-  --green: #00C9A7;
-  --amber: #F0B429;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
-  --radius: 12px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
-  background: var(--bg-dark);
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 60px 24px;
-}
-.header {
-  text-align: center;
-  margin-bottom: 56px;
-}
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-.logo-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--accent), var(--cyan));
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-}
-.header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-.header p {
-  color: var(--text-secondary);
-  font-size: 15px;
-  margin-top: 8px;
-}
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-.card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-.card-icon.purple { background: rgba(108,92,231,0.15); color: var(--accent-light); }
-.card-icon.cyan { background: rgba(0,180,216,0.15); color: var(--cyan); }
-.card-icon.green { background: rgba(0,201,167,0.15); color: var(--green); }
-.card-icon.amber { background: rgba(240,180,41,0.15); color: var(--amber); }
-.card h3 {
-  font-size: 17px;
-  font-weight: 600;
-}
-.card p {
-  color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.5;
-}
-.card .meta {
-  color: var(--text-muted);
-  font-size: 12px;
-  margin-top: auto;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-}
-.footer {
-  text-align: center;
-  margin-top: 56px;
-  color: var(--text-muted);
-  font-size: 13px;
-}
-.footer a {
-  color: var(--accent-light);
-  text-decoration: none;
-}
-.footer a:hover { text-decoration: underline; }
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+  :root { --bg: #0f1117; --sidebar: #161822; --card: #1c1e2e; --accent: #6C5CE7; --cyan: #00B4D8; --green: #00C9A7; --amber: #F0B429; --text: #E2E8F0; --dim: #94A3B8; --muted: #64748B; --border: #2D3348; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 24px; }
+  .logo { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--accent), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: white; margin-bottom: 24px; }
+  h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; background: linear-gradient(135deg, #E2E8F0, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 48px; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 900px; width: 100%; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: all 0.3s ease; text-decoration: none; color: var(--text); position: relative; }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card.disabled { opacity: 0.5; pointer-events: none; }
+  .card .icon { font-size: 28px; margin-bottom: 12px; }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .card p { font-size: 13px; color: var(--dim); line-height: 1.5; }
+  .badge { position: absolute; top: 12px; right: 12px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .badge.live { background: rgba(0,201,167,0.15); color: var(--green); border: 1px solid rgba(0,201,167,0.3); }
+  .badge.soon { background: rgba(240,180,41,0.15); color: var(--amber); border: 1px solid rgba(240,180,41,0.3); }
+  .footer { margin-top: 60px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="logo">
-      <div class="logo-icon">B</div>
-    </div>
-    <h1>Brisen Dashboards</h1>
-    <p>Project visualizations &amp; architecture diagrams</p>
+  <div class="logo">B</div>
+  <h1>Brisen Dashboards</h1>
+  <div class="subtitle">BAKER AI — VISUALIZATION HUB</div>
+  <div class="grid">
+    <a href="roadmap.html" class="card"><span class="badge live">LIVE</span><div class="icon">📊</div><h3>Roadmap to Operational</h3><p>Phase tracker with milestones, integration status, and progress visualization.</p></a>
+    <a href="memory-map.html" class="card"><span class="badge live">LIVE</span><div class="icon">🧠</div><h3>Memory Architecture</h3><p>Baker’s memory system — bhavanga stream, collections, and data flow.</p></a>
+    <div class="card disabled"><span class="badge soon">COMING SOON</span><div class="icon">🏗️</div><h3>System Architecture v4.3</h3><p>Full infrastructure diagram — data sources, RAG pipeline, orchestrator, outputs.</p></div>
+    <div class="card disabled"><span class="badge soon">COMING SOON</span><div class="icon">💻</div><h3>CEO Cockpit Preview</h3><p>Dashboard mockup — Priority Actions, Intelligence Feed, Baker’s Scan.</p></div>
   </div>
-
-  <div class="cards">
-    <a href="memory-map.html" class="card">
-      <div class="card-icon purple">&#x1f9e0;</div>
-      <h3>Baker Memory Map</h3>
-      <p>Sources, core processing, memory layer, and the three faces of Baker (Dashboard, Slack, WhatsApp).</p>
-      <div class="meta">Interactive diagram &middot; 15 KB</div>
-    </a>
-
-    <a href="architecture.html" class="card">
-      <div class="card-icon cyan">&#x1f3d7;</div>
-      <h3>Architecture Diagram v4.3</h3>
-      <p>Full system architecture — Sentinel triggers, Baker pipeline, Qdrant vector store, CEO Cockpit.</p>
-      <div class="meta">Interactive diagram &middot; 32 KB</div>
-    </a>
-
-    <a href="dashboard-preview.html" class="card">
-      <div class="card-icon green">&#x1f4ca;</div>
-      <h3>Dashboard Preview</h3>
-      <p>CEO Cockpit mockup — Priority Actions, Pending Drafts, Intelligence Feed, Decisions Log.</p>
-      <div class="meta">Interactive preview &middot; 74 KB</div>
-    </a>
-
-    <a href="roadmap.html" class="card">
-      <div class="card-icon amber">&#x1f5fa;</div>
-      <h3>Roadmap to Operational</h3>
-      <p>6-phase roadmap from MVP to fully operational Baker platform. Phase tracking with completion status.</p>
-      <div class="meta">Living document &middot; Updated Feb 23, 2026</div>
-    </a>
-  </div>
-
-  <div class="footer">
-    <p>Brisengroup &middot; <a href="https://baker-master.onrender.com" target="_blank">Baker Live Dashboard</a></p>
-  </div>
-</div>
+  <div class="footer">BRISEN GROUP · BAKER AI · 2026</div>
 </body>
 </html>
