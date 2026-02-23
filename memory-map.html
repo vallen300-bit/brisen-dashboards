@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker Memory Map — Feb 23, 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e17; color: #e0e0e0; overflow: hidden; }
+
+  svg { width: 100vw; height: 100vh; }
+
+  .node-group { cursor: pointer; }
+  .node-group:hover .node-box { filter: brightness(1.3); }
+  .node-group:hover .node-label { fill: #fff; }
+
+  .node-box { stroke-width: 2; rx: 12; ry: 12; }
+  .node-label { font-size: 13px; font-weight: 600; fill: #e0e0e0; text-anchor: middle; }
+  .node-sublabel { font-size: 10px; fill: #8899aa; text-anchor: middle; }
+  .node-status { font-size: 9px; fill: #66bb6a; text-anchor: middle; font-weight: 600; }
+  .node-status.pending { fill: #ffa726; }
+  .node-status.off { fill: #ef5350; }
+
+  .edge { stroke-width: 1.5; fill: none; opacity: 0.5; }
+  .edge.active { opacity: 0.8; stroke-dasharray: none; }
+  .edge.pending { opacity: 0.3; stroke-dasharray: 6 4; }
+
+  .title { font-size: 22px; font-weight: 700; fill: #ffffff; }
+  .subtitle { font-size: 12px; fill: #667788; }
+  .legend-text { font-size: 11px; fill: #8899aa; }
+  .legend-dot { stroke-width: 0; }
+
+  .section-label { font-size: 11px; fill: #556677; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+  .glow { filter: url(#glow); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .pulse { animation: pulse 2s ease-in-out infinite; }
+
+  @keyframes flowDash {
+    to { stroke-dashoffset: -20; }
+  }
+  .flow { stroke-dasharray: 10 5; animation: flowDash 1.5s linear infinite; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1200 750">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#4488aa" opacity="0.6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#66bb6a" opacity="0.6"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#ffa726" opacity="0.4"/>
+    </marker>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e17"/>
+      <stop offset="100%" style="stop-color:#111827"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="600" y="38" class="title" text-anchor="middle">Baker Memory Map</text>
+  <text x="600" y="56" class="subtitle" text-anchor="middle">One Memory · Two Minds · Three Faces — as of Feb 23, 2026 (Session 6)</text>
+
+  <!-- ==================== SOURCES (Left) ==================== -->
+  <text x="120" y="95" class="section-label" text-anchor="middle">Sources</text>
+
+  <!-- ClickUp -->
+  <g class="node-group" transform="translate(120, 120)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#4488cc"/>
+    <text class="node-label" y="-2">ClickUp</text>
+    <text class="node-sublabel" y="12">6 workspaces</text>
+    <text class="node-status" y="24">● LIVE</text>
+  </g>
+
+  <!-- Gmail -->
+  <g class="node-group" transform="translate(120, 195)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#4488cc"/>
+    <text class="node-label" y="-2">Gmail</text>
+    <text class="node-sublabel" y="12">OAuth2, 5 min poll</text>
+    <text class="node-status" y="24">● LIVE</text>
+  </g>
+
+  <!-- WhatsApp -->
+  <g class="node-group" transform="translate(120, 270)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#cc6644"/>
+    <text class="node-label" y="-2">WhatsApp</text>
+    <text class="node-sublabel" y="12">Wassenger</text>
+    <text class="node-status pending" y="24">⚠ NEEDS RE-LINK</text>
+  </g>
+
+  <!-- Feed Baker -->
+  <g class="node-group" transform="translate(120, 345)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#66bb6a"/>
+    <text class="node-label" y="-2">Feed Baker</text>
+    <text class="node-sublabel" y="12">Upload: PDF, DOCX, IMG</text>
+    <text class="node-status" y="24">● LIVE (100MB)</text>
+  </g>
+
+  <!-- 1M Analysis -->
+  <g class="node-group" transform="translate(120, 420)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#aa66cc"/>
+    <text class="node-label" y="-2">1M Analysis</text>
+    <text class="node-sublabel" y="12">Deep analysis tool</text>
+    <text class="node-status" y="24">● LIVE + STORE-BACK</text>
+  </g>
+
+  <!-- Todoist -->
+  <g class="node-group" transform="translate(120, 495)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="52" fill="#1a2744" stroke="#ffa726"/>
+    <text class="node-label" y="-2">Todoist</text>
+    <text class="node-sublabel" y="12">API v1 migration</text>
+    <text class="node-status pending" y="24">⏳ DEPLOYING</text>
+  </g>
+
+  <!-- Future Sources -->
+  <g class="node-group" transform="translate(120, 570)">
+    <rect class="node-box" x="-65" y="-20" width="130" height="65" fill="#111827" stroke="#334455" stroke-dasharray="4 3"/>
+    <text class="node-sublabel" y="-2" fill="#556677">Phase 2:</text>
+    <text class="node-sublabel" y="12" fill="#556677">Whoop · Dropbox</text>
+    <text class="node-sublabel" y="25" fill="#556677">RSS Feeds</text>
+    <text class="node-status pending" y="38">PLANNED</text>
+  </g>
+
+  <!-- ==================== BAKER CORE (Center) ==================== -->
+  <text x="480" y="95" class="section-label" text-anchor="middle">Baker Core</text>
+
+  <!-- Sentinel Layer -->
+  <g class="node-group" transform="translate(350, 250)">
+    <rect class="node-box" x="-70" y="-22" width="140" height="56" fill="#1a2233" stroke="#5599bb"/>
+    <text class="node-label" y="-4">Sentinel</text>
+    <text class="node-sublabel" y="10">Polling + Ingestion</text>
+    <text class="node-sublabel" y="22">Classify · Chunk · Embed</text>
+  </g>
+
+  <!-- Baker Brain -->
+  <g class="node-group glow" transform="translate(480, 380)">
+    <rect class="node-box" x="-85" y="-30" width="170" height="72" fill="#1a2744" stroke="#ffcc44" stroke-width="2.5"/>
+    <text class="node-label" y="-10" fill="#ffcc44" font-size="15">Baker Brain</text>
+    <text class="node-sublabel" y="6">Claude Opus 4.6</text>
+    <text class="node-sublabel" y="19">1M Context Window</text>
+    <text class="node-status" y="32">● REASONING ENGINE</text>
+  </g>
+
+  <!-- Pipeline -->
+  <g class="node-group" transform="translate(610, 250)">
+    <rect class="node-box" x="-70" y="-22" width="140" height="56" fill="#1a2233" stroke="#5599bb"/>
+    <text class="node-label" y="-4">Pipeline</text>
+    <text class="node-sublabel" y="10">Classify → Enrich →</text>
+    <text class="node-sublabel" y="22">Decide → Draft → Store</text>
+  </g>
+
+  <!-- ==================== MEMORY (Center-Bottom) ==================== -->
+  <text x="480" y="490" class="section-label" text-anchor="middle">Memory Layer</text>
+
+  <!-- Qdrant -->
+  <g class="node-group" transform="translate(390, 560)">
+    <rect class="node-box" x="-95" y="-32" width="190" height="110" fill="#162230" stroke="#44aacc"/>
+    <text class="node-label" y="-14" fill="#44aacc">Qdrant (Vector)</text>
+    <text class="node-sublabel" y="2">baker-whatsapp (39 chunks)</text>
+    <text class="node-sublabel" y="15">baker-emails (Gmail)</text>
+    <text class="node-sublabel" y="28">baker-contacts (people)</text>
+    <text class="node-sublabel" y="41">baker-documents (files + analysis)</text>
+    <text class="node-sublabel" y="54">baker-clickup (6 workspaces)</text>
+    <text class="node-sublabel" y="67">baker-todoist (deploying)</text>
+  </g>
+
+  <!-- PostgreSQL -->
+  <g class="node-group" transform="translate(610, 560)">
+    <rect class="node-box" x="-85" y="-32" width="170" height="110" fill="#162230" stroke="#6688cc"/>
+    <text class="node-label" y="-14" fill="#6688cc">PostgreSQL (Neon)</text>
+    <text class="node-sublabel" y="2">contacts (structured)</text>
+    <text class="node-sublabel" y="15">clickup_tasks</text>
+    <text class="node-sublabel" y="28">todoist_tasks (deploying)</text>
+    <text class="node-sublabel" y="41">deep_analyses</text>
+    <text class="node-sublabel" y="54">trigger_watermarks</text>
+    <text class="node-sublabel" y="67">briefing_queue</text>
+  </g>
+
+  <!-- ==================== FACES (Right) ==================== -->
+  <text x="920" y="95" class="section-label" text-anchor="middle">Three Faces</text>
+
+  <!-- Dashboard -->
+  <g class="node-group" transform="translate(920, 160)">
+    <rect class="node-box" x="-90" y="-28" width="180" height="72" fill="#1a2744" stroke="#66bb6a" stroke-width="2"/>
+    <text class="node-label" y="-8" fill="#66bb6a">Dashboard</text>
+    <text class="node-sublabel" y="6">baker-master.onrender.com</text>
+    <text class="node-sublabel" y="19">Scan · Search · Feed Baker</text>
+    <text class="node-status" y="34">● LIVE — Always On</text>
+  </g>
+
+  <!-- Slack -->
+  <g class="node-group" transform="translate(920, 280)">
+    <rect class="node-box" x="-90" y="-28" width="180" height="72" fill="#111827" stroke="#334455" stroke-dasharray="4 3"/>
+    <text class="node-label" y="-8" fill="#556677">Slack Face</text>
+    <text class="node-sublabel" y="6" fill="#445566">Team alerts + CEO/COO Q&A</text>
+    <text class="node-sublabel" y="19" fill="#445566">Bidirectional</text>
+    <text class="node-status pending" y="34">PHASE 3</text>
+  </g>
+
+  <!-- WhatsApp Face -->
+  <g class="node-group" transform="translate(920, 400)">
+    <rect class="node-box" x="-90" y="-28" width="180" height="72" fill="#111827" stroke="#334455" stroke-dasharray="4 3"/>
+    <text class="node-label" y="-8" fill="#556677">WhatsApp Face</text>
+    <text class="node-sublabel" y="6" fill="#445566">Dimitry's private line</text>
+    <text class="node-sublabel" y="19" fill="#445566">Bidirectional</text>
+    <text class="node-status pending" y="34">PHASE 3</text>
+  </g>
+
+  <!-- ClickUp Write -->
+  <g class="node-group" transform="translate(920, 520)">
+    <rect class="node-box" x="-90" y="-28" width="180" height="72" fill="#1a2744" stroke="#4488cc"/>
+    <text class="node-label" y="-8">ClickUp Write</text>
+    <text class="node-sublabel" y="6">M3 Authority: BAKER space</text>
+    <text class="node-sublabel" y="19">Kill switch + audit log</text>
+    <text class="node-status" y="34">● LIVE</text>
+  </g>
+
+  <!-- ==================== EDGES ==================== -->
+
+  <!-- Sources → Sentinel -->
+  <path class="edge active flow" d="M185,140 Q270,140 280,245" stroke="#4488cc" marker-end="url(#arrow)"/>
+  <path class="edge active flow" d="M185,215 Q260,215 280,250" stroke="#4488cc" marker-end="url(#arrow)"/>
+  <path class="edge pending" d="M185,290 Q260,290 280,260" stroke="#cc6644" marker-end="url(#arrow-orange)"/>
+  <path class="edge active flow" d="M185,365 Q270,370 280,260" stroke="#66bb6a" marker-end="url(#arrow-green)"/>
+  <path class="edge active" d="M185,440 Q260,430 395,380" stroke="#aa66cc" marker-end="url(#arrow)"/>
+  <path class="edge pending" d="M185,515 Q260,490 280,270" stroke="#ffa726" marker-end="url(#arrow-orange)"/>
+
+  <!-- Sentinel → Baker Brain -->
+  <path class="edge active flow" d="M350,280 L440,355" stroke="#5599bb" marker-end="url(#arrow)"/>
+
+  <!-- Pipeline → Baker Brain -->
+  <path class="edge active flow" d="M610,280 L520,355" stroke="#5599bb" marker-end="url(#arrow)"/>
+
+  <!-- Sentinel → Pipeline -->
+  <path class="edge active flow" d="M420,250 L540,250" stroke="#5599bb" marker-end="url(#arrow)"/>
+
+  <!-- Baker Brain → Memory -->
+  <path class="edge active flow" d="M440,420 L400,528" stroke="#44aacc" marker-end="url(#arrow)"/>
+  <path class="edge active flow" d="M520,420 L600,528" stroke="#6688cc" marker-end="url(#arrow)"/>
+
+  <!-- Memory → Baker Brain (retrieval) -->
+  <path class="edge active" d="M420,528 L455,420" stroke="#44aacc" opacity="0.3" marker-end="url(#arrow)"/>
+  <path class="edge active" d="M580,528 L505,420" stroke="#6688cc" opacity="0.3" marker-end="url(#arrow)"/>
+
+  <!-- Baker Brain / Pipeline → Faces -->
+  <path class="edge active flow" d="M565,380 Q740,280 830,175" stroke="#66bb6a" marker-end="url(#arrow-green)"/>
+  <path class="edge pending" d="M565,390 Q740,340 830,295" stroke="#556677" marker-end="url(#arrow-orange)"/>
+  <path class="edge pending" d="M565,400 Q740,400 830,415" stroke="#556677" marker-end="url(#arrow-orange)"/>
+  <path class="edge active flow" d="M565,410 Q740,480 830,535" stroke="#4488cc" marker-end="url(#arrow)"/>
+
+  <!-- Voyage AI label -->
+  <g transform="translate(480, 475)">
+    <rect x="-45" y="-10" width="90" height="20" fill="#0a0e17" stroke="#334455" rx="4"/>
+    <text class="node-sublabel" y="4" fill="#667788" text-anchor="middle">Voyage AI</text>
+  </g>
+
+  <!-- ==================== LEGEND ==================== -->
+  <g transform="translate(30, 680)">
+    <rect x="0" y="-3" width="8" height="8" fill="#66bb6a" class="legend-dot" rx="4"/>
+    <text x="14" y="5" class="legend-text">Live & Active</text>
+
+    <rect x="120" y="-3" width="8" height="8" fill="#ffa726" class="legend-dot" rx="4"/>
+    <text x="134" y="5" class="legend-text">Deploying / In Progress</text>
+
+    <rect x="300" y="-3" width="8" height="8" fill="#556677" class="legend-dot" rx="4"/>
+    <text x="314" y="5" class="legend-text">Planned (Future Phase)</text>
+
+    <rect x="470" y="-3" width="8" height="8" fill="#ef5350" class="legend-dot" rx="4"/>
+    <text x="484" y="5" class="legend-text">Needs Attention</text>
+
+    <line x1="620" y1="1" x2="660" y2="1" stroke="#5599bb" stroke-width="1.5" stroke-dasharray="10 5"/>
+    <text x="668" y="5" class="legend-text">Data Flow</text>
+
+    <line x1="750" y1="1" x2="790" y2="1" stroke="#556677" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+    <text x="798" y="5" class="legend-text">Planned Connection</text>
+  </g>
+
+  <!-- Stats bar -->
+  <g transform="translate(30, 715)">
+    <text class="legend-text" fill="#556677">7 Qdrant Collections · 6 PostgreSQL Tables · 6 Sources Connected · 1 Face Live · 2 Faces Planned · Render Starter ($7/mo) · GitHub Pro ($4/mo)</text>
+  </g>
+</svg>
+</body>
+</html>
