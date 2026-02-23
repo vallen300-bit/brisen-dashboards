@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker — Roadmap to Operational</title>
+<style>
+:root {
+  --bg-dark: #0f1117;
+  --bg-card: #1c1e2e;
+  --border: #2a2d3e;
+  --text-primary: #e8eaf0;
+  --text-secondary: #9ba1b5;
+  --text-muted: #6b7186;
+  --accent: #6C5CE7;
+  --accent-light: #a29bfe;
+  --cyan: #00B4D8;
+  --green: #00C9A7;
+  --amber: #F0B429;
+  --red: #EF4444;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+.back { color: var(--accent-light); text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; }
+.back:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
+.meta-bar { color: var(--text-muted); font-size: 13px; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.phase {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.phase h2 { font-size: 17px; font-weight: 600; }
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge.complete { background: rgba(0,201,167,0.15); color: var(--green); }
+.badge.active { background: rgba(0,180,216,0.15); color: var(--cyan); }
+.badge.queued { background: rgba(107,113,134,0.15); color: var(--text-muted); }
+.task-list { list-style: none; }
+.task-list li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-bottom: 1px solid rgba(42,45,62,0.5);
+}
+.task-list li:last-child { border-bottom: none; }
+.check { flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-top: 2px; font-size: 11px; }
+.check.done { background: var(--green); border-color: var(--green); color: #0f1117; }
+.check.open { border-color: var(--text-muted); }
+.phase-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+.estimate { text-align: center; margin-top: 40px; padding: 20px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); }
+.progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 40px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back">&larr; Back to Dashboards</a>
+  <h1>Baker &rarr; Fully Operational</h1>
+  <div class="subtitle">Roadmap</div>
+  <div class="meta-bar">Updated Feb 23, 2026 &middot; Session 7 &middot; Living document</div>
+
+  <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 1 — MVP Finalization</h2>
+      <span class="badge complete">Complete</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check done">&#10003;</span>Feed Baker upload feedback bug fix</li>
+      <li><span class="check done">&#10003;</span>INGEST-3: Image ingestion — business cards + whiteboards</li>
+      <li><span class="check done">&#10003;</span>INGEST-4: DOCX support + 100MB upload limit</li>
+      <li><span class="check open"></span>Director live testing begins</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 2 — Source Expansion</h2>
+      <span class="badge active">Active</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check done">&#10003;</span>Todoist sentinel — 68 projects, 1,705 tasks ingested</li>
+      <li><span class="check open"></span>Whoop sentinel (health/recovery data)</li>
+      <li><span class="check open"></span>Dropbox sentinel (document sync)</li>
+      <li><span class="check open"></span>RSS sentinel (replaces Feedly API — zero cost)</li>
+      <li><span class="check open"></span>WhatsApp re-link</li>
+      <li><span class="check open"></span>Handoff Notes Monitor sentinel (deferred)</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 3 — Faces Go Live</h2>
+      <span class="badge queued">Queued</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check open"></span>Slack Face: team alerts + CEO/COO Q&A, bidirectional</li>
+      <li><span class="check open"></span>WhatsApp Face: Dimitry's private line, bidirectional</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 4 — Intelligence Layer</h2>
+      <span class="badge queued">Queued</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check open"></span>Synthesized Search (Claude-reasoned answers vs. raw chunks)</li>
+      <li><span class="check open"></span>Dashboard UX backlog (UX-1 through UX-9)</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 5 — COO Access</h2>
+      <span class="badge queued">Queued</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check open"></span>Shared dashboard for Edita, role-based views</li>
+      <li><span class="check open"></span>Edita's Slack access to Baker</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <h2>Phase 6 — Baker as Operational Platform</h2>
+      <span class="badge queued">Queued</span>
+    </div>
+    <div class="phase-desc">Baker becomes Chief of Staff — deploys full project structures in ClickUp. Each project gets its own PM agent session.</div>
+    <ul class="task-list">
+      <li><span class="check open"></span>Baker deploys ClickUp project structures per project</li>
+      <li><span class="check open"></span>Per-project PM agent sessions, managed independently</li>
+      <li><span class="check open"></span>Baker Operating Loop: Observe &rarr; Brief &rarr; PM executes &rarr; Results flow back</li>
+      <li><span class="check open"></span>PM session templates (reusable handover prompts)</li>
+      <li><span class="check open"></span>First target: Hagenauer project</li>
+      <li><span class="check open"></span>Second target: IT Manager project</li>
+    </ul>
+  </div>
+
+  <div class="estimate">
+    <strong>Total estimate:</strong> ~11-14 Workshop sessions &middot; ~4-6 weeks at current cadence
+  </div>
+</div>
+</body>
+</html>
