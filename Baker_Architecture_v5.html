@@ -374,6 +374,87 @@
     font-size: 0.75rem;
   }
 
+  /* MCP Tools */
+  .mcp-section { margin-bottom: 3rem; }
+  .mcp-intro {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  .mcp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .mcp-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .mcp-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .mcp-panel.read::before { background: var(--accent-baker); }
+  .mcp-panel.write::before { background: var(--accent-cowork); }
+  .mcp-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .mcp-panel-header h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .mcp-count {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .mcp-panel.read .mcp-count { background: rgba(79,140,255,0.15); color: var(--accent-baker); }
+  .mcp-panel.write .mcp-count { background: rgba(167,139,250,0.15); color: var(--accent-cowork); }
+  .mcp-tool {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.8rem;
+  }
+  .mcp-tool:last-child { border-bottom: none; }
+  .mcp-tool-name {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 170px;
+    flex-shrink: 0;
+  }
+  .mcp-panel.read .mcp-tool-name { color: var(--accent-baker); }
+  .mcp-panel.write .mcp-tool-name { color: var(--accent-cowork); }
+  .mcp-tool-desc {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+  }
+  .mcp-arrow-label {
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .actors { grid-template-columns: 1fr; }
@@ -392,7 +473,7 @@
   <div class="header">
     <h1>Baker System Architecture</h1>
     <div class="sub">Three actors, three jobs — one memory</div>
-    <div class="version">v5.0 — March 2026</div>
+    <div class="version">v5.1 — March 2026 — 18 MCP tools live</div>
   </div>
 
   <!-- Three Actors -->
@@ -493,14 +574,14 @@
           <td><span class="tag tag-cowork">Cowork</span></td>
           <td class="via-cell">MCP Server — 14 read tools + raw SQL</td>
           <td><span class="direction-tag">→ Read</span></td>
-          <td>Memory: deadlines, emails, contacts, tasks, meetings, conversations</td>
+          <td>Memory: deadlines, emails, contacts, tasks, meetings, conversations, health, RSS, analyses</td>
         </tr>
         <tr>
           <td><span class="tag tag-cowork">Cowork</span></td>
           <td><span class="tag tag-baker">Baker</span></td>
-          <td class="via-cell">MCP Server — write tools (adding now)</td>
+          <td class="via-cell">MCP Server — 4 write tools (live)</td>
           <td><span class="direction-tag">← Write-back</span></td>
-          <td>Decisions, notes, analysis conclusions, new contacts</td>
+          <td>Decisions, deadlines, VIP contacts, analysis reports</td>
         </tr>
         <tr>
           <td><span class="tag tag-cowork">Cowork</span></td>
@@ -568,6 +649,51 @@
     <div class="attr">System Design Principle</div>
   </div>
 
+  <!-- MCP Bridge: 18 Tools -->
+  <div class="mcp-section">
+    <div class="section-title">The MCP Bridge — 18 Tools</div>
+    <div class="mcp-intro">
+      The direct connection between Cowork (thinking sessions) and Baker (24/7 memory). Cowork reads everything Baker knows and writes back what the Director decides.
+    </div>
+    <div class="mcp-grid">
+
+      <div class="mcp-panel read">
+        <div class="mcp-panel-header">
+          <h3>Read Tools</h3>
+          <span class="mcp-count">14 TOOLS</span>
+        </div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_deadlines</span><span class="mcp-tool-desc">Active deadlines — due dates, priority, confidence</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_vip_contacts</span><span class="mcp-tool-desc">Key people — name, role, email, notes</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_sent_emails</span><span class="mcp-tool-desc">Emails sent on your behalf + reply status</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_actions</span><span class="mcp-tool-desc">Baker's action log — what he did and when</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_clickup_tasks</span><span class="mcp-tool-desc">Tasks across all 6 ClickUp workspaces</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_todoist_tasks</span><span class="mcp-tool-desc">Todoist tasks by project, priority, status</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_whoop</span><span class="mcp-tool-desc">Health data — recovery, sleep, strain, HRV</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_rss_feeds</span><span class="mcp-tool-desc">Which news feeds Baker monitors</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_rss_articles</span><span class="mcp-tool-desc">Recent articles ingested from feeds</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_deep_analyses</span><span class="mcp-tool-desc">Past deep analysis reports (full text)</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_briefing_queue</span><span class="mcp-tool-desc">Items queued for next daily briefing</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_watermarks</span><span class="mcp-tool-desc">Last poll time for each data source</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_conversation_memory</span><span class="mcp-tool-desc">Past Scan Q&amp;A with full answers</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_raw_query</span><span class="mcp-tool-desc">Escape hatch — any custom SELECT against Baker's DB</span></div>
+      </div>
+
+      <div class="mcp-panel write">
+        <div class="mcp-panel-header">
+          <h3>Write Tools</h3>
+          <span class="mcp-count">4 TOOLS</span>
+        </div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_store_decision</span><span class="mcp-tool-desc">Store a decision, insight, or conclusion → decisions table</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_add_deadline</span><span class="mcp-tool-desc">Add a date that matters → Baker will track and remind</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_upsert_vip</span><span class="mcp-tool-desc">Add or update a person to track → vip_contacts table</span></div>
+        <div class="mcp-tool"><span class="mcp-tool-name">baker_store_analysis</span><span class="mcp-tool-desc">Store a full analysis output → deep_analyses table</span></div>
+        <div style="height: 1.5rem"></div>
+        <div class="mcp-arrow-label">↑ Cowork pushes conclusions back so Baker remembers permanently</div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Tech Stack -->
   <div class="stack-section">
     <div class="section-title">Tech Stack</div>
@@ -594,7 +720,7 @@
       </div>
       <div class="stack-item">
         <div class="stack-icon">🔗</div>
-        <div><div class="stack-label">MCP Server</div><div class="stack-detail">14 read + write tools</div></div>
+        <div><div class="stack-label">MCP Server</div><div class="stack-detail">14 read + 4 write = 18 tools</div></div>
       </div>
     </div>
   </div>
@@ -616,7 +742,7 @@
 
   <!-- Footer -->
   <div class="footer">
-    Baker System v5.0 — Brisengroup — Last updated March 2, 2026
+    Baker System v5.1 — Brisengroup — Last updated March 2, 2026 — 18 MCP tools live
   </div>
 
 </div>
