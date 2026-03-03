@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker Operating Model v2.0</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-hover: #222633;
+    --border: #2a2e3d;
+    --accent-pm: #a78bfa;
+    --accent-code: #4f8cff;
+    --accent-director: #f59e42;
+    --accent-green: #34d399;
+    --accent-red: #ef4444;
+    --text: #e2e4ea;
+    --text-dim: #8b8fa3;
+    --text-bright: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+  }
+  .header .sub {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+  .header .badges {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .badge.approved {
+    border-color: rgba(52,211,153,0.4);
+    color: var(--accent-green);
+  }
+
+  /* Section headers */
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Roles */
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .role-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .role-card:hover {
+    transform: translateY(-2px);
+    background: var(--card-hover);
+  }
+  .role-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .role-card.pm::before { background: var(--accent-pm); }
+  .role-card.code::before { background: var(--accent-code); }
+  .role-card.director::before { background: var(--accent-director); }
+  .role-card:hover.pm { border-color: var(--accent-pm); }
+  .role-card:hover.code { border-color: var(--accent-code); }
+  .role-card:hover.director { border-color: var(--accent-director); }
+
+  .role-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .pm .role-icon { background: rgba(167,139,250,0.15); }
+  .code .role-icon { background: rgba(79,140,255,0.15); }
+  .director .role-icon { background: rgba(245,158,66,0.15); }
+
+  .role-card h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.25rem;
+  }
+  .role-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+  .pm .role-label { color: var(--accent-pm); }
+  .code .role-label { color: var(--accent-code); }
+  .director .role-label { color: var(--accent-director); }
+
+  .role-platform {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+  .role-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .role-detail {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .role-detail strong {
+    color: var(--accent-green);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Change callout */
+  .change-callout {
+    background: linear-gradient(135deg, rgba(79,140,255,0.08), rgba(167,139,250,0.08));
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .change-item .metric {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .change-item .label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+  .change-item .from-to {
+    font-size: 0.72rem;
+    color: var(--accent-green);
+    margin-top: 0.15rem;
+  }
+
+  /* Workflow */
+  .workflow-section { margin-bottom: 3rem; }
+  .workflow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    position: relative;
+  }
+  .wf-step {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    position: relative;
+    transition: background 0.15s;
+  }
+  .wf-step:first-child { border-radius: 12px 0 0 12px; }
+  .wf-step:last-child { border-radius: 0 12px 12px 0; }
+  .wf-step:hover { background: var(--card-hover); }
+  .wf-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    z-index: 2;
+    background: var(--bg);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+  }
+  .wf-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .wf-step:nth-child(1) .wf-num { background: rgba(167,139,250,0.2); color: var(--accent-pm); }
+  .wf-step:nth-child(2) .wf-num { background: rgba(245,158,66,0.2); color: var(--accent-director); }
+  .wf-step:nth-child(3) .wf-num { background: rgba(79,140,255,0.2); color: var(--accent-code); }
+  .wf-step:nth-child(4) .wf-num { background: rgba(245,158,66,0.2); color: var(--accent-director); }
+  .wf-step:nth-child(5) .wf-num { background: rgba(167,139,250,0.2); color: var(--accent-pm); }
+
+  .wf-step .wf-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.35rem;
+  }
+  .wf-step .wf-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.12rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .tag-pm { background: rgba(167,139,250,0.15); color: var(--accent-pm); }
+  .tag-code { background: rgba(79,140,255,0.15); color: var(--accent-code); }
+  .tag-director { background: rgba(245,158,66,0.15); color: var(--accent-director); }
+
+  /* Documents */
+  .docs-section { margin-bottom: 3rem; }
+  .doc-tier {
+    margin-bottom: 1.5rem;
+  }
+  .tier-header {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tier-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+  .tier-1 .tier-badge { background: rgba(52,211,153,0.15); color: var(--accent-green); }
+  .tier-2 .tier-badge { background: rgba(79,140,255,0.15); color: var(--accent-code); }
+  .tier-3 .tier-badge { background: rgba(245,158,66,0.15); color: var(--accent-director); }
+  .tier-4 .tier-badge { background: rgba(255,255,255,0.06); color: var(--text-dim); }
+
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.6rem;
+  }
+  .doc-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: background 0.15s;
+  }
+  .doc-item:hover { background: var(--card-hover); }
+  .doc-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .doc-name {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .doc-meta {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+  }
+
+  /* Home Bases */
+  .homes-section { margin-bottom: 3rem; }
+  .homes-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  .home-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .home-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .home-card.dropbox::before { background: var(--accent-pm); }
+  .home-card.github::before { background: var(--accent-code); }
+  .home-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+  }
+  .home-card .home-path {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .home-card .home-contents {
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+  .home-card .home-anchor {
+    font-size: 0.78rem;
+    color: var(--accent-green);
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-style: italic;
+  }
+  .home-bridge {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+  }
+  .home-bridge .arrow {
+    font-size: 1.5rem;
+    display: block;
+    margin: 0.25rem 0;
+  }
+
+  /* Connections */
+  .conn-section { margin-bottom: 3rem; }
+  .conn-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.82rem;
+  }
+  .conn-table th {
+    background: var(--card);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.65rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .conn-table th:first-child { border-radius: 8px 0 0 0; }
+  .conn-table th:last-child { border-radius: 0 8px 0 0; }
+  .conn-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .conn-table tr:last-child td { border-bottom: none; }
+  .conn-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .conn-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .conn-table tbody tr {
+    background: var(--card);
+    transition: background 0.15s;
+  }
+  .conn-table tbody tr:hover { background: var(--card-hover); }
+  .conn-service { font-weight: 600; color: var(--text-bright); }
+  .conn-dim { color: var(--text-dim); }
+
+  /* Session Protocols */
+  .proto-section { margin-bottom: 3rem; }
+  .proto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .proto-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .proto-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .proto-card.pm-proto::before { background: var(--accent-pm); }
+  .proto-card.code-proto::before { background: var(--accent-code); }
+  .proto-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.25rem;
+  }
+  .proto-card .proto-phase {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+  .proto-step {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    font-size: 0.82rem;
+    align-items: flex-start;
+  }
+  .proto-step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-dim);
+  }
+  .proto-step-text {
+    color: var(--text);
+  }
+  .proto-step-text .hard-rule {
+    color: var(--accent-red);
+    font-weight: 600;
+    font-size: 0.72rem;
+  }
+  .proto-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0.75rem 0;
+  }
+
+  /* Metrics */
+  .metrics-section { margin-bottom: 3rem; }
+  .metrics-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.82rem;
+  }
+  .metrics-table th {
+    background: var(--card);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.65rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .metrics-table th:first-child { border-radius: 8px 0 0 0; }
+  .metrics-table th:last-child { border-radius: 0 8px 0 0; }
+  .metrics-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .metrics-table tr:last-child td { border-bottom: none; }
+  .metrics-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .metrics-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .metrics-table tbody tr {
+    background: var(--card);
+    transition: background 0.15s;
+  }
+  .metrics-table tbody tr:hover { background: var(--card-hover); }
+  .metric-label { font-weight: 600; color: var(--text-bright); }
+  .metric-before { color: var(--text-dim); }
+  .metric-after { color: var(--accent-green); font-weight: 600; }
+
+  /* Review */
+  .review-section { margin-bottom: 3rem; }
+  .review-card {
+    background: var(--card);
+    border: 1px solid rgba(52,211,153,0.25);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .review-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .review-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.82rem;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-q {
+    min-width: 160px;
+    font-weight: 600;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .review-a {
+    color: var(--text-dim);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .roles { grid-template-columns: 1fr; }
+    .workflow { flex-direction: column; }
+    .wf-step { border-radius: 0 !important; }
+    .wf-step:first-child { border-radius: 12px 12px 0 0 !important; }
+    .wf-step:last-child { border-radius: 0 0 12px 12px !important; }
+    .wf-step:not(:last-child)::after {
+      right: 50%; top: auto; bottom: -12px;
+      transform: translateX(50%) rotate(90deg);
+    }
+    .homes-grid { grid-template-columns: 1fr; }
+    .home-bridge .arrow { transform: rotate(90deg); }
+    .proto-grid { grid-template-columns: 1fr; }
+    .change-callout { grid-template-columns: 1fr; gap: 1rem; }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Baker Operating Model v2.0</h1>
+    <div class="sub">Two AI roles, one relay hop, zero translation layers</div>
+    <div class="badges">
+      <span class="badge approved">APPROVED</span>
+      <span class="badge">Supersedes Workflow Orchestration v1.0–1.4</span>
+      <span class="badge">March 3, 2026</span>
+    </div>
+  </div>
+
+  <!-- Key Changes -->
+  <div class="change-callout">
+    <div class="change-item">
+      <div class="metric">2 + 1</div>
+      <div class="label">Roles (down from 4)</div>
+      <div class="from-to">PM + Code + Director</div>
+    </div>
+    <div class="change-item">
+      <div class="metric">1</div>
+      <div class="label">Relay hop per feature</div>
+      <div class="from-to">was 3 (PM → PL → Code)</div>
+    </div>
+    <div class="change-item">
+      <div class="metric">73</div>
+      <div class="label">Lines PM reads at startup</div>
+      <div class="from-to">was 1,001 lines / 5 files</div>
+    </div>
+  </div>
+
+  <!-- Roles -->
+  <div class="section-title">The Three Participants</div>
+  <div class="roles">
+
+    <div class="role-card pm">
+      <div class="role-icon">🧠</div>
+      <h2>PM</h2>
+      <div class="role-label">ROADMAP &amp; PRIORITIES</div>
+      <div class="role-platform">Cowork (Claude app) · 200K context</div>
+      <div class="role-desc">Manages ClickUp (6 workspaces). Reviews shipped work. Writes SHORT task briefs — what + why, not how.</div>
+      <div class="role-detail">
+        <strong>Startup read</strong><br>
+        PM_ONBOARD.md (~73 lines, one file)
+      </div>
+    </div>
+
+    <div class="role-card code">
+      <div class="role-icon">⚡</div>
+      <h2>Code (x2)</h2>
+      <div class="role-label">SCOPE &amp; IMPLEMENT</div>
+      <div class="role-platform">Claude Code CLI · 1M context each</div>
+      <div class="role-desc">Scopes the technical approach AND implements it. Plans, builds, tests, pushes to GitHub. Two terminals can work in parallel.</div>
+      <div class="role-detail">
+        <strong>Startup read</strong><br>
+        CLAUDE.md (~127 lines, one file)
+      </div>
+    </div>
+
+    <div class="role-card director">
+      <div class="role-icon">👔</div>
+      <h2>Director</h2>
+      <div class="role-label">FINAL AUTHORITY</div>
+      <div class="role-platform">Human (Dimitry)</div>
+      <div class="role-desc">Bridges PM ↔ Code (one relay hop). Approves plans for non-trivial work. Final authority on scope and budget.</div>
+      <div class="role-detail">
+        <strong>Quality gate</strong><br>
+        Reviews Code's plan mode before implementation
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Workflow -->
+  <div class="workflow-section">
+    <div class="section-title">Task Flow — One Relay Hop</div>
+    <div class="workflow">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div class="wf-title"><span class="tag tag-pm">PM</span> writes brief</div>
+        <div class="wf-desc">TASK / WHAT / WHY / ACCEPT — 2-3 sentences each. No "how."</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div class="wf-title"><span class="tag tag-director">Director</span> relays</div>
+        <div class="wf-desc">Copy-pastes to Code terminal. One hop, no rewriting.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div class="wf-title"><span class="tag tag-code">Code</span> ships</div>
+        <div class="wf-desc">Plan mode → Director approves → implement, test, push. Reports: commit hash, files, what to test.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div class="wf-title"><span class="tag tag-director">Director</span> confirms</div>
+        <div class="wf-desc">Tells PM "Code shipped [X]." Code may also post to ClickUp Handoff Notes.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">5</div>
+        <div class="wf-title"><span class="tag tag-pm">PM</span> verifies</div>
+        <div class="wf-desc">Checks ClickUp Handoff Notes + GitHub commits. Verifies acceptance criteria. Updates state.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Where Things Live -->
+  <div class="homes-section">
+    <div class="section-title">Where Things Live — Two Home Bases</div>
+    <div class="homes-grid">
+      <div class="home-card dropbox">
+        <h3>📂 Dropbox</h3>
+        <div class="home-path">Baker-Project/</div>
+        <div class="home-contents">PM's docs, shared reference (Blueprint, Workflow), archive, briefs</div>
+        <div class="home-anchor">Anchor: PM_ONBOARD.md — PM can work even if GitHub is down</div>
+      </div>
+      <div class="home-bridge">
+        <span class="arrow">⟷</span>
+        <span>Cross-ref<br>on demand</span>
+      </div>
+      <div class="home-card github">
+        <h3>🐙 GitHub</h3>
+        <div class="home-path">vallen300-bit/baker-master</div>
+        <div class="home-contents">Code onboard, session log, all production code</div>
+        <div class="home-anchor">Anchor: CLAUDE.md — Code can work even if Dropbox is unreachable</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documents -->
+  <div class="docs-section">
+    <div class="section-title">Document Tiers</div>
+
+    <div class="doc-tier tier-1">
+      <div class="tier-header"><span class="tier-badge">Tier 1</span> Startup reads (every session)</div>
+      <div class="doc-grid">
+        <div class="doc-item">
+          <div class="doc-icon">📋</div>
+          <div><div class="doc-name">pm/PM_ONBOARD.md</div><div class="doc-meta">~73 lines · Dropbox · PM reads · Full onboard + pending</div></div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">⚙️</div>
+          <div><div class="doc-name">CLAUDE.md</div><div class="doc-meta">~127 lines · GitHub · Code reads · Architecture + rules</div></div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">🔀</div>
+          <div><div class="doc-name">.claude/instructions.md</div><div class="doc-meta">~30 lines · Dropbox root · Both · Role router</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-tier tier-2">
+      <div class="tier-header"><span class="tier-badge">Tier 2</span> History logs (write at close, read when tracing)</div>
+      <div class="doc-grid">
+        <div class="doc-item">
+          <div class="doc-icon">📜</div>
+          <div><div class="doc-name">pm/PM_HANDOVER_PROMPT.md</div><div class="doc-meta">Dropbox · PM writes · Session history</div></div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">📜</div>
+          <div><div class="doc-name">CODE_SESSION_LOG.md</div><div class="doc-meta">GitHub · Code writes · Commit history</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-tier tier-3">
+      <div class="tier-header"><span class="tier-badge">Tier 3</span> Reference (on-demand, never at startup)</div>
+      <div class="doc-grid">
+        <div class="doc-item">
+          <div class="doc-icon">📐</div>
+          <div><div class="doc-name">BAKER_BLUEPRINT_v4.md</div><div class="doc-meta">~479 lines · Dropbox · Architecture + roadmap</div></div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">📖</div>
+          <div><div class="doc-name">WORKFLOW_ORCHESTRATION.md</div><div class="doc-meta">~177 lines · Dropbox · Process + standards</div></div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon">✅</div>
+          <div><div class="doc-name">pm/briefs/_DONE_*.md</div><div class="doc-meta">12 files · Dropbox · Shipped brief details</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-tier tier-4">
+      <div class="tier-header"><span class="tier-badge">Tier 4</span> Archive (read-only, superseded)</div>
+      <div class="doc-grid">
+        <div class="doc-item">
+          <div class="doc-icon">🗄️</div>
+          <div><div class="doc-name">_archive/ + workshop/</div><div class="doc-meta">Old handovers, legacy PL briefs — no new files</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connections -->
+  <div class="conn-section">
+    <div class="section-title">Connections</div>
+    <table class="conn-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>PM Access</th>
+          <th>Code Access</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="conn-service">ClickUp (6 workspaces)</td><td>MCP tools (direct)</td><td class="conn-dim">Gets tasks from Director</td></tr>
+        <tr><td class="conn-service">Todoist</td><td>MCP tools (direct)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Gmail</td><td>MCP tools (direct)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Google Calendar</td><td>MCP tools (direct)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Fireflies</td><td>MCP tools (direct)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Slack</td><td>MCP tools (direct)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">WhatsApp</td><td>MCP (Wassenger, legacy)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Google Drive</td><td>MCP tools (doc search)</td><td class="conn-dim">—</td></tr>
+        <tr><td class="conn-service">Baker Memory</td><td>MCP (14 read + 4 write)</td><td>MCP (14 read + 4 write)</td></tr>
+        <tr><td class="conn-service">Baker Dashboard</td><td>Chrome → Render</td><td>curl / browser</td></tr>
+        <tr><td class="conn-service">Render (deploy + logs)</td><td>Chrome → dashboard</td><td class="conn-dim">Auto-deploys on push</td></tr>
+        <tr><td class="conn-service">GitHub</td><td>Chrome → repo</td><td>git pull / push</td></tr>
+        <tr><td class="conn-service">Dropbox</td><td>Direct file access</td><td>Reads via filesystem</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Session Protocols -->
+  <div class="proto-section">
+    <div class="section-title">Session Protocols</div>
+    <div class="proto-grid">
+
+      <div class="proto-card pm-proto">
+        <h3>PM Sessions</h3>
+        <div class="proto-phase">On Open</div>
+        <div class="proto-step"><div class="proto-step-num">1</div><div class="proto-step-text">Read <strong>PM_ONBOARD.md</strong> (~73 lines) — only startup read</div></div>
+        <div class="proto-step"><div class="proto-step-num">2</div><div class="proto-step-text"><span class="hard-rule">80-LINE CEILING:</span> If over 80 lines, trim first. Hard rule.</div></div>
+        <div class="proto-step"><div class="proto-step-num">3</div><div class="proto-step-text">Connect to ClickUp — check Handoff Notes for Code replies</div></div>
+        <div class="proto-step"><div class="proto-step-num">4</div><div class="proto-step-text">If Code shipped, review commits on GitHub</div></div>
+        <div class="proto-step"><div class="proto-step-num">5</div><div class="proto-step-text">Pick up from pending list</div></div>
+        <div class="proto-divider"></div>
+        <div class="proto-phase">On Close</div>
+        <div class="proto-step"><div class="proto-step-num">1</div><div class="proto-step-text">Update PM_ONBOARD.md — delete completed, add state, keep &lt;80 lines</div></div>
+        <div class="proto-step"><div class="proto-step-num">2</div><div class="proto-step-text">Append session summary to PM_HANDOVER_PROMPT.md</div></div>
+        <div class="proto-step"><div class="proto-step-num">3</div><div class="proto-step-text">Save new briefs to pm/briefs/</div></div>
+      </div>
+
+      <div class="proto-card code-proto">
+        <h3>Code Sessions</h3>
+        <div class="proto-phase">On Open</div>
+        <div class="proto-step"><div class="proto-step-num">1</div><div class="proto-step-text"><code style="font-size:0.75rem;color:var(--accent-code);">git pull && git log --oneline -10</code></div></div>
+        <div class="proto-step"><div class="proto-step-num">2</div><div class="proto-step-text">Read <strong>CLAUDE.md</strong> in repo (~127 lines)</div></div>
+        <div class="proto-step"><div class="proto-step-num">3</div><div class="proto-step-text">Ask Director what to work on</div></div>
+        <div class="proto-divider"></div>
+        <div class="proto-phase">On Close</div>
+        <div class="proto-step"><div class="proto-step-num">1</div><div class="proto-step-text">Update CLAUDE.md — delete completed, add state, keep &lt;130 lines</div></div>
+        <div class="proto-step"><div class="proto-step-num">2</div><div class="proto-step-text">Append session summary to CODE_SESSION_LOG.md</div></div>
+        <div class="proto-step"><div class="proto-step-num">3</div><div class="proto-step-text">Commit and push (PM sees it on GitHub)</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Context Engineering Metrics -->
+  <div class="metrics-section">
+    <div class="section-title">Context Engineering — Before vs After</div>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>v1 (4-role model)</th>
+          <th>v2 (current)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="metric-label">Roles</td><td class="metric-before">4 (PM, PL, Code, Director)</td><td class="metric-after">2 AI + Director</td></tr>
+        <tr><td class="metric-label">PM startup</td><td class="metric-before">1,001 lines / 5 files</td><td class="metric-after">73 lines / 1 file</td></tr>
+        <tr><td class="metric-label">Code startup</td><td class="metric-before">305 lines / 1 file</td><td class="metric-after">127 lines / 1 file</td></tr>
+        <tr><td class="metric-label">Relay hops</td><td class="metric-before">3 per feature</td><td class="metric-after">1 per feature</td></tr>
+        <tr><td class="metric-label">PL sessions</td><td class="metric-before">Every feature</td><td class="metric-after">Zero</td></tr>
+        <tr><td class="metric-label">Document sync</td><td class="metric-before">Manual copy between Dropbox &amp; git</td><td class="metric-after">No sync — each doc lives in one place</td></tr>
+        <tr><td class="metric-label">Session history</td><td class="metric-before">Inline (bloated startup files)</td><td class="metric-after">Separate log files (write-only)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PM Review -->
+  <div class="review-section">
+    <div class="section-title">PM Review — Confirmed</div>
+    <div class="review-card">
+      <h3>✓ All items approved — March 3, 2026</h3>
+      <div class="review-item"><div class="review-q">PL elimination</div><div class="review-a">Agreed. Code at 1M handles scoping + implementation.</div></div>
+      <div class="review-item"><div class="review-q">Task brief format</div><div class="review-a">Sufficient. TASK/WHAT/WHY/ACCEPT covers it.</div></div>
+      <div class="review-item"><div class="review-q">GitHub via Chrome</div><div class="review-a">Fine. Added ClickUp Handoff Notes as two-way channel.</div></div>
+      <div class="review-item"><div class="review-q">Missing connections</div><div class="review-a">Added: WhatsApp, Google Drive, Render logs.</div></div>
+      <div class="review-item"><div class="review-q">History log pattern</div><div class="review-a">No concerns. Write-at-close, read-on-demand is correct.</div></div>
+      <div class="review-item"><div class="review-q">Additional</div><div class="review-a">80-line hard ceiling on PM_ONBOARD.md enforced at session open.</div></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Baker Operating Model v2.0 — Brisen Group — Approved March 3, 2026
+  </div>
+
+</div>
+</body>
+</html>
