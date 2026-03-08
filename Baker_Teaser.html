@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAKER — AI Chief of Staff</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #e8f0fe 0%, #f0f4fa 40%, #eef2f9 100%);
+    color: #1a2a3a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #b8cfe6;
+  }
+  .header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #0d2137;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    color: #3a6a9b;
+    letter-spacing: 2px;
+  }
+  .header .tagline {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5a8abf;
+    margin-top: 6px;
+    letter-spacing: 1.5px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2b5a8a;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #c4d8ed;
+  }
+  .section p {
+    font-size: 15px;
+    color: #2a3d52;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .section p strong {
+    color: #0d2137;
+  }
+
+  /* ── BULLET LIST ── */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0 0;
+  }
+  .bullet-list li {
+    font-size: 14.5px;
+    color: #2a3d52;
+    padding: 8px 0 8px 22px;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(180, 205, 235, 0.3);
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 7px;
+    height: 7px;
+    background: #3a7abf;
+    border-radius: 50%;
+  }
+  .bullet-list li strong {
+    color: #0d2137;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, #dce8f5 0%, #e4edf8 100%);
+    border-left: 4px solid #3a7abf;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    color: #1a2a3a;
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid #c4d8ed;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead th {
+    background: #2b5a8a;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 2px solid #1e4470;
+  }
+  thead th:first-child {
+    border-radius: 7px 0 0 0;
+  }
+  thead th:last-child {
+    border-radius: 0 7px 0 0;
+  }
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #d4e2f0;
+    vertical-align: top;
+    color: #2a3d52;
+  }
+  tbody tr:nth-child(even) {
+    background: rgba(210, 228, 248, 0.25);
+  }
+  tbody tr:hover {
+    background: rgba(180, 210, 245, 0.3);
+  }
+  tbody td:first-child {
+    font-weight: 600;
+    color: #1a2a3a;
+    white-space: nowrap;
+  }
+  /* Baker column highlight */
+  thead th:last-child {
+    background: #1a4068;
+  }
+  tbody td:last-child {
+    color: #0d2137;
+    font-weight: 500;
+  }
+
+  /* ── STATS GRID ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: linear-gradient(135deg, #dce8f5 0%, #e8f0fa 100%);
+    border: 1px solid #c4d8ed;
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+  .stat-card .number {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a4068;
+    margin-bottom: 4px;
+  }
+  .stat-card .label {
+    font-size: 12.5px;
+    color: #4a6a8a;
+    font-weight: 500;
+  }
+
+  /* ── SHIFT BLOCK ── */
+  .shift-block {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 24px 0;
+  }
+  .shift-before, .shift-after {
+    padding: 24px;
+    border-radius: 8px;
+  }
+  .shift-before {
+    background: #e0ddd8;
+    border: 1px solid #c8c4bc;
+  }
+  .shift-after {
+    background: linear-gradient(135deg, #d0e4f5 0%, #dceaf8 100%);
+    border: 1px solid #a8c8e8;
+  }
+  .shift-arrow {
+    text-align: center;
+    font-size: 22px;
+    color: #3a7abf;
+    font-weight: 700;
+  }
+  .shift-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .shift-before .shift-label { color: #7a7368; }
+  .shift-after .shift-label { color: #2b5a8a; }
+  .shift-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .shift-before .shift-text { color: #5a5348; }
+  .shift-after .shift-text { color: #1a2a3a; font-weight: 500; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #c4d8ed;
+    text-align: center;
+  }
+  .footer p {
+    font-size: 12px;
+    color: #7a96b4;
+    letter-spacing: 1px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #ffffff; }
+    .page { padding: 30px; }
+    .stat-card, .highlight-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>BAKER</h1>
+    <div class="subtitle">AI Chief of Staff</div>
+    <div class="tagline">Built by a CEO. For CEOs.</div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="section">
+    <div class="section-title">The Problem</div>
+    <p>CEOs operating at scale — multiple entities, jurisdictions, 20+ active projects — face a structural information problem that no amount of hiring solves.</p>
+    <ul class="bullet-list">
+      <li><strong>Volume.</strong> Hundreds of daily signals across email, WhatsApp, Slack, task managers, calendars, meeting transcripts, and contractor updates. No human filters all of it.</li>
+      <li><strong>Fragmentation.</strong> Critical context is split across 10+ platforms. The deadline that matters is in one system, the related email in another, the relevant contract in a third.</li>
+      <li><strong>Role conflict.</strong> The CEO must be in the trenches — handling fires, responding to urgent stakeholders, making real-time calls. But he must simultaneously be the general — holding the strategic map, catching the project that's quietly drifting while the loud ones consume attention.</li>
+      <li><strong>Stakeholder load.</strong> Investors, employees, counteragents, sales teams, outside contractors — all pulling in different directions, all expecting fast responses. One missed signal cascades.</li>
+      <li><strong>Role erosion.</strong> The cumulative effect: the CEO spends 80% of his time managing operations. The role he should be playing — <strong>owner, shareholder, strategic allocator</strong> — gets squeezed into whatever time is left.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>The standard response: more assistants, more meetings, more check-ins. That adds noise, not intelligence. Baker solves this differently. It doesn't add people. It adds a system that lets the CEO stop managing and start owning.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-title">How It Works — Agentic RAG</div>
+    <p>Most AI tools use basic <strong>RAG</strong> (Retrieval-Augmented Generation): you ask a question, the system searches a document store, returns a text snippet. Reactive. Single-source. Stateless.</p>
+    <p>Baker uses <strong>Agentic RAG</strong> — a fundamentally different architecture:</p>
+    <ul class="bullet-list">
+      <li><strong>Multi-source reasoning.</strong> Agents query across email, WhatsApp, calendar, ClickUp, Todoist, meeting transcripts, and RSS simultaneously — then cross-correlate.</li>
+      <li><strong>Autonomous action.</strong> Baker doesn't just retrieve. It reasons, decides, and acts — posting comments, generating alerts, drafting responses, updating deadlines — without waiting for a prompt.</li>
+      <li><strong>Persistent memory.</strong> Every interaction, decision, and deadline stored in a knowledge graph. Baker gets smarter over time. Basic RAG resets every session.</li>
+      <li><strong>11 specialist agents.</strong> Not one generalist model. Domain-specific agents for finance, legal, operations, sales, marketing, product management, customer support, data analysis, enterprise search, compliance, and strategic planning — each trained on professional methodology.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Basic RAG answers questions. Agentic RAG runs operations.</p>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section">
+    <div class="section-title">Baker vs. Generic AI vs. OpenClaw</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Generic AI</th>
+            <th>OpenClaw</th>
+            <th>Baker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Architecture</td>
+            <td>Single LLM + chat window</td>
+            <td>Multi-agent framework, open-source</td>
+            <td>Agentic RAG + 11 specialist agents</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>Resets each session</td>
+            <td>Session-based</td>
+            <td>7,823 decisions + vector DB, permanent</td>
+          </tr>
+          <tr>
+            <td>Data sources</td>
+            <td>1 conversation</td>
+            <td>Configurable via marketplace</td>
+            <td>16 live sources, 9 sentinels polling 24/7</td>
+          </tr>
+          <tr>
+            <td>Proactivity</td>
+            <td>Responds when asked</td>
+            <td>Task-triggered</td>
+            <td>3,392 alerts generated autonomously</td>
+          </tr>
+          <tr>
+            <td>Business logic</td>
+            <td>Generic prompts</td>
+            <td>Skills marketplace (growing)</td>
+            <td>Custom-built for the principal</td>
+          </tr>
+          <tr>
+            <td>WhatsApp</td>
+            <td>Basic plugin</td>
+            <td>Not native</td>
+            <td>Server-hosted, VIP detection, auto-drafts</td>
+          </tr>
+          <tr>
+            <td>Uptime</td>
+            <td>Stops when laptop sleeps</td>
+            <td>Depends on deployment</td>
+            <td>24/7 on dedicated server</td>
+          </tr>
+          <tr>
+            <td>Specialist depth</td>
+            <td>One generalist model</td>
+            <td>Community-built agents</td>
+            <td>11 professional-grade specialist agents</td>
+          </tr>
+          <tr>
+            <td>Deployment</td>
+            <td>SaaS, shared</td>
+            <td>Self-hosted, open-source</td>
+            <td>Private infrastructure, single-principal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13.5px; color:#4a6a8a; margin-top:14px;"><strong>OpenClaw</strong> is worth watching — its open-source, multi-agent approach and emerging skills marketplace could mature into a strong platform. But today it is a framework, not an operating system. Baker is already in production.</p>
+  </div>
+
+  <!-- PRODUCTION STATS -->
+  <div class="section">
+    <div class="section-title">In Production — 2 Weeks of Live Data</div>
+    <p style="font-size:13px; color:#5a7a9a; margin-bottom:18px;">First action: February 22, 2026. All figures from live database, March 8, 2026.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number">3,392</div>
+        <div class="label">Alerts generated across 16 data sources</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">120</div>
+        <div class="label">Automated actions taken without prompting</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">112</div>
+        <div class="label">Active deadlines under surveillance</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">7,823</div>
+        <div class="label">Decisions stored in persistent memory</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">1,927</div>
+        <div class="label">Messages ingested (WhatsApp + Email)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">61</div>
+        <div class="label">Meeting transcripts processed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">11</div>
+        <div class="label">Specialist agents deployed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">22</div>
+        <div class="label">VIP contacts with tier-based response rules</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SHIFT -->
+  <div class="section">
+    <div class="section-title">The Shift</div>
+
+    <div class="shift-block">
+      <div class="shift-before">
+        <div class="shift-label">Before</div>
+        <div class="shift-text">CEO as manager. Triaging inboxes, chasing updates, sitting in status meetings, manually connecting dots. 80% of time spent on operations. Strategy gets whatever is left.</div>
+      </div>
+      <div class="shift-arrow">&rarr;</div>
+      <div class="shift-after">
+        <div class="shift-label">After</div>
+        <div class="shift-text">CEO as owner and shareholder. Strategic allocation. Portfolio-level thinking. Relationship building. The operational layer runs underneath — watched, remembered, and acted upon by a system that never sleeps.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>Baker doesn't make the CEO a better manager. It makes managing unnecessary.</p>
+    </div>
+  </div>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section">
+    <div class="section-title">What's Next</div>
+    <ul class="bullet-list">
+      <li><strong>Voice interface</strong> — dictate instructions, receive briefings</li>
+      <li><strong>Multi-principal expansion</strong> — same architecture, multiple users</li>
+      <li><strong>Plug-and-play integrations</strong> — rapid deployment layer</li>
+    </ul>
+  </div>
+
+  <!-- BUILD PROFILE -->
+  <div class="section">
+    <div class="section-title">Build Profile</div>
+    <p>Not built by an AI vendor. Built by a chairman managing ~$1B in assets across 20 active projects who needed a system that works at the speed and complexity of real executive operations. Every feature exists because it solved a real problem.</p>
+  </div>
+
+  <!-- WHO THIS IS FOR -->
+  <div class="section">
+    <div class="section-title">Who This Is Not For</div>
+    <p>If you manage fewer than 5 projects and check email twice a day — you don't need this. Baker is for principals who operate at scale, across entities and jurisdictions, where the biggest risk is not what you know but what you missed.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>BAKER &mdash; AI CHIEF OF STAFF &mdash; MARCH 2026</p>
+  </div>
+
+</div>
+</body>
+</html>
