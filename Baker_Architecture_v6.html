@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker System Architecture — Learning &amp; Memory</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-hover: #222633;
+    --border: #2a2e3d;
+    --accent-baker: #4f8cff;
+    --accent-cowork: #a78bfa;
+    --accent-director: #f59e42;
+    --accent-world: #34d399;
+    --accent-proposed: #f59e42;
+    --accent-tier1: #34d399;
+    --accent-tier2: #f59e42;
+    --accent-tier3: #4f8cff;
+    --accent-danger: #ef4444;
+    --text: #e2e4ea;
+    --text-dim: #8b8fa3;
+    --text-bright: #ffffff;
+    --flow-line: #3a3f52;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 { font-size: 2rem; font-weight: 700; color: var(--text-bright); letter-spacing: -0.02em; }
+  .header .sub { color: var(--text-dim); font-size: 0.95rem; margin-top: 0.5rem; }
+  .header .version {
+    display: inline-block; background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.2rem 0.7rem; font-size: 0.75rem; color: var(--text-dim); margin-top: 0.75rem;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 2.5rem; padding: 1rem 1.5rem;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-dim); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .dot-current { background: var(--accent-baker); }
+  .dot-proposed { background: var(--accent-proposed); border: 2px dashed var(--accent-proposed); background: rgba(245,158,66,0.3); }
+  .dot-tier1 { background: var(--accent-tier1); }
+  .dot-tier2 { background: var(--accent-tier2); }
+  .dot-tier3 { background: var(--accent-tier3); }
+  .dot-inactive { background: var(--accent-danger); opacity: 0.6; }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.1rem; font-weight: 600; color: var(--text-bright);
+    margin-bottom: 1.25rem; margin-top: 2.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-title.proposed { color: var(--accent-proposed); }
+  .section-title.proposed::after { background: rgba(245,158,66,0.3); }
+
+  /* Three Actors */
+  .actors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+  .actor-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.75rem; transition: border-color 0.2s, transform 0.15s; position: relative; overflow: hidden;
+  }
+  .actor-card:hover { transform: translateY(-2px); background: var(--card-hover); }
+  .actor-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .actor-card.baker::before { background: var(--accent-baker); }
+  .actor-card.cowork::before { background: var(--accent-cowork); }
+  .actor-card.director::before { background: var(--accent-director); }
+  .actor-card:hover.baker { border-color: var(--accent-baker); }
+  .actor-card:hover.cowork { border-color: var(--accent-cowork); }
+  .actor-card:hover.director { border-color: var(--accent-director); }
+  .actor-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
+  .baker .actor-icon { background: rgba(79,140,255,0.15); }
+  .cowork .actor-icon { background: rgba(167,139,250,0.15); }
+  .director .actor-icon { background: rgba(245,158,66,0.15); }
+  .actor-card h2 { font-size: 1.15rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.25rem; }
+  .actor-role { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .baker .actor-role { color: var(--accent-baker); }
+  .cowork .actor-role { color: var(--accent-cowork); }
+  .director .actor-role { color: var(--accent-director); }
+  .actor-metaphor { font-style: italic; color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .does, .doesnt { font-size: 0.85rem; margin-bottom: 0.75rem; }
+  .does strong, .doesnt strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+  .does strong { color: var(--accent-world); }
+  .doesnt strong { color: #ef4444; }
+  .doesnt { color: var(--text-dim); }
+
+  /* Layer cards */
+  .layer {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.75rem; margin-bottom: 1rem; position: relative; overflow: hidden;
+  }
+  .layer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent-baker); }
+  .layer.proposed { border-color: rgba(245,158,66,0.4); }
+  .layer.proposed::before { background: var(--accent-proposed); }
+  .layer-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .layer-num {
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; flex-shrink: 0; background: rgba(79,140,255,0.2); color: var(--accent-baker);
+  }
+  .layer-num.proposed { background: rgba(245,158,66,0.2); color: var(--accent-proposed); }
+  .layer-title { font-size: 1rem; font-weight: 600; color: var(--text-bright); }
+  .layer-title.proposed { color: var(--accent-proposed); }
+  .layer-desc { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; padding-left: 44px; }
+
+  /* Sources grid */
+  .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.6rem; padding-left: 44px; }
+  .source-card { padding: 0.75rem 0.85rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(79,140,255,0.06); }
+  .source-card .name { font-weight: 600; font-size: 0.82rem; color: var(--accent-baker); margin-bottom: 2px; }
+  .source-card .detail { font-size: 0.72rem; color: var(--text-dim); }
+  .source-card .count { font-size: 0.72rem; font-weight: 600; color: var(--accent-world); margin-top: 3px; }
+  .source-card.proposed { background: rgba(245,158,66,0.08); border: 1px dashed rgba(245,158,66,0.5); }
+  .source-card.proposed .name { color: var(--accent-proposed); }
+  .source-card.proposed .count { color: var(--accent-proposed); }
+  .source-card.inactive { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.3); }
+  .source-card.inactive .name { color: var(--accent-danger); }
+  .source-card.inactive .count { color: var(--accent-danger); }
+
+  /* Stats bar */
+  .stats-bar { display: flex; gap: 1.5rem; flex-wrap: wrap; padding-left: 44px; margin-top: 0.75rem; }
+  .stat { font-size: 0.78rem; color: var(--text-dim); }
+  .stat strong { color: var(--text-bright); font-size: 0.9rem; }
+
+  /* Flow steps */
+  .flow-steps { display: flex; align-items: center; gap: 0.6rem; padding-left: 44px; flex-wrap: wrap; }
+  .flow-step { padding: 0.5rem 0.85rem; border-radius: 6px; font-size: 0.78rem; font-weight: 500; border: 1px solid; }
+  .flow-step.input { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.3); color: var(--accent-world); }
+  .flow-step.process { background: rgba(79,140,255,0.1); border-color: rgba(79,140,255,0.3); color: var(--accent-baker); }
+  .flow-step.output { background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.3); color: var(--accent-cowork); }
+  .flow-arrow { font-size: 1.1rem; color: var(--text-dim); }
+
+  /* Storage boxes */
+  .storage-row { display: flex; gap: 1rem; padding-left: 44px; }
+  .storage-box { flex: 1; padding: 1.25rem; border-radius: 10px; border: 1px solid; }
+  .storage-box.pg { border-color: rgba(51,103,145,0.5); background: rgba(51,103,145,0.08); }
+  .storage-box.qd { border-color: rgba(124,58,237,0.5); background: rgba(124,58,237,0.08); }
+  .store-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+  .storage-box.pg .store-title { color: #5B9BD5; }
+  .storage-box.qd .store-title { color: #9B7BE8; }
+  .store-items { font-size: 0.75rem; color: var(--text-dim); line-height: 1.9; }
+  .store-tag { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 3px; background: rgba(255,255,255,0.06); margin: 0.1rem; font-size: 0.72rem; }
+  .store-tag.proposed { background: rgba(245,158,66,0.15); color: var(--accent-proposed); border: 1px dashed rgba(245,158,66,0.4); }
+
+  /* Connector */
+  .connector { text-align: center; padding: 0.5rem 0; font-size: 1.5rem; color: var(--text-dim); }
+
+  /* Gap callout */
+  .gap-box {
+    margin: 0.75rem 0 0 44px; padding: 0.85rem 1.1rem; border-radius: 8px;
+    background: rgba(245,158,66,0.08); border: 1px dashed rgba(245,158,66,0.3);
+    font-size: 0.8rem; color: var(--text-dim);
+  }
+  .gap-box strong { color: var(--accent-proposed); }
+
+  /* Actions grid */
+  .actions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.6rem; padding-left: 44px; }
+  .action-card { padding: 0.75rem 0.85rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(79,140,255,0.04); }
+  .action-card .act-name { font-weight: 600; font-size: 0.82rem; color: var(--accent-baker); margin-bottom: 2px; }
+  .action-card .act-detail { font-size: 0.72rem; color: var(--text-dim); }
+  .action-card.proposed { background: rgba(245,158,66,0.06); border: 1px dashed rgba(245,158,66,0.4); }
+  .action-card.proposed .act-name { color: var(--accent-proposed); }
+
+  /* Tier blocks */
+  .tier-container { display: flex; gap: 0; padding-left: 44px; margin-top: 1rem; }
+  .tier-block { flex: 1; padding: 1.25rem; border: 2px solid; position: relative; }
+  .tier-block.t1 { border-color: var(--accent-tier1); background: rgba(52,211,153,0.06); border-radius: 10px 0 0 10px; }
+  .tier-block.t2 { border-color: var(--accent-tier2); background: rgba(245,158,66,0.06); border-left: none; }
+  .tier-block.t3 { border-color: var(--accent-tier3); background: rgba(79,140,255,0.06); border-left: none; border-radius: 0 10px 10px 0; }
+  .tier-label { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.2rem; }
+  .tier-block.t1 .tier-label { color: var(--accent-tier1); }
+  .tier-block.t2 .tier-label { color: var(--accent-tier2); }
+  .tier-block.t3 .tier-label { color: var(--accent-tier3); }
+  .tier-window { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.6rem; font-weight: 600; }
+  .tier-content { font-size: 0.75rem; color: var(--text-dim); line-height: 1.8; }
+  .tier-arrow { position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--text-dim); z-index: 2; }
+
+  /* Slack detail boxes */
+  .slack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-left: 44px; margin-top: 0.75rem; }
+  .slack-box {
+    padding: 1rem; border-radius: 8px;
+    background: rgba(245,158,66,0.06); border: 1px dashed rgba(245,158,66,0.4);
+  }
+  .slack-box .sb-title { font-weight: 600; font-size: 0.82rem; color: var(--accent-proposed); margin-bottom: 0.5rem; }
+  .slack-box .sb-content { font-size: 0.75rem; color: var(--text-dim); line-height: 1.8; }
+
+  /* Volume projection */
+  .volume-row { display: flex; gap: 1rem; margin-top: 1.5rem; padding-left: 44px; }
+  .vol-card {
+    flex: 1; padding: 1rem 1.25rem; border-radius: 10px;
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .vol-card .vol-label { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.25rem; }
+  .vol-card .vol-num { font-size: 1.5rem; font-weight: 700; }
+  .vol-card .vol-note { font-size: 0.72rem; margin-top: 0.15rem; }
+  .vol-card.current .vol-num { color: var(--text-bright); }
+  .vol-card.current .vol-note { color: var(--text-dim); }
+  .vol-card.danger .vol-num { color: var(--accent-danger); }
+  .vol-card.danger .vol-note { color: var(--accent-danger); }
+  .vol-card.good .vol-num { color: var(--accent-tier1); }
+  .vol-card.good .vol-note { color: var(--accent-tier1); }
+
+  /* How They Connect Table */
+  .flow-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; }
+  .flow-table th {
+    background: var(--card); color: var(--text-dim); font-weight: 600; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.08em; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .flow-table th:first-child { border-radius: 8px 0 0 0; }
+  .flow-table th:last-child { border-radius: 0 8px 0 0; }
+  .flow-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .flow-table tr:last-child td { border-bottom: none; }
+  .flow-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .flow-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .flow-table tbody tr { background: var(--card); transition: background 0.15s; }
+  .flow-table tbody tr:hover { background: var(--card-hover); }
+  .tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+  .tag-baker { background: rgba(79,140,255,0.15); color: var(--accent-baker); }
+  .tag-cowork { background: rgba(167,139,250,0.15); color: var(--accent-cowork); }
+  .tag-director { background: rgba(245,158,66,0.15); color: var(--accent-director); }
+  .tag-world { background: rgba(52,211,153,0.15); color: var(--accent-world); }
+  .direction-tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 500; background: rgba(255,255,255,0.05); color: var(--text-dim); }
+  .via-cell { color: var(--text-dim); }
+
+  /* Memory Cycle */
+  .cycle { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+  .cycle-step { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; position: relative; }
+  .cycle-step:last-child { margin-bottom: 0; }
+  .cycle-num {
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700; flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .cycle-step:not(:last-child) .cycle-num::after {
+    content: ''; position: absolute; top: 32px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: calc(100% + 0.6rem); background: var(--border);
+  }
+  .cycle-step:nth-child(1) .cycle-num { background: rgba(52,211,153,0.2); color: var(--accent-world); }
+  .cycle-step:nth-child(2) .cycle-num { background: rgba(79,140,255,0.2); color: var(--accent-baker); }
+  .cycle-step:nth-child(3) .cycle-num { background: rgba(167,139,250,0.2); color: var(--accent-cowork); }
+  .cycle-step:nth-child(4) .cycle-num { background: rgba(167,139,250,0.2); color: var(--accent-cowork); }
+  .cycle-step:nth-child(5) .cycle-num { background: rgba(79,140,255,0.2); color: var(--accent-baker); }
+  .cycle-step:nth-child(6) .cycle-num { background: rgba(52,211,153,0.2); color: var(--accent-world); }
+  .cycle-content { padding-top: 0.25rem; }
+  .cycle-content .label { font-weight: 600; font-size: 0.9rem; color: var(--text-bright); }
+  .cycle-content .desc { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.15rem; }
+
+  /* Principle */
+  .principle {
+    background: linear-gradient(135deg, rgba(79,140,255,0.08), rgba(167,139,250,0.08));
+    border: 1px solid rgba(167,139,250,0.2); border-radius: 12px; padding: 1.5rem 2rem; text-align: center; margin: 2rem 0;
+  }
+  .principle .quote { font-size: 1.1rem; font-weight: 500; color: var(--text-bright); font-style: italic; }
+  .principle .attr { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem; }
+
+  /* MCP Section */
+  .mcp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .mcp-panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+  .mcp-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .mcp-panel.read::before { background: var(--accent-baker); }
+  .mcp-panel.write::before { background: var(--accent-cowork); }
+  .mcp-panel-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+  .mcp-panel-header h3 { font-size: 0.95rem; font-weight: 600; color: var(--text-bright); }
+  .mcp-count { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+  .mcp-panel.read .mcp-count { background: rgba(79,140,255,0.15); color: var(--accent-baker); }
+  .mcp-panel.write .mcp-count { background: rgba(167,139,250,0.15); color: var(--accent-cowork); }
+  .mcp-tool { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.8rem; }
+  .mcp-tool:last-child { border-bottom: none; }
+  .mcp-tool-name { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.72rem; font-weight: 600; white-space: nowrap; min-width: 170px; flex-shrink: 0; }
+  .mcp-panel.read .mcp-tool-name { color: var(--accent-baker); }
+  .mcp-panel.write .mcp-tool-name { color: var(--accent-cowork); }
+  .mcp-tool-desc { color: var(--text-dim); font-size: 0.78rem; }
+  .mcp-arrow-label { text-align: center; padding: 0.75rem; font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
+  .mcp-intro { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 1.5rem; max-width: 700px; }
+
+  /* Tech Stack */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+  .stack-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.75rem; transition: background 0.15s;
+  }
+  .stack-item:hover { background: var(--card-hover); }
+  .stack-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; background: rgba(255,255,255,0.05); flex-shrink: 0; }
+  .stack-label { font-size: 0.8rem; font-weight: 600; color: var(--text-bright); }
+  .stack-detail { font-size: 0.72rem; color: var(--text-dim); }
+
+  /* Triggers */
+  .triggers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem; margin-top: 1rem; }
+  .trigger-chip {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.5rem 0.75rem; font-size: 0.78rem; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s;
+  }
+  .trigger-chip:hover { background: var(--card-hover); }
+  .trigger-chip.proposed { border: 1px dashed rgba(245,158,66,0.5); }
+  .trigger-chip.proposed .trigger-dot { background: var(--accent-proposed); }
+  .trigger-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-world); flex-shrink: 0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .footer { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.75rem; margin-top: 2rem; }
+
+  @media (max-width: 900px) {
+    .actors { grid-template-columns: 1fr; }
+    .tier-container { flex-direction: column; }
+    .tier-block { border-radius: 10px !important; border: 2px solid !important; margin-bottom: 0.5rem; }
+    .tier-block.t1 { border-color: var(--accent-tier1) !important; }
+    .tier-block.t2 { border-color: var(--accent-tier2) !important; }
+    .tier-block.t3 { border-color: var(--accent-tier3) !important; }
+    .tier-arrow { display: none; }
+    .slack-grid { grid-template-columns: 1fr; }
+    .volume-row { flex-direction: column; }
+    .storage-row { flex-direction: column; }
+    .mcp-grid { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Baker System Architecture</h1>
+    <div class="sub">How Baker learns, remembers, retrieves, and acts — with proposed enhancements</div>
+    <div class="version">v6.0 — March 27, 2026 — 18 MCP tools live + proposed Slack &amp; memory tiers</div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-current"></div> Live today</div>
+    <div class="legend-item"><div class="legend-dot dot-proposed"></div> Proposed (new)</div>
+    <div class="legend-item"><div class="legend-dot dot-tier1"></div> Tier 1: Active (0–90 days)</div>
+    <div class="legend-item"><div class="legend-dot dot-tier2"></div> Tier 2: Compressed (90d–1yr)</div>
+    <div class="legend-item"><div class="legend-dot dot-tier3"></div> Tier 3: Institutional (1yr+)</div>
+    <div class="legend-item"><div class="legend-dot dot-inactive"></div> Down / needs fix</div>
+  </div>
+
+  <!-- ===== THREE ACTORS ===== -->
+  <div class="section-title">The Three Actors</div>
+  <div class="actors">
+    <div class="actor-card baker">
+      <div class="actor-icon">🛡️</div>
+      <h2>Baker (Sentinel)</h2>
+      <div class="actor-role">Chief of Staff</div>
+      <div class="actor-metaphor">"The assistant who never sleeps"</div>
+      <div class="does"><strong>✓ What it does</strong>Monitors all channels — email, WhatsApp, meetings, ClickUp, RSS. Stores everything in memory. Acts on routine tasks. Answers questions via Scan. Always on guard.</div>
+      <div class="doesnt"><strong>✗ What it doesn't do</strong>Think deeply. Analyze documents. Brainstorm. Create strategy.</div>
+    </div>
+    <div class="actor-card cowork">
+      <div class="actor-icon">🧠</div>
+      <h2>Cowork + MCP</h2>
+      <div class="actor-role">The Thinker &amp; Creator</div>
+      <div class="actor-metaphor">"The working session at the Director's desk"</div>
+      <div class="does"><strong>✓ What it does</strong>Deep analysis, cross-referencing Baker's memory, brainstorming, preparing decisions, creating documents, drafting Slack messages.</div>
+      <div class="doesnt"><strong>✗ What it doesn't do</strong>Monitor channels. Run 24/7. Act autonomously.</div>
+    </div>
+    <div class="actor-card director">
+      <div class="actor-icon">👔</div>
+      <h2>Director (Dimitry)</h2>
+      <div class="actor-role">Final Authority</div>
+      <div class="actor-metaphor">"The Chairman"</div>
+      <div class="does"><strong>✓ What it does</strong>Decides. Approves. Directs both Baker and Cowork.</div>
+      <div class="doesnt"><strong>✗ What it doesn't do</strong>Everything else — that's what Baker and Cowork are for.</div>
+    </div>
+  </div>
+
+  <!-- ===== LEARNING & MEMORY ARCHITECTURE ===== -->
+  <div class="section-title">How Baker Learns — The 5-Layer Architecture</div>
+
+  <!-- LAYER 1: INTAKE -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-num">1</div>
+      <div class="layer-title">INTAKE — What Baker Absorbs (24/7, automatic)</div>
+    </div>
+    <div class="layer-desc">Triggers poll data sources every few minutes. Every message, email, task, and transcript is captured.</div>
+    <div class="sources-grid">
+      <div class="source-card"><div class="name">📧 Gmail</div><div class="detail">Every 5 min · incl. attachments</div><div class="count">1,451 emails</div></div>
+      <div class="source-card"><div class="name">💬 WhatsApp</div><div class="detail">Webhooks (push) · media OCR</div><div class="count">2,574 messages</div></div>
+      <div class="source-card"><div class="name">✅ ClickUp</div><div class="detail">Every 5 min · 6 workspaces</div><div class="count">204 tasks</div></div>
+      <div class="source-card"><div class="name">🎙️ Fireflies</div><div class="detail">Auto-sync · full transcripts</div><div class="count">94 meetings</div></div>
+      <div class="source-card"><div class="name">📰 RSS Feeds</div><div class="detail">News monitoring</div><div class="count">383 articles</div></div>
+      <div class="source-card inactive"><div class="name">📋 Todoist ✗</div><div class="detail">Token expired Mar 9</div><div class="count">Needs reauth</div></div>
+      <div class="source-card proposed"><div class="name">💼 Slack (proposed)</div><div class="detail">All channels · in + outbound</div><div class="count">Not yet built</div></div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">Total records: <strong>~19,760</strong></div>
+      <div class="stat">Decisions: <strong>9,996</strong></div>
+      <div class="stat">Alerts: <strong>4,360</strong></div>
+      <div class="stat">Conversations: <strong>292</strong></div>
+    </div>
+  </div>
+
+  <div class="connector">▼</div>
+
+  <!-- LAYER 2: PROCESSING -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-num">2</div>
+      <div class="layer-title">PROCESSING — How Baker Digests Information</div>
+    </div>
+    <div class="layer-desc">Raw content is chunked, embedded, and stored in two complementary memory systems.</div>
+    <div class="flow-steps">
+      <div class="flow-step input">Raw content</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Noise filter</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Chunk (~500 tokens)</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Voyage AI embed (1024d)</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step output">Dual storage ↓</div>
+    </div>
+  </div>
+
+  <div class="connector">▼</div>
+
+  <!-- LAYER 3: STORAGE -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-num">3</div>
+      <div class="layer-title">STORAGE — Baker's Two Memory Systems</div>
+    </div>
+    <div class="layer-desc">Structured data in PostgreSQL for exact lookups. Semantic vectors in Qdrant for meaning-based search.</div>
+    <div class="storage-row">
+      <div class="storage-box pg">
+        <div class="store-title">🗄️ PostgreSQL (Neon)</div>
+        <div class="store-items">
+          <span class="store-tag">email_messages</span>
+          <span class="store-tag">whatsapp_messages</span>
+          <span class="store-tag">meeting_transcripts</span>
+          <span class="store-tag">clickup_tasks</span>
+          <span class="store-tag">decisions</span>
+          <span class="store-tag">alerts</span>
+          <span class="store-tag">contacts</span>
+          <span class="store-tag">conversation_memory</span>
+          <span class="store-tag">deadlines</span>
+          <span class="store-tag">vip_contacts</span>
+          <span class="store-tag">sent_emails</span>
+          <span class="store-tag">rss_articles</span>
+          <span class="store-tag proposed">slack_messages (proposed)</span>
+          <br><br>
+          <strong style="color:var(--text-dim)">Queried by:</strong> date, sender, keyword, type, project
+        </div>
+      </div>
+      <div class="storage-box qd">
+        <div class="store-title">🧠 Qdrant Cloud (Vectors)</div>
+        <div class="store-items">
+          <span class="store-tag">baker-emails</span>
+          <span class="store-tag">baker-whatsapp</span>
+          <span class="store-tag">baker-clickup</span>
+          <span class="store-tag">baker-documents</span>
+          <span class="store-tag">baker-contacts</span>
+          <span class="store-tag">baker-conversations</span>
+          <span class="store-tag">baker-todoist</span>
+          <span class="store-tag">baker-health</span>
+          <span class="store-tag">sentinel-interactions</span>
+          <span class="store-tag">sentinel-email</span>
+          <span class="store-tag">sentinel-meetings</span>
+          <span class="store-tag">sentinel-documents</span>
+          <span class="store-tag proposed">baker-slack (proposed)</span>
+          <br><br>
+          <strong style="color:var(--text-dim)">Queried by:</strong> semantic similarity (meaning-based)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector">▼</div>
+
+  <!-- LAYER 4: RETRIEVAL -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-num">4</div>
+      <div class="layer-title">RETRIEVAL — How Baker Finds the Right Answer</div>
+    </div>
+    <div class="layer-desc">When you ask a question, Baker searches both systems and assembles the best context for Claude Opus.</div>
+    <div class="flow-steps">
+      <div class="flow-step input">Your question</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Classify intent</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Qdrant search</div>
+      <span class="flow-arrow">+</span>
+      <div class="flow-step process">PostgreSQL search</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step process">Inject recent 3</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step output">Claude Opus answer</div>
+    </div>
+    <div class="gap-box">
+      <strong>Today's gap:</strong> Baker searches ALL records equally — no distinction between fresh and stale data. As volume grows, old records compete with current ones, degrading retrieval quality. The three-tier memory (below) solves this.
+    </div>
+  </div>
+
+  <div class="connector">▼</div>
+
+  <!-- LAYER 5: ACTION -->
+  <div class="layer">
+    <div class="layer-header">
+      <div class="layer-num">5</div>
+      <div class="layer-title">ACTION — What Baker Does With What He Knows</div>
+    </div>
+    <div class="layer-desc">Baker acts autonomously within guardrails. 162 actions taken to date.</div>
+    <div class="actions-grid">
+      <div class="action-card"><div class="act-name">✅ ClickUp Tasks</div><div class="act-detail">Create tasks, post comments (BAKER space only)</div></div>
+      <div class="action-card"><div class="act-name">📧 Email Drafts</div><div class="act-detail">Internal auto-send · External requires approval</div></div>
+      <div class="action-card"><div class="act-name">💬 WhatsApp</div><div class="act-detail">Reply to Director · Send to VIP contacts</div></div>
+      <div class="action-card"><div class="act-name">🚨 Alerts</div><div class="act-detail">T1/T2/T3 classification · Push notifications</div></div>
+      <div class="action-card"><div class="act-name">💾 Store Decisions</div><div class="act-detail">Record strategic decisions in permanent memory</div></div>
+      <div class="action-card proposed"><div class="act-name">💼 Slack Storage (proposed)</div><div class="act-detail">Store outbound messages · Learn tone/style</div></div>
+    </div>
+  </div>
+
+  <!-- ===== PROPOSED: THREE-TIER MEMORY ===== -->
+  <div class="section-title proposed">⭐ Proposed: Three-Tier Memory Architecture</div>
+
+  <div class="layer proposed">
+    <div class="layer-header">
+      <div class="layer-num proposed">★</div>
+      <div class="layer-title proposed">MEMORY TIERS — Keeping Baker Sharp as Data Grows</div>
+    </div>
+    <div class="layer-desc">Nothing is ever deleted. Data moves through tiers: full detail → compressed summaries → institutional knowledge. Retrieval prioritizes Tier 1, falls back to Tier 2/3 when needed.</div>
+
+    <div class="tier-container">
+      <div class="tier-block t1">
+        <div class="tier-label">Tier 1: Active Memory</div>
+        <div class="tier-window">0 – 90 days</div>
+        <div class="tier-content">
+          • Full detail, every record<br>
+          • Full vector embeddings<br>
+          • <strong style="color:var(--accent-tier1)">Priority in retrieval</strong><br>
+          • All sources: email, WA, Slack, meetings, tasks<br>
+          • Baker's "working desk"
+        </div>
+        <div class="tier-arrow">▶</div>
+      </div>
+      <div class="tier-block t2">
+        <div class="tier-label">Tier 2: Compressed</div>
+        <div class="tier-window">90 days – 1 year</div>
+        <div class="tier-content">
+          • Weekly summaries per source<br>
+          • Key decisions preserved verbatim<br>
+          • Raw data → archive tables<br>
+          • New summary vectors replace raw<br>
+          • Searchable, not in default path
+        </div>
+        <div class="tier-arrow">▶</div>
+      </div>
+      <div class="tier-block t3">
+        <div class="tier-label">Tier 3: Institutional</div>
+        <div class="tier-window">1 year+</div>
+        <div class="tier-content">
+          • Monthly summaries only<br>
+          • "What happened & what was decided"<br>
+          • Permanent strategic knowledge<br>
+          • Lightweight vectors for long-term recall<br>
+          • Always recoverable from archive
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROPOSED: SLACK INTEGRATION ===== -->
+  <div class="section-title proposed">⭐ Proposed: Slack Integration — Closing the Learning Gap</div>
+
+  <div class="layer proposed">
+    <div class="layer-header">
+      <div class="layer-num proposed">★</div>
+      <div class="layer-title proposed">SLACK MEMORY — Today's Messages Disappear. Tomorrow They Won't.</div>
+    </div>
+    <div class="layer-desc">Currently, Slack messages Baker composes via Cowork are generated once and forgotten. With this integration, they become part of Baker's permanent learning.</div>
+
+    <div class="slack-grid">
+      <div class="slack-box">
+        <div class="sb-title">Inbound (team → Baker)</div>
+        <div class="sb-content">
+          • Channel messages (all public)<br>
+          • DMs to Baker<br>
+          • Thread replies &amp; reactions<br>
+          • → <code>slack_messages</code> table<br>
+          • → <code>baker-slack</code> vectors
+        </div>
+      </div>
+      <div class="slack-box">
+        <div class="sb-title">Outbound (Baker → team)</div>
+        <div class="sb-content">
+          • Messages Baker composes via Cowork<br>
+          • Stored WITH context (who, channel, topic)<br>
+          • Baker learns his own tone &amp; style<br>
+          • Future messages reference past patterns<br>
+          • Builds communication memory
+        </div>
+      </div>
+      <div class="slack-box">
+        <div class="sb-title">Tier Lifecycle for Slack</div>
+        <div class="sb-content">
+          • <strong style="color:var(--accent-tier1)">0–90d:</strong> Every message searchable<br>
+          • <strong style="color:var(--accent-tier2)">90d–1yr:</strong> Weekly channel summaries<br>
+          • <strong style="color:var(--accent-tier3)">1yr+:</strong> Monthly communication digest<br>
+          • High-value messages stay in Tier 1<br>
+          • Est. growth: ~200–500 msgs/day
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Volume Projection -->
+  <div class="volume-row">
+    <div class="vol-card current">
+      <div class="vol-label">Today (no tiers)</div>
+      <div class="vol-num">~19,760</div>
+      <div class="vol-note">records in active search</div>
+    </div>
+    <div class="vol-card danger">
+      <div class="vol-label">In 6 months (no tiers, with Slack)</div>
+      <div class="vol-num">~120,000+</div>
+      <div class="vol-note">noise risk — retrieval quality degrades</div>
+    </div>
+    <div class="vol-card good">
+      <div class="vol-label">In 6 months (with tiers + Slack)</div>
+      <div class="vol-num">~8,000</div>
+      <div class="vol-note">in Tier 1 active search — sharp &amp; fast</div>
+    </div>
+  </div>
+
+  <!-- ===== EXISTING SECTIONS FROM V5 ===== -->
+
+  <!-- How They Connect -->
+  <div class="section-title" style="margin-top:3rem">How They Connect</div>
+  <table class="flow-table">
+    <thead><tr><th>From</th><th>To</th><th>Via</th><th>Direction</th><th>What Flows</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-world">World</span></td>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td class="via-cell">Triggers — Gmail, WhatsApp, Fireflies, ClickUp, RSS, Whoop, Dropbox</td>
+        <td><span class="direction-tag">→ Inbound</span></td>
+        <td>Raw data: emails, messages, transcripts, tasks, articles, health</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td class="via-cell">Pipeline — Classify → Retrieve → Augment → Generate → Store</td>
+        <td><span class="direction-tag">↻ Internal</span></td>
+        <td>Processed intelligence: embeddings, structured records, briefings</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td><span class="tag tag-director">Director</span></td>
+        <td class="via-cell">CEO Cockpit (Scan) + WhatsApp + Mobile Feed</td>
+        <td><span class="direction-tag">→ Outbound</span></td>
+        <td>Briefings, answers, alerts, draft emails, push notifications</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-director">Director</span></td>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td class="via-cell">Scan chat + WhatsApp</td>
+        <td><span class="direction-tag">← Inbound</span></td>
+        <td>Questions, approvals, commands</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td><span class="tag tag-cowork">Cowork</span></td>
+        <td class="via-cell">MCP Server — 14 read tools + raw SQL</td>
+        <td><span class="direction-tag">→ Read</span></td>
+        <td>Memory: deadlines, emails, contacts, tasks, meetings, conversations, health, RSS, analyses</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-cowork">Cowork</span></td>
+        <td><span class="tag tag-baker">Baker</span></td>
+        <td class="via-cell">MCP Server — 4 write tools (live)</td>
+        <td><span class="direction-tag">← Write-back</span></td>
+        <td>Decisions, deadlines, VIP contacts, analysis reports</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-cowork">Cowork</span></td>
+        <td><span class="tag tag-director">Director</span></td>
+        <td class="via-cell">Session output — handover files, documents</td>
+        <td><span class="direction-tag">→ Outbound</span></td>
+        <td>Analysis, strategies, prepared decisions</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Memory Cycle -->
+  <div class="section-title" style="margin-top:3rem">The Memory Cycle</div>
+  <div class="cycle">
+    <div class="cycle-step"><div class="cycle-num">1</div><div class="cycle-content"><div class="label">World → Baker ingests → Baker remembers</div><div class="desc">All channels feed raw data into Sentinel's memory stores (PostgreSQL + Qdrant)</div></div></div>
+    <div class="cycle-step"><div class="cycle-num">2</div><div class="cycle-content"><div class="label">Director opens Cowork → MCP reads Baker's memory</div><div class="desc">14 read tools surface deadlines, emails, contacts, tasks, meetings, conversations</div></div></div>
+    <div class="cycle-step"><div class="cycle-num">3</div><div class="cycle-content"><div class="label">Director + Cowork think together → reach decision</div><div class="desc">Deep analysis, cross-referencing, brainstorming — the working session</div></div></div>
+    <div class="cycle-step"><div class="cycle-num">4</div><div class="cycle-content"><div class="label">Cowork writes back to Baker via MCP</div><div class="desc">Decisions, notes, analysis conclusions flow back into Baker's memory</div></div></div>
+    <div class="cycle-step"><div class="cycle-num">5</div><div class="cycle-content"><div class="label">Baker remembers the decision</div><div class="desc">Stored in structured DB + vector memory — available to all future queries</div></div></div>
+    <div class="cycle-step"><div class="cycle-num">6</div><div class="cycle-content"><div class="label">Baker acts on it → World</div><div class="desc">Next trigger cycle picks up the decision — emails sent, tasks updated, alerts fired</div></div></div>
+  </div>
+
+  <div class="principle">
+    <div class="quote">"Baker never forgets, Cowork never stops thinking.<br>The MCP bridge makes them one system."</div>
+    <div class="attr">System Design Principle</div>
+  </div>
+
+  <!-- MCP Bridge -->
+  <div class="section-title">The MCP Bridge — 18 Tools</div>
+  <div class="mcp-intro">The direct connection between Cowork (thinking sessions) and Baker (24/7 memory). Cowork reads everything Baker knows and writes back what the Director decides.</div>
+  <div class="mcp-grid">
+    <div class="mcp-panel read">
+      <div class="mcp-panel-header"><h3>Read Tools</h3><span class="mcp-count">14 TOOLS</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_deadlines</span><span class="mcp-tool-desc">Active deadlines — due dates, priority, confidence</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_vip_contacts</span><span class="mcp-tool-desc">Key people — name, role, email, notes</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_sent_emails</span><span class="mcp-tool-desc">Emails sent on your behalf + reply status</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_actions</span><span class="mcp-tool-desc">Baker's action log — what he did and when</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_clickup_tasks</span><span class="mcp-tool-desc">Tasks across all 6 ClickUp workspaces</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_todoist_tasks</span><span class="mcp-tool-desc">Todoist tasks by project, priority, status</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_whoop</span><span class="mcp-tool-desc">Health data — recovery, sleep, strain, HRV</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_rss_feeds</span><span class="mcp-tool-desc">Which news feeds Baker monitors</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_rss_articles</span><span class="mcp-tool-desc">Recent articles ingested from feeds</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_deep_analyses</span><span class="mcp-tool-desc">Past deep analysis reports (full text)</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_briefing_queue</span><span class="mcp-tool-desc">Items queued for next daily briefing</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_watermarks</span><span class="mcp-tool-desc">Last poll time for each data source</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_conversation_memory</span><span class="mcp-tool-desc">Past Scan Q&amp;A with full answers</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_raw_query</span><span class="mcp-tool-desc">Escape hatch — any custom SELECT against Baker's DB</span></div>
+    </div>
+    <div class="mcp-panel write">
+      <div class="mcp-panel-header"><h3>Write Tools</h3><span class="mcp-count">4 TOOLS</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_store_decision</span><span class="mcp-tool-desc">Store a decision, insight, or conclusion → decisions table</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_add_deadline</span><span class="mcp-tool-desc">Add a date that matters → Baker will track and remind</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_upsert_vip</span><span class="mcp-tool-desc">Add or update a person to track → vip_contacts table</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_store_analysis</span><span class="mcp-tool-desc">Store a full analysis output → deep_analyses table</span></div>
+      <div style="height: 1.5rem"></div>
+      <div class="mcp-arrow-label">↑ Cowork pushes conclusions back so Baker remembers permanently</div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section-title">Tech Stack</div>
+  <div class="stack-grid">
+    <div class="stack-item"><div class="stack-icon">⚡</div><div><div class="stack-label">FastAPI</div><div class="stack-detail">Backend — port 8080</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🐘</div><div><div class="stack-label">PostgreSQL</div><div class="stack-detail">Neon — structured data</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🔮</div><div><div class="stack-label">Qdrant Cloud</div><div class="stack-detail">Vectors — Voyage AI 1024d</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🤖</div><div><div class="stack-label">Claude Opus 4.6</div><div class="stack-detail">LLM — 1M context</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🚀</div><div><div class="stack-label">Render</div><div class="stack-detail">Auto-deploy from main</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🔗</div><div><div class="stack-label">MCP Server</div><div class="stack-detail">14 read + 4 write = 18 tools</div></div></div>
+  </div>
+
+  <!-- Triggers -->
+  <div class="section-title" style="margin-top:2rem">Inbound Triggers (Baker's Ears)</div>
+  <div class="triggers-grid">
+    <div class="trigger-chip"><div class="trigger-dot"></div> Gmail (5 min)</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> WhatsApp (push)</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> ClickUp (5 min)</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> Fireflies</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> Todoist</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> RSS Feeds</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> Whoop Health</div>
+    <div class="trigger-chip"><div class="trigger-dot"></div> Dropbox Watch</div>
+    <div class="trigger-chip proposed"><div class="trigger-dot"></div> Slack (proposed)</div>
+  </div>
+
+  <div class="footer">
+    Baker System v6.0 — Brisengroup — Updated March 27, 2026 — 18 MCP tools live + proposed Slack &amp; memory tiers
+  </div>
+
+</div>
+</body>
+</html>
