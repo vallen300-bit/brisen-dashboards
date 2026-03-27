@@ -335,8 +335,8 @@
 
   <div class="header">
     <h1>Baker System Architecture</h1>
-    <div class="sub">How Baker learns, remembers, retrieves, and acts — with proposed enhancements</div>
-    <div class="version">v6.0 — March 27, 2026 — 18 MCP tools live + proposed Slack &amp; memory tiers</div>
+    <div class="sub">How Baker learns, remembers, retrieves, and acts — Learning &amp; Memory Architecture</div>
+    <div class="version">v6.0 — 27 March 2026 — 21 MCP tools · 3-tier memory (Opus) · Slack proposed</div>
   </div>
 
   <div class="legend">
@@ -516,11 +516,14 @@
     </div>
     <div class="layer-desc">Baker acts autonomously within guardrails. 162 actions taken to date.</div>
     <div class="actions-grid">
-      <div class="action-card"><div class="act-name">✅ ClickUp Tasks</div><div class="act-detail">Create tasks, post comments (BAKER space only)</div></div>
-      <div class="action-card"><div class="act-name">📧 Email Drafts</div><div class="act-detail">Internal auto-send · External requires approval</div></div>
+      <div class="action-card"><div class="act-name">✅ ClickUp Tasks</div><div class="act-detail">Create tasks, post comments (all 6 workspaces)</div></div>
+      <div class="action-card"><div class="act-name">📧 Email Drafts</div><div class="act-detail">All emails require Director approval before send</div></div>
       <div class="action-card"><div class="act-name">💬 WhatsApp</div><div class="act-detail">Reply to Director · Send to VIP contacts</div></div>
-      <div class="action-card"><div class="act-name">🚨 Alerts</div><div class="act-detail">T1/T2/T3 classification · Push notifications</div></div>
+      <div class="action-card"><div class="act-name">🚨 Alerts</div><div class="act-detail">T1/T2/T3 · Push notifications · Auto-dedup</div></div>
       <div class="action-card"><div class="act-name">💾 Store Decisions</div><div class="act-detail">Record strategic decisions in permanent memory</div></div>
+      <div class="action-card"><div class="act-name">🗂️ Dossier Research</div><div class="act-detail">Multi-specialist deep research · Auto-triggered from VIP WhatsApp</div></div>
+      <div class="action-card"><div class="act-name">🌐 Browser Actions</div><div class="act-detail">CDP click/fill/screenshot · Director confirms via dashboard</div></div>
+      <div class="action-card"><div class="act-name">📅 Meeting Detection</div><div class="act-detail">Auto-detect from email, WhatsApp, Ask Baker</div></div>
       <div class="action-card proposed"><div class="act-name">💼 Slack Storage (proposed)</div><div class="act-detail">Store outbound messages · Learn tone/style</div></div>
     </div>
   </div>
@@ -541,33 +544,35 @@
         <div class="tier-window">0 – 90 days</div>
         <div class="tier-content">
           • Full detail, every record<br>
-          • Full vector embeddings<br>
+          • Full vector embeddings (Voyage AI 1024d)<br>
           • <strong style="color:var(--accent-tier1)">Priority in retrieval</strong><br>
-          • All sources: email, WA, Slack, meetings, tasks<br>
-          • Baker's "working desk"
+          • All sources: email, WA, meetings, tasks, ClickUp<br>
+          • Baker's "working desk" — nothing filtered
         </div>
         <div class="tier-arrow">▶</div>
       </div>
       <div class="tier-block t2">
-        <div class="tier-label">Tier 2: Compressed</div>
+        <div class="tier-label">Tier 2: Compressed (Opus)</div>
         <div class="tier-window">90 days – 1 year</div>
         <div class="tier-content">
-          • Weekly summaries per source<br>
-          • Key decisions preserved verbatim<br>
-          • Raw data → archive tables<br>
+          • <strong style="color:var(--accent-tier2)">Claude Opus</strong> compresses per-matter<br>
+          • Preserves: figures, dates, commitments, dynamics<br>
+          • Raw data → archive (never deleted)<br>
           • New summary vectors replace raw<br>
-          • Searchable, not in default path
+          • Cost: ~$12/month (30 matters × $0.10)<br>
+          • <strong>LIVE</strong> — weekly Sundays 04:00 UTC
         </div>
         <div class="tier-arrow">▶</div>
       </div>
       <div class="tier-block t3">
-        <div class="tier-label">Tier 3: Institutional</div>
+        <div class="tier-label">Tier 3: Institutional (Sonnet)</div>
         <div class="tier-window">1 year+</div>
         <div class="tier-content">
-          • Monthly summaries only<br>
-          • "What happened & what was decided"<br>
+          • <strong style="color:var(--accent-tier3)">Claude Sonnet</strong> distills to briefs<br>
+          • "What happened &amp; what was decided"<br>
           • Permanent strategic knowledge<br>
-          • Lightweight vectors for long-term recall<br>
+          • Cost: ~$2/month<br>
+          • <strong>LIVE</strong> — monthly 1st of month 04:30 UTC<br>
           • Always recoverable from archive
         </div>
       </div>
@@ -675,14 +680,14 @@
       <tr>
         <td><span class="tag tag-baker">Baker</span></td>
         <td><span class="tag tag-cowork">Cowork</span></td>
-        <td class="via-cell">MCP Server — 14 read tools + raw SQL</td>
+        <td class="via-cell">MCP Server — 15 read tools + raw SQL</td>
         <td><span class="direction-tag">→ Read</span></td>
         <td>Memory: deadlines, emails, contacts, tasks, meetings, conversations, health, RSS, analyses</td>
       </tr>
       <tr>
         <td><span class="tag tag-cowork">Cowork</span></td>
         <td><span class="tag tag-baker">Baker</span></td>
-        <td class="via-cell">MCP Server — 4 write tools (live)</td>
+        <td class="via-cell">MCP Server — 6 write tools (live)</td>
         <td><span class="direction-tag">← Write-back</span></td>
         <td>Decisions, deadlines, VIP contacts, analysis reports</td>
       </tr>
@@ -713,11 +718,11 @@
   </div>
 
   <!-- MCP Bridge -->
-  <div class="section-title">The MCP Bridge — 18 Tools</div>
+  <div class="section-title">The MCP Bridge — 21 Tools</div>
   <div class="mcp-intro">The direct connection between Cowork (thinking sessions) and Baker (24/7 memory). Cowork reads everything Baker knows and writes back what the Director decides.</div>
   <div class="mcp-grid">
     <div class="mcp-panel read">
-      <div class="mcp-panel-header"><h3>Read Tools</h3><span class="mcp-count">14 TOOLS</span></div>
+      <div class="mcp-panel-header"><h3>Read Tools</h3><span class="mcp-count">15 TOOLS</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_deadlines</span><span class="mcp-tool-desc">Active deadlines — due dates, priority, confidence</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_vip_contacts</span><span class="mcp-tool-desc">Key people — name, role, email, notes</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_sent_emails</span><span class="mcp-tool-desc">Emails sent on your behalf + reply status</span></div>
@@ -732,14 +737,17 @@
       <div class="mcp-tool"><span class="mcp-tool-name">baker_watermarks</span><span class="mcp-tool-desc">Last poll time for each data source</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_conversation_memory</span><span class="mcp-tool-desc">Past Scan Q&amp;A with full answers</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_raw_query</span><span class="mcp-tool-desc">Escape hatch — any custom SELECT against Baker's DB</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_browser_tasks</span><span class="mcp-tool-desc">Browser monitoring tasks — websites Baker watches for changes</span></div>
     </div>
     <div class="mcp-panel write">
-      <div class="mcp-panel-header"><h3>Write Tools</h3><span class="mcp-count">4 TOOLS</span></div>
+      <div class="mcp-panel-header"><h3>Write Tools</h3><span class="mcp-count">6 TOOLS</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_store_decision</span><span class="mcp-tool-desc">Store a decision, insight, or conclusion → decisions table</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_add_deadline</span><span class="mcp-tool-desc">Add a date that matters → Baker will track and remind</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_upsert_vip</span><span class="mcp-tool-desc">Add or update a person to track → vip_contacts table</span></div>
       <div class="mcp-tool"><span class="mcp-tool-name">baker_store_analysis</span><span class="mcp-tool-desc">Store a full analysis output → deep_analyses table</span></div>
-      <div style="height: 1.5rem"></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_upsert_preference</span><span class="mcp-tool-desc">Set Director preferences — priorities, communication style, domain context</span></div>
+      <div class="mcp-tool"><span class="mcp-tool-name">baker_update_vip_profile</span><span class="mcp-tool-desc">Enrich VIP profiles — tier, domain, expertise, communication preference</span></div>
+      <div style="height: 1rem"></div>
       <div class="mcp-arrow-label">↑ Cowork pushes conclusions back so Baker remembers permanently</div>
     </div>
   </div>
@@ -752,7 +760,7 @@
     <div class="stack-item"><div class="stack-icon">🔮</div><div><div class="stack-label">Qdrant Cloud</div><div class="stack-detail">Vectors — Voyage AI 1024d</div></div></div>
     <div class="stack-item"><div class="stack-icon">🤖</div><div><div class="stack-label">Claude Opus 4.6</div><div class="stack-detail">LLM — 1M context</div></div></div>
     <div class="stack-item"><div class="stack-icon">🚀</div><div><div class="stack-label">Render</div><div class="stack-detail">Auto-deploy from main</div></div></div>
-    <div class="stack-item"><div class="stack-icon">🔗</div><div><div class="stack-label">MCP Server</div><div class="stack-detail">14 read + 4 write = 18 tools</div></div></div>
+    <div class="stack-item"><div class="stack-icon">🔗</div><div><div class="stack-label">MCP Server</div><div class="stack-detail">15 read + 6 write = 21 tools</div></div></div>
   </div>
 
   <!-- Triggers -->
@@ -770,7 +778,7 @@
   </div>
 
   <div class="footer">
-    Baker System v6.0 — Brisengroup — Updated March 27, 2026 — 18 MCP tools live + proposed Slack &amp; memory tiers
+    Baker System v6.0 — Brisengroup — 27 March 2026 — 21 MCP tools · 3-tier memory (Opus/Sonnet) live · Slack proposed
   </div>
 
 </div>
