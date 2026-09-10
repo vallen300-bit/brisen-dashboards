@@ -1,6 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shanghai, 13–19 September 2026</title>
+<link rel="manifest" href="shanghai.webmanifest">
+<meta name="theme-color" content="#22303a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Trip Room">
+<link rel="apple-touch-icon" href="shanghai-icon-180.png">
 <style>
 :root{--ink:#1b1b1b;--mute:#6e6e6e;--faint:#9a9a9a;--line:#e0dfda;--bg:#f7f6f3;--card:#fff;
 --nav:#22303a;--navink:#c9d6de;--navhi:#fff;--ok:#2e6b4f;--okbg:#e6f2ec;--warn:#8a6a1f;--warnbg:#fbf3e0;
@@ -104,6 +111,17 @@ tr:last-child td{border-bottom:0}
 
   <div class="navitem" data-pane="itin">📅 Itinerary</div>
 
+  <div class="navitem" data-pane="guide"><span class="chev" data-sub="s-guide">▶</span> 📋 Participant guide</div>
+  <div class="sub" id="s-guide">
+    <a data-pane="guide" data-go="g-changes">Three things that change your plans</a>
+    <a data-pane="guide" data-go="g-schedule">Schedule, 17–18 September</a>
+    <a data-pane="guide" data-go="g-badge">Your badge and its stickers</a>
+    <a data-pane="guide" data-go="g-hotel">Hotels and where to collect the badge</a>
+    <a data-pane="guide" data-go="g-airport">Airports and stations</a>
+    <a data-pane="guide" data-go="g-shuttle">Shuttles, meals, dress, weather</a>
+    <a data-pane="guide" data-go="g-full">Full text as received</a>
+  </div>
+
   <div class="navitem" data-pane="routes"><span class="chev" data-sub="s-routes">▶</span> 🗺 The seven CITIC routes</div>
   <div class="sub" id="s-routes">
     <div class="grp">Friday 18 September — pick one</div>
@@ -130,14 +148,17 @@ tr:last-child td{border-bottom:0}
 <!-- ================= TRIP ================= -->
 <section class="pane on" id="p-trip">
   <h1>The Trip</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 14:58</p>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:25</p>
 
   <div class="card">
     <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
     three free days on either side of it. Those free days are the whole opportunity: robot makers and
     AI labs you cannot meet from Europe.</p>
-    <p><b>The one hard constraint.</b> Company visits can only happen on <b>14, 15 or 16 September</b>.
-    The 17th and 18th belong to CITIC.</p>
+    <p><b>The one hard constraint — loosened on 10 September.</b> Company visits can happen on
+    <b>14, 15 or 16 September, or before 17:00 on the 17th</b>. The organiser's participant guide
+    (received 10 September) puts the first official item at 17:00 on the 17th; only the 18th belongs
+    to CITIC in full. Earlier versions of this page said the 17th was blocked all day — that came
+    from the July agenda and is now too strict.</p>
   </div>
 
   <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip ok">Confirmed on the list</span></h2>
@@ -296,8 +317,8 @@ tr:last-child td{border-bottom:0}
     <p>US chip rules stop advanced hardware going into China. They do not stop a European company
        running published Chinese weights on its own NVIDIA machines in Europe. <b>Self-host the open
        weights in the EU — do not send guest names to Hangzhou through a China API.</b></p>
-    <p><b>Private meetings can only happen 14, 15 or 16 September.</b> The 17th and 18th belong to CITIC.
-       Hangzhou costs a whole day.</p>
+    <p><b>Private meetings can happen 14, 15 or 16 September, or before 17:00 on the 17th.</b> The 18th
+       belongs to CITIC. Hangzhou costs a whole day.</p>
   </div>
   <table>
     <tr><th>Order</th><th>Lab</th><th>Ask for it?</th></tr>
@@ -391,28 +412,78 @@ tr:last-child td{border-bottom:0}
 
   <div class="band"><b>Group 3 · Beauty and health</b><span>Jing'an's own lane — and the only one of the three groups with nothing in it yet.</span></div>
 
-  <h2 id="t-bh">Where this stands <span class="chip no">No targets — research not run</span></h2>
+  <h2 id="t-bh">Where this stands <span class="chip pr">Call brief on file — still no company target</span></h2>
   <div class="card">
-    <h3>Not a single company has been named, by either side</h3>
-    <p class="meta">Opened here on Director instruction, 10 September</p>
-    <p><b>Why the group exists.</b> Jing'an's printed theme for 18 September is <b>beauty and health</b>,
-       plus ultra-HD audiovisual; its programme includes a beauty incubator. Jing'an is also the district
-       that approached Brisen first in August — and it led with heritage
-       regeneration and luxury retail, not technology.</p>
-    <p><b>What is already in the diary.</b> The online meeting on <b>11 September, 16:00 Shanghai / 10:00
-       Geneva</b>, is about the Jing'an visit. That call happens before any target in this group exists.</p>
-    <p><b>What is missing.</b> No companies, no addresses, no contacts, no evidence — nothing has been
-       researched in this lane. The robotics and AI-lab groups each rest on two independent passes; this
-       group rests on nothing.</p>
-    <p><b>What would fill it.</b> Jing'an's own beauty incubator and the tenants it names; the district's
-       published health and wellness programme; and whichever of those touch hotel operations — spa,
-       wellness, in-room health — rather than retail cosmetics.</p>
+    <h3>The 11 September call — who is on the other end</h3>
+    <p class="meta">16:00 Shanghai / 10:00 Geneva · online · a WeChat group of 10 · interpreter provided · facts brief received 10 September</p>
+    <p><b>The body is an office, not a centre:</b> 上海市静安区投资促进办公室, the Jing'an District Investment
+       Promotion Office. Director and Party secretary <b>李立文</b>; deputy <b>吴频捷</b> runs investment attraction
+       and enterprise retention. Tel 56031056. The 18 September printed slot, 10:30–11:30, is the district's own
+       investment pitch at 1600 West Nanjing Road: 5 minutes of remarks, a 20–25 minute pitch, 30 minutes of questions.</p>
+    <p><b>Still true:</b> not a single company has been named by either side, and no published Jing'an list names a
+       hotel, spa or serviced-residence operator. Everything below is what the district itself publishes.</p>
+  </div>
+  <div class="card">
+    <h3>What Jing'an has signed with foreign companies, 2025–2026</h3>
+    <table>
+      <tr><th>When</th><th>What the district or city page says</th></tr>
+      <tr><td>Mar 2025</td><td>District + L'Oréal + Cathay Capital set up a beauty-innovation fund, 凯辉创美未来基金</td></tr>
+      <tr><td>Q1 2025</td><td>Named arrivals: Denso Digital, Clarins, Temasek, Goldman Gao Hua, Ximalaya</td></tr>
+      <tr><td>8 May 2025</td><td>9 projects, stated investment above RMB 1 billion; LVMH Fashion named. Same day L'Oréal China, Huashan Hospital and Shanghai Skin Disease Hospital signed with the beauty cluster 美创静界</td></tr>
+      <tr><td>Nov 2025</td><td>Cargill and L'Oréal signed at the import expo; 14 investment firms signed</td></tr>
+      <tr><td>2025</td><td>12 new multinational regional headquarters; the district now counts 148 and more than 6,000 foreign-invested firms</td></tr>
+      <tr><td>23 Mar 2026</td><td>The 8-point foreign-investment policy "静八条"; first R&amp;D-centre plaques to Sanofi, Bristol Myers Squibb, Clarins, doTERRA</td></tr>
+      <tr><td>May–Jul 2026</td><td>L'Oréal China R&amp;D recognised as a global-level centre; second plaque batch — Skinovo, Philips innovation centre, Suntory, TÜV Rheinland; Michael Kors APAC headquarters landed</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3>The beauty cluster — 美创静界, Building A5, 718 Lingshi Road</h3>
+    <p class="meta">On the 18 September print as the 13:30–14:30 stop</p>
+    <p>Launched May 2025 in the Daning zone, run by <b>Shanghai Daning Asset Management Group</b> (chairman 毛立鹏).
+       Shared public labs with <b>Huashan Hospital dermatology</b> and the <b>Shanghai Skin Disease Hospital</b> —
+       proof-of-concept, efficacy and sensory testing; the Skin Disease Hospital is the state-designated cosmetics
+       safety and efficacy test body. Phase 1 about 10,000 m²; phases 2–3 planned at 50,000–100,000 m².
+       Preferential rent and a support fund for tenants.</p>
+    <p><b>Who is inside:</b> the annex says 130+ firms at over 90% occupancy; the district's own May–July 2026 pages say
+       100–102 firms at 92%. Named tenants are efficacy skincare, peptide raw materials and beauty-tech. <b>No hotel,
+       spa or wellness operator appears on any published list.</b></p>
+  </div>
+  <div class="card">
+    <h3>Zhangyuan 张园 — the one address with rooms in it</h3>
+    <p class="meta">99 Taixing Road · 09:00–09:45 stop on the print</p>
+    <p>Built 1882, the largest surviving Shikumen lane. <b>Swire Properties operates it and holds no equity</b> — the
+       owner is the district company 静安置业. West side opened 2022 with luxury retail; the east's first corridor
+       opened 30 June 2026 and <b>the whole east is expected end-2027</b>. The east programme lists offices, a
+       <b>boutique hotel and serviced apartments</b>, a performing-arts centre and a museum. <b>No hotel operator,
+       key count or opening year has been named</b> on any Swire, district or city page through 10 September.</p>
+  </div>
+  <div class="card">
+    <h3>Jing'an Global Connect — 1600 West Nanjing Road</h3>
+    <p class="meta">Opened 28 September 2025 · the 10:30 venue on the print</p>
+    <p>A government one-stop hall of about 5,000 m²: visas, residence and work permits in one building, foreign-related
+       notarisation, 18-currency exchange, an outbound-investment desk with more than 70 items, a talent window, and
+       an "invest and start up" service pack. It is a service hall, not an investment vehicle and not a hotel.</p>
+  </div>
+  <div class="card">
+    <h3>What Jing'an publicly asks foreign investors for</h3>
+    <p class="meta">The 8-point policy of 23 March 2026, as restated on city and district pages</p>
+    <p>1 · Turn a sales office into an R&amp;D or global hub. &nbsp;2 · Put R&amp;D on the ground — labs, open-innovation
+       platforms, incubators. &nbsp;3 · Bring group product and service lines not yet in China. &nbsp;4 · Grow into a regional
+       or business-unit headquarters; target 10 upgrades a year. &nbsp;5 · Asia-or-above first stores and launches — Zhangyuan
+       is the stage. &nbsp;6 · Invest in and go out with local firms. &nbsp;7 · Talent, cross-border data, bonded trade.
+       &nbsp;8 · One-company-one-policy service.</p>
+    <p><b>Beauty-specific ask:</b> take space in 美创静界, use the two hospitals' labs, join the L'Oréal–Cathay fund orbit.</p>
+  </div>
+  <div class="card">
+    <h3>What is still missing for this group</h3>
+    <p>A company target. Nothing on the district's published lists touches hotel operations — spa, wellness, in-room
+       health. The only rooms in the whole Jing'an story are the planned Zhangyuan east hotel, with no operator named.</p>
   </div>
 </section>
 
 <section class="pane" id="p-itin">
   <h1>Itinerary</h1>
-  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 10 September, 14:58.</p>
+  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 10 September, 22:25.</p>
   <p class="note"><span class="chip ok">Agreed</span> fixed and confirmed by the other side &nbsp;
      <span class="chip pr">Proposed</span> put forward, not confirmed &nbsp;
      <span class="chip no">Missing</span> nothing on file yet</p>
@@ -430,7 +501,9 @@ tr:last-child td{border-bottom:0}
       <p class="meta">16:00 Shanghai = 10:00 Geneva · interpreter provided</p>
       <p>Stated in-thread as a call to discuss the visit to Jing'an District. <b>Note before you join:</b>
       Jing'an carries no robotics in any of its own documents — its themes are beauty and health, and
-      audiovisual.</p></div></div>
+      audiovisual. <b>A facts brief on the district is now under Targeted companies → Beauty and health</b>:
+      who runs the investment office, what it has signed, the beauty cluster, Zhangyuan, and what the district
+      asks foreign investors for.</p></div></div>
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Sunday 13 September</div>
@@ -459,13 +532,15 @@ tr:last-child td{border-bottom:0}
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Thursday 17 September</div>
-    <div class="card"><h3>CITIC programme, all day <span class="chip ok">Agreed</span></h3>
-      <p class="meta">From the official agenda, updated 23 July</p>
-      <p><b>Morning</b> — arrival, check-in, registration.<br>
-         <b>Afternoon</b> — Cooperation Conference: municipal and CITIC remarks, an investment-environment
-         presentation, company experience-sharing, project signing.<br>
-         <b>Evening</b> — dinner hosted by the Shanghai Municipal Government and CITIC Group.</p>
-      <p>No company visits possible.</p></div></div>
+    <div class="card"><h3>Daytime free — CITIC programme from 17:00 <span class="chip ok">Agreed</span> <span class="chip pr">Corrected 10 September</span></h3>
+      <p class="meta">From the organiser's participant guide, received 10 September — it supersedes the July agenda</p>
+      <p><b>Before 17:00</b> — nothing is scheduled. A company visit or a lab meeting fits here; allow the
+         drive to Pudong and 15 minutes early at the door.<br>
+         <b>Badge</b> — collect in person at the <b>North Building, Dongjiao State Guest Hotel</b>, 1800 Jinke Road,
+         Pudong. Your hotel is not one of the two official ones, so no shuttle and no badge at your reception.<br>
+         <b>17:00–18:00</b> — Main Promotion Briefing, Zijin Hall, 1st floor, Dongjiao State Guest Hotel.<br>
+         <b>18:30–19:30</b> — Banquet, Jinxiu Hall 1st floor or Magnolia Hall 2nd floor, by the colour of your sticker.</p>
+      <p><b>Dress:</b> business formal, with a tie. Details in <b>Participant guide</b> on the left.</p></div></div>
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Friday 18 September</div>
@@ -489,10 +564,151 @@ tr:last-child td{border-bottom:0}
       <p class="meta">Return flight not yet booked.</p></div></div>
 </section>
 
+
+<!-- ================= PARTICIPANT GUIDE ================= -->
+<section class="pane" id="p-guide">
+  <h1>Participant guide</h1>
+  <p class="stamp">The organiser's own 2-page "Participant Guidelines" for the 17–18 September programme, received from the organiser's side on 10 September.
+     Folded in full below; the three findings first.</p>
+
+  <h2 id="g-changes">Three things that change your plans <span class="chip no">Read these</span></h2>
+  <div class="gap"><b>1 · 17 September is not a full day.</b> The first official item is the Main Promotion Briefing at
+     <b>17:00</b>. Everything before that is yours. Earlier pages said "company visits only 14, 15 or 16" — that was the
+     July agenda and is now too strict. A visit or lab meeting on the morning of the 17th is open.</div>
+  <div class="gap"><b>2 · Your 18 September district is fixed by a numbered sticker on your badge, printed in advance.</b>
+     No. 1 Pudong, No. 2 Jing'an, No. 3 Xuhui, No. 4 Yangpu, No. 5 Minhang, No. 6 Jiading, No. 7 Songjiang, No. 8 not
+     taking part. <b>You cannot choose on the day</b> — whichever district is agreed this week is the one printed on the badge.</div>
+  <div class="gap"><b>3 · Your hotel is not one of the two official ones.</b> The official hotels are the Dongjiao State
+     Guest Hotel (the venue) and the Howard Johnson Leonora Plaza, both in Pudong. Guests at their own hotel must
+     <b>collect the badge and information pack in person at the North Building of the Dongjiao State Guest Hotel on
+     17 September</b>, get no shuttle, and are asked to be at the conference centre or the site <b>15 minutes early</b>.
+     The information pack holds the event handbook and both shuttle timetables.</div>
+
+  <h2 id="g-schedule">Schedule, 17–18 September</h2>
+  <table>
+    <tr><th>When</th><th>What</th><th>Where</th></tr>
+    <tr><td>17 Sep, 17:00–18:00</td><td>Main Promotion Briefing</td><td>Zijin Hall, 1st floor, Dongjiao State Guest Hotel</td></tr>
+    <tr><td>17 Sep, 18:30–19:30</td><td>Banquet</td><td>Jinxiu Hall 1st floor <i>or</i> Magnolia Hall 2nd floor, Dongjiao State Guest Hotel</td></tr>
+    <tr><td>18 Sep</td><td>Full-day site visits across the districts</td><td>By the number on your badge — routes under <b>The seven CITIC routes</b></td></tr>
+  </table>
+
+  <h2 id="g-badge">Your badge and its stickers</h2>
+  <div class="card">
+    <p>The badge must be worn to enter any venue. The stickers on it say what you may attend:</p>
+    <table>
+      <tr><th>Sticker</th><th>Gives access to</th></tr>
+      <tr><td>Silver</td><td>Main Promotion Briefing</td></tr>
+      <tr><td>Yellow</td><td>Banquet, 1st floor</td></tr>
+      <tr><td>Orange</td><td>Banquet, 2nd floor</td></tr>
+      <tr><td>Numbered 1–8</td><td>The designated site visit: 1 Pudong New Area · 2 Jing'an · 3 Xuhui · 4 Yangpu · 5 Minhang · 6 Jiading · 7 Songjiang · 8 not participating</td></tr>
+    </table>
+  </div>
+
+  <h2 id="g-hotel">Hotels and where to collect the badge</h2>
+  <div class="card">
+    <p><b>Official hotel 1 — Dongjiao State Guest Hotel</b> (main venue): 1800 Jinke Road, Pudong New Area.<br>
+       <b>Official hotel 2 — Howard Johnson Leonora Plaza Shanghai</b> (10 minutes' drive from the venue): 99 Jinxin Road, Pudong New Area.</p>
+    <p>Guests book and pay their own rooms, breakfast for one included. Guests at either official hotel collect the badge and
+       information pack at the event reception desk in their hotel on arrival. <b>Guests staying elsewhere collect them at
+       the reception desk in the North Building of the Dongjiao State Guest Hotel on 17 September.</b></p>
+  </div>
+
+  <h2 id="g-airport">Airports and stations — distance and driving time to the official hotels</h2>
+  <table>
+    <tr><th>From</th><th>To</th><th>Distance</th><th>Driving time</th></tr>
+    <tr><td rowspan="2">Shanghai Hongqiao International Airport</td><td>Dongjiao State Guest Hotel</td><td>37 km</td><td>approx. 45 minutes</td></tr>
+    <tr><td>Howard Johnson Leonora Plaza</td><td>35 km</td><td>approx. 40 minutes</td></tr>
+    <tr><td rowspan="2">Shanghai Pudong International Airport</td><td>Dongjiao State Guest Hotel</td><td>29 km</td><td>approx. 30 minutes</td></tr>
+    <tr><td>Howard Johnson Leonora Plaza</td><td>33 km</td><td>approx. 35 minutes</td></tr>
+    <tr><td rowspan="2">Shanghai Hongqiao Railway Station</td><td>Dongjiao State Guest Hotel</td><td>33 km</td><td>approx. 50 minutes</td></tr>
+    <tr><td>Howard Johnson Leonora Plaza</td><td>32 km</td><td>approx. 45 minutes</td></tr>
+    <tr><td rowspan="2">Shanghai Railway Station</td><td>Dongjiao State Guest Hotel</td><td>20 km</td><td>approx. 30 minutes</td></tr>
+    <tr><td>Howard Johnson Leonora Plaza</td><td>20 km</td><td>approx. 28 minutes</td></tr>
+    <tr><td rowspan="2">Shanghai South Railway Station</td><td>Dongjiao State Guest Hotel</td><td>20 km</td><td>approx. 30 minutes</td></tr>
+    <tr><td>Howard Johnson Leonora Plaza</td><td>23 km</td><td>approx. 40 minutes</td></tr>
+  </table>
+  <p class="note">Times are the organiser's. Your own hotel is not in the table; plan the Pudong drive separately.</p>
+
+  <h2 id="g-shuttle">Shuttles, meals, dress, weather</h2>
+  <div class="card">
+    <p><b>Shuttles.</b> Dedicated buses run between the two official hotels and the site-visit locations; timetables are in
+       the information pack. Wait in the hotel lobby ahead of time; if you miss a bus, the reception desk arranges transport.
+       <b>Own-accommodation guests: arrive 15 minutes early at the Dongjiao conference centre or at the site.</b></p>
+    <p><b>Meals.</b> 17 Sep lunch — buffet at your hotel on showing the badge (applies to the official hotels). 17 Sep dinner —
+       the banquet, 1st or 2nd floor. 18 Sep lunch — at the designated place in your district, on showing the badge.</p>
+    <p><b>Dress.</b> 17 September: business formal <b>with a tie</b>. 18 September: business casual.</p>
+    <p><b>Weather forecast.</b> 16 Sep cloudy 22–27°C · 17 Sep cloudy 22–27°C · 18 Sep cloudy 22–28°C, light breeze each day.</p>
+  </div>
+
+  <h2 id="g-full">Full text as received</h2>
+  <div class="card">
+    <p class="meta">Verbatim. The sticker symbols in the original are small pictures and print here as blanks between the quotation marks.</p>
+    <p style="text-align:center"><b>Multinational Enterprises Shanghai Visit<br>Participant Guidelines</b></p>
+    <p>Dear Distinguished Guests,<br>
+       Thank you for attending the 2026 “Hi Shanghai, Hi Future - Multinational Enterprises Shanghai Visit” event.<br>
+       Please find below the relevant arrangements for the event:</p>
+    <p><b>I. Event Schedule</b><br>
+       September 17, 5:00-6:00 p.m.: Main Promotion Briefing, Zijin Hall, 1st Floor, Dongjiao State Guest Hotel<br>
+       September 17, 6:30-7:30 p.m.: Banquet, Jinxiu Hall on the 1st Floor / Magnolia Hall on the 2nd Floor, Dongjiao State Guest Hotel<br>
+       September 18: Full-day site visits across Shanghai’s districts</p>
+    <p>On the day of the event, please participate in the relevant activities indicated by the access stickers on your guest badge:<br>
+       (1) Silver “ ” sticker: access to the Main Promotion Briefing;<br>
+       (2) Yellow “ ” sticker: access to the Banquet on the 1st Floor;<br>
+       (3) Orange “ ” sticker: access to the Banquet on the 2nd Floor;<br>
+       (4) Numbered “ ” sticker: access to the designated site visit - No. 1 (Pudong New Area), No. 2 (Jing’an District),
+       No. 3 (Xuhui District), No. 4 (Yangpu District), No. 5 (Minhang District), No. 6 (Jiading District), No. 7 (Songjiang District),
+       or No. 8 (not participating in site visit activities).</p>
+    <p><b>II. Accommodation Arrangements</b><br>
+       Guests may stay at either of the following two designated partner hotels:<br>
+       (1) Dongjiao State Guest Hotel (main event venue): No. 1800 Jinke Road, Pudong New Area, Shanghai<br>
+       (2) Howard Johnson Leonora Plaza Shanghai (a 10-minute drive from the main event venue): No. 99 Jinxin Road, Pudong New Area, Shanghai<br>
+       Guests are kindly requested to book their own accommodation using the hotel information provided previously and to
+       check in and out in accordance with their booking details. Each guest is responsible for settling the room charges,
+       including breakfast for one, upon check-out.</p>
+    <p><b>III. Registration and Collection of Guest Badges</b><br>
+       Upon arrival at the hotel, please collect your guest badge (which must be worn to gain access to the event venues;
+       please keep it safe and do not lose it) and information pack from the event reception desk. The information pack
+       contains the Event Handbook, the Hotel-Venue Shuttle Bus Timetable, and the Hotel-Site Visit Shuttle Bus Timetable.<br>
+       Guests who have arranged their own accommodation are requested to collect their guest badge and information pack from
+       the reception desk in the North Building of Dongjiao State Guest Hotel on September 17, the day of the event.</p>
+    <p><b>IV. Distance and Travel Time from Airports / Railway Stations to the Hotels</b><br>
+       Shanghai Hongqiao International Airport — Dongjiao State Guest Hotel — 37 km — Approximately 45 minutes<br>
+       Shanghai Hongqiao International Airport — Howard Johnson Leonora Plaza Shanghai — 35 km — Approximately 40 minutes<br>
+       Shanghai Pudong International Airport — Dongjiao State Guest Hotel — 29 km — Approximately 30 minutes<br>
+       Shanghai Pudong International Airport — Howard Johnson Leonora Plaza Shanghai — 33 km — Approximately 35 minutes<br>
+       Shanghai Hongqiao Railway Station — Dongjiao State Guest Hotel — 33 km — Approximately 50 minutes<br>
+       Shanghai Hongqiao Railway Station — Howard Johnson Leonora Plaza Shanghai — 32 km — Approximately 45 minutes<br>
+       Shanghai Railway Station — Dongjiao State Guest Hotel — 20 km — Approximately 30 minutes<br>
+       Shanghai Railway Station — Howard Johnson Leonora Plaza Shanghai — 20 km — Approximately 28 minutes<br>
+       Shanghai South Railway Station — Dongjiao State Guest Hotel — 20 km — Approximately 30 minutes<br>
+       Shanghai South Railway Station — Howard Johnson Leonora Plaza Shanghai — 23 km — Approximately 40 minutes</p>
+    <p><b>V. Transportation Services</b><br>
+       The Event Organizing Team will arrange dedicated event shuttle bus services to provide round-trip transportation between
+       Dongjiao State Guest Hotel, Howard Johnson Leonora Plaza Shanghai, and the designated site visit locations. Detailed
+       shuttle bus timetables are included in each guest’s information pack. Please check the departure times and arrive at
+       the hotel lobby in advance to wait for your bus. If you miss your scheduled bus, please contact the Event Organizing
+       Team at the event reception desk in your hotel so that alternative transportation can be arranged.<br>
+       For guests who arrange their own accommodation, please arrive at the Conference Center of Dongjiao State Guest Hotel
+       or the site of visit 15 minutes in advance.</p>
+    <p><b>VI. Catering Arrangements</b><br>
+       Lunch and dinner on September 17, as well as lunch on September 18, will be uniformly arranged by the Event Organizing Team as follows:<br>
+       Lunch on September 17: Present your guest badge to dine at the buffet in your hotel;<br>
+       Dinner on September 17: Present your guest badge to attend the banquet in the Conference Center on the 1st or 2nd Floor of Dongjiao State Guest Hotel;<br>
+       Lunch on September 18: Guests participating in the site visits may present their guest badges to dine at the designated location in each respective district.</p>
+    <p><b>VII. Dress Code</b><br>
+       September 17: Business formal attire with a tie;<br>
+       September 18: Business casual attire is recommended for ease and comfort during the site visits.</p>
+    <p><b>VIII. Weather Forecast</b><br>
+       September 16: Cloudy, 22-27°C, light breeze<br>
+       September 17: Cloudy, 22-27°C, light breeze<br>
+       September 18: Cloudy, 22-28°C, light breeze</p>
+  </div>
+</section>
+
 <!-- ================= RESEARCH ================= -->
 <section class="pane" id="p-res">
   <h1>Research</h1>
-  <p class="stamp">What has been checked, by whom, and what is still open. Last updated 10 September, 14:58.</p>
+  <p class="stamp">What has been checked, by whom, and what is still open. Last updated 10 September, 22:25.</p>
 
   <h2 id="r-three">The three robot makers</h2>
   <table>
@@ -767,12 +983,19 @@ tr:last-child td{border-bottom:0}
       <td><span class="chip pr">AI as one exhibited sector</span></td></tr>
     <tr><td>12:00–14:00</td><td>Lunch</td><td>—</td><td>—</td></tr>
     <tr><td>14:00–15:30</td><td><b>Songjiang investment promotion</b></td>
-      <td>Ten minutes of remarks, a 15-minute district pitch, three or four firms at eight minutes
-      each, then 30 minutes of exchange. The firms are not named on the print.</td><td><span class="chip nb">Not stated</span></td></tr>
+      <td>Ten minutes of remarks, a 15-minute district pitch, four firms at eight minutes
+      each, then 30 minutes of exchange. The print does not name the firms; the district's own exchange
+      list, received 10 September, does: <b>Rittal 威图</b> (German, Loh Group — industrial enclosures,
+      cooling, power and IT infrastructure; CEO 罗黎阳 speaks), <b>PepsiCo Foods China 百事食品</b> (US —
+      Lay's, Cheetos and Quaker plant, national green factory; 焦燕 speaks), <b>Comau 柯马</b> (Italian —
+      car-body welding lines, industrial robots and flexible automation; APAC CEO 袁颖鋆 speaks),
+      <b>CP Group machinery 正大机电</b> (Thai — feed, farm and food-plant equipment, 8 companies;
+      chairman 邵莱民 speaks).</td><td><span class="chip pr">Comau builds industrial robots</span></td></tr>
   </table>
   <div class="card"><p><b>What a hotel owner sees.</b> A 6G and satellite park, a regional planning
   museum, and a pitch. The printed theme is <b>not</b> humanoid robots and no robot factory is on the
-  timetable. Nothing here is a hotel, a guest robot, or a cleaning or delivery maker.</p></div>
+  timetable. Nothing here is a hotel, a guest robot, or a cleaning or delivery maker. The one robot
+  name on the day is <b>Comau</b> — a car-plant automation integrator, not a service-robot maker.</p></div>
 
   <p class="note"><b>Source.</b> Every time, address and named firm above is taken from the organiser's
   own district schedule for 18 September 2026, circulated 31 August 2026. Where a stop's public
@@ -797,5 +1020,6 @@ function show(pane,go){
 document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>show(n.dataset.pane)));
 document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
 document.querySelector('.chev').click();
+if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('shanghai-sw.js').catch(()=>{});}
 </script>
 </body></html>

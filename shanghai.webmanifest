@@ -1,0 +1,17 @@
+{
+  "name": "Shanghai Trip Room",
+  "short_name": "Trip Room",
+  "description": "Brisen Group — Shanghai, 13–19 September 2026. Live trip room.",
+  "start_url": "./shanghai-september-2026.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f6f3",
+  "theme_color": "#22303a",
+  "lang": "en",
+  "icons": [
+    { "src": "shanghai-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "shanghai-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "shanghai-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
