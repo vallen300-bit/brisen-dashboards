@@ -1,0 +1,576 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shanghai, 13–19 September 2026</title>
+<style>
+:root{--ink:#1b1b1b;--mute:#6e6e6e;--faint:#9a9a9a;--line:#e0dfda;--bg:#f7f6f3;--card:#fff;
+--nav:#22303a;--navink:#c9d6de;--navhi:#fff;--ok:#2e6b4f;--okbg:#e6f2ec;--warn:#8a6a1f;--warnbg:#fbf3e0;
+--stop:#8c2b2b;--stopbg:#f7e9e9;--info:#2f4858;--infobg:#e9eff2}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8e6e1;--mute:#9c9992;--faint:#77746e;
+--line:#332f2b;--bg:#121211;--card:#1a1917;--nav:#16202708;--navink:#a9bcc7;--navhi:#fff;
+--ok:#7fc0a0;--okbg:#172a21;--warn:#d9b95f;--warnbg:#2a2415;--stop:#e09292;--stopbg:#2c1a1a;
+--info:#9dc0d2;--infobg:#182428}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif}
+.shell{display:flex;min-height:100vh}
+nav{width:262px;flex:0 0 262px;background:#22303a;color:var(--navink);padding:26px 0 40px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{padding:0 22px 20px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:14px}
+.brand b{display:block;color:#fff;font-size:16px;letter-spacing:-.01em}
+.brand span{font-size:11px;color:#7f95a3;letter-spacing:.1em;text-transform:uppercase}
+.navitem{display:flex;align-items:center;gap:8px;padding:11px 22px;cursor:pointer;font-size:14px;
+ border-left:3px solid transparent;user-select:none}
+.navitem:hover{background:rgba(255,255,255,.05)}
+.navitem.on{background:rgba(255,255,255,.09);border-left-color:#6ea8c4;color:var(--navhi);font-weight:600}
+.chev{display:inline-block;width:10px;transition:transform .16s;color:#7f95a3;font-size:10px}
+.chev.open{transform:rotate(90deg)}
+.sub{display:none;padding:2px 0 8px}
+.sub.open{display:block}
+.sub a{display:block;padding:7px 22px 7px 45px;font-size:13px;color:#93a8b5;text-decoration:none}
+.sub a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.sub .grp{padding:9px 22px 3px 30px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6d8492;font-weight:700}
+main{flex:1;padding:34px 40px 90px;max-width:1080px}
+.pane{display:none}.pane.on{display:block}
+h1{font-size:25px;margin:0 0 3px;letter-spacing:-.015em}
+.stamp{color:var(--mute);font-size:12.5px;margin:0 0 26px}
+h2{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);
+ margin:34px 0 12px;font-weight:700}
+h2:first-of-type{margin-top:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;margin:0 0 12px}
+.card h3{margin:0 0 4px;font-size:16px}
+.card .meta{color:var(--mute);font-size:13px;margin:0 0 8px}
+.card p{margin:0 0 8px}.card p:last-child{margin:0}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+ padding:3px 8px;border-radius:2px;vertical-align:2px}
+.ok{background:var(--okbg);color:var(--ok)}.pr{background:var(--warnbg);color:var(--warn)}
+.no{background:var(--stopbg);color:var(--stop)}.nb{background:var(--infobg);color:var(--info)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 14px;background:var(--card);
+ border:1px solid var(--line);border-radius:4px;overflow:hidden}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);
+ padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.tl{position:relative;margin:0 0 6px;padding-left:26px}
+.tl:before{content:"";position:absolute;left:7px;top:0;bottom:-12px;width:2px;background:var(--line)}
+.tl:last-child:before{bottom:auto;height:22px}
+.dot{position:absolute;left:0;top:14px;width:16px;height:16px;border-radius:50%;
+ background:var(--card);border:3px solid var(--faint)}
+.dot.a{border-color:var(--ok)}.dot.p{border-color:var(--warn)}.dot.x{border-color:var(--stop)}
+.day{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700;margin:0 0 5px}
+.wx{border-left:3px solid var(--line);padding:2px 0 2px 14px;margin:0 0 16px}
+.who{font-weight:600}.role{color:var(--mute);font-size:12.5px;font-weight:400}
+.said{margin:5px 0 0;color:#4a4a4a;font-style:italic}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .said{color:#b6b3ad}}
+.note{color:var(--mute);font-size:13.5px;margin:0 0 18px}
+.band{margin:38px 0 14px;padding:10px 0 9px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
+.band b{font-size:17px;letter-spacing:-.01em}
+.band span{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+.band:first-of-type{margin-top:14px}
+.gap{background:var(--stopbg);border:1px solid rgba(140,43,43,.25);border-radius:4px;padding:12px 15px;
+ margin:0 0 14px;font-size:14px;color:var(--stop)}
+@media(max-width:820px){.shell{flex-direction:column}nav{width:100%;height:auto;position:static;flex:none}main{padding:24px 18px 60px}}
+</style></head><body>
+<div class="shell">
+<nav>
+  <div class="brand"><span>Brisen Group</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span></div>
+
+  <div class="navitem on" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> The Trip</div>
+  <div class="sub" id="s-trip">
+    <a data-pane="trip" data-go="c-gausium">Gausium 高仙</a>
+    <a data-pane="trip" data-go="c-cp">Critical Point 临界点</a>
+    <a data-pane="trip" data-go="c-psi">PsiBot 灵初智能</a>
+    <a data-pane="trip" data-go="c-more">Proposed additions</a>
+  </div>
+
+  <div class="navitem" data-pane="tc"><span class="chev" data-sub="s-tc">▶</span> 🎯 Targeted companies</div>
+  <div class="sub" id="s-tc">
+    <div class="grp">Robotics</div>
+    <a data-pane="tc" data-go="t-gausium">Gausium 高仙</a>
+    <a data-pane="tc" data-go="t-cp">Critical Point 临界点</a>
+    <a data-pane="tc" data-go="t-psi">PsiBot 灵初智能</a>
+    <a data-pane="tc" data-go="t-keenon">Keenon 擎朗</a>
+    <a data-pane="tc" data-go="t-pudu">Pudu 普渡</a>
+    <a data-pane="tc" data-go="t-yunji">Yunji 云迹</a>
+    <a data-pane="tc" data-go="t-ubtech">UBTECH 优必选</a>
+    <div class="grp">AI labs</div>
+    <a data-pane="tc" data-go="t-labs">Ask in this order</a>
+    <a data-pane="tc" data-go="l-qwen">1 · Alibaba Qwen 通义</a>
+    <a data-pane="tc" data-go="l-zhipu">2 · Zhipu GLM 智谱</a>
+    <a data-pane="tc" data-go="l-step">3 · StepFun 阶跃星辰</a>
+    <a data-pane="tc" data-go="l-minimax">4 · MiniMax</a>
+    <a data-pane="tc" data-go="l-intern">5 · Shanghai AI Lab</a>
+    <a data-pane="tc" data-go="l-deepseek">6 · DeepSeek</a>
+    <div class="grp">Beauty and health</div>
+    <a data-pane="tc" data-go="t-bh">Where this stands — no targets yet</a>
+  </div>
+
+  <div class="navitem" data-pane="itin">📅 Itinerary</div>
+
+  <div class="navitem" data-pane="res"><span class="chev" data-sub="s-res">▶</span> Research</div>
+  <div class="sub" id="s-res">
+    <a data-pane="res" data-go="r-three">The three robot makers</a>
+    <a data-pane="res" data-go="r-other">Other robot makers</a>
+    <a data-pane="res" data-go="r-dist">Districts — agreed or not</a>
+    <a data-pane="res" data-go="r-ai">AI models</a>
+  </div>
+
+</nav>
+
+<main>
+<!-- ================= TRIP ================= -->
+<section class="pane on" id="p-trip">
+  <h1>The Trip</h1>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 14:58</p>
+
+  <div class="card">
+    <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
+    three free days on either side of it. Those free days are the whole opportunity: robot makers and
+    AI labs you cannot meet from Europe.</p>
+    <p><b>The one hard constraint.</b> Company visits can only happen on <b>14, 15 or 16 September</b>.
+    The 17th and 18th belong to CITIC.</p>
+  </div>
+
+  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>Cleaning robots, with a real hotel line</h3>
+    <p class="meta">Shanghai · introduced through China CITIC Bank</p>
+    <p><b>Your contacts:</b> <b>Amy 喵喵</b>, head of sales — she made the introductions.
+       <b>Allen.zh</b>, Director for the European region — the one who matters for anything in Vienna.</p>
+    <p><b>What the record says:</b> 3 of 40 published cases are hotels, including the InterContinental Vienna.</p>
+    <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
+  </div>
+
+  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>A robotic-hand spinout</h3>
+    <p class="meta">A component business</p>
+    <p><b>Your contacts:</b> <b>Jimmy Z</b> and <b>王子源 Welson</b>.</p>
+    <p>Spun out of AgiBot, the robotic-hand maker. Expect them to answer on hardware, not on running
+       a hotel. Questions 2 and 6 on your list will not land here.</p>
+  </div>
+
+  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>The newest of the three</h3>
+    <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
+    <p><b>Your contact:</b> <b>文雅</b> ("Miss Wang"). She said on 10 September that she is coordinating
+       who from PsiBot attends and when.</p>
+    <p><b>What the record says:</b> wheeled dual-arm machines, not a humanoid. <b>No hotel deployments,
+       no European presence, no CE mark.</b> Clean on nine sanctions lists.</p>
+  </div>
+
+  <div class="gap"><b>One thing to hold in mind:</b> these are not three independent views. They share
+  investors, and AgiBot both owns Critical Point and seeded PsiBot.</div>
+
+  <h2 id="c-more">Proposed additions — not yet asked for</h2>
+  <table>
+    <tr><th>Company</th><th>Why it is worth a half-day</th><th>Status</th></tr>
+    <tr><td><b>Keenon 擎朗</b></td><td>Runs <b>eight machines together</b> at the Traders Hongqiao — lobby
+      greeter, room delivery, luggage, cleaning, food service. About 30 minutes from your hotel. The only
+      chance to walk a whole fleet in a working hotel.</td><td><span class="chip pr">Candidate</span></td></tr>
+    <tr><td><b>Pudu 普渡</b></td><td>Corridor and food delivery — the same job as the delivery robot already
+      in your NVIDIA project. Documented on NVIDIA's own China blog.</td><td><span class="chip pr">Candidate</span></td></tr>
+    <tr><td><b>Yunji 云迹</b></td><td>Sells a hotel operating system, not just machines. Hotels were about
+      81% of its 2025 revenue.</td><td><span class="chip pr">Candidate</span></td></tr>
+    <tr><td><b>UBTECH</b></td><td>A candidate if a day is open. Guest-facing humanoids.</td><td><span class="chip nb">If a day is open</span></td></tr>
+  </table>
+
+</section>
+
+<!-- ================= ITINERARY ================= -->
+<section class="pane" id="p-tc">
+  <h1>Targeted companies</h1>
+  <p class="stamp">Every company on the Shanghai list, what it actually does, what the record shows, and where it stands · 13–19 September 2026</p>
+
+  <p class="note"><b>Three groups.</b> <b>Robotics</b> — 7 makers, 3 confirmed for the visit and 4
+     additional candidates. <b>AI labs</b> — 7 frontier labs, the ask already made and answered.
+     <b>Beauty and health</b> — Jing'an's own lane, opened today and still empty. Nothing here is ratified.</p>
+
+  <div class="band"><b>Group 1 · Robotics</b><span>7 makers — 3 confirmed for the visit, 4 additional candidates. This is the group the trip was built around.</span></div>
+
+  <div class="card">
+    <h3>If you can add visits, ask in this order</h3>
+    <p class="meta">Reading of the published hospitality-robotics research · 10 September</p>
+    <p><b>1 Keenon</b> — the only working fleet, and it is 30 minutes away.
+       <b>2 Pudu</b> — NVIDIA already published the pairing.
+       <b>3 Yunji</b> — the hotel operating system.
+       <b>4 UBTECH</b> — only if a day would otherwise go empty.</p>
+    <p>Unitree, Fourier, Galbot and AgiBot are outside this list — impressive robotics,
+       but not hotel operations.</p>
+  </div>
+
+  <h2 id="t-gausium">1 — Gausium 高仙 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>Commercial cleaning robots — the only one of the three with a real hotel line</h3>
+    <p class="meta">Shanghai · shareholder Xuhui Capital · introduced through China CITIC Bank</p>
+    <p><b>Contacts:</b> <b>Allen.zh</b>, Head of Europe/APAC — the one who matters for anything in Vienna.
+       <b>Amy 喵喵</b>, head of sales, made the introductions. Also named for the meeting:
+       <b>Muller 吴家印</b>, <b>Saxon</b> (regional sales), <b>Oulivia</b> (strategy).</p>
+    <p><b>Hotel evidence:</b> 3 of 40 published cases are hotels, including the InterContinental Vienna.</p>
+    <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
+    <p><b>Where it stands:</b> offered <b>14 or 15 September, 13:00–18:00</b>, with 5 of their people. Unanswered.</p>
+  </div>
+
+  <h2 id="t-cp">2 — Critical Point 临界点 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>A robotic-hand spinout of AgiBot — a component business, not hotel operations</h3>
+    <p class="meta">Introduced through China CITIC Bank</p>
+    <p><b>Contacts:</b> <b>Jimmy Z</b>, <b>王子源 Welson</b>.</p>
+    <p><b>Hotel evidence:</b> none published. <b>Europe:</b> nothing published.</p>
+    <p><b>What to expect:</b> hardware and components rather than hotel operations.</p>
+    <p><b>Where it stands:</b> Welson — "I will be ok at 16th afternoon". That is his only offer, and it
+       kills the one-day-for-all-three plan.</p>
+  </div>
+
+  <h2 id="t-psi">3 — PsiBot 灵初智能 <span class="chip ok">Confirmed on the list</span></h2>
+  <div class="card">
+    <h3>The newest of the three — wheeled dual-arm machines, not a humanoid</h3>
+    <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
+    <p><b>Contact:</b> <b>文雅 ("Miss Wang")</b>. She said on 10 September she is coordinating who attends and when.</p>
+    <p><b>Hotel evidence:</b> none published yet. <b>Europe:</b> no presence to date.</p>
+    <p><b>Where it stands:</b> on the list, no date offered.</p>
+  </div>
+
+  <h2 id="t-keenon">4 — Keenon 擎朗智能 <span class="chip pr">Ask for this one first</span></h2>
+  <div class="card">
+    <h3>A whole fleet already running in a hotel 30 minutes from yours</h3>
+    <p class="meta">Shanghai company, founded 2010 · the fleet is at the Traders / Shangri-La Hongqiao</p>
+    <p><b>What is actually running there:</b> a lobby humanoid (XMAN-R1), room delivery (W3), luggage
+       (S100), cleaning (C40) and food service (T10 and T3) — <b>8 machines working together in one
+       property.</b> Nowhere else on this trip can you watch a mixed fleet run as one system in a live
+       hotel, which is the third question on your own list.</p>
+    <p><b>The gap it fills:</b> the flight already has a delivery robot on the NVIDIA side and Gausium for
+       cleaning. What is missing is the <b>fleet</b> — many machines, one brain.</p>
+    <p><b>Unverified, and worth asking on site:</b> whether NVIDIA hardware is inside is not published.
+       Even if the brain is Chinese, the working fleet is what Gausium and PsiBot cannot show you.</p>
+    <p><b>The ask:</b> a meeting at their office plus a walk-through of the Hongqiao hotel. Fits 14–16 September.</p>
+  </div>
+
+  <h2 id="t-pudu">5 — Pudu 普渡科技 <span class="chip pr">The cleanest NVIDIA question</span></h2>
+  <div class="card">
+    <h3>NVIDIA has published this one itself</h3>
+    <p class="meta">Head office Shenzhen · ask friends for a Shanghai showroom, or a hotel they already run</p>
+    <p><b>Why it is different from the others:</b> NVIDIA's own China blog documents Jetson running on Pudu
+       delivery robots in restaurants <b>and hotels</b>. The newer machine lists <b>Jetson Orin AGX 64GB</b>.
+       That makes this the one company where "does it run on NVIDIA" is already answered in public — you can
+       spend the meeting on everything else.</p>
+    <p><b>Same job</b> as the delivery robot already inside your NVIDIA project: corridor and food runners.</p>
+  </div>
+
+  <h2 id="t-yunji">6 — Yunji 云迹 <span class="chip pr">A hotel company that happens to make robots</span></h2>
+  <div class="card">
+    <h3>Sells the operating system, not the machine</h3>
+    <p class="meta">Hong Kong listed · filing of 29 April 2026</p>
+    <p>Hotels were about <b>81% of its 2025 revenue</b>. It claims the largest share in China for hotel
+       service robots and hotel AI agents, with Huazhu and Jinjiang among its groups. What it sells is a
+       <b>hotel digital operating system</b> — voice, work orders, robot dispatch — with delivery machines
+       on top.</p>
+    <p><b>Why that matters to you:</b> every other company on this page sells you a machine. This one sells
+       the layer that makes a mixed fleet behave as one system, which is the thing you cannot buy from a
+       robot maker.</p>
+  </div>
+
+  <h2 id="t-ubtech">7 — UBTECH 优必选 <span class="chip nb">If a day is open</span></h2>
+  <div class="card">
+    <h3>Guest-facing humanoids</h3>
+    <p class="meta">Research, 10 Septembertember</p>
+    <p>Guest-facing humanoids. A candidate only if a slot would otherwise go unused.</p>
+  </div>
+
+  <div class="band"><b>Group 2 · AI labs</b><span>7 frontier labs. An introduction was requested on 10 September; Alibaba's Qwen team was named in reply.</span></div>
+
+  <h2 id="t-labs">Ask in this order <span class="chip pr">Second research pass, 10 September</span></h2>
+  <div class="card">
+    <h3>Can Brisen run Chinese models on its own machines in Europe? Yes — on the open ones</h3>
+    <p class="meta">Introduction requested 10 September; Alibaba's Qwen team named in reply</p>
+    <p>US chip rules stop advanced hardware going into China. They do not stop a European company
+       running published Chinese weights on its own NVIDIA machines in Europe. <b>Self-host the open
+       weights in the EU — do not send guest names to Hangzhou through a China API.</b></p>
+    <p><b>Private meetings can only happen 14, 15 or 16 September.</b> The 17th and 18th belong to CITIC.
+       Hangzhou costs a whole day.</p>
+  </div>
+  <table>
+    <tr><th>Order</th><th>Lab</th><th>Ask for it?</th></tr>
+    <tr><td>1</td><td><b>Alibaba — Qwen</b></td><td><b>Ask first.</b> Xuhui West Bund, 14–16 September</td></tr>
+    <tr><td>2</td><td><b>Zhipu — GLM</b></td><td>Only if 18 September Pudong is dead — otherwise you meet them there</td></tr>
+    <tr><td>3</td><td><b>StepFun</b></td><td>Yes — floor 30, the same tower as the 18 September Xuhui stop</td></tr>
+    <tr><td>4</td><td><b>MiniMax</b></td><td>Only for video and speech, and only if you will wear the licence tether</td></tr>
+    <tr><td>5</td><td><b>Shanghai AI Lab</b></td><td>If a hole opens. A lab briefing, not a vendor</td></tr>
+    <tr><td>6</td><td><b>DeepSeek</b></td><td>Only with a named host and a named date. Otherwise skip</td></tr>
+      </table>
+
+  <h2 id="l-qwen">1 — Alibaba, Qwen 通义 <span class="chip ok">Ask first</span></h2>
+  <div class="card">
+    <h3>The only lab with a working hotel stack behind it</h3>
+    <p class="meta">徐汇滨江 West Bund · D-block 龙启路 8号 · X-block 龙耀路 8号 · Hangzhou team at Xixi, 969 West Wen Yi Road</p>
+    <p><b>Licence:</b> Qwen3 and Qwen3.8-27B are <b>Apache 2.0</b> — run them anywhere, including on your own
+       European machines. <b>Do not ship Qwen3.8-Max.</b> Its own licence adds a separate-licence gate above
+       50 million dollars of trailing revenue for model-as-a-service and coding assistants, and a
+       name-in-the-interface duty above 20 million dollars monthly. A hotel concierge probably sits in the
+       carve-out — but that is not advice, and the open models are better anyway.</p>
+    <p><b>Hotel evidence, real but not luxury:</b> Dossen 东呈 runs Qwen across <b>3,500+ midscale hotels</b>
+       with a booking assistant and an AI hub. Fosun Tourism and Club Med run an agent on Qwen. Tongcheng's
+       旅智云 property-management system plugged both Qwen and DeepSeek. None of them is a Mandarin Oriental —
+       they prove the stack exists, not that anyone luxury has done it.</p>
+    <p><b>Note:</b> the printed 18 September Pudong programme names Alibaba Wuying, not the Qwen team.</p>
+    <p><b>The ask:</b> a 14–16 September introduction at the Xuhui West Bund campus, with Alibaba Cloud or
+       Tongyi people who can talk about <b>self-hosting on NVIDIA</b> — not the China API. Hangzhou instead
+       means a full day gone.</p>
+  </div>
+
+  <h2 id="l-zhipu">2 — Zhipu, GLM 智谱 <span class="chip pr">Only if Pudong is dead</span></h2>
+  <div class="card">
+    <h3>Already on the 18 September paper — if that day survives</h3>
+    <p class="meta">Shanghai at 张江模力社区, Pudong · 中科路 1750号 T1 · legal seat Beijing, Haidian</p>
+    <p><b>Licence:</b> GLM-4.5 and 4.5-Air are <b>MIT</b> — commercial use and modification allowed. Older
+       GLM-4 and ChatGLM cards carried custom licences, so read the card of the exact file you would run.</p>
+    <p><b>Hotel evidence:</b> none at your class. What they advertise is agents and tool use — a back-office
+       copilot, not a lobby machine.</p>
+    <p><b>Note:</b> the printed 18 September Zhangjiang list already names Zhipu, so a separate meeting is
+       only needed if that day does not include Pudong.</p>
+  </div>
+
+  <h2 id="l-step">3 — StepFun 阶跃星辰 <span class="chip ok">Yes — 14 to 16 September</span></h2>
+  <div class="card">
+    <h3>Thirty floors below your own 18 September stop</h3>
+    <p class="meta">徐汇区云锦路 701号 30楼 · the official 18 September Xuhui stop is the same tower, floor 45</p>
+    <p><b>Licence:</b> their Step3 code and weights are stated Apache 2.0 — first-pass reading; confirm the
+       card of the exact checkpoint before shipping anything.</p>
+    <p><b>Hotel evidence:</b> none. Their public products are a multimodal assistant and a character-chat app.
+       The useful conversation is tool use and operations rather than a guest persona.</p>
+    <p><b>Trap:</b> same building is not a meeting. On the 18th you can walk the tower; you cannot sit with
+       their team unless it is arranged for 14–16 September.</p>
+  </div>
+
+  <h2 id="l-minimax">4 — MiniMax <span class="chip pr">Only for video and speech</span></h2>
+  <div class="card">
+    <h3>The one with a real licence tether</h3>
+    <p class="meta">11/F, Building B, Xinyan Mansion, 桂箐路 65号, Xuhui · no visitor programme found</p>
+    <p><b>Licence:</b> a community licence, not open source — <b>do not call it open</b>. Commercial use
+       requires showing "Built with MiniMax" and, above <b>20 million dollars of yearly product revenue</b>,
+       prior written authorisation. Fine-tunes and hosted versions count as commercial use. A Brisen hotel
+       product sits above that line, so the tether is real.</p>
+    <p><b>What is actually useful:</b> Hailuo for video and their speech models. Their long-context model is
+       the pitch for long guest history. Their hosted service processes in China unless a data agreement
+       names another region.</p>
+    <p><b>The ask, if you make it:</b> "show us video and speech, and explain how the 20-million
+       authorisation works for a European hotel."</p>
+  </div>
+
+  <h2 id="l-intern">5 — Shanghai AI Lab, InternLM <span class="chip nb">If a hole opens</span></h2>
+  <div class="card">
+    <h3>A briefing on how China open-weights — not a vendor</h3>
+    <p class="meta">徐汇区龙文路 129号 国际传媒港 L1 · comm@pjlab.org.cn · not on the printed 18 September list</p>
+    <p><b>Licence:</b> the current InternLM repository is Apache 2.0; an older 20B card still demands a
+       commercial application form. Checkpoint-specific.</p>
+    <p><b>Hotel evidence:</b> none. Their live work is science, vision and evaluation tooling. Valuable as a
+       read on how Chinese open weights are made and measured. <b>Lowest commercial urgency of the yes list.</b></p>
+    <p><b>The ask:</b> a lab hour on 14–16 September through the municipal or CITIC introduction, or a direct
+       mail to the address above.</p>
+  </div>
+
+  <h2 id="l-deepseek">6 — DeepSeek <span class="chip pr">Only with a named host</span></h2>
+  <div class="card">
+    <h3>Open weights, no visit desk, and a whole day to reach</h3>
+    <p class="meta">杭州市拱墅区环城北路 169号 汇金国际大厦西1幢 1201 · Hongqiao to Hangzhou East about 1 hour</p>
+    <p><b>Licence:</b> <b>MIT</b> on the current model weights — as free as Qwen's open line.</p>
+    <p><b>Hotel evidence:</b> the same Chinese property-management vendor that plugged Qwen also plugged
+       DeepSeek. Nothing at luxury class.</p>
+    <p><b>The ask:</b> worth arranging only with a named host and a confirmed date — Hangzhou costs a full day.</p>
+  </div>
+
+  <div class="band"><b>Group 3 · Beauty and health</b><span>Jing'an's own lane — and the only one of the three groups with nothing in it yet.</span></div>
+
+  <h2 id="t-bh">Where this stands <span class="chip no">No targets — research not run</span></h2>
+  <div class="card">
+    <h3>Not a single company has been named, by either side</h3>
+    <p class="meta">Opened here on Director instruction, 10 September</p>
+    <p><b>Why the group exists.</b> Jing'an's printed theme for 18 September is <b>beauty and health</b>,
+       plus ultra-HD audiovisual; its programme includes a beauty incubator. Jing'an is also the district
+       that approached Brisen first in August — and it led with heritage
+       regeneration and luxury retail, not technology.</p>
+    <p><b>What is already in the diary.</b> The online meeting on <b>11 September, 16:00 Shanghai / 10:00
+       Geneva</b>, is about the Jing'an visit. That call happens before any target in this group exists.</p>
+    <p><b>What is missing.</b> No companies, no addresses, no contacts, no evidence — nothing has been
+       researched in this lane. The robotics and AI-lab groups each rest on two independent passes; this
+       group rests on nothing.</p>
+    <p><b>What would fill it.</b> Jing'an's own beauty incubator and the tenants it names; the district's
+       published health and wellness programme; and whichever of those touch hotel operations — spa,
+       wellness, in-room health — rather than retail cosmetics.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-itin">
+  <h1>Itinerary</h1>
+  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 10 September, 14:58.</p>
+  <p class="note"><span class="chip ok">Agreed</span> fixed and confirmed by the other side &nbsp;
+     <span class="chip pr">Proposed</span> put forward, not confirmed &nbsp;
+     <span class="chip no">Missing</span> nothing on file yet</p>
+
+  <div class="tl"><div class="dot x"></div>
+    <div class="day">Before departure</div>
+    <div class="card"><h3>Geneva → Shanghai, outbound <span class="chip no">Missing</span></h3>
+      <p class="meta">Flights not yet booked.</p>
+      <p>Everything below is built from a Shanghai arrival of 05:30 on Sunday 13 September. Tell me the
+      Geneva leg and it slots in above.</p></div></div>
+
+  <div class="tl"><div class="dot p"></div>
+    <div class="day">Thursday 11 September</div>
+    <div class="card"><h3>Jing'an district — online meeting <span class="chip ok">Agreed</span></h3>
+      <p class="meta">16:00 Shanghai = 10:00 Geneva · interpreter provided</p>
+      <p>Stated in-thread as a call to discuss the visit to Jing'an District. <b>Note before you join:</b>
+      Jing'an carries no robotics in any of its own documents — its themes are beauty and health, and
+      audiovisual.</p></div></div>
+
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Sunday 13 September</div>
+    <div class="card"><h3>Arrive Shanghai, 05:30 <span class="chip ok">Agreed</span></h3>
+      <p class="meta">You and Edita · hotel: Mandarin Oriental</p>
+      <p>From the official event agenda. Nothing else booked this day.</p></div></div>
+
+  <div class="tl"><div class="dot p"></div>
+    <div class="day">Monday 14 September</div>
+    <div class="card"><h3>Free — Gausium offers this day <span class="chip pr">Offered 13:00–18:00</span></h3>
+      <p class="meta">Gausium proposed 14 <i>or</i> 15 September, 13:00 to 18:00, with five of their people</p>
+      <p>The working plan is all three robot makers in one day; the date is being settled.</p></div></div>
+
+  <div class="tl"><div class="dot p"></div>
+    <div class="day">Tuesday 15 September</div>
+    <div class="card"><h3>Free — Gausium alternative, and Starry free <span class="chip pr">Offered 13:00–18:00</span></h3>
+      <p class="meta">Gausium's second option. 于希苘 Starry says 15 and 16 both work.</p>
+      <p>Suggested shape: one day for the three named makers, half a day for the eight-machine hotel
+      near you, half a day for a delivery or hotel-system maker.</p></div></div>
+
+  <div class="tl"><div class="dot p"></div>
+    <div class="day">Wednesday 16 September</div>
+    <div class="card"><h3>Free — Critical Point only free this afternoon <span class="chip pr">Proposed</span></h3>
+      <p class="meta">王子源 Welson: "I will be ok at 16th afternoon". Starry also free. Last day before CITIC.</p>
+      <p>The frontier AI lab meeting, if your friends can arrange one, fits here.</p></div></div>
+
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Thursday 17 September</div>
+    <div class="card"><h3>CITIC programme, all day <span class="chip ok">Agreed</span></h3>
+      <p class="meta">From the official agenda, updated 23 July</p>
+      <p><b>Morning</b> — arrival, check-in, registration.<br>
+         <b>Afternoon</b> — Cooperation Conference: municipal and CITIC remarks, an investment-environment
+         presentation, company experience-sharing, project signing.<br>
+         <b>Evening</b> — dinner hosted by the Shanghai Municipal Government and CITIC Group.</p>
+      <p>No company visits possible.</p></div></div>
+
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Friday 18 September</div>
+    <div class="card"><h3>District visits, full day <span class="chip ok">Agreed</span> <span class="chip pr">Which districts still open</span></h3>
+      <p class="meta">Delegates split into groups · earliest start 09:00, latest finish 16:15</p>
+      <p><b>You asked for</b> Xuhui for yourself and Pudong New Area for Edita, on 8 September. The organiser
+      replied "Received, thanks! I will arrange."</p>
+      <p><b>A different person then offered</b> Xuhui plus Songjiang or Jing'an. Your own answer, if the two
+      slots collide: you to Jing'an, Edita to Songjiang.</p>
+      <p><b>Unresolved.</b> Pudong is the only route with a robotics stop — Zhangjiang Robot Valley,
+      14:10–15:00.</p></div></div>
+
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Saturday 19 September</div>
+    <div class="card"><h3>Depart Shanghai, 01:30 <span class="chip ok">Agreed</span></h3>
+      <p class="meta">From the official agenda</p></div></div>
+
+  <div class="tl"><div class="dot x"></div>
+    <div class="day">Return</div>
+    <div class="card"><h3>Shanghai → Geneva, arrival <span class="chip no">Missing</span></h3>
+      <p class="meta">Return flight not yet booked.</p></div></div>
+</section>
+
+<!-- ================= RESEARCH ================= -->
+<section class="pane" id="p-res">
+  <h1>Research</h1>
+  <p class="stamp">What has been checked, by whom, and what is still open. Last updated 10 September, 14:58.</p>
+
+  <h2 id="r-three">The three robot makers</h2>
+  <table>
+    <tr><th>Company</th><th>What it actually does</th><th>Hotel evidence</th><th>Europe</th></tr>
+    <tr><td><b>Gausium</b></td><td>Cleaning machines, with a genuine hotel line</td>
+      <td>3 of 40 published cases are hotels, including the InterContinental Vienna</td>
+      <td>European data centre in place; data arrangements to confirm</td></tr>
+    <tr><td><b>Critical Point</b></td><td>Robotic-hand spinout of AgiBot; a component business</td>
+      <td>None found</td><td>Nothing on file</td></tr>
+    <tr><td><b>PsiBot</b></td><td>Wheeled dual-arm; incorporated September 2024</td>
+      <td><b>None</b></td><td><b>No presence, no CE mark</b></td></tr>
+  </table>
+  <p class="note"><b>Who did this:</b> two independent passes — one by the research seat (19 dossiers,
+  merged and on record) and one by a second reader (16 dossiers). They agree. Both label themselves
+  first-pass: Chinese registries were unreachable.</p>
+
+  <h2 id="r-other">Other robot makers — proposed, not yet asked for</h2>
+  <table>
+    <tr><th>Company</th><th>The case for it</th><th>Where it came from</th></tr>
+    <tr><td><b>Keenon 擎朗</b></td><td>Eight machines running together in one hotel, 30 minutes away. Whether
+      NVIDIA hardware is inside is not published — ask on site.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
+    <tr><td><b>Pudu 普渡</b></td><td>Documented on NVIDIA's own China blog; newer unit runs the current NVIDIA
+      module. Direct analogue of the delivery robot in your project.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
+    <tr><td><b>Yunji 云迹</b></td><td>A hotel operating system — voice, work orders, robot dispatch — not just
+      machines. Hotels ≈81% of 2025 revenue.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
+    <tr><td><b>UBTECH</b></td><td>Guest-facing humanoids.</td>
+      <td><span class="chip nb">Only if a day is empty</span></td></tr>
+  </table>
+  <p class="note"><b>Not proposed on purpose:</b> Unitree, Fourier, Galbot, AgiBot. They are impressive
+  robotics, but they are not hotel operations.</p>
+
+  <h2 id="r-dist">The districts — agreed or not, and by whom</h2>
+  <table>
+    <tr><th>District</th><th>Its printed theme for 18 Sep</th><th>Robotics on the day?</th><th>Where it stands</th></tr>
+    <tr><td><b>Pudong New Area</b></td><td>AI, biomedicine, humanoid robots</td>
+      <td><b>Yes — Zhangjiang Robot Valley, 14:10–15:00.</b> The only robotics stop on any of the seven routes.</td>
+      <td><span class="chip ok">You asked 8 Sep; organiser said "I will arrange"</span></td></tr>
+    <tr><td><b>Xuhui</b></td><td>AI and large models</td>
+      <td>No. A retail hub, heritage houses, an AI experience store, a telecom computing zone.</td>
+      <td><span class="chip ok">You asked 8 Sep</span> <span class="chip pr">also offered by the organisers</span></td></tr>
+    <tr><td><b>Songjiang</b></td><td>New-generation IT, high-end equipment</td>
+      <td>No. Opens at a 6G and satellite park.</td><td><span class="chip pr">Offered by the organisers</span></td></tr>
+    <tr><td><b>Jing'an</b></td><td>Beauty and health; ultra-HD audiovisual</td>
+      <td>No. Heritage retail, an investment talk, a beauty incubator.</td>
+      <td><span class="chip pr">Offered by the organisers</span> <span class="chip nb">Approached you first, 7 Aug</span></td></tr>
+  </table>
+  <div class="gap"><b>Where it stands.</b> The organiser accepted Pudong for Edita on 8 September.
+  A different contact later offered a list that does not include Pudong. Two counterparties, two answers —
+  and Pudong is the only one that serves the hotel work.</div>
+
+  <h2 id="r-ai">AI models — can Brisen run Chinese models in Europe?</h2>
+  <div class="card"><p><b>Short answer: yes.</b> US chip rules stop advanced hardware going <i>into</i>
+  China. They do not stop a European company downloading published Chinese models and running them on
+  its own machines in Europe. Nothing needs to leave Vienna.</p></div>
+  <table>
+    <tr><th>#</th><th>Lab and model</th><th>Could you run it in Europe?</th><th>Where they are</th></tr>
+    <tr><td>1</td><td><b>Alibaba — Qwen</b></td><td><span class="chip ok">Yes, best</span> Most open licence,
+      widest tooling. Avoid their top-tier model — it carries a revenue gate.</td><td>Xuhui West Bund, or Hangzhou</td></tr>
+    <tr><td>2</td><td><b>DeepSeek</b></td><td><span class="chip ok">Yes</span> Equally open, mature tooling.</td>
+      <td>Hangzhou — no named host yet</td></tr>
+    <tr><td>3</td><td><b>Zhipu — GLM</b></td><td><span class="chip ok">Yes</span> Open on current versions;
+      older ones differ.</td><td>Zhangjiang, Pudong</td></tr>
+    <tr><td>4</td><td><b>StepFun</b></td><td><span class="chip ok">Yes</span> Shanghai-native, smaller Western
+      ecosystem.</td><td>Xuhui — same tower as an 18 Sep stop</td></tr>
+    <tr><td>5</td><td><b>Shanghai AI Lab — InternLM</b></td><td><span class="chip ok">Yes</span> Research-led,
+      smaller hotel surface.</td><td>Xuhui</td></tr>
+    <tr><td>6</td><td><b>MiniMax</b></td><td><span class="chip pr">With a tether</span> Written permission needed
+      above 20 million dollars of product revenue.</td><td>Guiqing Road</td></tr>
+      </table>
+    <p class="note"><b>Also:</b> Europe's AI rules give an exemption for genuinely open licences. Five of the
+  seven qualify. And the obligation falls on Brisen as the deployer, not on the lab.</p>
+</section>
+
+<!-- ================= WECHAT ================= -->
+</main></div>
+<script>
+document.querySelectorAll('.chev').forEach(c=>c.addEventListener('click',e=>{
+  e.stopPropagation();
+  const s=document.getElementById(c.dataset.sub);
+  c.classList.toggle('open'); s.classList.toggle('open');
+}));
+function show(pane,go){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('p-'+pane).classList.add('on');
+  document.querySelectorAll('.navitem').forEach(n=>n.classList.toggle('on',n.dataset.pane===pane));
+  window.scrollTo(0,0);
+  if(go){const t=document.getElementById(go); if(t) setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),60);}
+}
+document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>show(n.dataset.pane)));
+document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
+document.querySelector('.chev').click();
+</script>
+</body></html>
