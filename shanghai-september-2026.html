@@ -79,7 +79,7 @@ tr:last-child td{border-bottom:0}
 <nav>
   <div class="brand"><span>Brisen Group</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span></div>
 
-  <div class="navitem on" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> The Trip</div>
+  <div class="navitem on" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> Why you are going</div>
   <div class="sub" id="s-trip">
     <a data-pane="trip" data-go="c-gausium">Gausium 高仙</a>
     <a data-pane="trip" data-go="c-cp">Critical Point 临界点</a>
@@ -110,6 +110,12 @@ tr:last-child td{border-bottom:0}
   </div>
 
   <div class="navitem" data-pane="itin">📅 Itinerary</div>
+  <div class="navitem" data-pane="log"><span class="chev" data-sub="s-log">▶</span> ✈️ Logistics</div>
+  <div class="sub" id="s-log">
+    <a data-pane="log" data-go="lg-flights">Flights</a>
+    <a data-pane="log" data-go="lg-trains">Trains</a>
+    <a data-pane="log" data-go="lg-hotels">Hotels</a>
+  </div>
 
   <div class="navitem" data-pane="guide"><span class="chev" data-sub="s-guide">▶</span> 📋 Participant guide</div>
   <div class="sub" id="s-guide">
@@ -147,13 +153,15 @@ tr:last-child td{border-bottom:0}
 <main>
 <!-- ================= TRIP ================= -->
 <section class="pane on" id="p-trip">
-  <h1>The Trip</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:25</p>
+  <h1>Why you are going</h1>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:32</p>
 
   <div class="card">
     <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
     three free days on either side of it. Those free days are the whole opportunity: robot makers and
     AI labs you cannot meet from Europe.</p>
+    <p><b>Where the companies stand.</b> The three named makers are on the list the organiser's side is arranging.
+    <b>None of the visits has a confirmed date yet</b> — the days offered are in the Itinerary.</p>
     <p><b>The one hard constraint — loosened on 10 September.</b> Company visits can happen on
     <b>14, 15 or 16 September, or before 17:00 on the 17th</b>. The organiser's participant guide
     (received 10 September) puts the first official item at 17:00 on the 17th; only the 18th belongs
@@ -161,7 +169,7 @@ tr:last-child td{border-bottom:0}
     from the July agenda and is now too strict.</p>
   </div>
 
-  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>Cleaning robots, with a real hotel line</h3>
     <p class="meta">Shanghai · introduced through China CITIC Bank</p>
@@ -171,7 +179,7 @@ tr:last-child td{border-bottom:0}
     <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
   </div>
 
-  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>A robotic-hand spinout</h3>
     <p class="meta">A component business</p>
@@ -180,7 +188,7 @@ tr:last-child td{border-bottom:0}
        a hotel. Questions 2 and 6 on your list will not land here.</p>
   </div>
 
-  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>The newest of the three</h3>
     <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
@@ -230,7 +238,7 @@ tr:last-child td{border-bottom:0}
        but not hotel operations.</p>
   </div>
 
-  <h2 id="t-gausium">1 — Gausium 高仙 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="t-gausium">1 — Gausium 高仙 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>Commercial cleaning robots — the only one of the three with a real hotel line</h3>
     <p class="meta">Shanghai · shareholder Xuhui Capital · introduced through China CITIC Bank</p>
@@ -242,7 +250,7 @@ tr:last-child td{border-bottom:0}
     <p><b>Where it stands:</b> offered <b>14 or 15 September, 13:00–18:00</b>, with 5 of their people. Unanswered.</p>
   </div>
 
-  <h2 id="t-cp">2 — Critical Point 临界点 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="t-cp">2 — Critical Point 临界点 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>A robotic-hand spinout of AgiBot — a component business, not hotel operations</h3>
     <p class="meta">Introduced through China CITIC Bank</p>
@@ -253,7 +261,7 @@ tr:last-child td{border-bottom:0}
        kills the one-day-for-all-three plan.</p>
   </div>
 
-  <h2 id="t-psi">3 — PsiBot 灵初智能 <span class="chip ok">Confirmed on the list</span></h2>
+  <h2 id="t-psi">3 — PsiBot 灵初智能 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>The newest of the three — wheeled dual-arm machines, not a humanoid</h3>
     <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
@@ -702,6 +710,56 @@ tr:last-child td{border-bottom:0}
        September 16: Cloudy, 22-27°C, light breeze<br>
        September 17: Cloudy, 22-27°C, light breeze<br>
        September 18: Cloudy, 22-28°C, light breeze</p>
+  </div>
+</section>
+
+
+<!-- ================= LOGISTICS ================= -->
+<section class="pane" id="p-log">
+  <h1>Logistics</h1>
+  <p class="stamp">Flights, trains and hotels. Last updated 10 September, 22:32.</p>
+
+  <h2 id="lg-flights">Flights <span class="chip no">Both legs missing</span></h2>
+  <div class="card">
+    <h3>Geneva → Shanghai <span class="chip no">Not booked</span></h3>
+    <p class="meta">The official agenda assumes a Shanghai arrival of 05:30 on Sunday 13 September</p>
+    <p>Nothing on file. Tell me the leg and it slots into the itinerary.</p>
+  </div>
+  <div class="card">
+    <h3>Shanghai → Geneva <span class="chip no">Not booked</span></h3>
+    <p class="meta">The official agenda assumes a Shanghai departure of 01:30 on Saturday 19 September</p>
+    <p>Nothing on file.</p>
+  </div>
+  <div class="card">
+    <h3>From the airport</h3>
+    <p>Pudong airport to the event hotel in Pudong: 29 km, about 30 minutes. Hongqiao airport to the event hotel:
+       37 km, about 45 minutes. Your own hotel is not in the organiser's table — see <b>Participant guide</b>.</p>
+  </div>
+
+  <h2 id="lg-trains">Trains <span class="chip nb">Only if Hangzhou happens</span></h2>
+  <div class="card">
+    <h3>Shanghai Hongqiao → Hangzhou East</h3>
+    <p class="meta">About 1 hour by high-speed rail · needed only for a Hangzhou lab meeting (Alibaba Qwen or DeepSeek)</p>
+    <p>No Hangzhou meeting has a host or a date, so no train is booked. A Hangzhou day costs the whole day.</p>
+  </div>
+  <div class="card">
+    <h3>18 September district visits</h3>
+    <p>By the organiser's shuttle buses from the two official hotels only. Your hotel is not served: go direct to the
+       site and be there 15 minutes early.</p>
+  </div>
+
+  <h2 id="lg-hotels">Hotels</h2>
+  <div class="card">
+    <h3>Where you stay — Mandarin Oriental <span class="chip ok">Booked</span></h3>
+    <p class="meta">You and Edita · not one of the organiser's two official hotels</p>
+    <p>Consequences: no shuttle, no badge at your reception. <b>Collect the badge and information pack in person at the
+       North Building of the Dongjiao State Guest Hotel on 17 September.</b></p>
+  </div>
+  <div class="card">
+    <h3>The organiser's two official hotels</h3>
+    <p><b>Dongjiao State Guest Hotel</b> — the venue — 1800 Jinke Road, Pudong New Area.<br>
+       <b>Howard Johnson Leonora Plaza Shanghai</b> — 10 minutes' drive from the venue — 99 Jinxin Road, Pudong New Area.</p>
+    <p>Both are where the 17 September briefing, banquet and shuttles start. Guests there book and pay their own rooms.</p>
   </div>
 </section>
 
