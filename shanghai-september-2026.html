@@ -79,7 +79,14 @@ tr:last-child td{border-bottom:0}
 <nav>
   <div class="brand"><span>Brisen Group</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span></div>
 
-  <div class="navitem on" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> Why you are going</div>
+    <div class="navitem on" data-pane="conf"><span class="chev" data-sub="s-conf">▶</span> ✅ Confirmed visits</div>
+  <div class="sub" id="s-conf">
+    <a data-pane="conf" data-go="k-jingan">11 Sep · Jing'an call</a>
+    <a data-pane="conf" data-go="k-citic">17 Sep · CITIC briefing and banquet</a>
+    <a data-pane="conf" data-go="k-routes">18 Sep · District visits</a>
+  </div>
+
+  <div class="navitem" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> ⏳ Pending confirmation</div>
   <div class="sub" id="s-trip">
     <a data-pane="trip" data-go="c-gausium">Gausium 高仙</a>
     <a data-pane="trip" data-go="c-cp">Critical Point 临界点</a>
@@ -152,16 +159,48 @@ tr:last-child td{border-bottom:0}
 
 <main>
 <!-- ================= TRIP ================= -->
-<section class="pane on" id="p-trip">
-  <h1>Why you are going</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:32</p>
+<section class="pane on" id="p-conf">
+  <h1>Confirmed visits</h1>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:33</p>
+
+  <div class="card">
+    <p><b>Confirmed</b> means the other side has fixed it in writing. Everything with only an offer or a wish
+    behind it is under <b>Pending confirmation</b>.</p>
+  </div>
+
+  <h2 id="k-jingan">Thursday 11 September — Jing'an district, online <span class="chip ok">Agreed</span></h2>
+  <div class="card">
+    <p class="meta">16:00 Shanghai / 10:00 Geneva · WeChat group of 10 · interpreter provided</p>
+    <p>The district's investment office, to discuss the Jing'an visit. Facts brief under <b>Targeted companies →
+       Beauty and health</b>. Jing'an's themes are beauty and health and audiovisual — no robotics.</p>
+  </div>
+
+  <h2 id="k-citic">Thursday 17 September — CITIC briefing and banquet <span class="chip ok">Agreed</span></h2>
+  <div class="card">
+    <p class="meta">Dongjiao State Guest Hotel, 1800 Jinke Road, Pudong · badge collected in person at the North Building</p>
+    <p><b>17:00–18:00</b> Main Promotion Briefing, Zijin Hall, 1st floor. <b>18:30–19:30</b> Banquet, 1st or 2nd floor
+       by sticker colour. Business formal with a tie. The daytime before 17:00 is free. Full detail under
+       <b>Participant guide</b>.</p>
+  </div>
+
+  <h2 id="k-routes">Friday 18 September — district visits, full day <span class="chip ok">Agreed</span> <span class="chip pr">Which district still open</span></h2>
+  <div class="card">
+    <p class="meta">Earliest start 09:00, latest finish 16:15 · business casual · lunch in the district on the badge</p>
+    <p>The day is fixed; the district is not. It is printed on the badge in advance as a number 1 to 7, so it must
+       be settled this week. The seven routes are under <b>The seven CITIC routes</b>.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-trip">
+  <h1>Pending confirmation</h1>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 10 September, 22:33</p>
 
   <div class="card">
     <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
     three free days on either side of it. Those free days are the whole opportunity: robot makers and
     AI labs you cannot meet from Europe.</p>
-    <p><b>Where the companies stand.</b> The three named makers are on the list the organiser's side is arranging.
-    <b>None of the visits has a confirmed date yet</b> — the days offered are in the Itinerary.</p>
+    <p><b>Where these stand.</b> Every item on this page has an offer, an introduction or a wish behind it —
+    <b>nothing here has a fixed date from the other side yet.</b> When one is fixed it moves to Confirmed visits.</p>
     <p><b>The one hard constraint — loosened on 10 September.</b> Company visits can happen on
     <b>14, 15 or 16 September, or before 17:00 on the 17th</b>. The organiser's participant guide
     (received 10 September) puts the first official item at 17:00 on the 17th; only the 18th belongs
@@ -169,7 +208,7 @@ tr:last-child td{border-bottom:0}
     from the July agenda and is now too strict.</p>
   </div>
 
-  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip pr">On the list — no date yet</span></h2>
+  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip pr">Offered 14 or 15 Sep, 13:00–18:00 — unanswered</span></h2>
   <div class="card">
     <h3>Cleaning robots, with a real hotel line</h3>
     <p class="meta">Shanghai · introduced through China CITIC Bank</p>
@@ -179,7 +218,7 @@ tr:last-child td{border-bottom:0}
     <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
   </div>
 
-  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip pr">On the list — no date yet</span></h2>
+  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip pr">Offered 16 Sep afternoon — unanswered</span></h2>
   <div class="card">
     <h3>A robotic-hand spinout</h3>
     <p class="meta">A component business</p>
@@ -188,7 +227,7 @@ tr:last-child td{border-bottom:0}
        a hotel. Questions 2 and 6 on your list will not land here.</p>
   </div>
 
-  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip pr">On the list — no date yet</span></h2>
+  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip no">No date offered</span></h2>
   <div class="card">
     <h3>The newest of the three</h3>
     <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
@@ -201,7 +240,7 @@ tr:last-child td{border-bottom:0}
   <div class="gap"><b>One thing to hold in mind:</b> these are not three independent views. They share
   investors, and AgiBot both owns Critical Point and seeded PsiBot.</div>
 
-  <h2 id="c-more">Proposed additions — not yet asked for</h2>
+  <h2 id="c-more">Proposed additions — not yet asked for <span class="chip no">Not requested</span></h2>
   <table>
     <tr><th>Company</th><th>Why it is worth a half-day</th><th>Status</th></tr>
     <tr><td><b>Keenon 擎朗</b></td><td>Runs <b>eight machines together</b> at the Traders Hongqiao — lobby
