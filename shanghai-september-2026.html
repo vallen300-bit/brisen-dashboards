@@ -106,114 +106,212 @@ tr:last-child td{border-bottom:0}
 @media print{.topbar{display:none}}
 @media(max-width:820px){.topbar{margin:-24px -18px 20px;padding:10px 18px}}
 @media(max-width:820px){.shell{flex-direction:column}nav{width:100%;height:auto;position:static;flex:none}main{padding:24px 18px 60px}}
-</style><script>(function(){try{var t=localStorage.getItem('ctr-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+
+/* ---- rebuild, 12 September 2026 (Director comments): no icons, one entry = one page, light/dark switch, phone menu ---- */
+.navitem{gap:0}
+.chev{margin-right:8px}
+.sub a.on{color:#fff;font-weight:600}
+.themerow{padding:0 22px 14px;margin:-4px 0 8px}
+.themetoggle{position:relative;display:inline-flex;align-items:center;justify-content:space-between;width:74px;height:32px;padding:0 6px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);cursor:pointer}
+.themetoggle svg{width:17px;height:17px;fill:none;stroke:#7f95a3;stroke-width:1.8;position:relative;z-index:1}
+.themetoggle .moon{fill:#7f95a3;stroke:none}
+.themetoggle[data-mode="light"] .sun{stroke:#fff}
+.themetoggle[data-mode="dark"] .moon{fill:#fff}
+.themetoggle .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;border:2px solid #6ea8c4;background:rgba(110,168,196,.22);transition:left .18s}
+.themetoggle[data-mode="dark"] .knob{left:45px}
+.contents a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;margin:0 0 8px;background:var(--card);border:1px solid var(--line);border-radius:4px;font-size:16px;color:var(--ink);text-decoration:none}
+.contents a:after{content:"\203A";color:var(--faint);font-size:22px;line-height:1}
+.contents a:hover{border-color:#6ea8c4}
+.topbar .menu,.topbar .share{appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--navhi);background:var(--nav);border:1px solid var(--nav);border-radius:4px;padding:9px 16px}
+.topbar .menu{display:none}
+.topbar .share{margin-left:auto;color:var(--ink);background:var(--card);border-color:var(--line)}
+.todaybar{display:flex;align-items:center;gap:10px;margin:0 0 3px}
+.todaybar h1{margin:0;flex:1}
+.todaybar .step{appearance:none;cursor:pointer;font:inherit;font-size:22px;line-height:1;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.today-item{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin:0 0 10px}
+.today-item .when{flex:0 0 86px;font-weight:700;font-size:14px;color:var(--info)}
+.today-item .what{flex:1}
+.today-item .what b{display:block;font-size:16px;margin:0 0 3px}
+.today-item .what span{color:var(--mute);font-size:13.5px}
+.today-item .what a{display:inline-block;margin-top:6px;font-size:13px;font-weight:700;color:var(--info)}
+.today-empty{color:var(--mute);padding:20px 0}
+.addr{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 18px;margin:0 0 12px}
+.addr h3{margin:0 0 3px;font-size:16px}
+.addr .cn{font-size:22px;line-height:1.4;margin:8px 0 12px;font-weight:600}
+.addr .row{display:flex;gap:8px}
+.addr .row button{appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;border-radius:4px;padding:10px 16px;border:1px solid var(--nav);color:var(--navhi);background:var(--nav)}
+.addr .row .copyaddr{color:var(--ink);background:var(--card);border-color:var(--line)}
+.overlay[hidden]{display:none}
+.overlay{position:fixed;inset:0;z-index:100;background:#fff;color:#111;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px;cursor:pointer}
+.overlay .cnbig{font-size:46px;font-weight:700;line-height:1.25}
+.overlay .addrbig{font-size:36px;line-height:1.35;margin-top:18px;font-weight:600}
+.overlay .enbig{font-size:15px;color:#555;margin-top:26px}
+.overlay .closehint{position:absolute;bottom:22px;font-size:12px;color:#888;letter-spacing:.08em;text-transform:uppercase}
+label.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:15px;line-height:1.5}
+label.chk:last-child{border-bottom:0}
+label.chk input{width:22px;height:22px;margin:2px 0 0;flex:0 0 22px;accent-color:var(--ok)}
+label.chk input:checked+span{color:var(--faint);text-decoration:line-through}
+.msg .mark{appearance:none;cursor:pointer;font:inherit;font-size:12px;font-weight:700;color:var(--ok);background:var(--okbg);border:0;border-radius:3px;padding:6px 12px}
+.msg .sentat{padding:8px 16px 0;font-size:12.5px;color:var(--ok)}
+@media(max-width:820px){
+  body.page-open nav{display:none}
+  body:not(.page-open) main{display:none}
+  .topbar .back{display:none}
+  .topbar .menu{display:inline-flex}
+  .topbar .where{font-size:12.5px}
+  .overlay .cnbig{font-size:40px}.overlay .addrbig{font-size:30px}
+  .today-item{flex-direction:column;gap:4px}
+  .today-item .when{flex:none}
+  .todaybar h1{font-size:20px}
+}
+.today-item .when:empty{display:none}
+</style><script>(function(){var t=null;try{t=localStorage.getItem('ctr-theme');}catch(e){}if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);})();</script>
 </head><body>
 <div class="shell">
 <nav>
-  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span><span class="upd" id="pubStamp">12 September 2026, 00:10</span></div>
-  <div class="themebar" role="group" aria-label="View"><button type="button" data-set="auto" aria-pressed="false">Auto</button><button type="button" data-set="light" aria-pressed="false">Light</button><button type="button" data-set="dark" aria-pressed="false">Dark</button></div>
+  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–20 September 2026</span><span class="upd" id="pubStamp">12 September 2026, 00:47</span></div>
+  <div class="themerow"><button type="button" id="themeToggle" class="themetoggle" aria-label="Switch between light and dark">
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><g stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.3" y1="5.3" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="18.7" y2="18.7"/><line x1="5.3" y1="18.7" x2="7.1" y2="16.9"/><line x1="16.9" y1="7.1" x2="18.7" y2="5.3"/></g></svg>
+    <span class="knob" aria-hidden="true"></span>
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 14.8A8.6 8.6 0 0 1 9.2 3.4a8.6 8.6 0 1 0 11.4 11.4z"/></svg>
+  </button></div>
 
-    <div class="navitem on" data-pane="conf"><span class="chev" data-sub="s-conf">▶</span> ✅ Confirmed visits</div>
+  <div class="navitem" data-pane="today">Today</div>
+
+  <div class="navitem" data-pane="conf"><span class="chev" data-sub="s-conf">▶</span>Confirmed visits</div>
   <div class="sub" id="s-conf">
-    <a data-pane="conf" data-go="k-jingan">11 Sep · Jing'an call</a>
-    <a data-pane="conf" data-go="k-citic">17 Sep · CITIC briefing and banquet</a>
-    <a data-pane="conf" data-go="k-routes">18 Sep · District visits</a>
+    <a href="#conf/k-jingan" data-pane="conf" data-go="k-jingan">11 Sep · Jing'an call</a>
+    <a href="#conf/k-citic" data-pane="conf" data-go="k-citic">17 Sep · CITIC briefing and banquet</a>
+    <a href="#conf/k-routes" data-pane="conf" data-go="k-routes">18 Sep · District visits</a>
   </div>
 
-  <div class="navitem" data-pane="send">✉️ Your replies — ready to send</div>
+  <div class="navitem" data-pane="send"><span class="chev" data-sub="s-send">▶</span>Your replies</div>
+  <div class="sub" id="s-send">
+    <a href="#send/send-drafts" data-pane="send" data-go="send-drafts">Drafts</a>
+    <a href="#send/send-sent" data-pane="send" data-go="send-sent">Sent</a>
+  </div>
 
-  <div class="navitem" data-pane="talks"><span class="chev" data-sub="s-talks">▶</span> 💬 Meetings and Talks</div>
+  <div class="navitem" data-pane="talks"><span class="chev" data-sub="s-talks">▶</span>Meetings and Talks</div>
   <div class="sub" id="s-talks">
-    <a data-pane="talks" data-go="t-jingan">Jing'an district</a>
-    <a href="https://vallen300-bit.github.io/brisen-dashboards/jingan-district.html" target="_blank" rel="noopener">↗ Jing'an district — full brief</a>
+    <a href="#talks/t-jingan" data-pane="talks" data-go="t-jingan">Jing'an district — online, 11 September</a>
+    <a href="https://vallen300-bit.github.io/brisen-dashboards/jingan-district.html" target="_blank" rel="noopener">Jing'an district — the full brief ↗</a>
   </div>
 
-  <div class="navitem" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> ⏳ Pending confirmation</div>
+  <div class="navitem" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span>Pending confirmation</div>
   <div class="sub" id="s-trip">
-    <a data-pane="trip" data-go="c-gausium">Gausium 高仙</a>
-    <a data-pane="trip" data-go="c-cp">Critical Point 临界点</a>
-    <a data-pane="trip" data-go="c-psi">PsiBot 灵初智能</a>
-    <a data-pane="trip" data-go="c-more">Proposed additions</a>
-    <a data-pane="trip" data-go="c-people">Who is who</a>
+    <a href="#trip/c-gausium" data-pane="trip" data-go="c-gausium">Gausium</a>
+    <a href="#trip/c-cp" data-pane="trip" data-go="c-cp">Critical Point</a>
+    <a href="#trip/c-psi" data-pane="trip" data-go="c-psi">PsiBot</a>
+    <a href="#trip/c-more" data-pane="trip" data-go="c-more">Proposed additions</a>
+    <a href="#trip/c-people" data-pane="trip" data-go="c-people">Who is who</a>
   </div>
 
-  <div class="navitem" data-pane="tc"><span class="chev" data-sub="s-tc">▶</span> 🎯 Targeted companies</div>
+  <div class="navitem" data-pane="tc"><span class="chev" data-sub="s-tc">▶</span>Companies to target</div>
   <div class="sub" id="s-tc">
-    <div class="grp">Robotics</div>
-    <a data-pane="tc" data-go="t-gausium">Gausium 高仙</a>
-    <a data-pane="tc" data-go="t-cp">Critical Point 临界点</a>
-    <a data-pane="tc" data-go="t-psi">PsiBot 灵初智能</a>
-    <a data-pane="tc" data-go="t-keenon">Keenon 擎朗</a>
-    <a data-pane="tc" data-go="t-pudu">Pudu 普渡</a>
-    <a data-pane="tc" data-go="t-yunji">Yunji 云迹</a>
-    <a data-pane="tc" data-go="t-ubtech">UBTECH 优必选</a>
-    <a data-pane="tc" data-go="t-excl">Excluded on purpose</a>
-    <div class="grp">AI labs</div>
-    <a data-pane="tc" data-go="t-labs">Ask in this order</a>
-    <a data-pane="tc" data-go="l-qwen">1 · Alibaba Qwen 通义</a>
-    <a data-pane="tc" data-go="l-zhipu">2 · Zhipu GLM 智谱</a>
-    <a data-pane="tc" data-go="l-step">3 · StepFun 阶跃星辰</a>
-    <a data-pane="tc" data-go="l-minimax">4 · MiniMax</a>
-    <a data-pane="tc" data-go="l-intern">5 · Shanghai AI Lab</a>
-    <a data-pane="tc" data-go="l-deepseek">6 · DeepSeek</a>
-    <a data-pane="tc" data-go="t-sense">7 · SenseTime — never</a>
-    <div class="grp">Beauty and health</div>
-    <a data-pane="tc" data-go="t-bh">Where this stands — no targets yet</a>
+    <a href="#tc/t-order" data-pane="tc" data-go="t-order">Ask in this order — robotics</a>
+    <a href="#tc/t-gausium" data-pane="tc" data-go="t-gausium">1 · Gausium</a>
+    <a href="#tc/t-cp" data-pane="tc" data-go="t-cp">2 · Critical Point</a>
+    <a href="#tc/t-psi" data-pane="tc" data-go="t-psi">3 · PsiBot</a>
+    <a href="#tc/t-keenon" data-pane="tc" data-go="t-keenon">4 · Keenon</a>
+    <a href="#tc/t-pudu" data-pane="tc" data-go="t-pudu">5 · Pudu</a>
+    <a href="#tc/t-yunji" data-pane="tc" data-go="t-yunji">6 · Yunji</a>
+    <a href="#tc/t-ubtech" data-pane="tc" data-go="t-ubtech">7 · UBTECH</a>
+    <a href="#tc/t-excl" data-pane="tc" data-go="t-excl">Excluded on purpose</a>
+    <a href="#tc/t-labs" data-pane="tc" data-go="t-labs">AI labs — ask in this order</a>
+    <a href="#tc/l-qwen" data-pane="tc" data-go="l-qwen">1 · Alibaba, Qwen</a>
+    <a href="#tc/l-zhipu" data-pane="tc" data-go="l-zhipu">2 · Zhipu, GLM</a>
+    <a href="#tc/l-step" data-pane="tc" data-go="l-step">3 · StepFun</a>
+    <a href="#tc/l-minimax" data-pane="tc" data-go="l-minimax">4 · MiniMax</a>
+    <a href="#tc/l-intern" data-pane="tc" data-go="l-intern">5 · Shanghai AI Lab</a>
+    <a href="#tc/l-deepseek" data-pane="tc" data-go="l-deepseek">6 · DeepSeek</a>
+    <a href="#tc/t-sense" data-pane="tc" data-go="t-sense">SenseTime — never</a>
+    <a href="#tc/t-bh" data-pane="tc" data-go="t-bh">Beauty and health — Jing'an</a>
   </div>
 
-  <div class="navitem" data-pane="itin">📅 Itinerary</div>
-  <div class="navitem" data-pane="log"><span class="chev" data-sub="s-log">▶</span> ✈️ Logistics</div>
+  <div class="navitem" data-pane="q"><span class="chev" data-sub="s-q">▶</span>Questions to ask</div>
+  <div class="sub" id="s-q">
+    <a href="#q/q-gausium" data-pane="q" data-go="q-gausium">Gausium — 14 Sep</a>
+    <a href="#q/q-psibot" data-pane="q" data-go="q-psibot">PsiBot — 16 Sep, 09:30</a>
+    <a href="#q/q-agibot" data-pane="q" data-go="q-agibot">AgiBot — 16 Sep, afternoon</a>
+    <a href="#q/q-lab" data-pane="q" data-go="q-lab">Any frontier lab</a>
+    <a href="#q/q-jingan" data-pane="q" data-go="q-jingan">The Jing'an side</a>
+    <a href="#q/q-keenon" data-pane="q" data-go="q-keenon">Keenon — if added</a>
+  </div>
+
+  <div class="navitem" data-pane="addr">Addresses in Chinese</div>
+  <div class="navitem" data-pane="miss">Still missing</div>
+  <div class="navitem" data-pane="people">People</div>
+  <div class="navitem" data-pane="itin">Itinerary</div>
+
+  <div class="navitem" data-pane="log"><span class="chev" data-sub="s-log">▶</span>Logistics</div>
   <div class="sub" id="s-log">
-    <a data-pane="log" data-go="lg-flights">Flights</a>
-    <a data-pane="log" data-go="lg-trains">Trains</a>
-    <a data-pane="log" data-go="lg-hotels">Hotels</a>
+    <a href="#log/lg-flights" data-pane="log" data-go="lg-flights">Flights</a>
+    <a href="#log/lg-trains" data-pane="log" data-go="lg-trains">Trains</a>
+    <a href="#log/lg-hotels" data-pane="log" data-go="lg-hotels">Hotels</a>
   </div>
 
-  <div class="navitem" data-pane="guide"><span class="chev" data-sub="s-guide">▶</span> 📋 Participant guide</div>
+  <div class="navitem" data-pane="guide"><span class="chev" data-sub="s-guide">▶</span>Participant guide</div>
   <div class="sub" id="s-guide">
-    <a data-pane="guide" data-go="g-changes">Three things that change your plans</a>
-    <a data-pane="guide" data-go="g-schedule">Schedule, 17–18 September</a>
-    <a data-pane="guide" data-go="g-badge">Your badge and its stickers</a>
-    <a data-pane="guide" data-go="g-hotel">Hotels and where to collect the badge</a>
-    <a data-pane="guide" data-go="g-airport">Airports and stations</a>
-    <a data-pane="guide" data-go="g-shuttle">Shuttles, meals, dress, weather</a>
-    <a data-pane="guide" data-go="g-full">Full text as received</a>
+    <a href="#guide/g-changes" data-pane="guide" data-go="g-changes">Three things that change your plans</a>
+    <a href="#guide/g-schedule" data-pane="guide" data-go="g-schedule">Schedule, 17–18 September</a>
+    <a href="#guide/g-badge" data-pane="guide" data-go="g-badge">Your badge and its stickers</a>
+    <a href="#guide/g-hotel" data-pane="guide" data-go="g-hotel">Hotels and where to collect the badge</a>
+    <a href="#guide/g-airport" data-pane="guide" data-go="g-airport">Airports and stations</a>
+    <a href="#guide/g-shuttle" data-pane="guide" data-go="g-shuttle">Shuttles, meals, dress, weather</a>
+    <a href="#guide/g-full" data-pane="guide" data-go="g-full">Full text as received</a>
   </div>
 
-  <div class="navitem" data-pane="routes"><span class="chev" data-sub="s-routes">▶</span> 🗺 The seven CITIC routes</div>
+  <div class="navitem" data-pane="routes"><span class="chev" data-sub="s-routes">▶</span>The seven CITIC routes</div>
   <div class="sub" id="s-routes">
-    <div class="grp">Friday 18 September — pick one</div>
-    <a data-pane="routes" data-go="d-pudong">1 · Pudong 浦东新区 — dropped</a>
-    <a data-pane="routes" data-go="d-jingan">2 · Jing'an 静安区 — Edita</a>
-    <a data-pane="routes" data-go="d-xuhui">3 · Xuhui 徐汇区 — you</a>
-    <a data-pane="routes" data-go="d-yangpu">4 · Yangpu 杨浦区</a>
-    <a data-pane="routes" data-go="d-minhang">5 · Minhang 闵行区</a>
-    <a data-pane="routes" data-go="d-jiading">6 · Jiading 嘉定区</a>
-    <a data-pane="routes" data-go="d-songjiang">7 · Songjiang 松江区 — not needed</a>
+    <div class="grp">Friday 18 September</div>
+    <a href="#routes/d-pudong" data-pane="routes" data-go="d-pudong">1 · Pudong — dropped</a>
+    <a href="#routes/d-jingan" data-pane="routes" data-go="d-jingan">2 · Jing'an — Edita</a>
+    <a href="#routes/d-xuhui" data-pane="routes" data-go="d-xuhui">3 · Xuhui — you</a>
+    <a href="#routes/d-yangpu" data-pane="routes" data-go="d-yangpu">4 · Yangpu</a>
+    <a href="#routes/d-minhang" data-pane="routes" data-go="d-minhang">5 · Minhang</a>
+    <a href="#routes/d-jiading" data-pane="routes" data-go="d-jiading">6 · Jiading</a>
+    <a href="#routes/d-songjiang" data-pane="routes" data-go="d-songjiang">7 · Songjiang — not needed</a>
   </div>
 
-  <div class="navitem" data-pane="res"><span class="chev" data-sub="s-res">▶</span> Research</div>
+  <div class="navitem" data-pane="res"><span class="chev" data-sub="s-res">▶</span>Research</div>
   <div class="sub" id="s-res">
-    <a data-pane="res" data-go="r-three">The three robot makers</a>
-    <a data-pane="res" data-go="r-other">Other robot makers</a>
-    <a data-pane="res" data-go="r-dist">Districts — agreed or not</a>
-    <a data-pane="res" data-go="r-ai">AI models</a>
-    <a data-pane="res" data-go="r-citic">Who CITIC actually is</a>
-    <a data-pane="res" data-go="r-case">Why these machines</a>
+    <a href="#res/r-three" data-pane="res" data-go="r-three">The three robot makers</a>
+    <a href="#res/r-other" data-pane="res" data-go="r-other">Other robot makers</a>
+    <a href="#res/r-dist" data-pane="res" data-go="r-dist">Districts — agreed or not</a>
+    <a href="#res/r-ai" data-pane="res" data-go="r-ai">AI models</a>
+    <a href="#res/r-citic" data-pane="res" data-go="r-citic">Who CITIC actually is</a>
+    <a href="#res/r-case" data-pane="res" data-go="r-case">Why these machines</a>
   </div>
 
-  <div class="navitem" data-pane="wx">💬 WeChat</div>
+  <div class="navitem" data-pane="wx"><span class="chev" data-sub="s-wx">▶</span>WeChat</div>
+  <div class="sub" id="s-wx">
+    <a href="#wx/wx-master" data-pane="wx" data-go="wx-master">Master group — robotics</a>
+    <a href="#wx/wx-lexi" data-pane="wx" data-go="wx-lexi">Lexi — direct chat</a>
+    <a href="#wx/wx-jingan" data-pane="wx" data-go="wx-jingan">Jing'an district group</a>
+    <a href="#wx/wx-routes" data-pane="wx" data-go="wx-routes">18 Sep — route split</a>
+    <a href="#wx/wx-email" data-pane="wx" data-go="wx-email">By email — the organiser</a>
+  </div>
 </nav>
 
 <main>
 <div class="topbar">
-  <button type="button" class="back" id="backMain">&#8592; Main page</button>
-  <span class="where">You are on <b id="whereNow">Confirmed visits</b></span>
+  <button type="button" class="menu" id="menuBtn">&#8801; Menu</button>
+  <button type="button" class="back" id="backMain">Today</button>
+  <span class="where"><b id="whereNow">Today</b></span>
+  <button type="button" class="share" id="shareBtn">Share</button>
 </div>
+<!-- ================= TODAY (built by script from the day table below) ================= -->
+<section class="pane on" id="p-today">
+  <div class="todaybar"><button type="button" class="step" id="dayPrev" aria-label="Previous day">&#8249;</button><h1 id="dayTitle">Today</h1><button type="button" class="step" id="dayNext" aria-label="Next day">&#8250;</button></div>
+  <p class="stamp" id="clocks">Shanghai — · Geneva —</p>
+  <p class="gap" id="netline" hidden>No signal — this is the copy saved on your phone. It refreshes itself when the signal returns.</p>
+  <div id="dayItems"></div>
+  <p class="note">Shanghai time throughout; Geneva is 6 hours behind. The day turns at midnight in Shanghai. Use the arrows to look ahead.</p>
+</section>
 <!-- ================= TRIP ================= -->
-<section class="pane on" id="p-conf">
+<section class="pane" id="p-conf">
   <h1>Confirmed visits</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
+  <p class="stamp">Shanghai, 13–20 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
 
   <div class="card">
     <p><b>Confirmed</b> means the other side has fixed it in writing. Everything with only an offer or a wish
@@ -237,7 +335,7 @@ tr:last-child td{border-bottom:0}
   <div class="card">
     <p class="meta">16:00–17:00 Shanghai / 10:00–11:00 Geneva · Tencent Meeting <b>222 105 598</b> · Lexi interprets</p>
     <p><b>Invite received 07:31 on 11 September</b>, from the group member with the bow icon. It is titled <b>布里森集团-中信银行线上交流会 — "Brisen Group – CITIC Bank online exchange"</b>, which names the bank, not the district. The brief below prepares the district's beauty-and-health panel; if the bank is the real counterparty the framing differs.</p>
-    <p>The district's investment office, to discuss the Jing'an visit. Facts brief under <b>Targeted companies →
+    <p>The district's investment office, to discuss the Jing'an visit. Facts brief under <b>Companies to target →
        Beauty and health</b>. Jing'an's themes are beauty and health and audiovisual — no robotics.</p>
   </div>
 
@@ -321,12 +419,13 @@ tr:last-child td{border-bottom:0}
 </section>
 
 <section class="pane" id="p-send">
-  <h1>Your replies — ready to send</h1>
+  <h1 id="sendTitle">Drafts — ready to send</h1>
   <p class="stamp">Five pieces, each addressed and on the right channel · written 11 September, 18:5x Geneva</p>
-  <p class="note">Press <b>Copy</b>, paste into the named channel, send. Nothing here has been sent for you.</p>
+  <p class="note">Press <b>Copy</b>, paste into the named channel, send — then press <b>Mark as sent</b> and it moves to <b>Sent</b>. Nothing here is sent for you. The mark is kept on this phone; tell the desk in chat and it becomes permanent for everyone.</p>
+  <p class="note" id="sendEmpty" hidden></p>
 
   <div class="msg">
-    <div class="hd"><b>1 · To Lexi 高澜茜</b> <span class="chan">WhatsApp — private, not the group</span>
+    <div class="hd" data-id="r-lexi-dinner"><b>1 · To Lexi 高澜茜</b> <span class="chan">WhatsApp — private, not the group</span>
       <button class="copy" type="button">Copy</button></div>
     <div class="body">Lexi, thank you — please pass my thanks to the Chairman and the Finance Director. Edita and I would be very glad to join them for dinner.
 
@@ -337,7 +436,7 @@ Understood on keeping it out of the group. And thank you for holding the room fo
   </div>
 
   <div class="msg">
-    <div class="hd"><b>2 · To Wayne Lu</b> <span class="chan">WeChat — master group, tag him</span>
+    <div class="hd" data-id="r-wayne-week"><b>2 · To Wayne Lu</b> <span class="chan">WeChat — master group, tag him</span>
       <button class="copy" type="button">Copy</button></div>
     <div class="body">@Wayne Lu Thank you — Gausium on the 14th afternoon, PsiBot on the 16th at 9:30, AgiBot on the 16th afternoon. All agreed from our side.
 
@@ -350,7 +449,7 @@ Dimitry</div>
   </div>
 
   <div class="msg">
-    <div class="hd"><b>3 · To 于希苘 Starry, PsiBot</b> <span class="chan">WeChat — master group, tag her</span>
+    <div class="hd" data-id="r-starry-address"><b>3 · To 于希苘 Starry, PsiBot</b> <span class="chan">WeChat — master group, tag her</span>
       <button class="copy" type="button">Copy</button></div>
     <div class="body">@于希苘 Starry Thank you — 9:30 on Wednesday the 16th is confirmed from our side.
 
@@ -361,7 +460,7 @@ Dimitry</div>
   </div>
 
   <div class="msg" style="border-left-color:var(--warn)">
-    <div class="hd"><b>4 · To 王子源 Welson, Critical Point</b> <span class="chan">WeChat — master group, tag him</span>
+    <div class="hd" data-id="r-welson-out"><b>4 · To 王子源 Welson, Critical Point</b> <span class="chan">WeChat — master group, tag him</span>
       <button class="copy" type="button">Copy</button></div>
     <div class="body">@王子源 Welson Thank you for offering the 16th afternoon — I had accepted it, and the schedule has since put us at AgiBot for that half-day.
 
@@ -372,7 +471,7 @@ Dimitry</div>
   </div>
 
   <div class="msg" style="border-left-color:var(--info)">
-    <div class="hd"><b>5 · To the Jing'an side</b> <span class="chan">Due Saturday 12 September — send as agreed on the call</span>
+    <div class="hd" data-id="r-jingan-piece"><b>5 · To the Jing'an side</b> <span class="chan">Due Saturday 12 September — send as agreed on the call</span>
       <button class="copy" type="button">Copy</button></div>
     <div class="body">Brisen Group — what we are looking for in Shanghai
 
@@ -421,7 +520,7 @@ Chairman, Brisen Group</div>
 
 <section class="pane" id="p-trip">
   <h1>Pending confirmation</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
+  <p class="stamp">Shanghai, 13–20 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
 
   <div class="card">
     <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
@@ -552,17 +651,16 @@ Chairman, Brisen Group</div>
 
 <!-- ================= ITINERARY ================= -->
 <section class="pane" id="p-tc">
-  <h1>Targeted companies</h1>
-  <p class="stamp">Every company on the Shanghai list, what it actually does, what the record shows, and where it stands · 13–19 September 2026</p>
+  <h1>Companies to target</h1>
+  <p class="stamp">Every company on the Shanghai list, what it actually does, what the record shows, and where it stands · 13–20 September 2026</p>
 
   <p class="note"><b>Three groups.</b> <b>Robotics</b> — 7 makers, 3 confirmed on Wayne Lu's list and 4
      proposed by this desk. <b>AI labs</b> — 7 frontier labs, the ask already made and answered.
      <b>Beauty and health</b> — Jing'an's own lane, opened today and still empty. Nothing here is ratified.</p>
 
-  <div class="band"><b>Group 1 · Robotics</b><span>7 makers — 3 confirmed on Wayne Lu's list, 4 proposed by this desk and not yet asked for. This is the group the trip was built around.</span></div>
-
+  <h2 id="t-order">If you can add visits, ask in this order</h2>
   <div class="card">
-    <h3>If you can add visits, ask in this order</h3>
+    <h3>Robotics — the desk's order</h3>
     <p class="meta">Desk reading of the NVIDIA framework and the two papers Storer sent · 10 September</p>
     <p><b>1 Keenon</b> — the only working fleet, and it is 30 minutes away.
        <b>2 Pudu</b> — NVIDIA already published the pairing.
@@ -572,6 +670,8 @@ Chairman, Brisen Group</div>
        robotics on NVIDIA hardware, but they are not hotel operations — and AgiBot is already in the room
        as Critical Point's parent.</p>
   </div>
+
+  <div class="band"><b>Group 1 · Robotics</b><span>7 makers — 3 confirmed on Wayne Lu's list, 4 proposed by this desk and not yet asked for. This is the group the trip was built around.</span></div>
 
   <h2 id="t-gausium">1 — Gausium 高仙 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
@@ -884,17 +984,16 @@ Chairman, Brisen Group</div>
 
 <section class="pane" id="p-itin">
   <h1>Itinerary</h1>
-  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 11 September, 18:10 Geneva.</p>
+  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Flights corrected from the issued ticket, 12 September.</p>
   <p class="note"><span class="chip ok">Agreed</span> fixed and confirmed by the other side &nbsp;
      <span class="chip pr">Proposed</span> put forward, not confirmed &nbsp;
      <span class="chip no">Missing</span> nothing on file yet</p>
 
-  <div class="tl"><div class="dot x"></div>
-    <div class="day">Before departure</div>
-    <div class="card"><h3>Geneva → Shanghai, outbound <span class="chip no">Missing</span></h3>
-      <p class="meta">No flight, carrier or departure time is on file at this desk.</p>
-      <p>Everything below is built from a Shanghai arrival of 05:30 on Sunday 13 September. Tell me the
-      Geneva leg and it slots in above.</p></div></div>
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Saturday 12 September</div>
+    <div class="card"><h3>Geneva → Shanghai <span class="chip ok">Booked</span></h3>
+      <p class="meta">China Eastern MU 218 · 12:00 Geneva Terminal 1 → Sunday 13 September, 05:30 Pudong Terminal 1 · 11h30 non-stop · Business</p>
+      <p>Seats <b>08H</b> Dimitry, <b>07L</b> Edita. 2 bags each. Booking 77JTPW. Full detail under <b>Logistics → Flights</b>.</p></div></div>
 
   <div class="tl"><div class="dot p"></div>
     <div class="day">Thursday 11 September</div>
@@ -902,7 +1001,7 @@ Chairman, Brisen Group</div>
       <p class="meta">16:00 Shanghai = 10:00 Geneva · WeChat group of 10 · Lexi interprets</p>
       <p>Stated in-thread as a call to discuss the visit to Jing'an District. <b>Note before you join:</b>
       Jing'an carries no robotics in any of its own documents — its themes are beauty and health, and
-      audiovisual. <b>A facts brief on the district is now under Targeted companies → Beauty and health</b>:
+      audiovisual. <b>A facts brief on the district is now under Companies to target → Beauty and health</b>:
       who runs the investment office, what it has signed, the beauty cluster, Zhangyuan, and what the district
       asks foreign investors for.</p></div></div>
 
@@ -972,15 +1071,17 @@ Chairman, Brisen Group</div>
       <p><b>Pudong dropped</b>, and with it the only robotics stop on any of the seven routes.
       <b>Songjiang is not needed.</b></p></div></div>
 
-  <div class="tl"><div class="dot a"></div>
-    <div class="day">Saturday 19 September</div>
-    <div class="card"><h3>Depart Shanghai, 01:30 <span class="chip ok">Agreed</span></h3>
-      <p class="meta">From the official agenda</p></div></div>
-
   <div class="tl"><div class="dot x"></div>
-    <div class="day">Return</div>
-    <div class="card"><h3>Shanghai → Geneva, arrival <span class="chip no">Missing</span></h3>
-      <p class="meta">No return flight or Geneva arrival on file at this desk.</p></div></div>
+    <div class="day">Saturday 19 September</div>
+    <div class="card"><h3>A full free day <span class="chip no">Nothing booked</span> <span class="chip pr">Corrected from the ticket</span></h3>
+      <p class="meta">The July agenda had you leaving at 01:30 this morning. The ticket says the night after.</p>
+      <p>Nothing is planned. The flight leaves at <b>01:30 on Sunday 20 September</b> — leave the hotel late on the 19th, and check the late checkout.</p></div></div>
+
+  <div class="tl"><div class="dot a"></div>
+    <div class="day">Sunday 20 September</div>
+    <div class="card"><h3>Shanghai → Geneva <span class="chip ok">Booked</span></h3>
+      <p class="meta">China Eastern MU 217 · 01:30 Pudong Terminal 1 → 07:50 Geneva Terminal 1 · 12h20 non-stop · Business</p>
+      <p>Seats <b>10D</b> Dimitry, <b>10H</b> Edita. 2 bags each. Full detail under <b>Logistics → Flights</b>.</p></div></div>
 </section>
 
 
@@ -1305,7 +1406,7 @@ Chairman, Brisen Group</div>
   never been read, and no member list has been opened — so the people below are those who have spoken,
   not everyone present.</p>
 
-  <h2>Master group — "Master Citic + Gausium + Robotics" · <b>18 members</b> (was 14)</h2>
+  <h2 id="wx-master">Master group — "Master Citic + Gausium + Robotics" · <b>18 members</b> (was 14)</h2>
   <div class="card">
     <p class="meta">Chinese name 布里森集团上海行对接 · grew to 18 by 14:26 on 10 September · this is where the robotics
     track lives, and where your letter to Wayne goes.</p>
@@ -1413,7 +1514,7 @@ Chairman, Brisen Group</div>
       <p>The origin of the whole track.</p></div>
   </div>
 
-  <h2>Lexi 高澜茜 — direct chat</h2>
+  <h2 id="wx-lexi">Lexi 高澜茜 — direct chat</h2>
   <div class="card">
     <p class="meta">One-to-one, not a group · read 11 September, 18:4x Geneva</p>
     <div class="wx"><span class="who">You</span> <span class="role">— 11 Sep, 10:08</span>
@@ -1436,7 +1537,7 @@ Chairman, Brisen Group</div>
       <p class="said">"we are all in the meeting, are you joining soon?"</p></div>
   </div>
 
-  <h2>"Jing'an district" · <b>11 members</b> (was 10)</h2>
+  <h2 id="wx-jingan">"Jing'an district" · <b>11 members</b> (was 10)</h2>
   <div class="card">
     <p class="meta">Chinese name 布里森－静安线上会议 · the online meeting room</p>
     <div class="wx"><span class="who">The bow-icon member</span> <span class="role">— 11 Sep, 10:05</span>
@@ -1454,7 +1555,7 @@ Chairman, Brisen Group</div>
       <p><span class="chip ok">Agreed — 16:00 Shanghai, 10:00 Geneva</span> Lexi interprets.</p></div>
   </div>
 
-  <h2>"18 Sep — route split" · <b>6 members</b> (was 5)</h2>
+  <h2 id="wx-routes">"18 Sep — route split" · <b>6 members</b> (was 5)</h2>
   <div class="card">
     <p class="meta">Chinese name 布里森上海9月18号路线 · the district routes</p>
     <div class="wx"><span class="who">小碗</span> <span class="role">— routes · 11 Sep, 09:53</span>
@@ -1493,7 +1594,7 @@ Chairman, Brisen Group</div>
       If they are at different times, then we would both go together for each."</p></div>
   </div>
 
-  <h2>By email, not WeChat — the organiser</h2>
+  <h2 id="wx-email">By email, not WeChat — the organiser</h2>
   <div class="card">
     <div class="wx"><span class="who">Liu Yansong 刘延松</span> <span class="role">— CITIC Europe Holdings, Prague · 8 Sep, 13:35</span>
       <p class="said">"Received, thanks! I will arrange."</p>
@@ -1726,74 +1827,386 @@ Chairman, Brisen Group</div>
   it is described as such.</p>
 </section>
 
+<!-- ================= QUESTIONS ================= -->
+<section class="pane" id="p-q">
+  <h1>Questions to ask</h1>
+  <p class="stamp">One page per meeting. Tick a question when it is answered — the ticks stay on this phone.</p>
+  <h2 id="q-gausium">Gausium 高仙 — Monday 14 September, afternoon</h2>
+  <div class="card"><p class="meta">Cleaning robots. Their offer was 13:00–18:00 with five people; the hour and address are still open.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-1"><span>They wrote "hotel deployments across Europe", plural — make them name each one. Research found one: InterContinental Vienna, 2 machines, their own claim.</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-2"><span>Any Mandarin Oriental, or any luxury reference beyond Vienna?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-3"><span>The European data centre: who is the data controller, is there a processing agreement, is there a European representative?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-4"><span>"Cleaning automation across your properties" — in numbers: machines per hotel, hours saved, cost per key.</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-5"><span>Which of the five is in the room: Allen.zh (Europe/APAC), Amy 喵喵 (sales), Muller 吴家印, Saxon (regional sales), Oulivia (strategy)?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-6"><span>The chairman's dinner — the 14th after the visit, or the 15th as the invitation says?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-7"><span>What was the "time conflict" that moved the visit off the 15th?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-gausium-8"><span>Do not quote the 60–80 thousand dollar unit figure — it is weakly sourced.</span></label>
+  </div>
+  <h2 id="q-psibot">PsiBot 灵初智能 — Wednesday 16 September, 09:30</h2>
+  <div class="card"><p class="meta">Their Shanghai office; address not yet given. Contacts: 于希苘 Starry, 文雅. Wheeled dual-arm machines, incorporated September 2024.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-psibot-1"><span>Is any machine of yours working in a hotel today — where, and doing what?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-psibot-2"><span>A wheeled dual-arm machine in a corridor or back of house: which job does it do end to end?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-psibot-3"><span>Europe: any presence, CE mark, or a plan and a date for one?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-psibot-4"><span>AgiBot seeded you — what is the relationship now, and who else shares your investors?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-psibot-5"><span>Who else in Shanghai should we be meeting this week?</span></label>
+  </div>
+  <h2 id="q-agibot">AgiBot 智元 — Wednesday 16 September, afternoon</h2>
+  <div class="card"><p class="meta">Named by Wayne on 11 September in place of Critical Point, its spinout. Robotics without hotel operations. Wayne offers to drive you between the two.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-agibot-1"><span>Why AgiBot and not Critical Point — and can 王子源 Welson join us there? (Ask Wayne, not them.)</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-agibot-2"><span>What of yours is relevant to a hotel — not a factory line, not a showroom?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-agibot-3"><span>Fleet: how many of your machines run together anywhere today, under one system?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-agibot-4"><span>The pink guide robot on the 18 September Xuhui route is built on your Lingxi X2 body — who integrates it, and who supports it?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-agibot-5"><span>Any European partner, distributor or service base?</span></label>
+  </div>
+  <h2 id="q-lab">Any frontier lab — if the 15th or the 17th morning fills</h2>
+  <div class="card"><p class="meta">Qwen first (Wayne is "coordinating"; the Jing'an side may introduce them too). Then Zhipu, StepFun. Never SenseTime.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-lab-1"><span>Self-hosting on our own NVIDIA machines in Europe: which models, under which licence, and who supports it?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-lab-2"><span>No guest data through a China-hosted service — can they work that way?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-lab-3"><span>Which hotel groups run their models today, and for what jobs?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-lab-4"><span>Qwen only: the West Bund team, not Hangzhou — and the Wuying stop on 18 September is not the Qwen team.</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-lab-5"><span>What would they want from a luxury hotel in Vienna as a reference site?</span></label>
+  </div>
+  <h2 id="q-jingan">The Jing'an side — any meeting</h2>
+  <div class="card"><p class="meta">The district's investment office and, behind the invitation, CITIC Bank. Beauty and health, audiovisual — no robotics.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-jingan-1"><span>Who on their side is in charge, and of what?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-jingan-2"><span>The Zhangyuan east hotel — who will own it, and do they want a management conversation? Do not ask to buy the Shikumen.</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-jingan-3"><span>What do they want from Brisen?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-jingan-4"><span>Can they introduce a frontier lab — Qwen or another — for the 15th?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-jingan-5"><span>Confirm out loud: 18 September, you take Xuhui and Edita takes Jing'an.</span></label>
+  </div>
+  <h2 id="q-keenon">Keenon 擎朗 — only if a visit is added</h2>
+  <div class="card"><p class="meta">Eight machines running together at the Traders / Shangri-La Hongqiao, about 30 minutes from your hotel. Not yet asked for.</p>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-keenon-1"><span>Walk the Hongqiao fleet: 8 machines in one hotel — is it one system, one dispatcher?</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-keenon-2"><span>Is NVIDIA hardware inside? It is not published.</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="q-keenon-3"><span>What does the hotel pay, and what did it stop paying people for?</span></label>
+  </div>
+</section>
+<!-- ================= ADDRESSES ================= -->
+<section class="pane" id="p-addr">
+  <h1>Addresses in Chinese</h1>
+  <p class="stamp">Press <b>Show the driver</b> and the Chinese fills the screen. The two gather points are as the organiser issued them; the hotel, airport and venue wording is the desk's rendering.</p>
+  <div class="card" style="border-left:3px solid var(--stop)"><p><b>Not yet given:</b> Gausium 高仙 (14 September), PsiBot 灵初智能 (16 September, 09:30), AgiBot 智元 (16 September, afternoon). They are on the <b>Still missing</b> page.</p></div>
+  <div class="addr" data-cn="上海浦东文华东方酒店" data-addr="上海市浦东新区浦东南路111号">
+    <h3>Mandarin Oriental Pudong — your hotel</h3><p class="meta">111 Pudong Road (S), Pudong 200120 · +86 21 2082 9888</p>
+    <p class="cn">上海浦东文华东方酒店<br>上海市浦东新区浦东南路111号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="浦东国际机场 1号航站楼" data-addr="上海市浦东新区浦东国际机场T1航站楼">
+    <h3>Pudong Airport, Terminal 1</h3><p class="meta">Both flights use Terminal 1</p>
+    <p class="cn">浦东国际机场 1号航站楼<br>上海市浦东新区浦东国际机场T1航站楼</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="东郊宾馆（北楼）" data-addr="上海市浦东新区金科路1800号">
+    <h3>Dongjiao State Guest Hotel — CITIC venue; badge at the North Building</h3><p class="meta">1800 Jinke Road, Pudong · briefing 17:00 and banquet 18:30 on 17 September · 29 km from Pudong airport</p>
+    <p class="cn">东郊宾馆（北楼）<br>上海市浦东新区金科路1800号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="" data-addr="上海市浦东新区金新路99号">
+    <h3>Howard Johnson Leonora Plaza — the organiser's second hotel</h3><p class="meta">99 Jinxin Road, Pudong · 10 minutes from the venue</p>
+    <p class="cn">上海市浦东新区金新路99号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="徐家汇中心3期A座" data-addr="上海市徐汇区徐家汇街道虹桥路183号">
+    <h3>ITC Xujiahui Center, Tower A, Phase 3 — your gather point, 18 September 10:00</h3><p class="meta">Xuhui route, badge No. 3 · as issued by 小碗 on 11 September</p>
+    <p class="cn">徐家汇中心3期A座<br>上海市徐汇区徐家汇街道虹桥路183号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="张园 南2门" data-addr="上海市静安区南京西路街道威海路550号">
+    <h3>Zhang Yuan, South Gate 2 — Edita's gather point, 18 September 09:45</h3><p class="meta">Jing'an route, badge No. 2 · as issued by 小碗 on 11 September · forward it to her</p>
+    <p class="cn">张园 南2门<br>上海市静安区南京西路街道威海路550号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="" data-addr="上海市徐汇区云锦路701号">
+    <h3>AI Tower — Xuhui route stop, 14:10 on 18 September; StepFun is on floor 30</h3><p class="meta">701 Yunjin Road, Xuhui · the route goes to floor 45</p>
+    <p class="cn">上海市徐汇区云锦路701号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="阿里巴巴 徐汇滨江" data-addr="上海市徐汇区龙启路8号 / 龙耀路8号">
+    <h3>Alibaba West Bund — the Qwen team</h3><p class="meta">D-block 8 Longqi Road · X-block 8 Longyao Road, Xuhui</p>
+    <p class="cn">阿里巴巴 徐汇滨江<br>上海市徐汇区龙启路8号 / 龙耀路8号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="智谱 张江模力社区" data-addr="上海市浦东新区中科路1750号 T1">
+    <h3>Zhipu (GLM), Zhangjiang</h3><p class="meta">1750 Zhongke Road, T1, Pudong</p>
+    <p class="cn">智谱 张江模力社区<br>上海市浦东新区中科路1750号 T1</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="" data-addr="上海市徐汇区桂箐路65号 新研大厦B座11层">
+    <h3>MiniMax</h3><p class="meta">11/F, Building B, Xinyan Mansion, 65 Guiqing Road, Xuhui</p>
+    <p class="cn">上海市徐汇区桂箐路65号 新研大厦B座11层</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="上海人工智能实验室" data-addr="上海市徐汇区龙文路129号 国际传媒港 L1">
+    <h3>Shanghai AI Lab (InternLM)</h3><p class="meta">129 Longwen Road, L1, Xuhui</p>
+    <p class="cn">上海人工智能实验室<br>上海市徐汇区龙文路129号 国际传媒港 L1</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="静安国际会客厅" data-addr="上海市静安区南京西路1600号">
+    <h3>Jing'an Global Connect — the district pitch venue</h3><p class="meta">1600 West Nanjing Road</p>
+    <p class="cn">静安国际会客厅<br>上海市静安区南京西路1600号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="美创静界 A5栋" data-addr="上海市静安区灵石路718号">
+    <h3>Beauty cluster 美创静界</h3><p class="meta">Building A5, 718 Lingshi Road, Jing'an</p>
+    <p class="cn">美创静界 A5栋<br>上海市静安区灵石路718号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+  <div class="addr" data-cn="张园" data-addr="上海市静安区泰兴路99号">
+    <h3>Zhangyuan</h3><p class="meta">99 Taixing Road, Jing'an</p>
+    <p class="cn">张园<br>上海市静安区泰兴路99号</p>
+    <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+  </div>
+</section>
+<!-- ================= STILL MISSING ================= -->
+<section class="pane" id="p-miss">
+  <h1>Still missing</h1>
+  <p class="stamp">Everything open, in one place. Tick it when it closes — the ticks stay on this phone. <span id="missCount"></span></p>
+  <div class="card">
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-psi-addr"><span>PsiBot office address and how to get there — 16 September, 09:30 <span class="role">— Ask Starry · draft 3</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-gau-hour"><span>Gausium: start hour, address, and who of the five comes — 14 September afternoon <span class="role">— Ask Wayne · draft 2</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-dinner"><span>Gausium chairman's dinner: the 14th or the 15th <span class="role">— Ask Lexi · draft 1</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-welson"><span>Critical Point is out of the plan and Welson has not been told <span class="role">— Draft 4</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-15"><span>15 September is empty — nobody has been asked for it since it reopened <span class="role">— Draft 2 asks Wayne</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-17"><span>17 September before 17:00 — nothing booked</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-agibot"><span>AgiBot: hour, address, who hosts — 16 September afternoon</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-jingan"><span>The written piece for the Jing'an side — due 12 September; decide whether NVIDIA is named <span class="role">— Draft 5</span></span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-edita"><span>Forward Edita her 18 September gather point — she is not in the route group</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-badge"><span>Badge and pack: collect at the North Building, Dongjiao, on 17 September — fix a time before 17:00</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-kevin"><span>Kevin's message of 10 September 14:54 is unread and cut off</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-lexi"><span>Lexi's direct message of 11 September 10:08 is unopened</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-tencent"><span>The meeting-platform login failed last time — fix it before any online meeting</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-19"><span>19 September is now a full free day — nothing planned</span></label>
+    <label class="chk"><input type="checkbox" class="chk" data-key="m-checkout"><span>Late checkout for the night of 19 September — the flight is 01:30 on the 20th</span></label>
+  </div>
+</section>
+<!-- ================= PEOPLE ================= -->
+<section class="pane" id="p-people">
+  <h1>People</h1>
+  <p class="stamp">Everyone who has spoken, by role, company and room. The rooms: <b>Master group</b> "Master Citic + Gausium + Robotics", 18 members · <b>Jing'an group</b>, 11 members · <b>Route-split group</b>, 6 members.</p>
+  <table><tr><th>Who</th><th>What they do here</th><th>Company</th><th>Room</th></tr>
+    <tr><td><b>Wayne Lu</b></td><td>Arranges the company visits; built the master group; offers to drive you between companies</td><td>Said to be China CITIC Bank, Shanghai Branch — said by Gausium's head of sales, not by him. No public trace. Unverified.</td><td>Master group</td></tr>
+    <tr><td><b>Lexi 高澜茜</b></td><td>Interprets on the calls; handles communication; passed the private dinner invitation</td><td></td><td>Master group · direct chat · Jing'an group</td></tr>
+    <tr><td><b>Liu Yansong 刘延松</b></td><td>The event organiser; your district routes go through him</td><td>CITIC Europe Holdings, Prague</td><td>Email</td></tr>
+    <tr><td><b>Kevin 章珂杰</b></td><td>The 18 September route split; confirmed Xuhui for you and Jing'an for Edita</td><td></td><td>Route-split group</td></tr>
+    <tr><td><b>小碗</b></td><td>Issues the 18 September gather points, times and addresses</td><td>New voice on 11 September</td><td>Route-split group</td></tr>
+    <tr><td><b>Amy 喵喵</b></td><td>Head of sales; made the introductions</td><td>Gausium</td><td>Master group</td></tr>
+    <tr><td><b>Allen.zh</b></td><td>Head of Europe/APAC — the one who matters for Vienna</td><td>Gausium</td><td>Master group</td></tr>
+    <tr><td><b>Muller 吴家印 · Saxon · Oulivia</b></td><td>Named for the meeting: Muller; Saxon, regional sales; Oulivia, strategy</td><td>Gausium</td><td>Master group</td></tr>
+    <tr><td><b>Gausium's Chairman and Finance Director</b></td><td>Invite you both to a private dinner — through Lexi, never in the group</td><td>Gausium</td><td>—</td></tr>
+    <tr><td><b>于希苘 Starry</b></td><td>"I represent PsiBot" — set the 16 September 09:30 slot</td><td>PsiBot</td><td>Master group</td></tr>
+    <tr><td><b>文雅 ("Miss Wang")</b></td><td>Coordinating PsiBot's participant and time</td><td>PsiBot</td><td>Master group</td></tr>
+    <tr><td><b>王勇 Wang Yong</b></td><td>Introduced PsiBot into the group</td><td></td><td>Master group</td></tr>
+    <tr><td><b>王子源 Welson</b></td><td>Offered the 16th afternoon; now out of the plan and not told</td><td>Critical Point</td><td>Master group</td></tr>
+    <tr><td><b>Jimmy Z</b></td><td>Contact</td><td>Critical Point</td><td>Master group</td></tr>
+    <tr><td><b>The member with the bow icon</b></td><td>Sent the meeting invite for the 11 September call</td><td>Jing'an side</td><td>Jing'an group</td></tr>
+    <tr><td><b>Chu Xiao</b></td><td>Answered the June Prague proposal; director of the Prague hotel company since 1 April 2026</td><td>CITIC Europe — not on this trip's rooms</td><td>—</td></tr>
+  </table>
+  <p class="note">Standing and the note on Wayne Lu: <a href="#trip/c-people" data-pane="trip" data-go="c-people">Pending confirmation → Who is who</a>.</p>
+</section>
 </main></div>
+<div id="bigAddr" class="overlay" hidden>
+  <div class="cnbig"></div>
+  <div class="addrbig"></div>
+  <div class="enbig"></div>
+  <div class="closehint">Tap anywhere to close</div>
+</div>
 <script>
-/* view options — Auto / Light / Dark, remembered per device */
+/* ---- China Trip Room — page script, rebuilt 12 September 2026 on the Director's comments ---- */
 (function(){
-  var root=document.documentElement, bar=document.querySelector('.themebar');
-  if(!bar) return;
-  function current(){ try{ return localStorage.getItem('ctr-theme')||'auto'; }catch(e){ return 'auto'; } }
-  function paint(v){
-    if(v==='auto'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme',v); }
-    bar.querySelectorAll('button').forEach(function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.set===v));
-    });
-  }
-  bar.addEventListener('click',function(e){
-    var b=e.target.closest('button[data-set]'); if(!b) return;
-    var v=b.dataset.set;
-    try{ v==='auto' ? localStorage.removeItem('ctr-theme') : localStorage.setItem('ctr-theme',v); }catch(err){}
-    paint(v);
-  });
-  paint(current());
-})();
+'use strict';
+function store(k,d){ try{ var v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }
+function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 
-document.querySelectorAll('.chev').forEach(c=>c.addEventListener('click',e=>{
-  e.stopPropagation();
-  const s=document.getElementById(c.dataset.sub);
-  c.classList.toggle('open'); s.classList.toggle('open');
-}));
-function show(pane,go){
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
-  document.getElementById('p-'+pane).classList.add('on');
-  document.querySelectorAll('.navitem').forEach(n=>n.classList.toggle('on',n.dataset.pane===pane));
-  window.scrollTo(0,0);
-  if(go){const t=document.getElementById(go); if(t) setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),60);}
-  if(window.__syncTopbar) window.__syncTopbar(pane);
+/* light / dark — one switch, remembered per device, system preference until first use */
+var root=document.documentElement, tg=document.getElementById('themeToggle');
+function paintTheme(v){ root.setAttribute('data-theme',v); tg.dataset.mode=v; tg.setAttribute('aria-label', v==='dark'?'Switch to light':'Switch to dark'); }
+tg.addEventListener('click',function(){ var v=root.getAttribute('data-theme')==='dark'?'light':'dark'; try{localStorage.setItem('ctr-theme',v);}catch(e){} paintTheme(v); });
+paintTheme(root.getAttribute('data-theme')==='dark'?'dark':'light');
+
+/* pages: every left-hand entry is one page. A section is split at its h2 headings; a heading and what follows it is one page,
+   what precedes the first heading is the page for the parent title, with a list of its pages. */
+var PANES={};
+function h2Text(h){ var c=h.cloneNode(true); c.querySelectorAll('.chip').forEach(function(x){x.remove();}); return c.textContent.replace(/\s+/g,' ').trim(); }
+function build(sec){
+  var pane=sec.id.replace(/^p-/,''), P={sec:sec,head:[],intro:[],groups:{},order:[],titles:{},contents:null};
+  var cur=null, pending=[];
+  Array.prototype.slice.call(sec.children).forEach(function(el){
+    if(el.tagName==='H1'||(el.classList.contains('stamp')&&!cur&&!P.intro.length)){ P.head.push(el); return; }
+    if(el.tagName==='H2'){ var id=el.id||(pane+'-'+(P.order.length+1)); el.id=id; cur=id; P.order.push(id); P.titles[id]=h2Text(el); P.groups[id]=pending.concat([el]); pending=[]; return; }
+    if(el.classList.contains('band')){ pending.push(el); return; }
+    if(pending.length){ pending.push(el); return; }
+    if(cur) P.groups[cur].push(el); else P.intro.push(el);
+  });
+  if(pending.length){ if(cur) P.groups[cur]=P.groups[cur].concat(pending); else P.intro=P.intro.concat(pending); }
+  if(P.order.length){
+    var c=document.createElement('div'); c.className='contents';
+    P.order.forEach(function(id){ var a=document.createElement('a'); a.href='#'+pane+'/'+id; a.dataset.pane=pane; a.dataset.go=id; a.textContent=P.titles[id]; c.appendChild(a); });
+    sec.appendChild(c); P.contents=c;
+  }
+  PANES[pane]=P;
 }
-document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>show(n.dataset.pane)));
-document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{if(!a.dataset.pane)return;e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
+document.querySelectorAll('section.pane').forEach(build);
+function setVis(list,on){ list.forEach(function(el){ el.style.display=on?'':'none'; }); }
 
-/* return button — back to the room's main page */
-(function(){
-  var btn=document.getElementById('backMain'), where=document.getElementById('whereNow');
-  function label(pane){
-    var n=document.querySelector('.navitem[data-pane="'+pane+'"]');
-    return n ? n.textContent.replace(/^[\s\u25B6\u25BC]+/,'').trim() : 'Confirmed visits';
+var where=document.getElementById('whereNow'), current={pane:'today',go:null};
+function navLabel(pane){ var n=document.querySelector('.navitem[data-pane="'+pane+'"]'); return n?n.textContent.replace(/^[\s▶▼]+/,'').trim():''; }
+function show(pane,go,opts){
+  var P=PANES[pane]; if(!P) return; opts=opts||{};
+  document.querySelectorAll('.pane').forEach(function(p){ p.classList.remove('on'); });
+  P.sec.classList.add('on');
+  if(pane==='send'){ if(!go) go='send-drafts'; P.sec.dataset.filter=(go==='send-sent')?'sent':'drafts'; renderSend(); }
+  var isGroup=!!(go&&P.groups[go]);
+  if(P.order.length){
+    setVis(P.intro,!isGroup); if(P.contents) P.contents.style.display=isGroup?'none':'';
+    P.order.forEach(function(id){ setVis(P.groups[id], id===go); });
   }
-  window.__syncTopbar=function(pane){
-    if(where) where.textContent=label(pane);
-    if(btn) btn.disabled = (pane==='conf');
-  };
-  if(btn) btn.addEventListener('click',function(){ show('conf'); });
-  window.__syncTopbar('conf');
-})();
-
-/* copy buttons on the replies pane */
-document.querySelectorAll('.msg .copy').forEach(function(b){
-  b.addEventListener('click',function(){
-    var t=b.closest('.msg').querySelector('.body').innerText;
-    function done(){ var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1400); }
-    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,fallback); }
-    else { fallback(); }
-    function fallback(){
-      var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); done(); }catch(e){}
-      document.body.removeChild(ta);
-    }
-  });
+  document.querySelectorAll('.navitem').forEach(function(n){ n.classList.toggle('on',n.dataset.pane===pane); });
+  document.querySelectorAll('.sub a').forEach(function(a){ a.classList.toggle('on', a.dataset.pane===pane && a.dataset.go===go); });
+  var nav=document.querySelector('.navitem[data-pane="'+pane+'"]'), ch=nav&&nav.querySelector('.chev');
+  if(ch){ ch.classList.add('open'); document.getElementById(ch.dataset.sub).classList.add('open'); }
+  var sub=''; var sa=document.querySelector('.sub a[data-pane="'+pane+'"][data-go="'+go+'"]');
+  if(sa) sub=sa.textContent.trim(); else if(isGroup) sub=P.titles[go];
+  where.textContent = sub ? navLabel(pane)+' · '+sub : navLabel(pane);
+  current={pane:pane,go:go||null};
+  if(!opts.noHash){ var h='#'+pane+(go?'/'+go:''); if(location.hash!==h){ try{ history.replaceState(null,'',h); }catch(e){ location.hash=h; } } }
+  document.body.classList.add('page-open');
+  window.scrollTo(0,0);
+}
+function fromHash(){ var h=(location.hash||'').replace(/^#/,''); if(!h) return {pane:'today',go:null}; var p=h.split('/'); return {pane:p[0],go:p[1]||null}; }
+document.addEventListener('click',function(e){
+  var ch=e.target.closest('.chev');
+  if(ch){ e.stopPropagation(); ch.classList.toggle('open'); document.getElementById(ch.dataset.sub).classList.toggle('open'); return; }
+  var t=e.target.closest('[data-pane]'); if(!t) return;
+  if(t.tagName==='A') e.preventDefault();
+  show(t.dataset.pane, t.dataset.go||null);
 });
-document.querySelector('.chev').click();
-if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('shanghai-sw.js').catch(function(){});}
+window.addEventListener('hashchange',function(){ var r=fromHash(); if(PANES[r.pane]) show(r.pane,r.go,{noHash:true}); });
+document.getElementById('menuBtn').addEventListener('click',function(){ document.body.classList.remove('page-open'); window.scrollTo(0,0); });
+document.getElementById('backMain').addEventListener('click',function(){ show('today'); });
+
+/* copy + share */
+function copyText(txt,btn,label){
+  function done(){ if(!btn) return; var o=btn.textContent; btn.textContent=label||'Copied'; setTimeout(function(){ btn.textContent=o; },1400); }
+  function fallback(){ var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch(e){} document.body.removeChild(ta); }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else fallback();
+}
+document.querySelectorAll('.msg .copy').forEach(function(b){ b.addEventListener('click',function(){ copyText(b.closest('.msg').querySelector('.body').innerText,b); }); });
+var shareBtn=document.getElementById('shareBtn');
+shareBtn.addEventListener('click',function(){
+  var url=location.href, title='China Trip Room — '+where.textContent;
+  if(navigator.share){ navigator.share({title:title,url:url}).catch(function(){}); } else copyText(url,shareBtn,'Link copied');
+});
+
+/* drafts and sent */
+function renderSend(){
+  var sec=document.getElementById('p-send'), f=sec.dataset.filter||'drafts', m=store('ctr-sent',{}), nD=0, nS=0;
+  sec.querySelectorAll('.msg').forEach(function(msg){
+    var hd=msg.querySelector('.hd'), id=hd.dataset.id, at=m[id], isSent=!!at;
+    msg.style.display = ((f==='sent')===isSent) ? '' : 'none';
+    if(isSent) nS++; else nD++;
+    var b=hd.querySelector('.mark');
+    if(!b){ b=document.createElement('button'); b.type='button'; b.className='mark'; hd.appendChild(b);
+      b.addEventListener('click',function(){ var mm=store('ctr-sent',{}); if(mm[id]) delete mm[id]; else mm[id]=new Date().toISOString(); save('ctr-sent',mm); renderSend(); }); }
+    b.textContent = isSent ? 'Back to drafts' : 'Mark as sent';
+    var st=msg.querySelector('.sentat');
+    if(isSent){ if(!st){ st=document.createElement('div'); st.className='sentat'; hd.insertAdjacentElement('afterend',st); }
+      var d=new Date(at); st.textContent='Marked as sent '+d.toLocaleString('en-GB',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})+' — on this phone. Tell the desk and it becomes permanent for everyone.'; }
+    else if(st) st.remove();
+  });
+  var gap=sec.querySelector('.gap'); if(gap) gap.style.display = f==='sent'?'none':'';
+  var e=document.getElementById('sendEmpty');
+  e.textContent = f==='sent' ? 'Nothing is marked as sent yet. After you send a draft, press "Mark as sent" on it.' : 'Every draft is marked as sent.';
+  e.hidden = !((f==='sent'&&nS===0)||(f==='drafts'&&nD===0));
+  document.getElementById('sendTitle').textContent = f==='sent' ? 'Sent' : 'Drafts — ready to send';
+}
+
+/* ticks on the question and still-missing pages */
+function countMissing(){ var all=document.querySelectorAll('#p-miss input.chk'), done=0; all.forEach(function(i){ if(i.checked) done++; }); var c=document.getElementById('missCount'); if(c) c.textContent=done+' of '+all.length+' closed.'; }
+document.querySelectorAll('input.chk').forEach(function(i){
+  i.checked=!!store('ctr-ticks',{})[i.dataset.key];
+  i.addEventListener('change',function(){ var m=store('ctr-ticks',{}); if(i.checked) m[i.dataset.key]=1; else delete m[i.dataset.key]; save('ctr-ticks',m); countMissing(); });
+});
+countMissing();
+
+/* addresses: full-screen for a driver */
+var ov=document.getElementById('bigAddr');
+document.querySelectorAll('.addr').forEach(function(a){
+  a.querySelector('.big').addEventListener('click',function(){
+    ov.querySelector('.cnbig').textContent=a.dataset.cn||''; ov.querySelector('.addrbig').textContent=a.dataset.addr||'';
+    ov.querySelector('.enbig').textContent=a.querySelector('h3').textContent; ov.hidden=false; });
+  a.querySelector('.copyaddr').addEventListener('click',function(){ copyText((a.dataset.cn?a.dataset.cn+'\n':'')+a.dataset.addr,this); });
+});
+ov.addEventListener('click',function(){ ov.hidden=true; });
+
+/* today */
+var DAYS={
+ '2026-09-12':{t:'Saturday 12 September — fly',i:[
+   {w:'12:00',b:'Geneva Terminal 1 — China Eastern MU 218 to Shanghai',n:'Seats 08H Dimitry · 07L Edita · 2 bags each · business · 11h30 non-stop · booking 77JTPW',g:'log/lg-flights'},
+   {w:'',b:'Lands 05:30 on Sunday, Pudong Terminal 1'},
+   {w:'due today',b:'The written piece for the Jing\'an side',n:'Draft 5 under Your replies. One decision is yours: whether NVIDIA is named.',g:'send/send-drafts'}]},
+ '2026-09-13':{t:'Sunday 13 September — arrive',i:[
+   {w:'05:30',b:'Land at Pudong Terminal 1',n:'To the hotel: your hotel is in Pudong; the organiser counts 29 km, about 30 minutes, to its Pudong venue',g:'addr'},
+   {w:'',b:'Mandarin Oriental Pudong — 111 Pudong Road (S)',n:'+86 21 2082 9888 · 上海市浦东新区浦东南路111号',g:'addr'},
+   {w:'',b:'Nothing booked. Chase: Gausium\'s hour and address for tomorrow; PsiBot\'s address for Wednesday',g:'miss'}]},
+ '2026-09-14':{t:'Monday 14 September — Gausium',i:[
+   {w:'afternoon',b:'Gausium 高仙 — cleaning robots',n:'Their offer: 13:00–18:00 with five people. Hour, address and attendees still open. Wayne moved it here on 11 September.',g:'q/q-gausium'},
+   {w:'evening',b:'Private dinner with Gausium\'s chairman and finance director — date in conflict',n:'Lexi\'s invitation says the 15th. Keep it out of the group.',g:'trip'}]},
+ '2026-09-15':{t:'Tuesday 15 September — free',i:[
+   {w:'all day',b:'Nothing booked — the clearest window for a frontier lab',n:'Wayne is "coordinating" Qwen; the Jing\'an side may introduce Qwen too. Nobody has been asked for this day since it reopened.',g:'q/q-lab'},
+   {w:'evening',b:'Gausium dinner, if it stays on the 15th',g:'trip'}]},
+ '2026-09-16':{t:'Wednesday 16 September — PsiBot, AgiBot',i:[
+   {w:'09:30',b:'PsiBot 灵初智能 — their Shanghai office',n:'Address not yet given. Two of you. Contacts: 于希苘 Starry, 文雅. The only meeting with an hour agreed by both sides.',g:'q/q-psibot'},
+   {w:'afternoon',b:'AgiBot 智元 — Critical Point\'s parent',n:'Named by Wayne on 11 September; Critical Point dropped and Welson not told. Wayne offers to drive between the two.',g:'q/q-agibot'}]},
+ '2026-09-17':{t:'Thursday 17 September — CITIC evening',i:[
+   {w:'before 17:00',b:'Free — held for a lab. Nothing booked.',g:'miss'},
+   {w:'by 16:45',b:'Collect badge and pack — North Building, Dongjiao State Guest Hotel, 1800 Jinke Road, Pudong',n:'Your hotel is not official: no shuttle, no badge at reception. Be 15 minutes early.',g:'addr'},
+   {w:'17:00–18:00',b:'Main Promotion Briefing — Zijin Hall, 1st floor',n:'Business formal, with a tie'},
+   {w:'18:30–19:30',b:'Banquet — Jinxiu Hall 1st floor or Magnolia Hall 2nd floor, by the colour of your sticker',g:'guide/g-badge'}]},
+ '2026-09-18':{t:'Friday 18 September — district visits',i:[
+   {w:'09:45',b:'Edita — Jing\'an route, badge No. 2: Zhang Yuan, South Gate 2',n:'张园-南2门 · 威海路550号 · forward this to her — she is not in the route group',g:'addr'},
+   {w:'10:00',b:'You — Xuhui route, badge No. 3: ITC Xujiahui Center, Tower A, Phase 3',n:'徐家汇中心3期A座 · 虹桥路183号 · business casual · lunch on the badge · ends by 16:15',g:'addr'},
+   {w:'13:45',b:'The one robot on your route: the guide robot at the Hunban × ModSpeed workshop',g:'routes/d-xuhui'}]},
+ '2026-09-19':{t:'Saturday 19 September — free day',i:[
+   {w:'all day',b:'Free. The flight is at 01:30 the following night, not tonight.',n:'The July agenda had you leaving tonight; the ticket says Sunday 01:30.',g:'log/lg-flights'},
+   {w:'late',b:'Leave for Pudong Terminal 1 — check the hotel\'s late checkout',g:'miss'}]},
+ '2026-09-20':{t:'Sunday 20 September — fly home',i:[
+   {w:'01:30',b:'Pudong Terminal 1 — China Eastern MU 217 to Geneva',n:'Seats 10D Dimitry · 10H Edita · lands Geneva 07:50 · 12h20 non-stop',g:'log/lg-flights'}]}
+};
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'], WD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function shDate(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }catch(e){ var d=new Date(Date.now()+8*3600e3); return d.toISOString().slice(0,10); } }
+function addDays(key,n){ var d=new Date(key+'T00:00:00Z'); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); }
+function prettyDate(key){ var d=new Date(key+'T00:00:00Z'); return WD[d.getUTCDay()]+' '+d.getUTCDate()+' '+MONTHS[d.getUTCMonth()]; }
+var dayOffset=0;
+function renderDay(){
+  var today=shDate(), key=addDays(today,dayOffset), D=DAYS[key], box=document.getElementById('dayItems'), h=document.getElementById('dayTitle');
+  h.textContent=(D?D.t:prettyDate(key))+(dayOffset===0?'':'');
+  box.innerHTML='';
+  if(!D){ var p=document.createElement('p'); p.className='today-empty'; p.textContent=(key<'2026-09-12')?'Before the trip. The first day on file is Saturday 12 September — use the arrow.':'After the trip. Nothing on file for this day.'; box.appendChild(p); return; }
+  D.i.forEach(function(it){
+    var d=document.createElement('div'); d.className='today-item';
+    var w=document.createElement('div'); w.className='when'; w.textContent=it.w; d.appendChild(w);
+    var x=document.createElement('div'); x.className='what'; var b=document.createElement('b'); b.textContent=it.b; x.appendChild(b);
+    if(it.n){ var s=document.createElement('span'); s.textContent=it.n; x.appendChild(s); }
+    if(it.g){ var p=it.g.split('/'); var a=document.createElement('a'); a.href='#'+it.g; a.dataset.pane=p[0]; if(p[1]) a.dataset.go=p[1]; a.textContent='Open '+(navLabel(p[0])||'page')+' ›'; x.appendChild(document.createElement('br')); x.appendChild(a); }
+    d.appendChild(x); box.appendChild(d);
+  });
+}
+document.getElementById('dayPrev').addEventListener('click',function(){ dayOffset--; renderDay(); });
+document.getElementById('dayNext').addEventListener('click',function(){ dayOffset++; renderDay(); });
+function clocks(){
+  function at(tz){ try{ return new Date().toLocaleTimeString('en-GB',{timeZone:tz,hour:'2-digit',minute:'2-digit'}); }catch(e){ return '—'; } }
+  document.getElementById('clocks').textContent='Shanghai '+at('Asia/Shanghai')+' · Geneva '+at('Europe/Zurich');
+}
+renderDay(); clocks(); setInterval(clocks,20000);
+setInterval(function(){ var k=shDate(); if(k!==renderDay._k){ renderDay._k=k; renderDay(); } },60000); renderDay._k=shDate();
+
+/* signal */
+function net(){ var n=document.getElementById('netline'); if(n) n.hidden = navigator.onLine!==false; }
+net(); window.addEventListener('online',net); window.addEventListener('offline',net);
+
+/* open the page the address names, or Today */
+var r=fromHash(); if(PANES[r.pane]) show(r.pane,r.go,{noHash:true}); else show('today',null,{noHash:true});
+if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('shanghai-sw.js').catch(function(){}); }
+})();
 </script>
 </body></html>
