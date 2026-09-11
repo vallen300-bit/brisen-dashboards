@@ -1,9 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shanghai, 13–19 September 2026</title>
+<title>China Trip Room — September 2026</title>
 <link rel="manifest" href="shanghai.webmanifest">
 <meta name="theme-color" content="#22303a">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Trip Room">
@@ -77,6 +76,15 @@ tr:last-child td{border-bottom:0}
 .themebar button[aria-pressed="true"]{color:#fff;background:rgba(110,168,196,.26);border-color:#6ea8c4}
 @media print{.themebar{display:none}}
 
+.msg{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:4px;
+ padding:0 0 14px;margin:0 0 20px}
+.msg .hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line)}
+.msg .hd b{font-size:15px}
+.msg .chan{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.msg .copy{margin-left:auto;appearance:none;cursor:pointer;font:inherit;font-size:12px;font-weight:700;
+ color:var(--navhi);background:var(--nav);border:0;border-radius:3px;padding:6px 12px}
+.msg .body{white-space:pre-wrap;font-size:14.5px;line-height:1.62;padding:14px 16px 0;color:var(--ink)}
+.msg .why{padding:10px 16px 0;font-size:13px;color:var(--mute)}
 .note{color:var(--mute);font-size:13.5px;margin:0 0 18px}
 .band{margin:38px 0 14px;padding:10px 0 9px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
 .band b{font-size:17px;letter-spacing:-.01em}
@@ -84,12 +92,23 @@ tr:last-child td{border-bottom:0}
 .band:first-of-type{margin-top:14px}
 .gap{background:var(--stopbg);border:1px solid rgba(140,43,43,.25);border-radius:4px;padding:12px 15px;
  margin:0 0 14px;font-size:14px;color:var(--stop)}
+.topbar{position:sticky;top:0;z-index:40;margin:-34px -40px 26px;padding:12px 40px;
+ background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px}
+.topbar .back{appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;
+ letter-spacing:.02em;color:var(--navhi);background:var(--nav);border:1px solid var(--nav);
+ border-radius:4px;padding:9px 16px;display:inline-flex;align-items:center;gap:8px}
+.topbar .back:hover{opacity:.88}
+.topbar .back[disabled]{opacity:.38;cursor:default}
+.topbar .where{color:var(--mute);font-size:13px}
+.topbar .where b{color:var(--ink)}
+@media print{.topbar{display:none}}
+@media(max-width:820px){.topbar{margin:-24px -18px 20px;padding:10px 18px}}
 @media(max-width:820px){.shell{flex-direction:column}nav{width:100%;height:auto;position:static;flex:none}main{padding:24px 18px 60px}}
 </style><script>(function(){try{var t=localStorage.getItem('ctr-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
 </head><body>
 <div class="shell">
 <nav>
-  <div class="brand"><span>Brisen Group</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span></div>
+  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–19 September 2026</span></div>
   <div class="themebar" role="group" aria-label="View"><button type="button" data-set="auto" aria-pressed="false">Auto</button><button type="button" data-set="light" aria-pressed="false">Light</button><button type="button" data-set="dark" aria-pressed="false">Dark</button></div>
 
     <div class="navitem on" data-pane="conf"><span class="chev" data-sub="s-conf">▶</span> ✅ Confirmed visits</div>
@@ -98,6 +117,8 @@ tr:last-child td{border-bottom:0}
     <a data-pane="conf" data-go="k-citic">17 Sep · CITIC briefing and banquet</a>
     <a data-pane="conf" data-go="k-routes">18 Sep · District visits</a>
   </div>
+
+  <div class="navitem" data-pane="send">✉️ Your replies — ready to send</div>
 
   <div class="navitem" data-pane="talks"><span class="chev" data-sub="s-talks">▶</span> 💬 Meetings and Talks</div>
   <div class="sub" id="s-talks">
@@ -111,6 +132,7 @@ tr:last-child td{border-bottom:0}
     <a data-pane="trip" data-go="c-cp">Critical Point 临界点</a>
     <a data-pane="trip" data-go="c-psi">PsiBot 灵初智能</a>
     <a data-pane="trip" data-go="c-more">Proposed additions</a>
+    <a data-pane="trip" data-go="c-people">Who is who</a>
   </div>
 
   <div class="navitem" data-pane="tc"><span class="chev" data-sub="s-tc">▶</span> 🎯 Targeted companies</div>
@@ -123,6 +145,7 @@ tr:last-child td{border-bottom:0}
     <a data-pane="tc" data-go="t-pudu">Pudu 普渡</a>
     <a data-pane="tc" data-go="t-yunji">Yunji 云迹</a>
     <a data-pane="tc" data-go="t-ubtech">UBTECH 优必选</a>
+    <a data-pane="tc" data-go="t-excl">Excluded on purpose</a>
     <div class="grp">AI labs</div>
     <a data-pane="tc" data-go="t-labs">Ask in this order</a>
     <a data-pane="tc" data-go="l-qwen">1 · Alibaba Qwen 通义</a>
@@ -131,6 +154,7 @@ tr:last-child td{border-bottom:0}
     <a data-pane="tc" data-go="l-minimax">4 · MiniMax</a>
     <a data-pane="tc" data-go="l-intern">5 · Shanghai AI Lab</a>
     <a data-pane="tc" data-go="l-deepseek">6 · DeepSeek</a>
+    <a data-pane="tc" data-go="t-sense">7 · SenseTime — never</a>
     <div class="grp">Beauty and health</div>
     <a data-pane="tc" data-go="t-bh">Where this stands — no targets yet</a>
   </div>
@@ -172,19 +196,39 @@ tr:last-child td{border-bottom:0}
     <a data-pane="res" data-go="r-other">Other robot makers</a>
     <a data-pane="res" data-go="r-dist">Districts — agreed or not</a>
     <a data-pane="res" data-go="r-ai">AI models</a>
+    <a data-pane="res" data-go="r-citic">Who CITIC actually is</a>
+    <a data-pane="res" data-go="r-case">Why these machines</a>
   </div>
 
+  <div class="navitem" data-pane="wx">💬 WeChat</div>
 </nav>
 
 <main>
+<div class="topbar">
+  <button type="button" class="back" id="backMain">&#8592; Main page</button>
+  <span class="where">You are on <b id="whereNow">Confirmed visits</b></span>
+</div>
 <!-- ================= TRIP ================= -->
 <section class="pane on" id="p-conf">
   <h1>Confirmed visits</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 09:1x</p>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
 
   <div class="card">
     <p><b>Confirmed</b> means the other side has fixed it in writing. Everything with only an offer or a wish
     behind it is under <b>Pending confirmation</b>.</p>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--info)">
+    <h3>What moved on 11 September</h3>
+    <p class="meta">Three WeChat rooms read from your screen · last read 18:0x Geneva</p>
+    <p><b>1 · The company week is now agreed in the group.</b> Gausium 14th afternoon, PsiBot 16th at 09:30,
+       AgiBot 16th afternoon. You accepted it at 16:52 and Wayne answered <i>"Ok"</i>.</p>
+    <p><b>2 · 15 September is free again</b> — Wayne moved Gausium off it at 17:44. <b>Nothing is in that day.</b>
+       It is now the clearest window for a frontier lab.</p>
+    <p><b>3 · Critical Point is out</b> of the plan you accepted, and Welson's offer of the 16th afternoon has
+       never been answered.</p>
+    <p><b>4 · The 18 September gather points were issued</b> — both districts, times and addresses.</p>
+    <p><b>5 · The Jing'an call was held</b> and produced a piece of work due Saturday. See below.</p>
   </div>
 
   <h2 id="k-jingan">Thursday 11 September — Jing'an district, online <span class="chip ok">Agreed</span></h2>
@@ -226,6 +270,21 @@ tr:last-child td{border-bottom:0}
        00:35 today, and the district side should hear it from you.</p>
   </div>
 
+  <div class="card" style="border-left:3px solid var(--ok)">
+    <h3>What the call produced <span class="chip ok">Held 11 September</span> <span class="chip pr">One thing due Saturday</span></h3>
+    <p class="meta">Reported by the Director after the call · the room itself carries nothing after "you can enter the meeting now" at 10:05</p>
+    <p><b>What was agreed:</b> Brisen sends them, <b>on Saturday 12 September</b>, a short written description of
+       what Brisen is interested in — <b>AI hospitality and robotics</b> — together with a <b>summary of the AI
+       hotel project</b>. They will meet in Shanghai, they will show what they have, and <b>they may introduce
+       Brisen to Qwen and others</b>.</p>
+    <p><b>Why this one matters more than its size.</b> It is the second live route to a frontier lab, independent
+       of the robotics coordinator, who is still only "coordinating" Qwen. Two routes to the same lab is the
+       first redundancy this trip has had.</p>
+    <p><b>Still unrecorded:</b> who attended on their side and in what role, and whether they said anything about
+       the 18 September Jing'an route. <b>No beauty-and-health company was named</b> — that group is still empty.</p>
+    <p><b>Unopened:</b> a direct message from <b>Lexi 高澜茜</b> at 10:08 — <i>"good, just need to work out …"</i>.</p>
+  </div>
+
   <h2 id="k-citic">Thursday 17 September — CITIC briefing and banquet <span class="chip ok">Agreed</span></h2>
   <div class="card">
     <p class="meta">Dongjiao State Guest Hotel, 1800 Jinke Road, Pudong · badge collected in person at the North Building</p>
@@ -234,11 +293,108 @@ tr:last-child td{border-bottom:0}
        <b>Participant guide</b>.</p>
   </div>
 
-  <h2 id="k-routes">Friday 18 September — district visits, full day <span class="chip ok">Agreed</span> <span class="chip ok">Pair confirmed 11 Sep</span></h2>
+    <h2 id="k-routes">Friday 18 September — district visits, full day <span class="chip ok">Agreed</span> <span class="chip ok">Gather points issued 11 Sep</span></h2>
   <div class="card">
     <p class="meta">Earliest start 09:00, latest finish 16:15 · business casual · lunch in the district on the badge</p>
     <p>The day is fixed. You: Xuhui (badge No. 3). Edita: Jing'an (badge No. 2). Sent to Kevin on 10 September and <b>confirmed by 章珂杰 Kevin at 00:35 on 11 September — "no problem"</b>. Pudong dropped; <b>Songjiang is off</b> — your 15:23 agreement to it was superseded by the 22:58 pair, which Kevin accepted. The seven routes are under <b>The seven CITIC routes</b>.</p>
   </div>
+
+  <div class="card" style="border-left:3px solid var(--ok)">
+    <h3>Where each of you stands, and when <span class="chip ok">Issued 11 September</span></h3>
+    <p class="meta">Sent by 小碗 into the route-split group at 09:48 and 09:53, each with a map card</p>
+    <table>
+      <tr><th>Route</th><th>Who</th><th>Gather</th><th>Where</th></tr>
+      <tr><td><b>No. 2 — Jing'an</b></td><td><b>Edita</b></td><td><b>09:45</b></td>
+        <td><b>Zhang Yuan, South Gate 2</b><br>张园-南2门 · 上海市静安区南京西路街道威海路550号</td></tr>
+      <tr><td><b>No. 3 — Xuhui</b></td><td><b>You</b></td><td><b>10:00</b></td>
+        <td><b>ITC Xujiahui Center, Tower A, Phase 3</b><br>徐家汇中心3期A座 · 上海市徐汇区徐家汇街道虹桥路183号</td></tr>
+    </table>
+    <p><b>Fifteen minutes apart, in two districts.</b> The split is real and simultaneous — neither of you can attend both.</p>
+    <p><b>Kevin, into the same room: <i>"you can forward to Edita"</i>.</b> Edita is not in that group. The Jing'an
+       gather point reaches her only if you send it.</p>
+    <p><b>What it costs.</b> Pudong is off both routes, and Pudong was the only one of the seven carrying a robotics
+       stop — Zhangjiang Robot Valley, 14:10–15:00. <b>18 September now yields no robot site.</b> Every robotics
+       visit has to come out of 14, 15 or 16 September.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-send">
+  <h1>Your replies — ready to send</h1>
+  <p class="stamp">Five pieces, each addressed and on the right channel · written 11 September, 18:5x Geneva</p>
+  <p class="note">Press <b>Copy</b>, paste into the named channel, send. Nothing here has been sent for you.</p>
+
+  <div class="msg">
+    <div class="hd"><b>1 · To Lexi 高澜茜</b> <span class="chan">WhatsApp — private, not the group</span>
+      <button class="copy" type="button">Copy</button></div>
+    <div class="body">Lexi, thank you — please pass my thanks to the Chairman and the Finance Director. Edita and I would be very glad to join them for dinner.
+
+One thing to check: the group has now moved our Gausium visit to the afternoon of Monday 14 September. Does the dinner follow the visit on the 14th, or stay on the 15th? Either evening works for us — I only want to be sure we are on the same one.
+
+Understood on keeping it out of the group. And thank you for holding the room for me this morning.</div>
+    <div class="why"><b>Why:</b> the invitation names the 15th; the visit moved to the 14th. This fixes the date without telling her the group changed the plan, and keeps the dinner private as she asked.</div>
+  </div>
+
+  <div class="msg">
+    <div class="hd"><b>2 · To Wayne Lu</b> <span class="chan">WeChat — master group, tag him</span>
+      <button class="copy" type="button">Copy</button></div>
+    <div class="body">@Wayne Lu Thank you — Gausium on the 14th afternoon, PsiBot on the 16th at 9:30, AgiBot on the 16th afternoon. All agreed from our side.
+
+Two things. The 15th is now completely free — could we use that whole day for the Qwen team, or another lab you can reach? Thursday 17 September before 17:00 is also open.
+
+And for Gausium: could you send the start time, the address, and who will attend from their side?
+
+Dimitry</div>
+    <div class="why"><b>Why:</b> the 15th reopened at 17:44 and nobody has claimed it. This is the ask that fills it, and it collects the three Gausium details still missing.</div>
+  </div>
+
+  <div class="msg">
+    <div class="hd"><b>3 · To 于希苘 Starry, PsiBot</b> <span class="chan">WeChat — master group, tag her</span>
+      <button class="copy" type="button">Copy</button></div>
+    <div class="body">@于希苘 Starry Thank you — 9:30 on Wednesday the 16th is confirmed from our side.
+
+Could you send the office address, and the best way to reach you from the Mandarin Oriental? Two of us will come.
+
+Dimitry</div>
+    <div class="why"><b>Why:</b> the only meeting on the trip with an hour agreed by both sides, and still the only one with no address.</div>
+  </div>
+
+  <div class="msg" style="border-left-color:var(--warn)">
+    <div class="hd"><b>4 · To 王子源 Welson, Critical Point</b> <span class="chan">WeChat — master group, tag him</span>
+      <button class="copy" type="button">Copy</button></div>
+    <div class="body">@王子源 Welson Thank you for offering the 16th afternoon — I had accepted it, and the schedule has since put us at AgiBot for that half-day.
+
+Could you join us there? If that does not work for you, tell me and we will find another window while we are in Shanghai.
+
+Dimitry</div>
+    <div class="why"><b>Why:</b> he made an offer, you accepted it, and the agreed plan drops him. He has not been told anything for a day. This keeps the relationship without adding a slot.</div>
+  </div>
+
+  <div class="msg" style="border-left-color:var(--info)">
+    <div class="hd"><b>5 · To the Jing'an side</b> <span class="chan">Due Saturday 12 September — send as agreed on the call</span>
+      <button class="copy" type="button">Copy</button></div>
+    <div class="body">Brisen Group — what we are looking for in Shanghai
+
+Brisen Group owns and develops hotels in Europe. Our hotel in Vienna is operated by Mandarin Oriental.
+
+We are building the first AI-native luxury hotel: a property where service robotics and AI systems are designed into the building from the start, rather than added to it afterwards. Three things interest us.
+
+1. Service robotics for hotels — cleaning, delivery, luggage, and guest-facing machines. We want to see a fleet working together in a live hotel, not single machines in a showroom.
+
+2. Hotel operating systems — one system that dispatches the robots, handles work orders and voice, instead of separate machines each with its own app.
+
+3. Frontier AI models — we run models on our own machines in Europe. An introduction to a leading Chinese lab would be valuable to us.
+
+What we would like from the visit: to see what you have in operation, to understand what works and what does not, and to meet the people behind it.
+
+We are in Shanghai from 13 to 19 September.
+
+Dimitry Vallen
+Chairman, Brisen Group</div>
+    <div class="why"><b>Why:</b> this is the piece you agreed on the call. <b>One judgement is yours:</b> it does not name NVIDIA. Naming an American chip partner in writing to a Chinese municipal and bank counterparty is a decision, not a detail — say the word and I put it in.</div>
+  </div>
+
+  <div class="gap"><b>Order of sending.</b> Lexi first — the dinner date is the only thing with two counterparties
+  holding different days. Then the group, all three in one sitting. The Jing'an piece tomorrow.</div>
 </section>
 
 <section class="pane" id="p-talks">
@@ -263,7 +419,7 @@ tr:last-child td{border-bottom:0}
 
 <section class="pane" id="p-trip">
   <h1>Pending confirmation</h1>
-  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 09:1x</p>
+  <p class="stamp">Shanghai, 13–19 September 2026 · live page, last updated 11 September, 18:10 Geneva</p>
 
   <div class="card">
     <p><b>Why you are going.</b> A Shanghai Municipal Government event, CITIC Group co-organiser, with
@@ -278,32 +434,77 @@ tr:last-child td{border-bottom:0}
     from the July agenda and is now too strict.</p>
   </div>
 
-  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip pr">14 Sep, 13:00–18:00 — your answer sent, awaiting theirs</span></h2>
-  <div class="card">
-    <h3>Cleaning robots, with a real hotel line</h3>
-    <p class="meta">Shanghai · introduced through China CITIC Bank</p>
-    <p><b>Your contacts:</b> <b>Amy 喵喵</b>, head of sales — she made the introductions.
-       <b>Allen.zh</b>, Director for the European region — the one who matters for anything in Vienna.</p>
-    <p><b>What the record says:</b> 3 of 40 published cases are hotels, including the InterContinental Vienna.</p>
-    <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
+  <div class="card" style="border-left:3px solid var(--info)">
+    <h3>Shareable link — the visitor version</h3>
+    <p class="meta">Public web address · opens for anyone, no account, from WhatsApp or email</p>
+    <p><a href="https://vallen300-bit.github.io/brisen-dashboards/shanghai-september-2026.html">https://vallen300-bit.github.io/brisen-dashboards/shanghai-september-2026.html</a></p>
+    <p><b>What is on it:</b> the week, the companies, the labs, the districts.
+       <b>What is held back:</b> the message log, who is who, the CITIC ownership work, and every
+       internal judgement. <b>It is a public address — assume the counterparties can read it.</b></p>
   </div>
 
-  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip pr">16 Sep afternoon — accepted by you, awaiting time and address</span></h2>
+  <div class="card" style="border-left:3px solid var(--stop)">
+    <h3>Private dinner — Gausium's chairman and finance director <span class="chip no">Keep out of the group</span> <span class="chip pr">Date in conflict</span></h3>
+    <p class="meta">Passed by Lexi 高澜茜 on WhatsApp, 11 September — not in any WeChat group, and not on the public page</p>
+    <p><b>The invitation:</b> the <b>Chairman</b> and the <b>Finance Director</b> of Gausium invite <b>both of you</b>
+       to dinner after your visit to them. Her words: <i>"I would not mention this in the WeChat group as it will be
+       a private dinner between Gausium and Brisen."</i></p>
+    <p><b>Why it is the strongest signal on the trip:</b> every other counterparty has sent sales or coordination
+       people. This is principal level, off the record, and on their initiative.</p>
+    <p><b>The conflict:</b> she writes <i>"after your visit to them on 15th Sep"</i>. The group moved the Gausium
+       visit to <b>the 14th afternoon</b> at 17:44 the same day. Either she is working from the old date, or the
+       dinner is a separate evening — <b>nobody has said which</b>, and the two counterparties are holding
+       different days. Your reply under <b>Your replies</b> fixes it.</p>
+    <p><b>Handling:</b> this card and the dinner stay off the public visitor page and out of every group room.</p>
+  </div>
+
+  <h2 id="c-gausium">Company 1 — Gausium 高仙 <span class="chip ok">14 September, afternoon — agreed in the group</span></h2>
+  <div class="card">
+    <h3>Cleaning robots, with a real hotel line</h3>
+    <p class="meta">Shanghai · brought in by Wayne Lu · the only one of the three whose business is understood</p>
+    <p><b>Your contacts:</b> <b>Amy 喵喵</b>, head of sales — she made the introductions.
+       <b>Allen.zh</b>, Director for the European region — the one who matters for anything in Vienna.</p>
+    <p><b>What the record says:</b> 3 of 40 published cases are hotels. One luxury-hotel reference in
+       the world — the <b>InterContinental Vienna, two machines</b> — and that claim is the vendor's own.
+       No Mandarin Oriental reference anywhere.</p>
+    <p><b>Watch:</b> their European data centre is real, but the data controller is the Chinese parent,
+       with no processing agreement and no European representative on file.</p>
+    <p><b>11 September, 09:43 — Wayne Lu:</b> <i>"Tentatively, we plan to meet Gausium on the 15th afternoon"</i>.
+       That is not the day you gave him. You told the group the 14th worked; <b>Gausium has answered neither day</b>,
+       and their own last word is still the open offer of 14 <i>or</i> 15, 13:00 to 18:00.</p>
+    <p><b>11 September, 17:44 — resolved.</b> Wayne moved them back: <i>"We'll adjust the visit of Gausium from
+       15/9 to 14/9 afternoon due to the time conflict."</i> The day is the one you first gave. <b>The hour, the
+       address and the attendee list are still open</b>, and the conflict he cites is unexplained.</p>
+  </div>
+
+  <h2 id="c-cp">Company 2 — Critical Point 临界点 <span class="chip no">Out of the agreed plan — and not told</span></h2>
   <div class="card">
     <h3>A robotic-hand spinout</h3>
-    <p class="meta">A component business</p>
+    <p class="meta">Brought in by Wayne Lu · a component business, not hotel operations</p>
     <p><b>Your contacts:</b> <b>Jimmy Z</b> and <b>王子源 Welson</b>.</p>
     <p>Spun out of AgiBot, the robotic-hand maker. Expect them to answer on hardware, not on running
        a hotel. Questions 2 and 6 on your list will not land here.</p>
+    <p><b>11 September — they fall out of the plan.</b> You thanked Wayne for <i>"Gausium on the 14th and Critical
+       Point on the 16th"</i>. His reply at 09:43 names <b>AgiBot</b> for the 16th afternoon and does not mention
+       Critical Point at all. AgiBot is Critical Point's parent, so this may be a substitution rather than a drop —
+       <b>nobody has said which</b>. Welson's own offer of the 16th afternoon still stands unanswered by us.</p>
+    <p><b>11 September, 16:52 — you accepted the plan without them</b> (<i>"great, it works, see you then"</i>, and
+       Wayne: <i>"Ok"</i>). Critical Point is therefore out by agreement, not by decision. <b>Welson has still not
+       been told anything</b>, and his offer of the 16th afternoon has now sat unanswered for a day.</p>
   </div>
 
-  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip pr">Moved herself to the 16th — hour not set</span></h2>
+  <h2 id="c-psi">Company 3 — PsiBot 灵初智能 <span class="chip ok">16 September, 09:30 — agreed by both sides</span></h2>
   <div class="card">
     <h3>The newest of the three</h3>
     <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
-    <p><b>Your contact:</b> <b>文雅</b> ("Miss Wang"), and <b>于希苒 Starry</b>, who confirmed at 01:16 on 11 September — <i>"I represent PsiBot"</i>. <b>Starry is not a separate party; she is PsiBot.</b> She asked at 17:57 on 10 September to move off the 15th: <i>"Sorry, I have a last-minute commitment on the 15th. Would it be possible to reschedule me to the 16th?"</i> Your 16th afternoon is already Welson and Critical Point, so the 16th morning is the only slot left.</p>
+    <p><b>Your contact:</b> <b>文雅</b> ("Miss Wang"), and <b>于希苘 Starry</b>, who confirmed at 01:16 on 11 September — <i>"I represent PsiBot"</i>. <b>Starry is not a separate party; she is PsiBot.</b> She asked at 17:57 on 10 September to move off the 15th: <i>"Sorry, I have a last-minute commitment on the 15th. Would it be possible to reschedule me to the 16th?"</i> Your 16th afternoon is already Welson and Critical Point, so the 16th morning is the only slot left.</p>
     <p><b>What the record says:</b> wheeled dual-arm machines, not a humanoid. <b>No hotel deployments,
        no European presence, no CE mark.</b> Clean on nine sanctions lists.</p>
+    <p><b>11 September, 09:46 — 于希苘 Starry:</b> <i>"Sure we could meet in the morning on the 16th. We could meet
+       at 9:30am in our Shanghai office."</i> <b>This is the firmest slot on the whole trip</b> — a named hour from
+       the counterparty. <b>What is missing:</b> the office address and how you get there. Ask for both.</p>
+    <p><b>Closed at 16:32.</b> You: <i>"Starry, thank you. Yes it works"</i> — she: <i>"Awesome"</i>.
+       <b>This is the only meeting on the trip with an hour agreed by both sides.</b> Address still missing.</p>
   </div>
 
   <div class="gap"><b>One thing to hold in mind:</b> these are not three independent views. They share
@@ -314,14 +515,33 @@ tr:last-child td{border-bottom:0}
     <tr><th>Company</th><th>Why it is worth a half-day</th><th>Status</th></tr>
     <tr><td><b>Keenon 擎朗</b></td><td>Runs <b>eight machines together</b> at the Traders Hongqiao — lobby
       greeter, room delivery, luggage, cleaning, food service. About 30 minutes from your hotel. The only
-      chance to walk a whole fleet in a working hotel.</td><td><span class="chip pr">Candidate</span></td></tr>
+      chance to walk a whole fleet in a working hotel.</td><td><span class="chip pr">Proposed by desk</span></td></tr>
     <tr><td><b>Pudu 普渡</b></td><td>Corridor and food delivery — the same job as the delivery robot already
-      in your NVIDIA project. Documented on NVIDIA's own China blog.</td><td><span class="chip pr">Candidate</span></td></tr>
+      in your NVIDIA project. Documented on NVIDIA's own China blog.</td><td><span class="chip pr">Proposed by desk</span></td></tr>
     <tr><td><b>Yunji 云迹</b></td><td>Sells a hotel operating system, not just machines. Hotels were about
-      81% of its 2025 revenue.</td><td><span class="chip pr">Candidate</span></td></tr>
-    <tr><td><b>UBTECH</b></td><td>A candidate if a day is open. Guest-facing humanoids.</td><td><span class="chip nb">If a day is open</span></td></tr>
+      81% of its 2025 revenue.</td><td><span class="chip pr">Proposed by desk</span></td></tr>
+    <tr><td><b>UBTECH</b></td><td>Only if a day is empty. Guest-facing humanoids — which the luxury reading
+      says you should not lead with.</td><td><span class="chip nb">Last resort</span></td></tr>
   </table>
 
+  <h2 id="c-people">Who is who</h2>
+  <table>
+    <tr><th>Name</th><th>Their lane</th><th>Standing</th></tr>
+    <tr><td><b>Wayne Lu</b></td><td>Arranges the company visits. Set the objective, built the 14-person group,
+      brought in Gausium and Critical Point.</td><td><span class="chip no">Identity unverified</span></td></tr>
+    <tr><td><b>Liu Yansong 刘延松</b></td><td>The event organiser. CITIC Europe Holdings, Prague. Your district
+      routes go through him.</td><td><span class="chip ok">Known, on file</span></td></tr>
+    <tr><td><b>Kevin 章珂杰</b></td><td>The 18 September route split.</td><td><span class="chip nb">WeChat only</span></td></tr>
+    <tr><td><b>Lexi 高澜茜</b></td><td>Interprets on the calls.</td><td><span class="chip nb">WeChat only</span></td></tr>
+    <tr><td><b>Amy 喵喵</b> / <b>Allen.zh</b></td><td>Gausium sales, and its European director.</td><td><span class="chip ok">Introduced</span></td></tr>
+    <tr><td><b>王勇 Wang Yong</b></td><td>Introduced PsiBot into the group.</td><td><span class="chip nb">WeChat only</span></td></tr>
+    <tr><td><b>小碗</b></td><td>Issues the 18 September gather points, times and addresses.</td><td><span class="chip nb">New on 11 September — WeChat only</span></td></tr>
+    <tr><td><b>于希苘 Starry</b></td><td>PsiBot. Sets her own time and place.</td><td><span class="chip ok">Self-identified — "I represent PsiBot"</span></td></tr>
+  </table>
+  <div class="gap"><b>On Wayne Lu.</b> He is a WeChat display name. That he works at China CITIC Bank,
+  Shanghai Branch was said by Gausium's head of sales — not by him. He is not in your contact register,
+  not in your mail, and has no public trace at that bank. He is also the person holding your whole
+  robotics track.</div>
 </section>
 
 <!-- ================= ITINERARY ================= -->
@@ -329,42 +549,49 @@ tr:last-child td{border-bottom:0}
   <h1>Targeted companies</h1>
   <p class="stamp">Every company on the Shanghai list, what it actually does, what the record shows, and where it stands · 13–19 September 2026</p>
 
-  <p class="note"><b>Three groups.</b> <b>Robotics</b> — 7 makers, 3 confirmed for the visit and 4
-     additional candidates. <b>AI labs</b> — 7 frontier labs, the ask already made and answered.
+  <p class="note"><b>Three groups.</b> <b>Robotics</b> — 7 makers, 3 confirmed on Wayne Lu's list and 4
+     proposed by this desk. <b>AI labs</b> — 7 frontier labs, the ask already made and answered.
      <b>Beauty and health</b> — Jing'an's own lane, opened today and still empty. Nothing here is ratified.</p>
 
-  <div class="band"><b>Group 1 · Robotics</b><span>7 makers — 3 confirmed for the visit, 4 additional candidates. This is the group the trip was built around.</span></div>
+  <div class="band"><b>Group 1 · Robotics</b><span>7 makers — 3 confirmed on Wayne Lu's list, 4 proposed by this desk and not yet asked for. This is the group the trip was built around.</span></div>
 
   <div class="card">
     <h3>If you can add visits, ask in this order</h3>
-    <p class="meta">Reading of the published hospitality-robotics research · 10 September</p>
+    <p class="meta">Desk reading of the NVIDIA framework and the two papers Storer sent · 10 September</p>
     <p><b>1 Keenon</b> — the only working fleet, and it is 30 minutes away.
        <b>2 Pudu</b> — NVIDIA already published the pairing.
        <b>3 Yunji</b> — the hotel operating system.
        <b>4 UBTECH</b> — only if a day would otherwise go empty.</p>
-    <p>Unitree, Fourier, Galbot and AgiBot are outside this list — impressive robotics,
-       but not hotel operations.</p>
+    <p><b>Do not add</b> Unitree, Fourier, Galbot or AgiBot as extra hotel visits. They are impressive
+       robotics on NVIDIA hardware, but they are not hotel operations — and AgiBot is already in the room
+       as Critical Point's parent.</p>
   </div>
 
   <h2 id="t-gausium">1 — Gausium 高仙 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>Commercial cleaning robots — the only one of the three with a real hotel line</h3>
-    <p class="meta">Shanghai · shareholder Xuhui Capital · introduced through China CITIC Bank</p>
+    <p class="meta">Shanghai · brought in by Wayne Lu · shareholder Xuhui Capital · introduced through China CITIC Bank</p>
     <p><b>Contacts:</b> <b>Allen.zh</b>, Head of Europe/APAC — the one who matters for anything in Vienna.
        <b>Amy 喵喵</b>, head of sales, made the introductions. Also named for the meeting:
        <b>Muller 吴家印</b>, <b>Saxon</b> (regional sales), <b>Oulivia</b> (strategy).</p>
-    <p><b>Hotel evidence:</b> 3 of 40 published cases are hotels, including the InterContinental Vienna.</p>
-    <p><b>Europe:</b> a European data centre is in place; the European data arrangements are a question for the meeting.</p>
+    <p><b>Hotel evidence:</b> 3 of 40 published cases are hotels. One luxury-hotel reference in the world —
+       the <b>InterContinental Vienna, 2 machines</b> — and that claim is the vendor's own. No Mandarin Oriental
+       reference anywhere.</p>
+    <p><b>Europe:</b> the European data centre is real, but the data controller is the Chinese parent,
+       with no processing agreement and no European representative on file.</p>
+    <p><b>Open against them:</b> they wrote "hotel deployments across Europe", plural. Research found one.
+       <b>Make them name the others.</b></p>
     <p><b>Where it stands:</b> offered <b>14 or 15 September, 13:00–18:00</b>, with 5 of their people. Unanswered.</p>
   </div>
 
   <h2 id="t-cp">2 — Critical Point 临界点 <span class="chip pr">On the list — no date yet</span></h2>
   <div class="card">
     <h3>A robotic-hand spinout of AgiBot — a component business, not hotel operations</h3>
-    <p class="meta">Introduced through China CITIC Bank</p>
+    <p class="meta">Brought in by Wayne Lu</p>
     <p><b>Contacts:</b> <b>Jimmy Z</b>, <b>王子源 Welson</b>.</p>
-    <p><b>Hotel evidence:</b> none published. <b>Europe:</b> nothing published.</p>
-    <p><b>What to expect:</b> hardware and components rather than hotel operations.</p>
+    <p><b>Hotel evidence:</b> none found. <b>Europe:</b> nothing on file.</p>
+    <p><b>What to expect:</b> they answer on hardware, not on running a hotel. Questions on staffing cost
+       per room and on reference properties will not land here.</p>
     <p><b>Where it stands:</b> Welson — "I will be ok at 16th afternoon". That is his only offer, and it
        kills the one-day-for-all-three plan.</p>
   </div>
@@ -374,9 +601,12 @@ tr:last-child td{border-bottom:0}
     <h3>The newest of the three — wheeled dual-arm machines, not a humanoid</h3>
     <p class="meta">Xuhui district · incorporated 11 September 2024 · introduced 10 September by 王勇 Wang Yong</p>
     <p><b>Contact:</b> <b>文雅 ("Miss Wang")</b>. She said on 10 September she is coordinating who attends and when.</p>
-    <p><b>Hotel evidence:</b> none published yet. <b>Europe:</b> no presence to date.</p>
+    <p><b>Hotel evidence:</b> none. <b>Europe:</b> no presence, no CE mark. Clean on 9 sanctions lists.</p>
     <p><b>Where it stands:</b> on the list, no date offered.</p>
   </div>
+
+  <div class="gap"><b>Not three independent views.</b> The three share investors, and AgiBot both owns
+     Critical Point and seeded PsiBot. Treat agreement between them as one source, not three.</div>
 
   <h2 id="t-keenon">4 — Keenon 擎朗智能 <span class="chip pr">Ask for this one first</span></h2>
   <div class="card">
@@ -417,19 +647,26 @@ tr:last-child td{border-bottom:0}
        robot maker.</p>
   </div>
 
-  <h2 id="t-ubtech">7 — UBTECH 优必选 <span class="chip nb">If a day is open</span></h2>
+  <h2 id="t-ubtech">7 — UBTECH 优必选 <span class="chip nb">Last resort — only if a day is empty</span></h2>
   <div class="card">
     <h3>Guest-facing humanoids</h3>
-    <p class="meta">Research, 10 Septembertember</p>
-    <p>Guest-facing humanoids. A candidate only if a slot would otherwise go unused.</p>
+    <p class="meta">Desk research, 10 September</p>
+    <p>Impressive, and wrong for the brief. The luxury reading says do not lead with a guest-facing humanoid
+       in a Mandarin Oriental. Worth a look only if a slot would otherwise go unused.</p>
   </div>
 
-  <div class="band"><b>Group 2 · AI labs</b><span>7 frontier labs. An introduction was requested on 10 September; Alibaba's Qwen team was named in reply.</span></div>
+  <h2 id="t-excl">Excluded on purpose</h2>
+  <div class="card">
+    <p><b>Not proposed, deliberately:</b> Unitree, Fourier, Galbot, AgiBot. Impressive robotics, but they
+       are not hotel operations. <b>Fourier was pulled by Director ratification on 7 September.</b></p>
+  </div>
+
+  <div class="band"><b>Group 2 · AI labs</b><span>7 frontier labs. The ask went to the master group on 10 September; Wayne Lu answered the same hour naming Alibaba's Qwen team.</span></div>
 
   <h2 id="t-labs">Ask in this order <span class="chip pr">Second research pass, 10 September</span></h2>
   <div class="card">
     <h3>Can Brisen run Chinese models on its own machines in Europe? Yes — on the open ones</h3>
-    <p class="meta">Introduction requested 10 September; Alibaba's Qwen team named in reply</p>
+    <p class="meta">The ask went to the master group 10 September 14:26 · Wayne Lu answered 14:41 naming Alibaba's Qwen team</p>
     <p>US chip rules stop advanced hardware going into China. They do not stop a European company
        running published Chinese weights on its own NVIDIA machines in Europe. <b>Self-host the open
        weights in the EU — do not send guest names to Hangzhou through a China API.</b></p>
@@ -444,7 +681,8 @@ tr:last-child td{border-bottom:0}
     <tr><td>4</td><td><b>MiniMax</b></td><td>Only for video and speech, and only if you will wear the licence tether</td></tr>
     <tr><td>5</td><td><b>Shanghai AI Lab</b></td><td>If a hole opens. A lab briefing, not a vendor</td></tr>
     <tr><td>6</td><td><b>DeepSeek</b></td><td>Only with a named host and a named date. Otherwise skip</td></tr>
-      </table>
+    <tr><td>7</td><td><b>SenseTime</b></td><td><b>Never.</b> See below</td></tr>
+  </table>
 
   <h2 id="l-qwen">1 — Alibaba, Qwen 通义 <span class="chip ok">Ask first</span></h2>
   <div class="card">
@@ -459,7 +697,8 @@ tr:last-child td{border-bottom:0}
        with a booking assistant and an AI hub. Fosun Tourism and Club Med run an agent on Qwen. Tongcheng's
        旅智云 property-management system plugged both Qwen and DeepSeek. None of them is a Mandarin Oriental —
        they prove the stack exists, not that anyone luxury has done it.</p>
-    <p><b>Note:</b> the printed 18 September Pudong programme names Alibaba Wuying, not the Qwen team.</p>
+    <p><b>Trap:</b> the printed 18 September Pudong programme names Alibaba <b>Wuying</b>, not the Qwen team.
+       Walking that stop is not meeting Qwen.</p>
     <p><b>The ask:</b> a 14–16 September introduction at the Xuhui West Bund campus, with Alibaba Cloud or
        Tongyi people who can talk about <b>self-hosting on NVIDIA</b> — not the China API. Hangzhou instead
        means a full day gone.</p>
@@ -473,8 +712,9 @@ tr:last-child td{border-bottom:0}
        GLM-4 and ChatGLM cards carried custom licences, so read the card of the exact file you would run.</p>
     <p><b>Hotel evidence:</b> none at your class. What they advertise is agents and tool use — a back-office
        copilot, not a lobby machine.</p>
-    <p><b>Note:</b> the printed 18 September Zhangjiang list already names Zhipu, so a separate meeting is
-       only needed if that day does not include Pudong.</p>
+    <p><b>The connection you should see:</b> the printed 18 September Zhangjiang list already names Zhipu.
+       <b>Kevin's 10 September offer drops Pudong</b> — and with it this meeting. If Pudong lives, do not
+       double-book them.</p>
   </div>
 
   <h2 id="l-step">3 — StepFun 阶跃星辰 <span class="chip ok">Yes — 14 to 16 September</span></h2>
@@ -484,7 +724,8 @@ tr:last-child td{border-bottom:0}
     <p><b>Licence:</b> their Step3 code and weights are stated Apache 2.0 — first-pass reading; confirm the
        card of the exact checkpoint before shipping anything.</p>
     <p><b>Hotel evidence:</b> none. Their public products are a multimodal assistant and a character-chat app.
-       The useful conversation is tool use and operations rather than a guest persona.</p>
+       <b>Character chat is the opposite of luxury front-of-house</b> — ask them about tool use and operations,
+       never about a guest persona.</p>
     <p><b>Trap:</b> same building is not a meeting. On the 18th you can walk the tower; you cannot sit with
        their team unless it is arranged for 14–16 September.</p>
   </div>
@@ -523,8 +764,18 @@ tr:last-child td{border-bottom:0}
     <p><b>Licence:</b> <b>MIT</b> on the current model weights — as free as Qwen's open line.</p>
     <p><b>Hotel evidence:</b> the same Chinese property-management vendor that plugged Qwen also plugged
        DeepSeek. Nothing at luxury class.</p>
-    <p><b>The ask:</b> worth arranging only with a named host and a confirmed date — Hangzhou costs a full day.</p>
+    <p><b>What to know before naming them:</b> the 2026 US defence act bars DeepSeek from Defense and
+       intelligence systems and, in one clause, from contractors performing those contracts. <b>That is not an
+       EU ban and it does not touch a hotel</b> — but this project is NVIDIA-named, so expect the question.
+       Self-hosting the MIT weights in Europe sends nothing to Hangzhou.</p>
+    <p><b>The ask:</b> only if someone inside names a person and a date. Their lobby became a tourist stop and
+       they refuse interviews. <b>Do not spend a day on a photograph.</b></p>
   </div>
+
+  <h2 id="t-sense">SenseTime <span class="chip no">Do not ask, do not name</span></h2>
+  <div class="gap"><b>SenseTime is off this list permanently.</b> On the US Entity List since
+     9 October 2019, plus OFAC NS-CMIC. NVIDIA is a US person and this project runs on American chips.
+     That pairing cannot be fixed in a meeting.</div>
 
   <div class="band"><b>Group 3 · Beauty and health</b><span>Jing'an's own lane — and the only one of the three groups with nothing in it yet.</span></div>
 
@@ -595,11 +846,39 @@ tr:last-child td{border-bottom:0}
     <p>A company target. Nothing on the district's published lists touches hotel operations — spa, wellness, in-room
        health. The only rooms in the whole Jing'an story are the planned Zhangyuan east hotel, with no operator named.</p>
   </div>
+  <div class="card" style="border-left:3px solid var(--stop)">
+    <h3>Internal read — NOT on the public page <span class="chip no">Internal only</span></h3>
+    <p class="meta">Researcher's assessment, 10 September, judged against a Vienna owner whose building a luxury brand runs</p>
+    <p><b>Judgment.</b> Jing'an is a relationship and cluster surface, not a buyable luxury hotel. Zhangyuan, Global Connect
+       and the beauty cluster are not for sale to a foreign private owner. The buildings that rhyme with Vienna —
+       Jing An Shangri-La, The Middle House, The Sukhothai, Portman Ritz-Carlton, The Puli — sit inside Kerry, Swire/HKR,
+       the exhibition-centre group, Jinjiang or New World, and do not trade.</p>
+    <p><b>The one sentence that rhymes:</b> 静安置业 will own a boutique hotel in Zhangyuan east; no operator is named; the
+       building is not on the market. <b>Ask who will own it and whether they want a management conversation. Do not ask
+       to buy the Shikumen</b> — "invest in Zhangyuan" will be heard as brand-and-manage, not buy.</p>
+    <p><b>What actually traded, 2025–26.</b> Bohua Plaza / One Museum Place, Jing'an office — about RMB 10.8 billion, Hines
+       and ADIA out to a Chinese-insurance fund at roughly 20% below the first ask, ADIA rolling a minority. Ciro's Plaza
+       — RMB 2.1 billion for 90%, but that is <b>Huangpu, not Jing'an</b>. Andaz Xintiandi — 45% equity for RMB 0, liabilities
+       stayed. City-wide 2025: foreign buyers bought 3 assets and sold 15; all hotel trades but one were under RMB 300 million.</p>
+    <p><b>Where foreigners were burned, close enough to cite.</b> Shanghai Centre / Portman — foreign partners built it, the
+       joint venture ended about 2020, the exhibition-centre group owns it, Marriott still manages. Jing'an Hilton 1988–2018
+       — the brand was removed at contract end and Jinjiang put its own flag on the door. Lesson for any operator contract:
+       the flag is removable.</p>
+    <p><b>Rules.</b> A foreign individual does not buy a Jing'an hotel; the path is a project company or foreign-invested
+       enterprise buying equity in the land-use-right holder, with NDRC and MOFCOM filing. Commercial land tenure is
+       typically 40 years. The 8-point policy pays for R&amp;D centres, headquarters upgrades, first stores, data and talent —
+       not for buying a hotel.</p>
+    <p><b>Red flags for the call.</b> No Mandarin Oriental in Jing'an. Do not repeat the 2022 "LV hotel in the east" leak — one
+       unnamed source, never confirmed. Do not use 130 tenants as a diligence number. The full numbered text of the 8-point
+       policy was not posted; only restatements.</p>
+    <p><b>Could not verify:</b> any Jing'an luxury-hotel sale or asking book 2025–26; the Zhangyuan hotel operator, keys or
+       year; whether the L'Oréal–Cathay fund takes a new limited partner; Bohua's exact signed price.</p>
+  </div>
 </section>
 
 <section class="pane" id="p-itin">
   <h1>Itinerary</h1>
-  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 10 September, 22:25.</p>
+  <p class="stamp">Live and sliding — everything moves until it is marked agreed. Last updated 11 September, 18:10 Geneva.</p>
   <p class="note"><span class="chip ok">Agreed</span> fixed and confirmed by the other side &nbsp;
      <span class="chip pr">Proposed</span> put forward, not confirmed &nbsp;
      <span class="chip no">Missing</span> nothing on file yet</p>
@@ -607,14 +886,14 @@ tr:last-child td{border-bottom:0}
   <div class="tl"><div class="dot x"></div>
     <div class="day">Before departure</div>
     <div class="card"><h3>Geneva → Shanghai, outbound <span class="chip no">Missing</span></h3>
-      <p class="meta">Flights not yet booked.</p>
+      <p class="meta">No flight, carrier or departure time is on file at this desk.</p>
       <p>Everything below is built from a Shanghai arrival of 05:30 on Sunday 13 September. Tell me the
       Geneva leg and it slots in above.</p></div></div>
 
   <div class="tl"><div class="dot p"></div>
     <div class="day">Thursday 11 September</div>
     <div class="card"><h3>Jing'an district — online meeting <span class="chip ok">Agreed</span></h3>
-      <p class="meta">16:00 Shanghai = 10:00 Geneva · interpreter provided</p>
+      <p class="meta">16:00 Shanghai = 10:00 Geneva · WeChat group of 10 · Lexi interprets</p>
       <p>Stated in-thread as a call to discuss the visit to Jing'an District. <b>Note before you join:</b>
       Jing'an carries no robotics in any of its own documents — its themes are beauty and health, and
       audiovisual. <b>A facts brief on the district is now under Targeted companies → Beauty and health</b>:
@@ -627,24 +906,40 @@ tr:last-child td{border-bottom:0}
       <p class="meta">You and Edita · hotel: Mandarin Oriental</p>
       <p>From the official event agenda. Nothing else booked this day.</p></div></div>
 
-  <div class="tl"><div class="dot p"></div>
+  <div class="tl"><div class="dot a"></div>
     <div class="day">Monday 14 September</div>
-    <div class="card"><h3>Gausium — 13:00 to 18:00 <span class="chip pr">Your answer: 14th — awaiting their confirmation</span></h3>
-      <p class="meta">Gausium proposed 14 <i>or</i> 15 September, 13:00 to 18:00, with five of their people. You chose the 14th on 10 September.</p>
-      <p>Whether Critical Point and PsiBot join the same day is not settled; Critical Point has only offered the 16th afternoon.</p></div></div>
+    <div class="card"><h3>Gausium 高仙, afternoon <span class="chip ok">Agreed in the group</span></h3>
+      <p class="meta">Wayne Lu, 11 September 17:44: "We'll adjust the visit of Gausium from 15/9 to 14/9 afternoon due to the time conflict"</p>
+      <p>Back on the day you originally gave it. Their own standing offer was 13:00 to 18:00 with five of their
+      people — <b>Allen.zh</b> (Europe/APAC), <b>Amy 喵喵</b>, <b>Muller 吴家印</b>, <b>Saxon</b>, <b>Oulivia</b>.</p>
+      <p><b>Still to pin:</b> the hour, the address, and who of the five actually comes. <b>The conflict Wayne
+      refers to is not explained</b> — he does not say what clashed.</p>
+      <p><b>Take with you:</b> they wrote "hotel deployments across Europe", plural; the research found one,
+      the InterContinental Vienna. Make them name the others.</p>
+      <p><b>Evening — a private dinner is on offer</b> from their chairman and finance director, for both of you.
+      <b>Their invitation names the 15th, not the 14th.</b> Under <b>Pending confirmation</b>. Not for the group.</p></div></div>
 
-  <div class="tl"><div class="dot p"></div>
+  <div class="tl"><div class="dot x"></div>
     <div class="day">Tuesday 15 September</div>
-    <div class="card"><h3>Held for a frontier AI lab <span class="chip pr">Asked of Wayne Lu, 10 September</span></h3>
-      <p class="meta">Offered to Wayne Lu for the Qwen team or another lab. <b>Now empty — PsiBot moved off this day.</b> Wayne answered only <i>"copy that"</i> at 01:16 on 11 September; no lab day given.</p>
-      <p>Suggested shape: one day for the three named makers, half a day for the eight-machine hotel
-      near you, half a day for a delivery or hotel-system maker.</p></div></div>
+    <div class="card"><h3>Free again — and unclaimed <span class="chip no">Nothing booked</span></h3>
+      <p class="meta">Gausium moved off to the 14th at 17:44 on 11 September. Nothing has taken its place.</p>
+      <p><b>This is now the clearest lab window on the trip.</b> A whole day, free, three days before the event.
+      Wayne is still only <i>"coordinating"</i> the Qwen visit; the Jing'an side said separately they may introduce
+      you to Qwen and others.</p>
+      <p><b>Nobody has been asked for this specific day since it reopened.</b> Until someone is, it stays empty —
+      and an empty day in Shanghai is the most expensive thing on this page.</p></div></div>
 
-  <div class="tl"><div class="dot p"></div>
+  <div class="tl"><div class="dot a"></div>
     <div class="day">Wednesday 16 September</div>
-    <div class="card"><h3>PsiBot morning asked · Critical Point afternoon accepted <span class="chip pr">Awaiting both replies</span></h3>
-      <p class="meta">王子源 Welson: "I will be ok at 16th afternoon". <b>PsiBot (于希苒 Starry) asked to move here from the 15th</b> — morning is the only free half. Last day before CITIC.</p>
-      <p>The frontier AI lab meeting, if your friends can arrange one, fits here.</p></div></div>
+    <div class="card"><h3>PsiBot 09:30 · AgiBot afternoon <span class="chip ok">Both sides said yes</span></h3>
+      <p class="meta">Starry, 09:46: "9:30am in our Shanghai office" · you, 16:32: "Yes it works" · she: "Awesome" · you to Wayne, 16:52: "it works, see you then" · Wayne: "Ok"</p>
+      <p><b>PsiBot, 09:30</b>, at their Shanghai office. The only meeting on this trip with an hour agreed by both
+      sides. <b>The address is still missing</b> — ask for it and for how you get there.</p>
+      <p><b>AgiBot, afternoon.</b> New to the list, and not something this desk proposed: robotics without hotel
+      operations. It is <b>Critical Point's parent</b>, and Wayne has quietly replaced the one with the other.</p>
+      <p><b>Critical Point is out.</b> 王子源 Welson offered the 16th afternoon and you accepted it; the plan you
+      agreed at 16:52 does not contain them, and <b>nobody has told him</b>.</p>
+      <p>Last day before CITIC. Wayne has offered to accompany you and drive you between companies.</p></div></div>
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Thursday 17 September</div>
@@ -660,13 +955,16 @@ tr:last-child td{border-bottom:0}
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Friday 18 September</div>
-    <div class="card"><h3>District visits, full day <span class="chip ok">Agreed</span> <span class="chip ok">Districts named and sent</span></h3>
+    <div class="card"><h3>District visits, full day <span class="chip ok">Agreed</span> <span class="chip ok">Gather points issued</span></h3>
       <p class="meta">Delegates split into groups · earliest start 09:00, latest finish 16:15</p>
-      <p><b>Pudong dropped</b> — the group is full; you decided on 10 September not to press for it.</p>
-      <p><b>You — Xuhui</b> (badge No. 3). <b>Edita — Jing'an</b> (badge No. 2), for the beauty cluster and the two
-      dermatology hospitals. Decided 10 September, late. <b>Songjiang is not needed</b> — a 6G park and a pitch.</p>
-      <p><b>Both contacts told on 10 September, late evening</b> — the routes contact and Lexi each got the final pair,
-      Xuhui plus Jing'an. <b>Awaiting their confirmation.</b> Badge numbers print in advance.</p></div></div>
+      <p><b>You — Xuhui</b> (badge No. 3): gather <b>10:00</b> at <b>ITC Xujiahui Center, Tower A, Phase 3</b> —
+      徐家汇中心3期A座, 上海市徐汇区徐家汇街道虹桥路183号.<br>
+      <b>Edita — Jing'an</b> (badge No. 2): gather <b>09:45</b> at <b>Zhang Yuan, South Gate 2</b> —
+      张园-南2门, 上海市静安区南京西路街道威海路550号.</p>
+      <p>Both issued by <b>小碗</b> in the route-split group on 11 September, 09:48 and 09:53, each with a map card.
+      <b>Kevin: "you can forward to Edita"</b> — she is not in that group.</p>
+      <p><b>Pudong dropped</b>, and with it the only robotics stop on any of the seven routes.
+      <b>Songjiang is not needed.</b></p></div></div>
 
   <div class="tl"><div class="dot a"></div>
     <div class="day">Saturday 19 September</div>
@@ -676,14 +974,14 @@ tr:last-child td{border-bottom:0}
   <div class="tl"><div class="dot x"></div>
     <div class="day">Return</div>
     <div class="card"><h3>Shanghai → Geneva, arrival <span class="chip no">Missing</span></h3>
-      <p class="meta">Return flight not yet booked.</p></div></div>
+      <p class="meta">No return flight or Geneva arrival on file at this desk.</p></div></div>
 </section>
 
 
 <!-- ================= PARTICIPANT GUIDE ================= -->
 <section class="pane" id="p-guide">
   <h1>Participant guide</h1>
-  <p class="stamp">The organiser's own 2-page "Participant Guidelines" for the 17–18 September programme, received from the organiser's side on 10 September.
+  <p class="stamp">The organiser's own 2-page "Participant Guidelines" for the 17–18 September programme, sent by Lexi 高澜茜 in her direct WeChat chat, 10 September 14:14.
      Folded in full below; the three findings first.</p>
 
   <h2 id="g-changes">Three things that change your plans <span class="chip no">Read these</span></h2>
@@ -879,8 +1177,8 @@ tr:last-child td{border-bottom:0}
   <table>
     <tr><th>Company</th><th>What it actually does</th><th>Hotel evidence</th><th>Europe</th></tr>
     <tr><td><b>Gausium</b></td><td>Cleaning machines, with a genuine hotel line</td>
-      <td>3 of 40 published cases are hotels, including the InterContinental Vienna</td>
-      <td>European data centre in place; data arrangements to confirm</td></tr>
+      <td>3 of 40 published cases; one luxury reference — InterContinental Vienna, 2 machines, vendor's own claim</td>
+      <td>EU data centre real; controller is the Chinese parent, no processing agreement, no EU representative</td></tr>
     <tr><td><b>Critical Point</b></td><td>Robotic-hand spinout of AgiBot; a component business</td>
       <td>None found</td><td>Nothing on file</td></tr>
     <tr><td><b>PsiBot</b></td><td>Wheeled dual-arm; incorporated September 2024</td>
@@ -894,12 +1192,12 @@ tr:last-child td{border-bottom:0}
   <table>
     <tr><th>Company</th><th>The case for it</th><th>Where it came from</th></tr>
     <tr><td><b>Keenon 擎朗</b></td><td>Eight machines running together in one hotel, 30 minutes away. Whether
-      NVIDIA hardware is inside is not published — ask on site.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
+      NVIDIA hardware is inside is not published — ask on site.</td><td><span class="chip pr">Desk research, 10 Sep</span></td></tr>
     <tr><td><b>Pudu 普渡</b></td><td>Documented on NVIDIA's own China blog; newer unit runs the current NVIDIA
-      module. Direct analogue of the delivery robot in your project.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
+      module. Direct analogue of the delivery robot in your project.</td><td><span class="chip pr">Desk research, 10 Sep</span></td></tr>
     <tr><td><b>Yunji 云迹</b></td><td>A hotel operating system — voice, work orders, robot dispatch — not just
-      machines. Hotels ≈81% of 2025 revenue.</td><td><span class="chip pr">Research, 10 September</span></td></tr>
-    <tr><td><b>UBTECH</b></td><td>Guest-facing humanoids.</td>
+      machines. Hotels ≈81% of 2025 revenue.</td><td><span class="chip pr">Desk research, 10 Sep</span></td></tr>
+    <tr><td><b>UBTECH</b></td><td>Guest-facing humanoids. Luxury guidance says do not lead with these.</td>
       <td><span class="chip nb">Only if a day is empty</span></td></tr>
   </table>
   <p class="note"><b>Not proposed on purpose:</b> Unitree, Fourier, Galbot, AgiBot. They are impressive
@@ -913,16 +1211,15 @@ tr:last-child td{border-bottom:0}
       <td><span class="chip ok">You asked 8 Sep; organiser said "I will arrange"</span></td></tr>
     <tr><td><b>Xuhui</b></td><td>AI and large models</td>
       <td>No. A retail hub, heritage houses, an AI experience store, a telecom computing zone.</td>
-      <td><span class="chip ok">You asked 8 Sep</span> <span class="chip pr">also offered by the organisers</span></td></tr>
+      <td><span class="chip ok">You asked 8 Sep</span> <span class="chip pr">also in Kevin's offer</span></td></tr>
     <tr><td><b>Songjiang</b></td><td>New-generation IT, high-end equipment</td>
-      <td>No. Opens at a 6G and satellite park.</td><td><span class="chip pr">Offered by the organisers</span></td></tr>
+      <td>No. Opens at a 6G and satellite park.</td><td><span class="chip pr">Offered by Kevin</span></td></tr>
     <tr><td><b>Jing'an</b></td><td>Beauty and health; ultra-HD audiovisual</td>
       <td>No. Heritage retail, an investment talk, a beauty incubator.</td>
-      <td><span class="chip pr">Offered by the organisers</span> <span class="chip nb">Approached you first, 7 Aug</span></td></tr>
+      <td><span class="chip pr">Offered by Kevin</span> <span class="chip nb">Approached you first, 7 Aug</span></td></tr>
   </table>
-  <div class="gap"><b>Where it stands.</b> Pudong was accepted for Edita on 8 September, then the group was
-  reported full; <b>on 10 September you dropped it</b>. Edita goes to Songjiang. Final pair, decided 10 September: you Xuhui,
-  Edita Jing'an; Songjiang not needed. Both contacts told 10 September; awaiting confirmation.</div>
+  <div class="gap"><b>The conflict, resolved.</b> Pudong was accepted for Edita on 8 September, then reported full;
+  <b>on 10 September the Director dropped it</b>. Edita goes to Songjiang. Final pair, decided 10 September ~23:2x: Director Xuhui, Edita Jing'an; Songjiang dropped as not needed. Kevin and Lexi told 10 September ~23:3x; awaiting confirmation.</div>
 
   <h2 id="r-ai">AI models — can Brisen run Chinese models in Europe?</h2>
   <div class="card"><p><b>Short answer: yes.</b> US chip rules stop advanced hardware going <i>into</i>
@@ -942,12 +1239,257 @@ tr:last-child td{border-bottom:0}
       smaller hotel surface.</td><td>Xuhui</td></tr>
     <tr><td>6</td><td><b>MiniMax</b></td><td><span class="chip pr">With a tether</span> Written permission needed
       above 20 million dollars of product revenue.</td><td>Guiqing Road</td></tr>
-      </table>
-    <p class="note"><b>Also:</b> Europe's AI rules give an exemption for genuinely open licences. Five of the
+    <tr><td>7</td><td><b>SenseTime</b></td><td><span class="chip no">No — do not ask</span> On the US restricted
+      list. Your project runs on American chips.</td><td>—</td></tr>
+  </table>
+  <div class="gap"><b>The hard rule.</b> SenseTime must never appear beside NVIDIA on this project.
+  NVIDIA is a US company; SenseTime carries a presumption of denial. That pairing cannot be fixed in a meeting.</div>
+  <p class="note"><b>Also:</b> Europe's AI rules give an exemption for genuinely open licences. Five of the
   seven qualify. And the obligation falls on Brisen as the deployer, not on the lab.</p>
+  <h2 id="r-citic">Who CITIC actually is — and what it owns <span class="chip nb">Researcher pass, 10 September</span></h2>
+  <div class="card">
+    <h3>CITIC owns the Mandarin Oriental in Prague. Not Mandarin Oriental.</h3>
+    <p class="meta">Czech company register plus CITIC Group's own consolidation list at 31 March 2026 · not independently opened by this desk</p>
+    <p>The Prague hotel is a Czech company, <b>KARMELITSKÁ HOTEL s.r.o.</b>, at the hotel's own address in
+       Malá Strana. Its sole shareholder is <b>CITIC Europe Holdings</b>. <b>Jardine and Mandarin Oriental
+       manage the brand; they do not own the building.</b> The seller in any Prague conversation is CITIC.</p>
+    <p><b>The name that matters:</b> <b>Chu Xiao</b> — the man who answered the June proposal — became a
+       director of that company on <b>1 April 2026</b>, and may act alone.</p>
+    <p><b>Reported, weaker source:</b> the company was loss-making in 2023 and its equity was negative by
+       about 269 million crowns. Second-hand; not confirmed.</p>
+    <p><b>The distinction to hold on this trip:</b> Wayne Lu's bank in Shanghai and the Prague owner are
+       <b>different legal persons inside the same group</b>. The robot introductions do not come from your
+       Prague counterparty, and a warm robotics week is not progress on the hotel.</p>
+    <p><b>Also still owned in Europe:</b> Le Palais hotel, Florentinum, ŽĎAS, the Lobkowicz breweries.
+       Slavia and Smartwings are sold. In the United States: two bank branches and a broker — <b>no hotel</b>.</p>
+  </div>
+
+  <h2 id="r-case">Why these machines — the case already on file</h2>
+  <div class="card">
+    <h3>The reading behind the visit list</h3>
+    <p class="meta">NVIDIA's 20 July framework, and the two papers Peter Storer sent on 30 July</p>
+    <p><b>NVIDIA's own framework</b> hands selection, integration, operation and fleet orchestration to
+       "NVIDIA + Partners", naming its own stack. <b>Brisen is not named anywhere in that role map.</b>
+       Meeting the makers yourself is one of the few ways that changes.</p>
+    <p><b>BCG, March 2026:</b> the saving is lower cost per key through automation and robotics. The barriers
+       are integration, split owner-operator-brand structures and poor hotel data — <b>not the technology</b>.</p>
+    <p><b>InsightBridge, July 2026:</b> the luxury rule is <b>back of house yes, guest-facing carefully</b>.
+       Warmth stays human. That is why the humanoid maker is last on the list and the cleaning and delivery
+       machines are first.</p>
+    <p><b>One figure, weakly sourced:</b> robotic cleaning at roughly 60 to 80 thousand dollars a unit. Staged
+       number, primary document not fully read. Do not quote it to a counterparty.</p>
+  </div>
+
 </section>
 
 <!-- ================= WECHAT ================= -->
+<section class="pane" id="p-wx">
+  <h1>WeChat</h1>
+  <p class="stamp">Who you are talking to, in which room, and what was actually proposed. Newest first.</p>
+  <p class="note">Read from your own screen on 9, 10 and 11 September. History above the visible window has
+  never been read, and no member list has been opened — so the people below are those who have spoken,
+  not everyone present.</p>
+
+  <h2>Master group — "Master Citic + Gausium + Robotics" · <b>18 members</b> (was 14)</h2>
+  <div class="card">
+    <p class="meta">Chinese name 布里森集团上海行对接 · grew to 18 by 14:26 on 10 September · this is where the robotics
+    track lives, and where your letter to Wayne goes.</p>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 11 Sep, 17:44</span>
+      <p class="said">"Dimitry, We'll adjust the visit of Gausium from 15/9 to 14/9 afternoon due to the time conflict."</p>
+      <p><span class="chip ok">The 15th is free again</span> Gausium lands back on the day you first gave it.
+      <b>He does not say what the conflict was.</b> Nothing has been put into the 15th since.</p></div>
+
+    <div class="wx"><span class="who">You, then Wayne Lu</span> <span class="role">— 11 Sep, 16:52</span>
+      <p class="said">You: "Weyne, great. it works, see you then" — Wayne: "Ok"</p>
+      <p><span class="chip ok">The week is accepted</span> This is the moment the plan became agreed:
+      Gausium, AgiBot and PsiBot in, <b>Critical Point out</b>, the Qwen visit still only "coordinating".</p></div>
+
+    <div class="wx"><span class="who">You, then 于希苘 Starry</span> <span class="role">— 11 Sep, 16:32</span>
+      <p class="said">You: "Starry, thank you. Yes it works" — she: "Awesome"</p>
+      <p><span class="chip ok">Closed both ways</span> 16 September, 09:30, their Shanghai office. The only
+      meeting on the trip with an hour agreed by both sides. Address still not given.</p></div>
+
+    <div class="wx"><span class="who">于希苘 Starry</span> <span class="role">— PsiBot · 11 Sep, 09:46</span>
+      <p class="said">"Sure we could meet in the morning on the 16th. We could meet at 9:30am in our Shanghai
+      office. Please see if this schedule works for you."</p>
+      <p><span class="chip ok">A named hour — the firmest slot on the trip</span> No address given. Ask for it,
+      and for how you get there.</p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 11 Sep, 09:43</span>
+      <p class="said">"Dimitry, We are still coordinating the visit to Qwen team. Tentatively, we plan to meet
+      Gausium on the 15th afternoon, and Agibot (afternoon) and Psibot (morning) on the 16th. I can accompany
+      you and drive you to each company if you want."</p>
+      <p><span class="chip no">Three departures from what you thanked him for</span>
+      Gausium moves off the 14th · <b>AgiBot</b> is named for the first time · <b>Critical Point disappears</b>.
+      AgiBot is Critical Point's parent, so it may be a substitution — he does not say. The Qwen visit is still
+      only "coordinating", so the 15th he is filling with Gausium is the day you had held for the lab.</p>
+      <p><span class="chip nb">He offers to drive you</span> The person holding your whole robotics track, whose
+      employer rests on one third-party sentence, would also be your driver between companies.</p></div>
+
+    <div class="wx"><span class="who">You</span> <span class="role">— 11 Sep, 09:16 · sent</span>
+      <p class="said">"Starry — thank you, and understood: PsiBot on Wednesday 16 September. Could we meet in the
+      morning? Please propose a time and how we get there" · "Wayne — the 15th is now free. Would Tuesday 15
+      September work for the Qwen team or another lab? Thursday 17 September morning is also open."</p>
+      <p><span class="chip ok">Both answered</span> Starry with a time; Wayne with a plan that takes the 15th.</p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 11 Sep, 01:16</span>
+      <p class="said">"copy that"</p>
+      <p><span class="chip nb">Acknowledgement only</span> His answer to your thanks for "Gausium on the 14th and
+      Critical Point on the 16th". Eight hours later his own plan has neither.</p></div>
+
+    <div class="wx"><span class="who">于希苘 Starry</span> <span class="role">— PsiBot · 11 Sep, ~01:1x</span>
+      <p class="said">"I represent PsiBot"</p>
+      <p><span class="chip ok">Lane established</span> She is not a separate party; she is PsiBot.</p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 10 Sep, 14:52</span>
+      <p class="said">"Well noted above, I'll share the schedule tomorrow."</p>
+      <p><span class="chip pr">He is building the schedule</span> He has taken the availability and will
+      come back with a plan. Say your preference before he fixes it.</p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 10 Sep, 14:41</span>
+      <p class="said">"We will try to arrange the chance to visit Alibaba's Qwen team."</p>
+      <p><span class="chip pr">Working on it</span> A direct answer to the AI-labs ask, naming Qwen — the
+      named first choice did its job.</p></div>
+
+    <div class="wx"><span class="who">Gausium team</span> <span class="role">— 10 Sep, ~14:2x</span>
+      <p class="said">"…from hotel deployments across Europe, including what has worked well and how we have
+      addressed the operational challenges… Our Head of Europe/APAC Allen.zh, Muller 吴家印, 喵喵 and regional
+      sales Saxon, also strategy specialist Oulivia would be happy to arrange an introductory discussion…
+      <b>We can meet either on 14 or 15 from 13:00 to 18:00.</b> Please feel free to share your availability."</p>
+      <p><span class="chip pr">A real slot offer — needs your pick</span> They also ask to explore cleaning
+      automation "across your properties". <b>Note:</b> they say hotel deployments in Europe, plural. The
+      research found one — InterContinental Vienna, two machines. Ask them to name the others.</p></div>
+
+    <div class="wx"><span class="who">于希苘 Starry</span> <span class="role">— 10 Sep</span>
+      <p class="said">"For me, 15 and 16th are ok as well"</p></div>
+
+    <div class="wx"><span class="who">王子源 Welson</span> <span class="role">— Critical Point · 10 Sep</span>
+      <p class="said">"I will be ok at 16th afternoon"</p>
+      <p><span class="chip no">Clashes with one-day-for-all-three</span></p></div>
+
+    <div class="wx"><span class="who">You</span> <span class="role">— 10 Sep, 14:26 · sent</span>
+      <p class="said">The AI-labs follow-up went out to this group, naming Alibaba's Qwen team as first choice.</p>
+      <p><span class="chip ok">Sent</span></p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— coordinator · 10 Sep, 11:49</span>
+      <p class="said">"Dimitry, do u have any prefer dates in next week? and if any topics related to Gausium's
+      and Critical Point's business that you're interested in, feel free to share them in the group…
+      Gausium and Critical Point, could you share your company addresses and which days next week are more
+      convenient? I'll arrange the visit schedule for everyone."</p>
+      <p><span class="chip no">Still unanswered</span> This is what your draft letter replies to.</p></div>
+
+    <div class="wx"><span class="who">文雅 ("Miss Wang")</span> <span class="role">— PsiBot · 10 Sep, 12:28</span>
+      <p class="said">She is coordinating PsiBot's participant and time.</p></div>
+
+    <div class="wx"><span class="who">王勇 Wang Yong</span> <span class="role">— introducer · 10 Sep, 12:11</span>
+      <p class="said">"Hi Dimitry; 文雅 is from PsiBot company"</p>
+      <p>This is how the third company entered. He added her to the group at 12:05.</p></div>
+
+    <div class="wx"><span class="who">Amy 喵喵</span> <span class="role">— Gausium, head of sales · 10 Sep, 11:23</span>
+      <p class="said">"Allen is the Director of our European region at Gausium… Wayne From CITIC Bank
+      Shanghai Branch; He will coordinate Brisen Group visiting schedules; and Mr Vallen is heads of
+      Brisen Group"</p>
+      <p><span class="chip no">This is the only source for Wayne's employer</span></p></div>
+
+    <div class="wx"><span class="who">Wayne Lu</span> <span class="role">— 9 Sep</span>
+      <p class="said">"Our plan is to try to arrange for Brisen to visit three robotics companies on a
+      single day next week."</p>
+      <p>The origin of the whole track.</p></div>
+  </div>
+
+  <h2>Lexi 高澜茜 — direct chat</h2>
+  <div class="card">
+    <p class="meta">One-to-one, not a group · read 11 September, 18:4x Geneva</p>
+    <div class="wx"><span class="who">You</span> <span class="role">— 11 Sep, 10:08</span>
+      <p class="said">"good. just need to work out google thing"</p>
+      <p><span class="chip no">The last line in the chat</span> Nothing in this room confirms you got into the
+      meeting. That the call happened at all is known only because you said so.</p></div>
+    <div class="wx"><span class="who">Lexi 高澜茜</span> <span class="role">— 11 Sep, ~10:07</span>
+      <p class="said">"i have informed the attendees to wait for you" · "about the 2 things to chase, you are in
+      the group with the people who are in charge of this 2 matters, please approach and tag them first, if not
+      working, i will follow up"</p>
+      <p><span class="chip pr">She hands the chasing back to you</span> She will act only if tagging the
+      responsible people in the group fails first.</p></div>
+    <div class="wx"><span class="who">Lexi 高澜茜</span> <span class="role">— 11 Sep, 10:06</span>
+      <p class="said">"use google to get online" · "the verification code is not working" · "there are several
+      methods to log in, use google"</p>
+      <p><span class="chip no">You nearly missed the call</span> The meeting platform asked to bind a mobile
+      number and the code failed. The attendees were held for you. <b>Fix the login before any further online
+      meeting</b> — there is no reason to discover this twice.</p></div>
+    <div class="wx"><span class="who">Lexi 高澜茜</span> <span class="role">— 11 Sep, 10:00</span>
+      <p class="said">"we are all in the meeting, are you joining soon?"</p></div>
+  </div>
+
+  <h2>"Jing'an district" · <b>11 members</b> (was 10)</h2>
+  <div class="card">
+    <p class="meta">Chinese name 布里森－静安线上会议 · the online meeting room</p>
+    <div class="wx"><span class="who">The bow-icon member</span> <span class="role">— 11 Sep, 10:05</span>
+      <p class="said">"@Dimitry Vallen Hi, can enter the meeting now."</p>
+      <p><span class="chip no">Last message in the room</span> Nothing has been said in it since — by anyone,
+      on either side.</p></div>
+
+    <div class="wx"><span class="who">The bow-icon member</span> <span class="role">— 11 Sep, 07:31 and 09:54</span>
+      <p class="said">The Tencent Meeting card — 布里森集团-中信银行线上交流会, 2026/09/11, 16:00–17:00,
+      meeting number 222 105 598 — then a reminder at 09:54. One member was added at 09:47.</p>
+      <p><span class="chip nb">The title names the bank, not the district</span></p></div>
+
+    <div class="wx"><span class="who">The group</span> <span class="role">— for 11 Sep</span>
+      <p class="said">"tomorrow 4pm Chinese time online meeting to discuss about the visit to Jingan District"</p>
+      <p><span class="chip ok">Agreed — 16:00 Shanghai, 10:00 Geneva</span> Lexi interprets.</p></div>
+  </div>
+
+  <h2>"18 Sep — route split" · <b>6 members</b> (was 5)</h2>
+  <div class="card">
+    <p class="meta">Chinese name 布里森上海9月18号路线 · the district routes</p>
+    <div class="wx"><span class="who">小碗</span> <span class="role">— routes · 11 Sep, 09:53</span>
+      <p class="said">"No.3 Xuhui Route: Gather at ITC Xujiahui Center at 10:00 a.m., September 18."</p>
+      <p>With a map card: <b>徐家汇中心3期A座</b>, 上海市徐汇区徐家汇街道虹桥路183号.
+      <span class="chip ok">Your route — issued</span></p></div>
+
+    <div class="wx"><span class="who">章珂杰 Kevin</span> <span class="role">— routes · 11 Sep, ~09:5x</span>
+      <p class="said">"you can forward to Edita"</p>
+      <p><span class="chip no">Edita is not in this group</span> The Jing'an gather point reaches her only if
+      you send it on.</p></div>
+
+    <div class="wx"><span class="who">小碗</span> <span class="role">— routes · 11 Sep, 09:48</span>
+      <p class="said">"Hi Dimitry, No.2 Jing'an Route: Gather at South Gate 2 of Zhang Yuan (Jing'an) at
+      9:45 a.m., September 18."</p>
+      <p>With a map card: <b>张园-南2门</b>, 上海市静安区南京西路街道威海路550号.
+      <span class="chip ok">Edita's route — issued</span> A new voice in this room; no lane on file beyond it.</p></div>
+
+    <div class="wx"><span class="who">You</span> <span class="role">— 11 Sep, before 09:48 · sent</span>
+      <p class="said">"…and Edita takes Jing'an, badge No. 2. Could you send the meeting point and start time
+      for each route?"</p>
+      <p><span class="chip ok">Answered within the hour</span> This is the ask that produced both gather points.</p></div>
+
+    <div class="wx"><span class="who">章珂杰 Kevin</span> <span class="role">— routes · 10 Sep, 14:54</span>
+      <p class="said">"👌Then we wil…" — <b>unread and cut off on screen.</b></p>
+      <p><span class="chip no">Unread — open this thread</span> A reply on the districts landed and has
+      not been read.</p></div>
+    <div class="wx"><span class="who">Kevin 章珂杰</span> <span class="role">— routes</span>
+      <p class="said">"We can send one to Xuhui and the other to Songjiang or Jing'an." · "It is at the same day Sep 18"</p>
+      <p><span class="chip pr">Proposed</span> Does not mention Pudong, which the organiser already accepted.</p></div>
+    <div class="wx"><span class="who">Lexi 高澜茜</span> <span class="role">— interpreter</span>
+      <p class="said">Asked whether the two districts run at the same time, and noted that if so "they will
+      attend one each separately".</p></div>
+    <div class="wx"><span class="who">You</span> <span class="role">— your answer in the Lexi thread</span>
+      <p class="said">"they happen at the same time, then one for Edita for Songjiang, one for me for Jingan.
+      If they are at different times, then we would both go together for each."</p></div>
+  </div>
+
+  <h2>By email, not WeChat — the organiser</h2>
+  <div class="card">
+    <div class="wx"><span class="who">Liu Yansong 刘延松</span> <span class="role">— CITIC Europe Holdings, Prague · 8 Sep, 13:35</span>
+      <p class="said">"Received, thanks! I will arrange."</p>
+      <p>His answer to your request for <b>Xuhui for you, Pudong New Area for Edita</b>.
+      <span class="chip ok">The strongest thing you hold on the districts</span></p></div>
+    <div class="wx"><span class="who">Liu Yansong 刘延松</span> <span class="role">— 7 Aug, 11:30</span>
+      <p class="said">"Jing'an District, Shanghai, is very interested in exploring potential cooperation
+      opportunities with you…"</p>
+      <p>Jing'an approached you first, and led with heritage regeneration and luxury retail — not technology.</p></div>
+  </div>
+</section>
 
 <!-- ================= THE SEVEN CITIC ROUTES ================= -->
 <section class="pane" id="p-routes">
@@ -1202,10 +1744,41 @@ function show(pane,go){
   document.querySelectorAll('.navitem').forEach(n=>n.classList.toggle('on',n.dataset.pane===pane));
   window.scrollTo(0,0);
   if(go){const t=document.getElementById(go); if(t) setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),60);}
+  if(window.__syncTopbar) window.__syncTopbar(pane);
 }
 document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>show(n.dataset.pane)));
 document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{if(!a.dataset.pane)return;e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
+
+/* return button — back to the room's main page */
+(function(){
+  var btn=document.getElementById('backMain'), where=document.getElementById('whereNow');
+  function label(pane){
+    var n=document.querySelector('.navitem[data-pane="'+pane+'"]');
+    return n ? n.textContent.replace(/^[\s\u25B6\u25BC]+/,'').trim() : 'Confirmed visits';
+  }
+  window.__syncTopbar=function(pane){
+    if(where) where.textContent=label(pane);
+    if(btn) btn.disabled = (pane==='conf');
+  };
+  if(btn) btn.addEventListener('click',function(){ show('conf'); });
+  window.__syncTopbar('conf');
+})();
+
+/* copy buttons on the replies pane */
+document.querySelectorAll('.msg .copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.closest('.msg').querySelector('.body').innerText;
+    function done(){ var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,fallback); }
+    else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); done(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+});
 document.querySelector('.chev').click();
-if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('shanghai-sw.js').catch(()=>{});}
+if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('shanghai-sw.js').catch(function(){});}
 </script>
 </body></html>
