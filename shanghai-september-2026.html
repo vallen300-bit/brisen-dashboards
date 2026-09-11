@@ -99,6 +99,12 @@ tr:last-child td{border-bottom:0}
     <a data-pane="conf" data-go="k-routes">18 Sep · District visits</a>
   </div>
 
+  <div class="navitem" data-pane="talks"><span class="chev" data-sub="s-talks">▶</span> 💬 Meetings and Talks</div>
+  <div class="sub" id="s-talks">
+    <a data-pane="talks" data-go="t-jingan">Jing'an district</a>
+    <a href="https://vallen300-bit.github.io/brisen-dashboards/jingan-district.html" target="_blank" rel="noopener">↗ Jing'an district — full brief</a>
+  </div>
+
   <div class="navitem" data-pane="trip"><span class="chev" data-sub="s-trip">▶</span> ⏳ Pending confirmation</div>
   <div class="sub" id="s-trip">
     <a data-pane="trip" data-go="c-gausium">Gausium 高仙</a>
@@ -232,6 +238,26 @@ tr:last-child td{border-bottom:0}
   <div class="card">
     <p class="meta">Earliest start 09:00, latest finish 16:15 · business casual · lunch in the district on the badge</p>
     <p>The day is fixed. You: Xuhui (badge No. 3). Edita: Jing'an (badge No. 2). Sent to Kevin on 10 September and <b>confirmed by 章珂杰 Kevin at 00:35 on 11 September — "no problem"</b>. Pudong dropped; <b>Songjiang is off</b> — your 15:23 agreement to it was superseded by the 22:58 pair, which Kevin accepted. The seven routes are under <b>The seven CITIC routes</b>.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-talks">
+  <h1>Meetings and Talks</h1>
+  <p class="stamp">Every counterparty conversation, and the file behind it</p>
+
+  <h2 id="t-jingan">Jing'an district — online, 11 September</h2>
+  <div class="card">
+    <p class="meta">16:00–17:00 Shanghai / 10:00–11:00 Geneva · Tencent Meeting <b>222 105 598</b> · Lexi interprets</p>
+    <p>The introductory call Jing'an asked for on 7 August and you accepted on 8 September, arranged through
+       Liu Yansong at CITIC Europe in Prague. The invite card is titled "Brisen Group – CITIC Bank online exchange
+       meeting", which names the bank rather than the district.</p>
+    <p><b>The full district brief is a separate page</b> — who they are, who invites an investor, what they pay and
+       what they do not, their 18 September route, their three showpieces, the robotics check, and every open point.</p>
+    <p><a href="https://vallen300-bit.github.io/brisen-dashboards/jingan-district.html" target="_blank" rel="noopener"><b>↗ Open the Jing'an district brief</b></a></p>
+  </div>
+  <div class="card">
+    <p class="meta">More talks land here as they happen</p>
+    <p>Each one gets the same treatment: what it was, who was on it, and the file behind the counterparty.</p>
   </div>
 </section>
 
@@ -1178,7 +1204,7 @@ function show(pane,go){
   if(go){const t=document.getElementById(go); if(t) setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),60);}
 }
 document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>show(n.dataset.pane)));
-document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
+document.querySelectorAll('.sub a').forEach(a=>a.addEventListener('click',e=>{if(!a.dataset.pane)return;e.preventDefault();show(a.dataset.pane,a.dataset.go);}));
 document.querySelector('.chev').click();
 if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('shanghai-sw.js').catch(()=>{});}
 </script>

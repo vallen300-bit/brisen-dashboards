@@ -1,0 +1,392 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jing'an District — what we know</title>
+<script>(function(){try{var t=localStorage.getItem('ja-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+<style>
+:root{--ink:#1b1b1b;--mute:#6e6e6e;--faint:#9a9a9a;--line:#e0dfda;--bg:#f7f6f3;--card:#fff;
+--navink:#c9d6de;--navhi:#fff;--ok:#2e6b4f;--okbg:#e6f2ec;--warn:#8a6a1f;--warnbg:#fbf3e0;
+--stop:#8c2b2b;--stopbg:#f7e9e9;--info:#2f4858;--infobg:#e9eff2}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8e6e1;--mute:#9c9992;--faint:#77746e;
+--line:#332f2b;--bg:#121211;--card:#1a1917;--navink:#a9bcc7;--navhi:#fff;
+--ok:#7fc0a0;--okbg:#172a21;--warn:#d9b95f;--warnbg:#2a2415;--stop:#e09292;--stopbg:#2c1a1a;
+--info:#9dc0d2;--infobg:#182428}}
+:root[data-theme="dark"]{--ink:#e8e6e1;--mute:#9c9992;--faint:#77746e;
+--line:#332f2b;--bg:#121211;--card:#1a1917;--navink:#a9bcc7;--navhi:#fff;
+--ok:#7fc0a0;--okbg:#172a21;--warn:#d9b95f;--warnbg:#2a2415;--stop:#e09292;--stopbg:#2c1a1a;
+--info:#9dc0d2;--infobg:#182428}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif}
+.shell{display:flex;min-height:100vh}
+nav{width:276px;flex:0 0 276px;background:#22303a;color:var(--navink);padding:26px 0 40px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{padding:0 22px 18px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:10px}
+.brand b{display:block;color:#fff;font-size:16px;letter-spacing:-.01em}
+.brand span{font-size:11px;color:#7f95a3;letter-spacing:.1em;text-transform:uppercase}
+.themebar{display:flex;gap:4px;padding:0 22px 16px}
+.themebar button{flex:1;appearance:none;cursor:pointer;font:inherit;font-size:10.5px;font-weight:700;
+ letter-spacing:.09em;text-transform:uppercase;color:#93a8b5;background:rgba(255,255,255,.05);
+ border:1px solid rgba(255,255,255,.10);border-radius:3px;padding:6px 0}
+.themebar button:hover{color:#fff;background:rgba(255,255,255,.10)}
+.themebar button[aria-pressed="true"]{color:#fff;background:rgba(110,168,196,.26);border-color:#6ea8c4}
+.grp{padding:12px 22px 4px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6d8492;font-weight:700}
+.navitem{display:flex;align-items:baseline;gap:9px;padding:9px 22px;cursor:pointer;font-size:13.5px;
+ border-left:3px solid transparent;user-select:none;color:#93a8b5}
+.navitem:hover{background:rgba(255,255,255,.05);color:#fff}
+.navitem.on{background:rgba(255,255,255,.09);border-left-color:#6ea8c4;color:var(--navhi);font-weight:600}
+.navitem i{font-style:normal;color:#6d8492;font-size:11px;min-width:14px}
+main{flex:1;padding:34px 40px 90px;max-width:1020px}
+.pane{display:none}.pane.on{display:block}
+h1{font-size:25px;margin:0 0 3px;letter-spacing:-.015em}
+.stamp{color:var(--mute);font-size:12.5px;margin:0 0 26px}
+h2{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin:30px 0 12px;font-weight:700}
+h2:first-of-type{margin-top:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;margin:0 0 12px}
+.card h3{margin:0 0 6px;font-size:16px}
+.card p{margin:0 0 9px}.card p:last-child{margin:0}
+.meta{color:var(--mute);font-size:13px;margin:0 0 8px}
+.chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+ padding:3px 8px;border-radius:2px;vertical-align:2px;margin-left:4px}
+.ok{background:var(--okbg);color:var(--ok)}.pr{background:var(--warnbg);color:var(--warn)}
+.no{background:var(--stopbg);color:var(--stop)}.nb{background:var(--infobg);color:var(--info)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 14px;background:var(--card);
+ border:1px solid var(--line);border-radius:4px;overflow:hidden}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);
+ padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+blockquote{margin:0 0 10px;padding:2px 0 2px 14px;border-left:3px solid var(--line);color:var(--mute);font-style:italic}
+.q{color:var(--mute);font-size:13.5px}
+ul{margin:0 0 10px;padding-left:20px}li{margin:0 0 5px}
+.big{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.src{font-size:12.5px;color:var(--mute)}
+@media(max-width:820px){.shell{display:block}nav{width:auto;height:auto;position:static}main{padding:22px 18px 70px}}
+@media print{nav{display:none}.pane{display:block!important}}
+</style></head><body>
+<div class="shell">
+<nav>
+  <div class="brand"><span>Brisen Group</span><b>Jing'an District</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">Everything on file · 11 September 2026</span></div>
+  <div class="themebar" role="group" aria-label="View">
+    <button type="button" data-set="auto" aria-pressed="false">Auto</button>
+    <button type="button" data-set="light" aria-pressed="false">Light</button>
+    <button type="button" data-set="dark" aria-pressed="false">Dark</button></div>
+
+  <div class="grp">Before you speak</div>
+  <div class="navitem on" data-pane="call"><i>1</i>The call today</div>
+  <div class="navitem" data-pane="ask"><i>2</i>What to ask</div>
+  <div class="grp">Who they are</div>
+  <div class="navitem" data-pane="who"><i>3</i>The district itself</div>
+  <div class="navitem" data-pane="route"><i>4</i>How they reached you</div>
+  <div class="grp">What is on offer</div>
+  <div class="navitem" data-pane="bureau"><i>5</i>Who invites an investor</div>
+  <div class="navitem" data-pane="money"><i>6</i>The money question</div>
+  <div class="navitem" data-pane="banks"><i>7</i>Banks and CITIC</div>
+  <div class="grp">What you would see</div>
+  <div class="navitem" data-pane="day"><i>8</i>The 18 September route</div>
+  <div class="navitem" data-pane="show"><i>9</i>Their three showpieces</div>
+  <div class="navitem" data-pane="park"><i>10</i>Market North park</div>
+  <div class="grp">Hard edges</div>
+  <div class="navitem" data-pane="norobot"><i>11</i>No robotics here</div>
+  <div class="navitem" data-pane="open"><i>12</i>Open and unresolved</div>
+  <div class="navitem" data-pane="src"><i>13</i>Where this comes from</div>
+</nav>
+
+<main>
+
+<section class="pane on" id="p-call">
+  <h1>The call today</h1>
+  <p class="stamp">16:00–17:00 Shanghai · 10:00–11:00 Geneva · Tencent Meeting 222 105 598</p>
+  <div class="card">
+    <h3>This is the introductory call you asked for <span class="chip ok">Agreed</span></h3>
+    <p>On 8 September you wrote to Liu Yansong: <i>"You wrote to me on 7 August that Jing'an District would
+       welcome an introductory call. I should have answered then and I did not; my apologies."</i> He replied
+       <i>"Received, thanks! I will arrange."</i> This meeting is the answer to that.</p>
+    <p><b>Who is on it.</b> A WeChat group of 10, opened by <b>Lexi 高澜茜</b>, who introduced you as the head of
+       Brisen and said she will interpret and handle communication, as she did on the earlier hotel-business call.
+       The invite card came at 07:31 today from the member with the bow icon, who wrote <i>"see you at our online
+       meeting tomorrow afternoon"</i>.</p>
+    <p><b>The title names the bank, not the district</b> — 布里森集团-中信银行线上交流会, "Brisen Group – CITIC
+       Bank online exchange meeting". See <b>Banks and CITIC</b> for why that is most likely the channel speaking,
+       not a change of counterparty.</p>
+  </div>
+  <div class="card">
+    <h3>The one line to say out loud</h3>
+    <p>On 18 September you take <b>Xuhui</b>, badge No. 3, and <b>Edita takes Jing'an</b>, badge No. 2 — confirmed by
+       章珂杰 Kevin at 00:35 today. The district side should hear that from you, because their programme that day is
+       built for the visitor who comes.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-ask">
+  <h1>What to ask</h1>
+  <p class="stamp">Four questions that turn a courtesy call into information</p>
+  <div class="card"><h3>1 · Who is on your side, and in what role?</h3>
+    <p>Their investment promotion is normally fronted by a deputy district head — at the 8 May 2025 conference that
+       was <b>胡勇 Hu Yong</b>. Knowing whether you have the commerce commission, the promotion office or the bank
+       tells you what the meeting can decide.</p></div>
+  <div class="card"><h3>2 · Is the 18 September Jing'an route the same programme you are describing?</h3>
+    <p>Their published day is a fixed seven-stop route. If what they pitch on the call is different, one of the two
+       is out of date.</p></div>
+  <div class="card"><h3>3 · What would you like from Brisen?</h3>
+    <p>The event's own target profile is a manufacturer expanding in Shanghai. Brisen is a Swiss hotel and
+       residential developer with no Shanghai operation. Better that they say what they want than that you guess.</p></div>
+  <div class="card"><h3>4 · Can you reach a frontier AI lab for us?</h3>
+    <p><b>Tuesday 15 September is now free</b> — PsiBot moved off it. Jing'an has no robotics, but it has data and
+       headquarters reach, and its 国际会客厅 window exists precisely to make introductions.</p></div>
+</section>
+
+<section class="pane" id="p-who">
+  <h1>The district itself</h1>
+  <p class="stamp">上海市静安区 · central Shanghai · the only one of the four districts that approached Brisen first</p>
+  <div class="card">
+    <h3>How they describe themselves</h3>
+    <p class="meta">Their own self-introduction, sent through CITIC Europe on 7 August 2026</p>
+    <blockquote>Located in the heart of Shanghai, Jing'an District gets its name from the ancient Jing'an Temple.
+      It is a vibrant blend of old and new — home to luxury shopping streets like West Nanjing Road, modern tech
+      hubs, and charming traditional neighborhoods… landmarks range from the golden-roofed Jing'an Temple and
+      historic shikumen lane houses at Zhang Yuan, to fairytale-like European villas (Mahlers Hall) and key WWII
+      sites like the Sihang Warehouse.</blockquote>
+    <p>They led with <b>historic-fabric regeneration and luxury retail</b>, not with technology. Worth remembering:
+       it is the closest of the four districts to what Brisen actually does.</p>
+  </div>
+  <div class="card">
+    <h3>What the district is, in its own policy words</h3>
+    <p><b>A headquarters-and-data district.</b> Its 2026 business-environment plan builds a headquarters-economy
+       centre, runs a "headquarters upgrading" programme, chases multinational regional headquarters, functional
+       global divisions and treasury centres, and establishes a district cross-border data service centre.</p>
+    <p><b>Its named industry tracks:</b> beauty and health · ultra-high-definition AI audiovisual and
+       cultural-creative · blockchain · data intelligence · headquarters economy.</p>
+    <p class="q">Reported, not verified this pass: 142 cumulative multinational regional headquarters, about 11% of
+       Shanghai's total, 54 of them added since the start of the 14th Five-Year Plan.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-route">
+  <h1>How they reached you</h1>
+  <p class="stamp">Through Prague, not through Shanghai</p>
+  <table><thead><tr><th>Date</th><th>What happened</th><th>Channel</th></tr></thead><tbody>
+  <tr><td>7 Aug 2026</td><td><b>Jing'an asks for an introductory call.</b> Liu Yansong, Strategic Coordination General Director, CITIC Europe Holdings a.s., Prague: <i>"Jing'an District, Shanghai, is very interested in exploring potential cooperation opportunities with you."</i> Not answered at the time.</td><td>Email</td></tr>
+  <tr><td>8 Sep 2026</td><td>You answer, apologise for the delay, offer three mornings.</td><td>Email</td></tr>
+  <tr><td>8 Sep 2026</td><td><i>"Received, thanks! I will arrange."</i></td><td>WhatsApp</td></tr>
+  <tr><td>10 Sep 2026</td><td>The meeting group stands at 10 members.</td><td>WeChat</td></tr>
+  <tr><td>11 Sep 2026</td><td>Invite card at 07:31; meeting at 16:00 Shanghai.</td><td>WeChat</td></tr>
+  </tbody></table>
+  <div class="card"><h3>The thing to keep in view</h3>
+    <p><b>Jing'an did not contact Brisen directly.</b> Every step has run through CITIC Europe in Prague. That is
+       also why a CITIC-titled meeting card is unsurprising.</p>
+    <p><b>Nothing has ever been signed.</b> No Brisen entity has applied for, been offered, or accepted any Jing'an
+       incentive, tenancy or agreement, and there is no signed document with any Shanghai district in the record.</p></div>
+</section>
+
+<section class="pane" id="p-bureau">
+  <h1>Who invites an investor</h1>
+  <p class="stamp">Two bodies, one building</p>
+  <table><thead><tr><th>Body</th><th>Address</th><th>Telephone</th></tr></thead><tbody>
+  <tr><td><b>静安区商务委员会</b><br>Jing'an District Commission of Commerce</td><td>巨鹿路915号</td><td class="number">021-64178239</td></tr>
+  <tr><td><b>静安区投资促进办公室</b><br>Investment Promotion Office</td><td>巨鹿路915号, floor 17</td><td class="number">021-33372300</td></tr>
+  </tbody></table>
+  <div class="card"><h3>Who normally fronts the pitch</h3>
+    <p>At the district's <b>8 May 2025</b> high-quality-development investment conference, <b>deputy district head
+       胡勇 Hu Yong</b> signed on the government's behalf. Expect the promotion office to run the presentation and a
+       deputy head to open it.</p>
+    <p class="meta">Their published conference shape, from the 18 September programme: leaders' remarks 5 minutes ·
+       investment-environment presentation 20–25 minutes · interactive exchange 30 minutes.</p></div>
+</section>
+
+<section class="pane" id="p-money">
+  <h1>The money question</h1>
+  <p class="stamp">Read in full: two district policies and the one 2026 fund that carries figures</p>
+  <div class="card">
+    <h3>What Jing'an publishes for an inbound foreign investor <span class="chip no">No figure exists</span></h3>
+    <p>Its 2024 measures on building a modern industrial system explicitly back <b>multinational regional
+       headquarters and R&amp;D centres</b> — but the text <b>carries no cash figure anywhere</b>. It sets direction
+       and delegates to the commerce commission, the science-and-economy commission and the promotion office.</p>
+    <p>Its 2026 business-environment action plan builds the headquarters-economy centre, the cross-border data
+       service centre, the 静安国际会客厅 one-stop window and a QFLP route — again, <b>no published number</b>.</p>
+    <p><b>So the absence is real, but it is not the same as an absence of support.</b> Jing'an's route is the
+       international window plus municipal headquarters recognition, both discretionary.</p>
+  </div>
+  <div class="card">
+    <h3>The one fund with numbers points outward, not inward</h3>
+    <p class="meta">2026 Jing'an special fund for building a going-abroad service platform, first batch, 23 April 2026</p>
+    <ul>
+      <li>Up to <b>RMB 5 million</b> for a newly established going-abroad headquarters in Jing'an, or an existing one upgraded to Asia-Pacific or global</li>
+      <li><b>RMB 500,000</b> for an overseas operating entity</li>
+      <li>Overseas investment or M&amp;A: up to <b>20%</b> of repatriated dividends, max <b>RMB 5 million</b> per company per year</li>
+      <li>International market development: up to <b>50%</b>, max <b>RMB 2 million</b> a year, plus a <b>RMB 300,000</b> first-landing award</li>
+      <li>Going-out professional services: up to <b>20%</b>, max <b>RMB 2 million</b> per project, <b>RMB 10 million</b> per company a year</li>
+      <li>Platform building up to <b>50%</b>, max <b>RMB 500,000</b> · demonstration projects <b>RMB 200,000</b></li>
+    </ul>
+    <p><b>None of it is available to an inbound foreign investor.</b> It requires establishment in Jing'an, sound
+       operations, no serious violations and a demonstrable overseas footprint.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-banks">
+  <h1>Banks and CITIC</h1>
+  <p class="stamp">Why the invite says "CITIC Bank" and what that most likely means</p>
+  <div class="card">
+    <h3>Jing'an's bank partners were signed in May 2025 — and CITIC was not among them</h3>
+    <p>At the 8 May 2025 investment conference the district signed strategic-cooperation agreements with
+       <b>six banks</b>: Bank of China, Agricultural Bank of China, ICBC, China Construction Bank, Bank of
+       Communications and Industrial Bank — framed around district projects and <b>cross-border finance for
+       companies going abroad</b>. <b>CITIC Bank does not appear.</b></p>
+    <p><b>So the reading is:</b> CITIC Group is the entrusted co-organiser of the whole municipal event, CITIC Europe
+       in Prague is the channel that introduced Jing'an to you, and the meeting card carries the CITIC name for that
+       reason.</p>
+    <p class="q">Unverified either way: whether CITIC Bank Shanghai holds a separate arrangement with the district.
+       If the call is genuinely a bank meeting, question 3 will surface it in the first five minutes.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-day">
+  <h1>The 18 September route</h1>
+  <p class="stamp">As published in the organiser's district-schedules annex · Shanghai time · Edita's day, badge No. 2</p>
+  <table><thead><tr><th>Time</th><th>Stop</th><th>Address</th></tr></thead><tbody>
+  <tr><td class="number">09:00–09:45</td><td><b>静安张园 Zhang Yuan</b></td><td>泰兴路99号</td></tr>
+  <tr><td class="number">10:00–10:30</td><td><b>静安国际会客厅</b> Jing'an Global Connect</td><td>南京西路1600号万航国际中心</td></tr>
+  <tr><td class="number">10:30–11:30</td><td><b>静安投资推介会</b> — district investment promotion conference</td><td>南京西路1600号</td></tr>
+  <tr><td class="number">11:45–13:00</td><td>Lunch</td><td>待定 — to be confirmed</td></tr>
+  <tr><td class="number">13:30–14:30</td><td><b>美创静界</b> — beauty and health incubation platform</td><td>灵石路718号A5栋</td></tr>
+  <tr><td class="number">14:35–15:15</td><td><b>"视听静界"π空间</b> — AI audiovisual space</td><td>广中西路717号</td></tr>
+  <tr><td class="number">15:35–16:15</td><td><b>"视听静界"元空间</b> — ultra-HD video space</td><td>共和新路3301号</td></tr>
+  </tbody></table>
+  <div class="card"><h3>Why this is Edita's day</h3>
+    <p>The district's stated theme for the day is <b>beauty and health, and ultra-high-definition AI audiovisual and
+       cultural-creative</b>. The beauty and dermatology programme is directly relevant to her; you take Xuhui,
+       which is artificial intelligence and large models.</p></div>
+</section>
+
+<section class="pane" id="p-show">
+  <h1>Their three showpieces</h1>
+  <p class="stamp">What they will walk a visitor through, and what each one actually is</p>
+  <div class="card"><h3>张园 Zhang Yuan — the urban-renewal flagship</h3>
+    <p>Founded <b>1882</b>, called "the finest garden in Shanghai"; the largest and best-preserved shikumen complex
+       surviving in the city, and the central city's first retain-renovate-demolish renewal pilot. West zone reopened
+       <b>2022</b>; the east zone's first phase opened <b>June 2026</b>. Operated in its entirety by
+       <b>Swire Properties</b>, with <b>Louis Vuitton</b> and <b>Piaget</b> among the first-tier brands in occupation.</p>
+    <p class="q">This is the stop closest to Brisen's own trade. If you want one substantive exchange on the call,
+       heritage-led mixed-use regeneration is it.</p></div>
+  <div class="card"><h3>静安国际会客厅 Jing'an Global Connect — the one-stop window</h3>
+    <p>At 南京西路1600号, the former city air terminal, roughly <b>5,000 sqm</b>, where three metro lines meet;
+       formally opened <b>September 2025</b>. Services: whole-chain support for enterprises going abroad,
+       whole-process cross-border data services, and convenience services for foreign nationals — foreign-related
+       notarisation, <b>24-hour smart Hong Kong/Macau endorsement</b>, foreign-related marriage registration.
+       In the 2026 plan it is the "1+3+N" internationalisation window.</p></div>
+  <div class="card"><h3>美创静界 — the beauty and health incubator</h3>
+    <p>A specialist incubator on a government-plus-medical-research-institution-plus-enterprise model, integrating
+       the dermatology department of <b>Fudan University's Huashan Hospital</b> and the <b>Shanghai Dermatology
+       Hospital</b>, with shared public laboratories for concept validation, efficacy testing and
+       sensory/formulation work. Launched <b>May 2025</b>; more than <b>130 enterprises</b> at over
+       <b>90% occupancy</b>.</p></div>
+</section>
+
+<section class="pane" id="p-park">
+  <h1>Market North park</h1>
+  <p class="stamp">市北高新 · the district's industrial engine, operated by Shibei Hi-Tech (Group)</p>
+  <div class="card">
+    <h3>The numbers they quote</h3>
+    <table><tbody>
+    <tr><td>Area</td><td class="number"><b>3.31 km²</b>, north of the Middle Ring</td></tr>
+    <tr><td>Park total revenue</td><td class="number"><b>RMB 260 billion</b></td></tr>
+    <tr><td>Recognised headquarters enterprises</td><td class="number"><b>42</b></td></tr>
+    <tr><td>Headquarters-characteristic leading companies</td><td class="number"><b>100+</b></td></tr>
+    <tr><td>Data-intelligence firms</td><td class="number"><b>800+</b></td></tr>
+    <tr><td>Municipal development-zone ranking</td><td class="number"><b>No. 2</b></td></tr>
+    </tbody></table>
+    <p><b>Industrial path:</b> cloud, data, intelligence, chain. <b>Sub-zones:</b> 静安国际科创社区 ·
+       总部经济集聚区 · 数通链谷 · 市北·壹中心.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-norobot">
+  <h1>No robotics here</h1>
+  <p class="stamp">Checked negative across every governing document — this one is settled</p>
+  <div class="card">
+    <h3>The characters 机器人 and 具身智能 appear nowhere <span class="chip nb">Closed</span></h3>
+    <p>Three documents were read in full — the 2024 industrial-system measures, the 2026 business-environment action
+       plan, and the park operator's own site. <b>None of them uses the words for "robot" or "embodied
+       intelligence" at any point.</b> The district's published tracks are blockchain, audiovisual,
+       beauty-and-creative, headquarters economy and data intelligence.</p>
+    <p><b>Jing'an is a headquarters-and-data district, not a robotics one.</b> Its 18 September route carries no
+       robotics stop. That is a fact about their priorities, not a judgement about the meeting — and it is exactly
+       why your own day goes to Xuhui.</p>
+  </div>
+</section>
+
+<section class="pane" id="p-open">
+  <h1>Open and unresolved</h1>
+  <p class="stamp">Surfaced, not smoothed over</p>
+  <div class="card"><h3>What the event's convener expects, and what Brisen actually is <span class="chip pr">Open</span></h3>
+    <p>The convener's stated target, 22 July 2026: <i>"tech enterprises, hidden champions and single-product
+       manufacturing champions, focusing on multinational enterprises that are already operating in Shanghai with
+       plans for capital increase and production expansion, and those seeking new investment footprints in
+       Shanghai."</i> The agenda names project signing on 17 September, and the registration form asks what
+       <i>"Support from Shanghai Government"</i> the enterprise requires.</p>
+    <p><b>Brisen is a Swiss hotel and residential developer with no Shanghai operation, attending to understand and
+       buy robots.</b> The stated profile and your actual purpose do not match. No view is taken here on what
+       follows — but expect to be asked what you would invest in Shanghai.</p></div>
+  <div class="card"><h3>What Jing'an offers an inbound investor in cash <span class="chip pr">Open</span></h3>
+    <p>No figure is published. The only 2026 fund with numbers is outbound. Ask on the call, or it stays unknown.</p></div>
+  <div class="card"><h3>Whether CITIC Bank has its own district arrangement <span class="chip pr">Unverified</span></h3>
+    <p>Not found in public sources this morning. The six May-2025 bank partners do not include it.</p></div>
+  <div class="card"><h3>Resolved since the dossier was written <span class="chip ok">Closed</span></h3>
+    <p>The 18 September split was recorded as contested — an email version sending Edita to Pudong, a WeChat version
+       sending her to Songjiang. <b>Both are now superseded:</b> you take Xuhui, Edita takes Jing'an, and Kevin
+       confirmed it at 00:35 today. Pudong is dropped; Songjiang is off.</p></div>
+</section>
+
+<section class="pane" id="p-src">
+  <h1>Where this comes from</h1>
+  <p class="stamp">Everything above is traceable; nothing is remembered</p>
+  <div class="card"><h3>First-hand record</h3>
+    <ul>
+      <li>The organiser's district-schedules annex, attached 31 August 2026 — the route, times, addresses, themes, site descriptions</li>
+      <li>The event agenda, updated 23 July 2026 — the convener, CITIC's role, the 17–18 September structure</li>
+      <li>Your email thread with Liu Yansong, 2 July – 9 September 2026, and the WhatsApp thread of 8–9 September</li>
+      <li>The WeChat client, read first-hand 9, 10 and 11 September — the groups, the invite card, the confirmations</li>
+    </ul></div>
+  <div class="card"><h3>Issuing-organ documents, read in full</h3>
+    <ul>
+      <li>静发改委〔2024〕18号 — modern industrial system measures, published 18 December 2024</li>
+      <li>静府办发〔2026〕2号 — international first-class business-environment action plan, published 16 March 2026</li>
+      <li>2026 going-abroad service-platform special fund guide, first batch, 23 April 2026</li>
+      <li>Shanghai Foreign Investment Guide — the commerce commission and promotion office addresses</li>
+      <li>Shibei Hi-Tech (Group) own site — the park figures</li>
+    </ul></div>
+  <div class="card"><h3>Added this morning, 11 September</h3>
+    <ul>
+      <li>english.shanghai.gov.cn, Jing'an business-environment page — cross-border data centre, ultra-high-definition innovation centre, TÜV Rheinland InnoHub, the Sanofi and Cathay Capital pharmaceutical fund of about USD 274 million, the cosmetics partnership with Fengxian, over RMB 1 billion committed by nine companies</li>
+      <li>jingan.gov.cn report on the 8 May 2025 investment conference — deputy district head Hu Yong and the six signing banks</li>
+    </ul>
+    <p class="src">Full dossier, with source ranks and the flagged-facts table:
+       <code>~/baker-vault/wiki/dossiers/shanghai-jingan-district/</code></p></div>
+</section>
+
+</main>
+</div>
+<script>
+(function(){
+  var root=document.documentElement, bar=document.querySelector('.themebar');
+  function cur(){ try{ return localStorage.getItem('ja-theme')||'auto'; }catch(e){ return 'auto'; } }
+  function paint(v){
+    if(v==='auto'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme',v); }
+    bar.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.set===v)); });
+  }
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-set]'); if(!b) return;
+    var v=b.dataset.set;
+    try{ v==='auto' ? localStorage.removeItem('ja-theme') : localStorage.setItem('ja-theme',v); }catch(err){}
+    paint(v);
+  });
+  paint(cur());
+})();
+(function(){
+  var items=document.querySelectorAll('.navitem');
+  function show(key){
+    document.querySelectorAll('.pane').forEach(function(p){ p.classList.toggle('on', p.id==='p-'+key); });
+    items.forEach(function(i){ i.classList.toggle('on', i.dataset.pane===key); });
+    window.scrollTo(0,0);
+  }
+  items.forEach(function(i){ i.addEventListener('click', function(){ show(i.dataset.pane); }); });
+})();
+</script>
+</body></html>
