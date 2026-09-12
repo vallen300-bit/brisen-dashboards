@@ -166,21 +166,24 @@ label.chk input:checked+span{color:var(--faint);text-decoration:line-through}
 }
 .today-item .when:empty{display:none}
 
-/* ---- chevron fix, 12 September 2026 08:55 Geneva (Director, from the phone: "my finger is too thick", the menu
-   closed when the tap missed): the open/close arrow is now a real 44 x 44 px button at the RIGHT edge of the row.
-   Tap the arrow = open or close the list; tap the words = open the page, as before. Origination Desk. ---- */
-.navitem{padding-right:12px}
-.chev{order:2;margin:-9px 0 -9px auto;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+/* ---- chevron fix, 12 September 2026 09:05 Geneva (Director, from the phone: "my finger is too thick", then
+   "chevrons before the item title"): the open/close arrow is a real 44 x 44 px button BEFORE the title.
+   Tap the arrow = open or close the list; tap the words = open the page. Rows without a list keep their
+   titles in the same column. Origination Desk. ---- */
+.navitem{padding-left:12px;padding-right:16px}
+.chev{order:0;margin:-9px 10px -9px 0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
  font-size:15px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#b7c8d3;
  transition:transform .16s,background .16s;flex:0 0 44px}
 .chev:active{background:rgba(255,255,255,.18)}
 .chev.open{transform:rotate(90deg)}
-@media(max-width:820px){.navitem{padding-top:13px;padding-bottom:13px;font-size:15px}.sub a{padding:12px 22px 12px 34px;font-size:14.5px}}
+.navitem:not(:has(.chev)){padding-left:66px}
+.sub a{padding-left:66px}
+@media(max-width:820px){.navitem{padding-top:13px;padding-bottom:13px;font-size:15px}.sub a{padding:12px 22px 12px 66px;font-size:14.5px}}
 </style><script>(function(){var t=null;try{t=localStorage.getItem('ctr-theme');}catch(e){}if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);})();</script>
 </head><body>
 <div class="shell">
 <nav>
-  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–20 September 2026</span><span class="upd" id="pubStamp">12 September 2026, 08:53</span></div>
+  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–20 September 2026</span><span class="upd" id="pubStamp">12 September 2026, 08:58</span></div>
   <div class="themerow"><button type="button" id="themeToggle" class="themetoggle" aria-label="Switch between light and dark">
     <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><g stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.3" y1="5.3" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="18.7" y2="18.7"/><line x1="5.3" y1="18.7" x2="7.1" y2="16.9"/><line x1="16.9" y1="7.1" x2="18.7" y2="5.3"/></g></svg>
     <span class="knob" aria-hidden="true"></span>
