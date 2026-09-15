@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgiBot · PsiBot — company briefing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --paper:#f6f1e8;
+  --ink:#1a1a18;
+  --mute:#5c5850;
+  --line:#d4cdc0;
+  --card:#fffdf8;
+  --a:#8a3b1a;
+  --a-soft:#f3e4db;
+  --p:#1d4a4a;
+  --p-soft:#dcecea;
+  --flag:#8a5a14;
+  --flag-bg:#f8edd6;
+  --src:#6b665c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:17px/1.45 "Source Sans 3",-apple-system,sans-serif;
+}
+.top{
+  padding:1.4rem 1.2rem .8rem;
+  max-width:72rem;
+  margin:0 auto;
+}
+.kicker{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mute);
+  margin:0 0 .35rem;
+}
+h1{
+  font:600 2rem/1.1 Newsreader,Georgia,serif;
+  margin:0 0 .4rem;
+}
+.lede{
+  color:var(--mute);
+  max-width:46rem;
+  margin:0 0 1rem;
+}
+.jump{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+}
+.jump a{
+  display:inline-block;
+  padding:.35rem .8rem;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  text-decoration:none;
+  font-weight:600;
+  font-size:.9rem;
+}
+.jump a.a{border-left:4px solid var(--a)}
+.jump a.p{border-left:4px solid var(--p)}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  max-width:72rem;
+  margin:0 auto;
+  border-top:1px solid var(--line);
+}
+@media (max-width:880px){
+  .grid{grid-template-columns:1fr}
+  h1{font-size:1.6rem}
+}
+.col{padding:1.2rem 1.2rem 3rem; background:var(--card)}
+.col + .col{border-left:1px solid var(--line)}
+@media (max-width:880px){
+  .col + .col{border-left:0; border-top:8px solid var(--paper)}
+}
+.col.agibot{box-shadow:inset 4px 0 0 var(--a)}
+.col.psibot{box-shadow:inset 4px 0 0 var(--p)}
+.brand{
+  font:600 1.55rem/1.15 Newsreader,Georgia,serif;
+  margin:0 0 .15rem;
+}
+.brand small{display:block; font:400 .95rem/1.3 "Source Sans 3",sans-serif; color:var(--mute); margin-top:.2rem}
+.one{
+  font:italic 500 1.15rem/1.35 Newsreader,Georgia,serif;
+  margin:.6rem 0 1rem;
+}
+h2{
+  font:600 .72rem/1 Source Sans 3,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--mute);
+  margin:1.35rem 0 .4rem;
+  padding-top:.7rem;
+  border-top:1px solid var(--line);
+}
+h2:first-of-type{border-top:0; padding-top:0}
+table{width:100%; border-collapse:collapse; font-size:.92rem}
+th,td{vertical-align:top; padding:.38rem .4rem .38rem 0; border-bottom:1px solid #eee8dc; text-align:left}
+th{width:8.2rem; color:var(--mute); font-weight:600; font-size:.8rem}
+ul{margin:.2rem 0 0; padding-left:1.1rem}
+li{margin:.25rem 0}
+.prod{
+  display:grid;
+  gap:.4rem;
+}
+.prod b{display:block; font-size:.95rem}
+.prod span{color:var(--mute); font-size:.88rem}
+.flag{
+  background:var(--flag-bg);
+  color:var(--flag);
+  padding:.15rem .4rem;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.people{margin:0; padding:0; list-style:none}
+.people li{padding:.45rem 0; border-bottom:1px solid #eee8dc}
+.people b{display:block}
+.people span{color:var(--mute); font-size:.88rem}
+.srcs{font-size:.78rem; color:var(--src); line-height:1.5}
+.srcs a{color:var(--src)}
+.note{font-size:.88rem; color:var(--mute)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <p class="kicker">Shanghai · 15 September 2026 · facts only</p>
+  <h1>Two companies</h1>
+  <p class="lede">What AgiBot 智元 and PsiBot 灵初智能 are, on the public record and in this week’s thread. No verdict on whether to visit.</p>
+  <nav class="jump">
+    <a class="a" href="#agibot">AgiBot 智元</a>
+    <a class="p" href="#psibot">PsiBot 灵初智能</a>
+  </nav>
+</header>
+
+<div class="grid">
+
+<!-- ===================== AGIBOT ===================== -->
+<article class="col agibot" id="agibot">
+  <p class="kicker">Research 1</p>
+  <h1 class="brand">AgiBot 智元<small>智元创新（上海）科技股份有限公司</small></h1>
+  <p class="one">A Shanghai humanoid and mobile-robot maker. Builds whole robots, a commercial floor cleaner, and — through a 2026 subsidiary — dexterous hands. Named deployments on its own site are factories, a restaurant chain, a metro, a mall, a hospital, an airport.</p>
+
+  <h2>This week’s thread</h2>
+  <table>
+    <tr><th>How they entered</th><td>Wayne Lu named AgiBot on 11 September as Critical Point’s parent, after Critical Point was dropped. Welson (Critical Point) was not told. Wayne offered to drive between the two visits.</td></tr>
+    <tr><th>Hour</th><td>Not the meeting that both sides have already locked to one hour.</td></tr>
+    <tr><th>Address given?</th><td>Not by Wayne in-thread. The company’s own site prints a Pudong campus (below).</td></tr>
+  </table>
+
+  <h2>Identity</h2>
+  <table>
+    <tr><th>English / brand</th><td>AgiBot · AGIBOT · 智元机器人</td></tr>
+    <tr><th>Legal</th><td>智元创新（上海）科技股份有限公司<br>Former name in press: 上海智元新创技术有限公司</td></tr>
+    <tr><th>Founded</th><td>February 2023 (company milestone). Registry date cited as 27 Feb 2023.</td></tr>
+    <tr><th>HK</th><td>Registered as a non-HK company 13 Jan 2026 (BR 79587598). Listing process reported started 24 Jul 2026; no A1/PHIP read in this pass.</td></tr>
+    <tr><th>Mission line</th><td>“以智能机器创造无限生产力”</td></tr>
+    <tr><th>Founders (public)</th><td>邓泰华 Deng Taihua (chair / CEO). 彭志辉 Peng Zhihui 稚晖君 (president / CTO) among the founding set.</td></tr>
+    <tr><th>Scale claim</th><td>Own site: 15,000 general-purpose embodied robots rolled off the line (production count, not hotel installs).</td></tr>
+    <tr><th>Phone / mail</th><td>400-186-0818 (weekdays 9:30–12:00, 13:30–18:30)<br>business@agibot.com · pr@agibot.com</td></tr>
+    <tr><th>Sites</th><td>agibot.com.cn · agibot.com · store.agibot.com</td></tr>
+  </table>
+
+  <h2>Doors</h2>
+  <table>
+    <tr><th>Campus (own site)</th><td>上海市浦东新区康桥镇<strong>环桥路1001号 B2智元大楼</strong></td></tr>
+    <tr><th>Registry / store</th><td>浦东新区<strong>秀浦路2555号29幢8层</strong>（漕河泾康桥商务绿洲）— second door; do not collapse with 环桥路.</td></tr>
+    <tr><th>Data centre</th><td>浦东新区周邓公路5358号</td></tr>
+    <tr><th>Factory</th><td>临港智能制造园, 奉贤 (on G2 product copy)</td></tr>
+    <tr><th>Other cities</th><td>北京海淀互联网金融中心 · 深圳湾科技生态园12栋A座</td></tr>
+    <tr><th>Critical Point</th><td>Subsidiary registry: 徐汇区天平路185号11层1107室 — different legal person, different district.</td></tr>
+  </table>
+
+  <h2>What they sell</h2>
+  <div class="prod">
+    <p><b>远征 A2 / A3 / A3 Ultra</b><span>Full-size humanoid. Reception, exhibition, stage, tours. A3 Ultra copy lists “hotel reception, front-desk.” Same pages say demos need secondary development.</span></p>
+    <p><b>灵犀 X2</b><span>Smaller interactive body. Guide / receptionist / tourism. Copy: pass water, drinks, brochures.</span></p>
+    <p><b>精灵 G2</b><span>Industrial embodied operator. Company says Jetson Thor “will” be the core domain controller; claims first mass-produced Thor robot.</span></p>
+    <p><b>酷拓 D1 Max</b><span>Quadruped. Patrol / rough terrain.</span></p>
+    <p><b>绝尘 C5</b><span>Sweep / scrub / dust-push floor cleaner + workstation (auto charge / fill / drain). Application icons on the product page: mall, transport hub, factory, hospital. No hotel icon. Named sites on the solutions page: 比亚迪, 济南齐鲁医院, 上海绿地缤纷广场. Deng APC speech also named 虹桥机场.</span></p>
+    <p><b>临界点灵巧手 / OmniHand</b><span>Dexterous hands, now sold under the Critical Point / AGILINK brand (see below).</span></p>
+    <p><b>RaaS</b><span>Robot-as-a-service rental on the overseas store. Press: from €899, from 1 day; 17 countries. Events / marketing / short industrial jobs — not a hotel OS.</span></p>
+  </div>
+
+  <h2>Seven published solution lines</h2>
+  <p class="note">Own solutions page. “已落地” names are theirs.</p>
+  <table>
+    <tr><th>产线上下料</th><td>龙旗科技, 华天科技</td></tr>
+    <tr><th>工业搬运</th><td>富临精工 (~100 A2-W in company copy), 上汽通用奥特能</td></tr>
+    <tr><th>物流分拣</th><td>德马</td></tr>
+    <tr><th>导览导购导引</th><td>Scenario list includes 零售、餐饮、<strong>酒店</strong>、政务、地铁. Named deployments: <strong>安踏, 海底捞, 广州地铁</strong>. No named hotel.</td></tr>
+    <tr><th>服务零售站</th><td>Unattended retail kiosk. No named customer on that card.</td></tr>
+    <tr><th>安防巡检</th><td>卧龙集团工厂, 国家电网 750kV 变电站</td></tr>
+    <tr><th>工商业清洁</th><td>比亚迪, 齐鲁医院, 绿地缤纷广场</td></tr>
+  </table>
+
+  <h2>Hospitality-adjacent claims</h2>
+  <table>
+    <tr><th>Word “酒店” on site</th><td>Used under 导览导购 and on some A3/X2 pages. The named live sites on that card are Anta, Haidilao, Guangzhou Metro.</td></tr>
+    <tr><th>MWC 2026</th><td>精灵 G2 shown as a “hotel waiter” passing a drink on a booth. Far-征 A2 as an airport-hall guide; shook hands with Spain’s king in the hall.</td></tr>
+    <tr><th>长隆 Chimelong</th><td>Strategic agreement 23 Aug 2026, Hengqin. Copy is future tense: build a theme-park set including “全球首个机器人服务酒店,” circus, parade, joint lab. Not an operating hotel today.</td></tr>
+    <tr><th>Genting Malaysia</th><td>MoU 17 Apr 2026. Explore / develop; will acquire robots for pilots; Robotics Gala early 2027. Witnesses included 邓泰华 and 姜青松 (“Daniel Jiang”).</td></tr>
+    <tr><th>World Games “酒店”</th><td>G2 competition scenario. Pre-Games work cited: 龙旗 / 上汽 factories.</td></tr>
+    <tr><th>Named live hotel</th><td>None found in this pass (no property + city + robot job + already running).</td></tr>
+  </table>
+
+  <h2>NVIDIA</h2>
+  <table>
+    <tr><th>GTC 2026 (16 Mar)</th><td>On NVIDIA’s partner list. Building humanoids on Cosmos, Isaac Sim, Isaac Lab; adopting Isaac GR00T N for industrial humanoid deployments.</td></tr>
+    <tr><th>Thor</th><td>AgiBot: G2 will use Jetson Thor as domain controller; “first mass-produced Thor robot” is their claim.</td></tr>
+    <tr><th>GR00T</th><td>NVIDIA repo tags <code>EmbodimentTag.AGIBOT_GENIE1</code>. N1.6 trained/eval on Genie-1 (GEAR lab).</td></tr>
+    <tr><th>Metropolis / hotel case</th><td>Not found for AgiBot. NVIDIA’s published hotel-delivery write-up in this lane is Pudu, not AgiBot.</td></tr>
+  </table>
+
+  <h2>Leadership (first-party list)</h2>
+  <ul class="people">
+    <li><b>邓泰华 Deng Taihua</b><span>Founder, chairman, CEO. Also named Critical Point legal representative in Jan 2026 天眼查-citing press. Genting MoU witness.</span></li>
+    <li><b>彭志辉 Peng Zhihui</b><span>President / CTO. Public “稚晖君” identity.</span></li>
+    <li><b>姜青松 Jiang Qingsong</b><span>Co-president / COO. “Daniel Jiang” on the Genting PDF.</span></li>
+    <li><b>姚卯青 Yao Maoqing</b><span>Co-president, embodied business.</span></li>
+    <li><b>熊彦 Xiong Yan</b><span>Co-president, interactive business (A/X guest-facing stack). Not the same person as 熊坤.</span></li>
+    <li><b>王闯 Wang Chuang</b><span>SVP, 通用业务. Quoted on Fulin. Later 爱企查 extract also names him Critical Point legal rep (核准 2026-04-30).</span></li>
+    <li><b>张修征 Zhang Xiuzheng</b><span>SVP, sales and service.</span></li>
+  </ul>
+
+  <h2>Critical Point 临界点 / AGILINK — the dropped visit</h2>
+  <table>
+    <tr><th>Legal</th><td>上海临界点创新智能科技有限公司. USCC cited 91310104MAK5A3Y66N (aggregator).</td></tr>
+    <tr><th>Founded</th><td>14 Jan 2026. AgiBot put in RMB 4m for 80% at birth (press citing 天眼查).</td></tr>
+    <tr><th>What</th><td>Dexterous hands / end-effectors. OmniHand, OmniHand Pro. Shown ICRA Vienna 2 Jun 2026. Component maker, not a hotel cleaner.</td></tr>
+    <tr><th>Operating lead</th><td>熊坤 Xiong Kun — HKUST robotics MSc; Tencent Robotics X; IDEA; Inovance; joined AgiBot Nov 2024 to run hands.</td></tr>
+    <tr><th>Money (press)</th><td>Four rounds in five months. Hillhouse + BlueRun in Jan; Feb round with a “head internet firm,” Baidu Ventures, Yunfeng, SAIC capital, Joyson. June 2026: post-money stated above USD 1bn. Claims 8,000 units already delivered.</td></tr>
+    <tr><th>Thread names</th><td>Wayne @ Jimmy Z and 王子源 “Welson” on 10 Sep. Neither matches the published officer set (Xiong / Deng / Wang Chuang) in the 10 Sep pass.</td></tr>
+    <tr><th>Legal-rep flag</th><td><span class="flag">Open</span> 邓泰华 (Feb 2026 天眼查-citing press) vs 王闯 (爱企查, 核准 30 Apr 2026).</td></tr>
+  </table>
+
+  <h2>Open on the public record</h2>
+  <ul>
+    <li>Two Pudong doors (环桥路1001 vs 秀浦路2555).</li>
+    <li>Haidilao store counts conflict in secondary press; first-party publishes no count.</li>
+    <li>15,000 units = production, not installs in hotels.</li>
+    <li>Jimmy Z / Welson identity vs public officers.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <p class="srcs">
+    <a href="https://www.agibot.com.cn/">agibot.com.cn</a> ·
+    <a href="https://www.agibot.com.cn/solution">solutions</a> ·
+    <a href="https://www.agibot.com.cn/products/C5">C5</a> ·
+    <a href="https://www.agibot.com.cn/Contact/Business">contact</a> ·
+    <a href="https://www.agibot.com.cn/company/leadership">leadership</a> ·
+    <a href="https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world">NVIDIA GTC 2026</a> ·
+    <a href="https://www.rwgenting.com/content/dam/approved/rw-genting/web/images/press-releases/2026/20260417-GENMXAGIBOT-EN.pdf">Genting MoU PDF</a> ·
+    <a href="https://finance.sina.com.cn/jjxw/2026-08-24/doc-inipmhfs6089259.shtml">Chimelong 23 Aug</a> ·
+    <a href="https://www.bjnews.com.cn/detail/1769404124129399.html">Critical Point / 天眼查 press</a> ·
+    <a href="https://news.pedaily.cn/202606/565521.shtml">Pedaily June round</a>
+  </p>
+</article>
+
+<!-- ===================== PSIBOT ===================== -->
+<article class="col psibot" id="psibot">
+  <p class="kicker">Research 2</p>
+  <h1 class="brand">PsiBot 灵初智能<small>上海灵初智能科技有限公司</small></h1>
+  <p class="one">A 2024 embodied-AI company: foundation models for dexterous manipulation, data gloves, and a wheeled humanoid. Published work is warehouse / retail / industry. The Shanghai floor is an office in 北杨 AI town.</p>
+
+  <h2>This week’s thread</h2>
+  <table>
+    <tr><th>How they entered</th><td>王勇 introduced 文雅 into the master group 10 Sep 12:11: “from PsiBot company.” Wayne asked her at 12:22 for participant and time; she replied 12:28 that she is coordinating PsiBot’s participant and time.</td></tr>
+    <tr><th>Hour</th><td>The only meeting with an hour already agreed by both sides. Afternoon.</td></tr>
+    <tr><th>Who attends</th><td>“Two of you.” Contacts named: <strong>于希苘 Starry</strong>, <strong>文雅</strong>.</td></tr>
+    <tr><th>Address given?</th><td>Not yet, by them. The company’s own site already prints a Xuhui floor (below). Registry aggregators print a different floor in the same lane.</td></tr>
+  </table>
+
+  <h2>Identity</h2>
+  <table>
+    <tr><th>English / brand</th><td>PsiBot · Psi AI · 灵初智能</td></tr>
+    <tr><th>Legal now</th><td>上海灵初智能科技有限公司. USCC 91110108MADYFG4K6W.</td></tr>
+    <tr><th>Legal was</th><td>北京灵初智能科技有限公司. Domicile and name moved to Shanghai on <strong>2 Mar 2026</strong>.</td></tr>
+    <tr><th>Founded</th><td>September 2024, Beijing (own About). Registry date 11 Sep 2024.</td></tr>
+    <tr><th>What they say they are</th><td>“攻克具身智能灵巧操作.” End-to-end PSI models + Psi-SynEngine data engine + PKU joint lab.</td></tr>
+    <tr><th>Mail</th><td>market@psibot.ai (own site). LinkedIn scrape also shows market@psirobot.ai.</td></tr>
+    <tr><th>Site</th><td>psibot.ai</td></tr>
+  </table>
+
+  <h2>Doors</h2>
+  <table>
+    <tr><th>Own site (every footer)</th><td>上海市徐汇区北杨人工智能小镇<strong>华发路899弄1号（8号楼）19层</strong><br>EN: 19th Floor, No.1, Lane 899, Huafa Road, Xuhui.</td></tr>
+    <tr><th>Registered domicile</th><td>Same lane/number, <strong>15层整层</strong> — aggregators citing GSXT. Change recorded 2 Mar 2026.</td></tr>
+    <tr><th>Prior Beijing</th><td>海淀区中关村大街1号07层0701–0706 (until the move). Liepin also lists 中关村方正国际大厦.</td></tr>
+    <tr><th>Shenzhen branch</th><td>北京灵初智能科技有限公司深圳分公司, est. 6 Jan 2025, 负责人 柴晓杰. Nanshan TCL科学园 D1-601 (Qichacha). A Baoan “华南研发中心” line exists in 招商 copy only — not on psibot.ai.</td></tr>
+    <tr><th>Second Shanghai site</th><td>None found. One 华发 / 北杨 campus.</td></tr>
+    <tr><th>Campus type</th><td>北杨小镇 is a 临港集团 + 徐汇 office/R&amp;D campus, not a hotel or a published warehouse.</td></tr>
+  </table>
+
+  <h2>What they sell</h2>
+  <div class="prod">
+    <p><b>Models — Psi R0, R0.5, R1, R2, W0</b><span>End-to-end RL then VLA. Own About: R0 Dec 2024; R1 May 2025; R2 + W0 Apr 2026. They say R2 topped Molmospace ahead of PI and NVIDIA — their leaderboard claim.</span></p>
+    <p><b>Psi Sim / Psi Data / Psi-SynEngine</b><span>Simulation + data engine. Portable exoskeleton / tactile glove kit; “in the wild” pipeline; cross-embodiment migration. CEO (Mar 2026): gloves already scaled in <em>Beijing</em>.</span></p>
+    <p><b>PsiBot V1</b><span>Wheeled base + humanoid upper body. Own spec: 32 DoF, tactile five-finger hand, &lt;180 cm, &gt;8 h battery, computing platform “Thor.” Sold as an enterprise kit for service, logistics, manufacturing — not hotels.</span></p>
+    <p><b>ψ-SynRobot</b><span>Self-developed whole robot. Site (20 Apr 2026): mass production started. Aimed at “复杂物流、零售及工业” — warehouse, supermarket, industrial line.</span></p>
+    <p><b>PsiBot H1 / DC1 / SynGlove</b><span>Hand, data-collection kit, teleoperation glove. H1 page: supports Isaac Gym, Isaac Lab, MuJoCo.</span></p>
+  </div>
+  <p class="note">Solution slugs found: Retail, Industry, Health (药店 / 康养 / 送药上门). No hotel / 酒店 solution page.</p>
+
+  <h2>What they say is running</h2>
+  <table>
+    <tr><th>Own About</th><td>“已在真实物流客户仓库完成小规模场景验证.” Jan 2025: “头部客户POC签约启动.” Customers unnamed.</td></tr>
+    <tr><th>CEO 王启斌<br>GeekPark 10 Mar 2026</th><td>Three cuts: 服装供包, 入箱检, 分拨墙. 供包: “初步商业化,” “陪产” at a customer site, peak 800 UPH, scene ~two months old. 入箱检: first-stage validation, still climbing on site. “不是拍 demo…而是在客户现场把系统跑起来.”</td></tr>
+    <tr><th>CEO · TMT 21 May 2026</th><td>Two customer types: manufacturing precision / auto-parts inspection, and apparel-warehouse pick/sort/pack. “大多数真正的商业订单还处于小批量验证阶段.” Warehouse 接洽→稳定 6–9 months. PoC→大规模采购 2–3 years. 2026 year-end sales target stated as “几个亿.” Unnamed overseas logistics customer “也有.”</td></tr>
+    <tr><th>Shows</th><td>WAIC 2025: takeaway-bag “最后一百米” booth demo. WRC 2026: world-model / human-data pipeline. Mahjong long-horizon VLA on the site videos.</td></tr>
+    <tr><th>Named paying customer</th><td>None published.</td></tr>
+    <tr><th>Named hotel</th><td>None published.</td></tr>
+  </table>
+
+  <h2>Hospitality-adjacent facts</h2>
+  <table>
+    <tr><th>PsiBot hotel install</th><td>None found on psibot.ai, WRC brochure, GeekPark, TMT, WAIC coverage.</td></tr>
+    <tr><th>CEO’s previous job</th><td>王启斌 worked at <strong>云迹科技 Yunji</strong> then 京东机器人, “主要负责酒店配送机器人与物流配送机器人的研发” (GeekPark). That is his CV, not a PsiBot deployment.</td></tr>
+    <tr><th>Closest indoor-delivery page</th><td>Health: pharmacy / 康养 / medicine-to-door. No named site.</td></tr>
+  </table>
+
+  <h2>Money</h2>
+  <table>
+    <tr><th>Own About, Mar 2026</th><td>Cumulative <strong>RMB 2bn</strong> angel + Pre-A. Inception: Hillhouse 高瓴, BlueRun 蓝驰. Later: 国开金融, 国投先导, 徐汇资本 and other state / industry names.</td></tr>
+    <tr><th>Tianyancha brand card</th><td>Also lists 智元创新（上海）科技股份有限公司 among early investors on one seed-round row — aggregator, not a filing PDF.</td></tr>
+    <tr><th>Starry LinkedIn, Aug 2026</th><td>Posted “over $100M new financing” with industrial strategic investors — her words, not a filing.</td></tr>
+    <tr><th>RMB 2bn flag</th><td><span class="flag">Open</span> Company-sourced; no filing read in this pass.</td></tr>
+  </table>
+
+  <h2>NVIDIA</h2>
+  <table>
+    <tr><th>V1 “Thor”</th><td>On PsiBot’s own spec sheet. The line does not print “NVIDIA” or “Jetson.”</td></tr>
+    <tr><th>Isaac</th><td>H1 page lists Isaac Gym / Isaac Lab. DC1 leftover copy mentions “NV's Isaac Sim/Lab.”</td></tr>
+    <tr><th>Inception</th><td>PsiBot’s own blog: member; 2025 Inception Startup Showcase · Volcano Engine, Beijing 11–12 Jun 2025. Not found as a first-party NVIDIA.com item in this pass.</td></tr>
+    <tr><th>Thor partner list</th><td>NVIDIA Jetson Thor blog 15 Jul 2026 names 1X, Agile, Amazon Robotics, Boston Dynamics, FANUC, Hitachi, Techman… <strong>PsiBot is not on that list.</strong></td></tr>
+  </table>
+
+  <h2>Published team</h2>
+  <ul class="people">
+    <li><b>王启斌 Dr Viktor Wang</b><span>Founder &amp; CEO. Prior: Yunji hotel-delivery robots, then JD robotics.</span></li>
+    <li><b>柴晓杰 Dr Xiaojie Chai</b><span>Co-founder, engineering leader. Shenzhen branch 负责人.</span></li>
+    <li><b>陈源培 Yuanpei Chen</b><span>Co-founder, RL leader. On the GeekPark interview with the CEO.</span></li>
+    <li><b>杨耀东 Prof Yaodong Yang</b><span>Chief scientist, PKU–PsiBot joint lab.</span></li>
+    <li><b>温颖 Prof Ying Wen</b><span>RL leader.</span></li>
+  </ul>
+  <p class="note">Starry and 文雅 are not on this About list.</p>
+
+  <h2>People in the thread (not on the About page)</h2>
+  <ul class="people">
+    <li><b>于希苘 · Starry Yu</b><span>Named contact for this meeting. LinkedIn headline: <strong>PsiBot Marketing VP</strong>. Posts as “we/us” on financing and WRC. No independent public page prints the Chinese name 于希苘 next to Starry. A second LinkedIn “Starry Yu” (Glico CMO, Shanghai) is a different person.</span></li>
+    <li><b>文雅 · Wenya · “Miss Wang”</b><span>Visit coordinator in WeChat only. No public hit tying 文雅 / 王文雅 / Wenya to PsiBot on the site, news, or LinkedIn. Introduced by 王勇. His relation to the company is unstated.</span></li>
+  </ul>
+
+  <h2>Open on the public record</h2>
+  <ul>
+    <li>Visit pin not sent. Site 19F Building 8 vs registry 15F whole floor.</li>
+    <li>文雅’s role is WeChat-only.</li>
+    <li>于希苘 ≡ Starry Yu is the working identity, not a printed legal-name match.</li>
+    <li>Warehouse customers unnamed. Paid vs free POC unnamed.</li>
+    <li>market@psibot.ai vs market@psirobot.ai.</li>
+    <li>LinkedIn company page still says HQ Haidian — stale vs the March 2026 rename.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <p class="srcs">
+    <a href="https://www.psibot.ai/">psibot.ai</a> ·
+    <a href="https://www.psibot.ai/about-us_zh/">About</a> ·
+    <a href="https://www.psibot.ai/en/contact-us/">Contact</a> ·
+    <a href="https://www.psibot.ai/en/products/product_psibot-v1/">V1</a> ·
+    <a href="https://www.psibot.ai/en/products/product_psibot-h1/">H1</a> ·
+    <a href="https://www.linkedin.com/in/starry-yu-211238375">Starry Yu</a> ·
+    <a href="https://www.geekpark.net/news/360880">GeekPark 10 Mar 2026</a> ·
+    <a href="https://www.tmtpost.com/7996985.html">TMT 21 May 2026</a> ·
+    <a href="https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/">NVIDIA Thor list (PsiBot absent)</a> ·
+    <a href="https://qiye.qizhidao.com/company/afb0a92aa787841d5453e53a3b296315.html">Qizhidao / GSXT-cited domicile</a>
+  </p>
+</article>
+
+</div>
+</body>
+</html>
