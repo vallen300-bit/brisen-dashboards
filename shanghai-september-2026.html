@@ -141,6 +141,16 @@ tr:last-child td{border-bottom:0}
 .addr .row{display:flex;gap:8px}
 .addr .row button{appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;border-radius:4px;padding:10px 16px;border:1px solid var(--nav);color:var(--navhi);background:var(--nav)}
 .addr .row .copyaddr{color:var(--ink);background:var(--card);border-color:var(--line)}
+.addr.taxi{padding:0;overflow:hidden;border-color:var(--nav)}
+.addr.taxi .taxihead{background:var(--nav);color:var(--navhi);font-size:20px;font-weight:700;letter-spacing:.08em;padding:11px 18px}
+.addr.taxi .taxibody{background:#f7f2e4;color:#16202a;padding:16px 18px}
+.addr.taxi .taxibody h3{margin:0 0 4px;color:#16202a}
+.addr.taxi .taxibody .meta{color:#5a5140}
+.addr.taxi .cn{font-size:26px;color:#16202a}
+.shop{border-bottom:1px solid var(--line);padding:12px 0}
+.shop:last-child{border-bottom:0}
+.shop h3{margin:0 0 2px;font-size:15.5px}
+.shop p{margin:2px 0}
 .overlay[hidden]{display:none}
 .overlay{position:fixed;inset:0;z-index:100;background:#fff;color:#111;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px;cursor:pointer}
 .overlay .cnbig{font-size:46px;font-weight:700;line-height:1.25}
@@ -183,7 +193,7 @@ label.chk input:checked+span{color:var(--faint);text-decoration:line-through}
 </head><body>
 <div class="shell">
 <nav>
-  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–20 September 2026</span><span class="upd" id="pubStamp">16 September 2026, 00:50</span></div>
+  <div class="brand"><span>Origination</span><b>China Trip Room</b><span style="letter-spacing:0;text-transform:none;font-size:11.5px;color:#7f95a3">13–20 September 2026</span><span class="upd" id="pubStamp">16 September 2026, 12:04</span></div>
   <div class="themerow"><button type="button" id="themeToggle" class="themetoggle" aria-label="Switch between light and dark">
     <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><g stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.3" y1="5.3" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="18.7" y2="18.7"/><line x1="5.3" y1="18.7" x2="7.1" y2="16.9"/><line x1="16.9" y1="7.1" x2="18.7" y2="5.3"/></g></svg>
     <span class="knob" aria-hidden="true"></span>
@@ -259,6 +269,14 @@ label.chk input:checked+span{color:var(--faint);text-decoration:line-through}
   <div class="navitem" data-pane="miss">Still missing</div>
   <div class="navitem" data-pane="people">People</div>
   <div class="navitem" data-pane="itin">Itinerary</div>
+
+  <div class="navitem" data-pane="leis"><span class="chev" data-sub="s-leis">▶</span>Leisure</div>
+  <div class="sub" id="s-leis">
+    <a href="#leis/l-shops" data-pane="leis" data-go="l-shops">Shops</a>
+    <a href="#leis/l-places" data-pane="leis" data-go="l-places">Places to visit</a>
+    <a href="#leis/l-rest" data-pane="leis" data-go="l-rest">Restaurants</a>
+    <a href="#leis/l-other" data-pane="leis" data-go="l-other">Other</a>
+  </div>
 
   <div class="navitem" data-pane="log"><span class="chev" data-sub="s-log">▶</span>Logistics</div>
   <div class="sub" id="s-log">
@@ -1534,6 +1552,63 @@ Chairman, Brisen Group</div>
        number, primary document not fully read. Do not quote it to a counterparty.</p>
   </div>
 
+</section>
+
+<!-- ================= LEISURE ================= -->
+<section class="pane" id="p-leis">
+  <h1>Leisure</h1>
+  <p class="stamp">Your own suggestions and James's, from this Shanghai week. Added 16 September.</p>
+
+  <h2 id="l-shops">Shops</h2>
+  <div class="card">
+    <div class="shop"><h3>1 · 老凤祥 Lao Feng Xiang</h3><p>Historic Shanghai jeweller: gold and jadeite.</p><p class="meta">Nanjing East Road cluster</p><p><a href="https://maps.apple.com/?q=Lao%20Feng%20Xiang%20Nanjing%20East%20Road%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>2 · 周大福 Chow Tai Fook</h3><p>Jade and high jewellery, paperwork done properly.</p><p class="meta">南京东路550号 · 550 Nanjing East Road</p><p><a href="https://maps.apple.com/?q=Chow%20Tai%20Fook%20550%20Nanjing%20East%20Road%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>3 · 朵云轩 Duo Yun Xuan</h3><p>Shanghai-school stationery, prints, scholarly objects, sales and auctions.</p><p class="meta">Nanjing East Road</p><p><a href="https://maps.apple.com/?q=Duo%20Yun%20Xuan%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>4 · 上下 Shang Xia</h3><p>Chinese design house: tea and craft, gift packaging.</p><p class="meta">淮海中路233号 · 233 Middle Huaihai Road</p><p><a href="https://maps.apple.com/?q=Shang%20Xia%2C%20233%20Middle%20Huaihai%20Road%2C%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>5 · 藏宝楼 Cangbao Lou — Fuyou antiques</h3><p>Multi-floor antiques market: jade, porcelain, curios. Quality varies, bargain.</p><p class="meta">方浜中路457号 · 457 Fangbang Middle Road</p><p><a href="https://maps.apple.com/?q=Cangbao%20Lou%2C%20457%20Fangbang%20Middle%20Road%2C%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>6 · 王德传 Wang De Chuan</h3><p>Tea gifts and tasting.</p><p class="meta">Xintiandi and HKRI Taikoo Hui</p><p><a href="https://maps.apple.com/?q=Wang%20De%20Chuan%20Xintiandi%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>7 · 李宁 Li-Ning</h3><p>Sneakers, hoodies, bags. A gift for roughly nineteen to thirty-two.</p><p class="meta">Major malls and Nanjing Road</p><p><a href="https://maps.apple.com/?q=Li-Ning%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>8 · 江南布衣 JNBY</h3><p>Contemporary Chinese fashion. A gift for roughly twenty-two to thirty-two.</p><p class="meta">Malls</p><p><a href="https://maps.apple.com/?q=JNBY%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>9 · Pop Mart</h3><p>Designer toys and blind boxes. A gift for about nineteen.</p><p class="meta">Malls</p><p><a href="https://maps.apple.com/?q=Pop%20Mart%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p></div>
+    <div class="shop"><h3>10 · Florentia Village 佛罗伦萨小镇</h3><p>Luxury outlet, last season — Bottega and its neighbours.</p><p class="meta">卓阅路58弄 · Lane 58 Zhuoyue Road</p><p><a href="https://maps.apple.com/?q=Florentia%20Village%20Shanghai" target="_blank" rel="noopener">Open in Maps</a> · <a href="https://www.florentiavillage.com/en/shanghai" target="_blank" rel="noopener">Website</a></p></div>
+    <div class="shop"><h3>11 · Christie's Shanghai</h3><p>Auction house: the serious antiques path.</p><p class="meta">中山东一路1号 Bund One</p><p><a href="https://maps.apple.com/?q=Christie%27s%20Shanghai%20Bund%20One" target="_blank" rel="noopener">Open in Maps</a> · <a href="https://www.christies.com/en/locations/shanghai" target="_blank" rel="noopener">Website</a></p></div>
+  </div>
+  <p class="note">If you want Shanghai rather than the same European boutiques you see at home, skip the international finance centre circuit: Nanjing East Road, Shang Xia, and the outlet above.</p>
+
+  <h2 id="l-places">Places to visit</h2>
+  <div class="card">
+    <h3>新场古镇 Xinchang Ancient Town</h3>
+    <p class="meta">Pudong · seen on 15 September, from the hotel on the antiques day</p>
+    <p>A living salt-town water village: canals, Ming and Qing houses, a teahouse, and people who live there. Free to enter, not a ticketed park. Quieter on a weekday.</p>
+    <p>浦东新区新场镇 · 海泉街一带 · <a href="https://maps.apple.com/?q=Xinchang%20Ancient%20Town%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p>
+  </div>
+  <div class="addr taxi" data-cn="新场古镇" data-addr="上海市浦东新区新场镇 海泉街">
+    <div class="taxihead">请带我去</div>
+    <div class="taxibody">
+      <h3>Xinchang Ancient Town</h3><p class="meta">Show this to the driver, or type 新场古镇 into the car app</p>
+      <p class="cn">新场古镇<br>上海市浦东新区新场镇 海泉街</p>
+      <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+    </div>
+  </div>
+
+  <h2 id="l-rest">Restaurants</h2>
+  <div class="card">
+    <h3>晟永兴 Sheng Yong Xing <span class="chip ok">You liked this kitchen</span></h3>
+    <p class="meta">Bund 5, fifth floor · a star in the guide · Peking duck over jujube wood · the river in the window</p>
+    <p>A whole duck runs about 500 yuan. Dinner from about 17:30, last tables 21:00 to 21:30.</p>
+    <p><b>Tables by telephone only:</b> <a href="tel:+862163302885">021-6330-2885</a> · <a href="https://maps.apple.com/?q=Bund%205%2C%2020%20Guangdong%20Road%20Shanghai" target="_blank" rel="noopener">Open in Maps</a></p>
+  </div>
+  <div class="addr taxi" data-cn="外滩5号 晟永兴" data-addr="上海市黄浦区广东路20号 外滩5号5楼">
+    <div class="taxihead">请带我去</div>
+    <div class="taxibody">
+      <h3>Sheng Yong Xing — Bund 5, 5th floor</h3><p class="meta">Show this to the driver</p>
+      <p class="cn">外滩5号 晟永兴<br>上海市黄浦区广东路20号 5楼</p>
+      <div class="row"><button type="button" class="big">Show the driver</button><button type="button" class="copyaddr">Copy</button></div>
+    </div>
+  </div>
+
+  <h2 id="l-other">Other</h2>
+  <div class="card"><p>Nothing here yet. Tell the desk what to add.</p></div>
 </section>
 
 <!-- ================= WECHAT ================= -->
